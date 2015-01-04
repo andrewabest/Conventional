@@ -8,20 +8,21 @@ using NUnit.Framework;
 
 namespace Conventional.Tests
 {
-    public class MockModel
+    public class PropertiesShouldHavePublicGettersAndSettersMock
     {
-        public string Name { get; private set; }
+        public string Public { get; set; }
+        public string PrivateGet { private get; set; }
+        public string PrivateSet { get; private set; }
     }
 
     public class SpecificationTests
     {
         [Test]
-        public void Blah()
+        public void PropertiesShouldHavePublicGettersAndSettersConformanceSpecification_FailsOnPrivatePropertyAccessors()
         {
-            new[] {typeof (MockModel)}.MustAllConformTo(
-                new PropertiesShouldHavePublicGettersAndSettersConformanceSpecification())
+            new[] { typeof(PropertiesShouldHavePublicGettersAndSettersMock) }
+                .MustAllConformTo(Specification.PropertiesShouldHavePublicGettersAndSetters)
                 .WithFailureAssertion(Assert.Fail);
         }
-
     }
 }
