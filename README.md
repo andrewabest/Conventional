@@ -5,4 +5,4 @@ A suite of basic convention tests to run over types to make sure your duckies ar
 
 To install from NuGet
 
->Install-Package Best.Conventional 
+    Install-Package Best.Conventional 
