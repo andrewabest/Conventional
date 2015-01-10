@@ -2,8 +2,16 @@
 
 namespace Conventional.Tests.ExampleOutput
 {
-    public class SpecificationTests
+    //[Ignore]
+    public class SampleOutputTests
     {
+        private class PropertiesShouldHavePublicGettersAndSettersMock
+        {
+            public string Public { get; set; }
+            public string PrivateGet { private get; set; }
+            public string PrivateSet { get; private set; }
+        }
+
         [Test]
         public void PropertiesShouldHavePublicGettersAndSettersConformanceSpecification_FailsOnPrivatePropertyAccessors()
         {

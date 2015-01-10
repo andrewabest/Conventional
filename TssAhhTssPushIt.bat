@@ -10,7 +10,7 @@ call msbuild.exe .\Conventional\Conventional.csproj /p:Configuration=Release /p:
 IF %ERRORLEVEL% NEQ 0 GOTO ERROR
 
 nuget pack .\Conventional\Conventional.csproj -Prop Configuration=Release
-nuget push .\Conventional\Conventional.nupkg
+nuget push .\Best.Conventional.0.0.0.3.nupkg
 
 echo .
 echo Finished ResetTheWorldWithData on:

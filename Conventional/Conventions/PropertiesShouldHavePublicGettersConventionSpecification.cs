@@ -1,11 +1,15 @@
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Conventional.Conventions
 {
     public class PropertiesShouldHavePublicGettersConventionSpecification : ConventionSpecification
     {
-        private const string FailureMessage = "All properties should have public getters";
+        protected override string FailureMessage
+        {
+            get { return "All properties should have public getters"; }
+        }
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
@@ -16,9 +20,8 @@ namespace Conventional.Conventions
             if (failures.Any())
             {
                 var failureMessage =
-                    FailureMessage + 
-                    Environment.NewLine +
-                    failures.Aggregate(string.Empty, (s, info) => s + "\t- " + info.Name + Environment.NewLine);
+                    BuildFailureMessage(failures.Aggregate(string.Empty,
+                        (s, info) => s + "\t- " + info.Name + Environment.NewLine));
 
                 return ConventionResult.NotSatisfied(type.FullName, failureMessage);
             }

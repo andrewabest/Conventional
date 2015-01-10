@@ -5,7 +5,10 @@ namespace Conventional.Conventions
 {
     public class PropertiesShouldHavePublicSettersConventionSpecification : ConventionSpecification
     {
-        private const string FailureMessage = "All properties should have public setters";
+        protected override string FailureMessage
+        {
+            get { return "All properties should have public setters"; }
+        }
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
@@ -16,9 +19,8 @@ namespace Conventional.Conventions
             if (failures.Any())
             {
                 var failureMessage =
-                    FailureMessage + 
-                    Environment.NewLine +
-                    failures.Aggregate(string.Empty, (s, info) => s + "\t- " + info.Name + Environment.NewLine);
+                    BuildFailureMessage(failures.Aggregate(string.Empty,
+                        (s, info) => s + "\t- " + info.Name + Environment.NewLine));
 
                 return ConventionResult.NotSatisfied(type.FullName, failureMessage);
             }

@@ -45,12 +45,14 @@
     <Compile Include="Conventions\OrSpecification.cs" />
     <Compile Include="Conventions\PropertiesShouldHavePublicGettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesShouldHavePublicSettersConventionSpecification.cs" />
+    <Compile Include="Conventions\ShouldHaveAttributeConventionSpecification.cs" />
     <Compile Include="Specification.cs" />
     <Compile Include="StringConstants.cs" />
     <Compile Include="ConformanceResult.cs" />
     <Compile Include="Conformist.cs" />
     <Compile Include="IConventionSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Conventional.nuspec" />

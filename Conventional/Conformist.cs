@@ -6,9 +6,9 @@ namespace Conventional
 {
     public static class Conformist
     {
-        public static IEnumerable<ConventionResult> MustConformTo(this Type type, IConventionSpecification conventionSpecification)
+        public static ConventionResult MustConformTo(this Type type, IConventionSpecification conventionSpecification)
         {
-            return new [] { conventionSpecification.IsSatisfiedBy(type) };
+            return conventionSpecification.IsSatisfiedBy(type);
         }
 
         public static IEnumerable<ConventionResult> MustConformTo(this IEnumerable<Type> types, IConventionSpecification conventionSpecification)
