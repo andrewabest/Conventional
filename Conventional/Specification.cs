@@ -1,3 +1,4 @@
+using System;
 using Conventional.Conventions;
 
 namespace Conventional
@@ -12,6 +13,11 @@ namespace Conventional
         public static PropertiesShouldHavePublicSettersConventionSpecification PropertiesShouldHavePublicSetters
         {
             get {  return new PropertiesShouldHavePublicSettersConventionSpecification(); }
+        }
+
+        public static ShouldHaveAttributeConventionSpecification ShouldHaveAttribute(Type attributeType)
+        {
+            return new ShouldHaveAttributeConventionSpecification(attributeType);
         }
     }
 }
