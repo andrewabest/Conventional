@@ -29,5 +29,20 @@ namespace Conventional
         {
             return new NameShouldEndWithConventionSpecification(suffix);
         }
+
+        public static ShouldLiveInNamespaceConventionSpecification ShouldLiveInNamespace(string nameSpace)
+        {
+            return new ShouldLiveInNamespaceConventionSpecification(nameSpace);
+        }
+
+        public static ShouldHaveADefaultConstructorConventionSpecification ShouldHaveADefaultConstructor
+        {
+            get { return new ShouldHaveADefaultConstructorConventionSpecification(); }
+        }
+
+        public static ShouldNotTakeADependencyOnConventionSpecification ShouldNotTakeADependencyOn(Type type)
+        {
+            return new ShouldNotTakeADependencyOnConventionSpecification(type);
+        }
     }
 }

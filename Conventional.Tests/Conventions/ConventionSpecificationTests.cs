@@ -146,5 +146,98 @@ namespace Conventional.Tests.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
+
+        private class NamespaceMember
+        {
+        }
+
+        [Test]
+        public void ShouldLiveInNamespaceConventionSpecification_Success()
+        {
+            typeof(NamespaceMember)
+                .MustConformTo(Convention.ShouldLiveInNamespace("Conventional.Tests.Conventions"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void ShouldLiveInNamespaceConventionSpecification_FailsIfTypeDoesNotLiveInTheGivenNamespace()
+        {
+            var result = typeof (ClassSuffix)
+                .MustConformTo(Convention.ShouldLiveInNamespace("Another.Namespace"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        private class HasADefaultConstructor
+        {
+        }
+
+        [Test]
+        public void ShouldHaveADefaultConstructorConventionSpecification_Success()
+        {
+            typeof(HasADefaultConstructor)
+                .MustConformTo(Convention.ShouldHaveADefaultConstructor)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class DoesNotHaveADefaultConstructor
+        {
+            public DoesNotHaveADefaultConstructor(string name)
+            {
+            }
+        }
+
+        [Test]
+        public void ShouldHaveADefaultConstructorConventionSpecification_FailsWhenNoDefaultConstructorExists()
+        {
+            var result = typeof(DoesNotHaveADefaultConstructor)
+                .MustConformTo(Convention.ShouldHaveADefaultConstructor);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        private class Dependency
+        {
+        }
+
+        private class HasNoIllegalDependencies
+        {
+            public HasNoIllegalDependencies(string name)
+            {
+            }
+        }
+
+        [Test]
+        public void ShouldNotTakeADependencyOnConventionSpecification_Success()
+        {
+            typeof(HasNoIllegalDependencies)
+                .MustConformTo(Convention.ShouldNotTakeADependencyOn(typeof(Dependency)))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class HasIllegalDependencies
+        {
+            public HasIllegalDependencies(Dependency dependency)
+            {
+            }
+        }
+        
+        [Test]
+        public void ShouldNotTakeADependencyOnConventionSpecification_FailsIfTheIdentifiedConstructorParameterExists()
+        {
+            var result = typeof (HasIllegalDependencies)
+                .MustConformTo(Convention.ShouldNotTakeADependencyOn(typeof (Dependency)));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }

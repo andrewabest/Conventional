@@ -46,7 +46,10 @@
     <Compile Include="Conventions\PropertiesShouldHavePublicGettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesShouldHavePublicSettersConventionSpecification.cs" />
     <Compile Include="Conventions\ShouldEndWithConventionSpecification.cs" />
+    <Compile Include="Conventions\ShouldHaveADefaultConstructorConventionSpecification.cs" />
     <Compile Include="Conventions\ShouldHaveAttributeConventionSpecification.cs" />
+    <Compile Include="Conventions\ShouldLiveInNamespaceConventionSpecification.cs" />
+    <Compile Include="Conventions\ShouldNotTakeADependencyOnConventionSpecification.cs" />
     <Compile Include="Conventions\ShouldStartWithConventionSpecification.cs" />
     <Compile Include="Convention.cs" />
     <Compile Include="StringConstants.cs" />
