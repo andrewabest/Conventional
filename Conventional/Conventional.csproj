@@ -45,8 +45,10 @@
     <Compile Include="Conventions\OrSpecification.cs" />
     <Compile Include="Conventions\PropertiesShouldHavePublicGettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesShouldHavePublicSettersConventionSpecification.cs" />
+    <Compile Include="Conventions\ShouldEndWithConventionSpecification.cs" />
     <Compile Include="Conventions\ShouldHaveAttributeConventionSpecification.cs" />
-    <Compile Include="Specification.cs" />
+    <Compile Include="Conventions\ShouldStartWithConventionSpecification.cs" />
+    <Compile Include="Convention.cs" />
     <Compile Include="StringConstants.cs" />
     <Compile Include="ConformanceResult.cs" />
     <Compile Include="Conformist.cs" />

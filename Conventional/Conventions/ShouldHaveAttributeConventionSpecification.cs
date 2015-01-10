@@ -6,7 +6,6 @@ namespace Conventional.Conventions
     public class ShouldHaveAttributeConventionSpecification : ConventionSpecification
     {
         private readonly Type _attributeType;
-        private const string FailureDescription = "Attribute {0} not found";
 
         public ShouldHaveAttributeConventionSpecification(Type attributeType)
         {
@@ -20,16 +19,14 @@ namespace Conventional.Conventions
 
         protected override string FailureMessage
         {
-            get { return "An attribute is required"; }
+            get { return "Attribute {0} not found"; }
         }
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
             if (type.GetCustomAttribute(_attributeType) == null)
             {
-                var failureMessage = BuildFailureMessage(FailureDescription.FormatWith(type.FullName));
-
-                return ConventionResult.NotSatisfied(type.FullName, failureMessage);
+                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(type.FullName));
             }
 
             return ConventionResult.Satisfied(type.FullName);

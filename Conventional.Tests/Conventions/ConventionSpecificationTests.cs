@@ -99,6 +99,52 @@ namespace Conventional.Tests.Conventions
             result.Failures.Should().HaveCount(1);
         }
 
+        private class PrefixClass
+        {
+        }
 
+        [Test]
+        public void NameShouldStartWithConventionSpecification_Success()
+        {
+            typeof (PrefixClass)
+                .MustConformTo(Convention.NameShouldStartWith("Prefix"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+        
+        [Test]
+        public void NameShouldStartWithConventionSpecification_FailsIfNameDoesNotStartWithSuppliedPrefix()
+        {
+            var result = typeof (PrefixClass)
+                .MustConformTo(Convention.NameShouldStartWith("NotPrefix"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+        
+        private class ClassSuffix
+        {
+        }
+
+        [Test]
+        public void NameShouldEndWithConventionSpecification_Success()
+        {
+            typeof(ClassSuffix)
+                .MustConformTo(Convention.NameShouldEndWith("Suffix"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+        
+        [Test]
+        public void NameShouldEndWithConventionSpecification_FailsIfNameDoesNotEndWithSuppliedPrefix()
+        {
+            var result = typeof(ClassSuffix)
+                .MustConformTo(Convention.NameShouldEndWith("NotSuffix"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }

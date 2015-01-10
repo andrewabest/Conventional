@@ -19,5 +19,15 @@ namespace Conventional
         {
             return new ShouldHaveAttributeConventionSpecification(attributeType);
         }
+
+        public static NameShouldStartWithConventionSpecification NameShouldStartWith(string prefix)
+        {
+            return new NameShouldStartWithConventionSpecification(prefix);
+        }
+        
+        public static NameShouldEndWithConventionSpecification NameShouldEndWith(string suffix)
+        {
+            return new NameShouldEndWithConventionSpecification(suffix);
+        }
     }
 }
