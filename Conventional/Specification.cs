@@ -1,10 +1,17 @@
+using Conventional.Conventions;
+
 namespace Conventional
 {
-    public static class Specification
+    public static class Convention
     {
-        public static PropertiesShouldHavePublicGettersAndSettersConformanceSpecification PropertiesShouldHavePublicGettersAndSetters
+        public static PropertiesShouldHavePublicGettersConventionSpecification PropertiesShouldHavePublicGetters
         {
-            get {  return new PropertiesShouldHavePublicGettersAndSettersConformanceSpecification(); }
+            get {  return new PropertiesShouldHavePublicGettersConventionSpecification(); }
+        }
+        
+        public static PropertiesShouldHavePublicSettersConventionSpecification PropertiesShouldHavePublicSetters
+        {
+            get {  return new PropertiesShouldHavePublicSettersConventionSpecification(); }
         }
     }
 }

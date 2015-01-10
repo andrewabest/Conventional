@@ -39,12 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions\AndSpecification.cs" />
+    <Compile Include="Conventions\ConventionSpecification.cs" />
+    <Compile Include="Conventions\NotSpecification.cs" />
+    <Compile Include="Conventions\OrSpecification.cs" />
+    <Compile Include="Conventions\PropertiesShouldHavePublicGettersConventionSpecification.cs" />
+    <Compile Include="Conventions\PropertiesShouldHavePublicSettersConventionSpecification.cs" />
     <Compile Include="Specification.cs" />
     <Compile Include="StringConstants.cs" />
     <Compile Include="ConformanceResult.cs" />
     <Compile Include="Conformist.cs" />
-    <Compile Include="IConformanceSpecification.cs" />
-    <Compile Include="PropertiesShouldHavePublicGettersAndSettersConformanceSpecification.cs" />
+    <Compile Include="IConventionSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
