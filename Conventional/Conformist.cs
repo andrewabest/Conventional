@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Conventional
 {
@@ -11,9 +12,23 @@ namespace Conventional
             return conventionSpecification.IsSatisfiedBy(type);
         }
 
-        public static IEnumerable<ConventionResult> MustConformTo(this IEnumerable<Type> types, IConventionSpecification conventionSpecification)
+        public static WrappedConventionResult MustConformTo(this IEnumerable<Type> types, IConventionSpecification conventionSpecification)
         {
-            return types.Select(conventionSpecification.IsSatisfiedBy);
+            return new WrappedConventionResult(
+                types, 
+                types.Select(conventionSpecification.IsSatisfiedBy));
+        }
+
+        public static WrappedConventionResult AndMustConformTo(this WrappedConventionResult results, IConventionSpecification conventionSpecification)
+        {
+            return new WrappedConventionResult(
+                results.Types, 
+                results.Results.Union(results.Types.Select(conventionSpecification.IsSatisfiedBy)));
+        }
+
+        public static void WithFailureAssertion(this ConventionResult result, Action<string> failureAssertion)
+        {
+            new[] {result}.WithFailureAssertion(failureAssertion);
         }
 
         public static void WithFailureAssertion(this IEnumerable<ConventionResult> results, Action<string> failureAssertion)

@@ -2,11 +2,11 @@ using System;
 
 namespace Conventional.Conventions
 {
-    public class NameShouldStartWithConventionSpecification : ConventionSpecification
+    public class NameMustStartWithConventionSpecification : ConventionSpecification
     {
         private readonly string _prefix;
 
-        public NameShouldStartWithConventionSpecification(string prefix)
+        public NameMustStartWithConventionSpecification(string prefix)
         {
             _prefix = prefix;
         }

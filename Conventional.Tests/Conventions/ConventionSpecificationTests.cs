@@ -12,10 +12,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void PropertiesShouldHavePublicGetters_Success()
+        public void PropertiesMustHavePublicGetters_Success()
         {
             typeof(AllPublicGetterMock)
-                .MustConformTo(Convention.PropertiesShouldHavePublicGetters)
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters)
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -27,10 +27,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void PropertiesShouldHavePublicGetters_FailsWhenPrivateGetterExists()
+        public void PropertiesMustHavePublicGetters_FailsWhenPrivateGetterExists()
         {
             var result = typeof (PrivateGetterMock)
-                .MustConformTo(Convention.PropertiesShouldHavePublicGetters);
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -42,10 +42,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void PropertiesShouldHavePublicSetters_Success()
+        public void PropertiesMustHavePublicSetters_Success()
         {
             typeof(AllPublicSetterMock)
-                .MustConformTo(Convention.PropertiesShouldHavePublicSetters)
+                .MustConformTo(Convention.PropertiesMustHavePublicSetters)
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -57,10 +57,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void PropertiesShouldHavePublicSetters_FailsWhenPrivateSetterExists()
+        public void PropertiesMustHavePublicSetters_FailsWhenPrivateSetterExists()
         {
             var result = typeof (PrivateSetterMock)
-                .MustConformTo(Convention.PropertiesShouldHavePublicSetters);
+                .MustConformTo(Convention.PropertiesMustHavePublicSetters);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -76,10 +76,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void ShouldHaveAttributeConventionSpecification_Success()
+        public void MustHaveAttributeConventionSpecification_Success()
         {
             typeof(MockWithAttribute)
-                .MustConformTo(Convention.ShouldHaveAttribute(typeof(MockAttribute)))
+                .MustConformTo(Convention.MustHaveAttribute(typeof(MockAttribute)))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -90,10 +90,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void ShouldHaveAttributeConventionSpecification_FailsIfAttributeDoesNotExist()
+        public void MustHaveAttributeConventionSpecification_FailsIfAttributeDoesNotExist()
         {
             var result = typeof (MockWithoutAttribute)
-                .MustConformTo(Convention.ShouldHaveAttribute(typeof (MockAttribute)));
+                .MustConformTo(Convention.MustHaveAttribute(typeof (MockAttribute)));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -104,20 +104,20 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void NameShouldStartWithConventionSpecification_Success()
+        public void NameMustStartWithConventionSpecification_Success()
         {
             typeof (PrefixClass)
-                .MustConformTo(Convention.NameShouldStartWith("Prefix"))
+                .MustConformTo(Convention.NameMustStartWith("Prefix"))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
         }
         
         [Test]
-        public void NameShouldStartWithConventionSpecification_FailsIfNameDoesNotStartWithSuppliedPrefix()
+        public void NameMustStartWithConventionSpecification_FailsIfNameDoesNotStartWithSuppliedPrefix()
         {
             var result = typeof (PrefixClass)
-                .MustConformTo(Convention.NameShouldStartWith("NotPrefix"));
+                .MustConformTo(Convention.NameMustStartWith("NotPrefix"));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -128,20 +128,20 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void NameShouldEndWithConventionSpecification_Success()
+        public void NameMustEndWithConventionSpecification_Success()
         {
             typeof(ClassSuffix)
-                .MustConformTo(Convention.NameShouldEndWith("Suffix"))
+                .MustConformTo(Convention.NameMustEndWith("Suffix"))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
         }
         
         [Test]
-        public void NameShouldEndWithConventionSpecification_FailsIfNameDoesNotEndWithSuppliedPrefix()
+        public void NameMustEndWithConventionSpecification_FailsIfNameDoesNotEndWithSuppliedPrefix()
         {
             var result = typeof(ClassSuffix)
-                .MustConformTo(Convention.NameShouldEndWith("NotSuffix"));
+                .MustConformTo(Convention.NameMustEndWith("NotSuffix"));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -152,20 +152,20 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void ShouldLiveInNamespaceConventionSpecification_Success()
+        public void MustLiveInNamespaceConventionSpecification_Success()
         {
             typeof(NamespaceMember)
-                .MustConformTo(Convention.ShouldLiveInNamespace("Conventional.Tests.Conventions"))
+                .MustConformTo(Convention.MustLiveInNamespace("Conventional.Tests.Conventions"))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
         }
 
         [Test]
-        public void ShouldLiveInNamespaceConventionSpecification_FailsIfTypeDoesNotLiveInTheGivenNamespace()
+        public void MustLiveInNamespaceConventionSpecification_FailsIfTypeDoesNotLiveInTheGivenNamespace()
         {
             var result = typeof (ClassSuffix)
-                .MustConformTo(Convention.ShouldLiveInNamespace("Another.Namespace"));
+                .MustConformTo(Convention.MustLiveInNamespace("Another.Namespace"));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -176,10 +176,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void ShouldHaveADefaultConstructorConventionSpecification_Success()
+        public void MustHaveADefaultConstructorConventionSpecification_Success()
         {
             typeof(HasADefaultConstructor)
-                .MustConformTo(Convention.ShouldHaveADefaultConstructor)
+                .MustConformTo(Convention.MustHaveADefaultConstructor)
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -193,10 +193,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void ShouldHaveADefaultConstructorConventionSpecification_FailsWhenNoDefaultConstructorExists()
+        public void MustHaveADefaultConstructorConventionSpecification_FailsWhenNoDefaultConstructorExists()
         {
             var result = typeof(DoesNotHaveADefaultConstructor)
-                .MustConformTo(Convention.ShouldHaveADefaultConstructor);
+                .MustConformTo(Convention.MustHaveADefaultConstructor);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -214,10 +214,10 @@ namespace Conventional.Tests.Conventions
         }
 
         [Test]
-        public void ShouldNotTakeADependencyOnConventionSpecification_Success()
+        public void MustNotTakeADependencyOnConventionSpecification_Success()
         {
             typeof(HasNoIllegalDependencies)
-                .MustConformTo(Convention.ShouldNotTakeADependencyOn(typeof(Dependency)))
+                .MustConformTo(Convention.MustNotTakeADependencyOn(typeof(Dependency)))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -231,10 +231,10 @@ namespace Conventional.Tests.Conventions
         }
         
         [Test]
-        public void ShouldNotTakeADependencyOnConventionSpecification_FailsIfTheIdentifiedConstructorParameterExists()
+        public void MustNotTakeADependencyOnConventionSpecification_FailsIfTheIdentifiedConstructorParameterExists()
         {
             var result = typeof (HasIllegalDependencies)
-                .MustConformTo(Convention.ShouldNotTakeADependencyOn(typeof (Dependency)));
+                .MustConformTo(Convention.MustNotTakeADependencyOn(typeof (Dependency)));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);

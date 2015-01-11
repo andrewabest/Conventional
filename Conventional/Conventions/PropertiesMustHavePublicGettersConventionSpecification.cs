@@ -1,20 +1,21 @@
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Conventional.Conventions
 {
-    public class PropertiesShouldHavePublicSettersConventionSpecification : ConventionSpecification
+    public class PropertiesMustHavePublicGettersConventionSpecification : ConventionSpecification
     {
         protected override string FailureMessage
         {
-            get { return "All properties should have public setters"; }
+            get { return "All properties should have public getters"; }
         }
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
             var toInspect = type.GetProperties().Where(p => p.CanWrite);
 
-            var failures = toInspect.Where(subject => subject.SetMethod.IsPublic == false).ToArray();
+            var failures = toInspect.Where(subject => subject.GetMethod.IsPublic == false).ToArray();
 
             if (failures.Any())
             {

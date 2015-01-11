@@ -2,18 +2,18 @@ using System;
 
 namespace Conventional.Conventions
 {
-    public class ShouldLiveInNamespaceConventionSpecification : ConventionSpecification
+    public class MustLiveInNamespaceConventionSpecification : ConventionSpecification
     {
         private readonly string _nameSpace;
 
-        public ShouldLiveInNamespaceConventionSpecification(string nameSpace)
+        public MustLiveInNamespaceConventionSpecification(string nameSpace)
         {
             _nameSpace = nameSpace;
         }
 
         protected override string FailureMessage
         {
-            get { return "Should live in namespace {0} but actually lives in namespace {1}"; }
+            get { return "Must live in namespace {0} but actually lives in namespace {1}"; }
         }
 
         public override ConventionResult IsSatisfiedBy(Type type)

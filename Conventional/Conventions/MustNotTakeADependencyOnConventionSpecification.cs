@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Conventional.Conventions
 {
-    public class ShouldNotTakeADependencyOnConventionSpecification : ConventionSpecification
+    public class MustNotTakeADependencyOnConventionSpecification : ConventionSpecification
     {
         private readonly Type _dependencyType;
 
-        public ShouldNotTakeADependencyOnConventionSpecification(Type dependencyType)
+        public MustNotTakeADependencyOnConventionSpecification(Type dependencyType)
         {
             _dependencyType = dependencyType;
         }

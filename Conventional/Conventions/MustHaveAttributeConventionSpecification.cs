@@ -3,11 +3,11 @@ using System.Reflection;
 
 namespace Conventional.Conventions
 {
-    public class ShouldHaveAttributeConventionSpecification : ConventionSpecification
+    public class MustHaveAttributeConventionSpecification : ConventionSpecification
     {
         private readonly Type _attributeType;
 
-        public ShouldHaveAttributeConventionSpecification(Type attributeType)
+        public MustHaveAttributeConventionSpecification(Type attributeType)
         {
             if (typeof (Attribute).IsAssignableFrom(attributeType) == false)
             {

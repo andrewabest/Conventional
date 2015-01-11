@@ -5,44 +5,44 @@ namespace Conventional
 {
     public static class Convention
     {
-        public static PropertiesShouldHavePublicGettersConventionSpecification PropertiesShouldHavePublicGetters
+        public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters
         {
-            get {  return new PropertiesShouldHavePublicGettersConventionSpecification(); }
+            get {  return new PropertiesMustHavePublicGettersConventionSpecification(); }
         }
         
-        public static PropertiesShouldHavePublicSettersConventionSpecification PropertiesShouldHavePublicSetters
+        public static PropertiesMustHavePublicSettersConventionSpecification PropertiesMustHavePublicSetters
         {
-            get {  return new PropertiesShouldHavePublicSettersConventionSpecification(); }
+            get {  return new PropertiesMustHavePublicSettersConventionSpecification(); }
         }
 
-        public static ShouldHaveAttributeConventionSpecification ShouldHaveAttribute(Type attributeType)
+        public static MustHaveAttributeConventionSpecification MustHaveAttribute(Type attributeType)
         {
-            return new ShouldHaveAttributeConventionSpecification(attributeType);
+            return new MustHaveAttributeConventionSpecification(attributeType);
         }
 
-        public static NameShouldStartWithConventionSpecification NameShouldStartWith(string prefix)
+        public static NameMustStartWithConventionSpecification NameMustStartWith(string prefix)
         {
-            return new NameShouldStartWithConventionSpecification(prefix);
+            return new NameMustStartWithConventionSpecification(prefix);
         }
         
-        public static NameShouldEndWithConventionSpecification NameShouldEndWith(string suffix)
+        public static NameMustEndWithConventionSpecification NameMustEndWith(string suffix)
         {
-            return new NameShouldEndWithConventionSpecification(suffix);
+            return new NameMustEndWithConventionSpecification(suffix);
         }
 
-        public static ShouldLiveInNamespaceConventionSpecification ShouldLiveInNamespace(string nameSpace)
+        public static MustLiveInNamespaceConventionSpecification MustLiveInNamespace(string nameSpace)
         {
-            return new ShouldLiveInNamespaceConventionSpecification(nameSpace);
+            return new MustLiveInNamespaceConventionSpecification(nameSpace);
         }
 
-        public static ShouldHaveADefaultConstructorConventionSpecification ShouldHaveADefaultConstructor
+        public static MustHaveADefaultConstructorConventionSpecification MustHaveADefaultConstructor
         {
-            get { return new ShouldHaveADefaultConstructorConventionSpecification(); }
+            get { return new MustHaveADefaultConstructorConventionSpecification(); }
         }
 
-        public static ShouldNotTakeADependencyOnConventionSpecification ShouldNotTakeADependencyOn(Type type)
+        public static MustNotTakeADependencyOnConventionSpecification MustNotTakeADependencyOn(Type type)
         {
-            return new ShouldNotTakeADependencyOnConventionSpecification(type);
+            return new MustNotTakeADependencyOnConventionSpecification(type);
         }
     }
 }

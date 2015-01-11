@@ -43,21 +43,22 @@
     <Compile Include="Conventions\ConventionSpecification.cs" />
     <Compile Include="Conventions\NotSpecification.cs" />
     <Compile Include="Conventions\OrSpecification.cs" />
-    <Compile Include="Conventions\PropertiesShouldHavePublicGettersConventionSpecification.cs" />
-    <Compile Include="Conventions\PropertiesShouldHavePublicSettersConventionSpecification.cs" />
-    <Compile Include="Conventions\ShouldEndWithConventionSpecification.cs" />
-    <Compile Include="Conventions\ShouldHaveADefaultConstructorConventionSpecification.cs" />
-    <Compile Include="Conventions\ShouldHaveAttributeConventionSpecification.cs" />
-    <Compile Include="Conventions\ShouldLiveInNamespaceConventionSpecification.cs" />
-    <Compile Include="Conventions\ShouldNotTakeADependencyOnConventionSpecification.cs" />
-    <Compile Include="Conventions\ShouldStartWithConventionSpecification.cs" />
+    <Compile Include="Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs" />
+    <Compile Include="Conventions\PropertiesMustHavePublicSettersConventionSpecification.cs" />
+    <Compile Include="Conventions\NameMustEndWithConventionSpecification.cs" />
+    <Compile Include="Conventions\MustHaveADefaultConstructorConventionSpecification.cs" />
+    <Compile Include="Conventions\MustHaveAttributeConventionSpecification.cs" />
+    <Compile Include="Conventions\MustLiveInNamespaceConventionSpecification.cs" />
+    <Compile Include="Conventions\MustNotTakeADependencyOnConventionSpecification.cs" />
+    <Compile Include="Conventions\NameMustStartWithConventionSpecification.cs" />
     <Compile Include="Convention.cs" />
     <Compile Include="StringConstants.cs" />
-    <Compile Include="ConformanceResult.cs" />
+    <Compile Include="ConventionResult.cs" />
     <Compile Include="Conformist.cs" />
     <Compile Include="IConventionSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="WrappedConventionResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Conventional.nuspec" />

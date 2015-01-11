@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConformistScenarios.cs" />
     <Compile Include="Conventions\ConventionSpecificationTests.cs" />
     <Compile Include="ExampleOutput\SampleOutputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

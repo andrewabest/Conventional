@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Conventional.Conventions
 {
-    public class ShouldHaveADefaultConstructorConventionSpecification : ConventionSpecification
+    public class MustHaveADefaultConstructorConventionSpecification : ConventionSpecification
     {
         protected override string FailureMessage
         {
