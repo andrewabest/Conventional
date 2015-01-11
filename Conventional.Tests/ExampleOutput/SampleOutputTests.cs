@@ -2,7 +2,7 @@
 
 namespace Conventional.Tests.ExampleOutput
 {
-    //[Ignore]
+    [Ignore]
     public class SampleOutputTests
     {
         private class PropertiesMustHavePublicGettersAndSettersMock
