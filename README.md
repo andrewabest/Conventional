@@ -22,7 +22,7 @@ Fluent Syntax
 ```c#
 new[] { typeof(MyType), typeof(MyOtherType) }
     .MustConformTo(Convention.PropertiesShouldHavePublicGetters)
-    .AndMustConformTo(Convention.PropertiesShouldHavePublicSetters))
+    .AndMustConformTo(Convention.PropertiesShouldHavePublicSetters)
     .WithFailureAssertion(Assert.Fail);
 ```
 
@@ -32,7 +32,7 @@ new[] { typeof(MyType), typeof(MyOtherType) }
     .MustConformTo(
         Convention.PropertiesShouldHavePublicGetters.And(
         Convention.PropertiesShouldHavePublicSetters))
-    .AndMustConformTo(Convention.MustHaveADefaultConstructor))
+    .AndMustConformTo(Convention.MustHaveADefaultConstructor)
     .WithFailureAssertion(Assert.Fail);
 ```
 
