@@ -239,5 +239,47 @@ namespace Conventional.Tests.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
+
+        private class HasAppropriateConstructors
+        {
+            protected HasAppropriateConstructors()
+            {
+            }
+
+            public HasAppropriateConstructors(string name)
+            {
+            }
+        }
+
+        [Test]
+        public void MustHaveAppropriateConstructorsConventionSpecification_Success()
+        {
+            typeof(HasAppropriateConstructors)
+                 .MustConformTo(Convention.MustHaveAppropriateConstructors)
+                 .IsSatisfied
+                 .Should()
+                 .BeTrue(); 
+        }
+
+        private class DoesNotHaveAppropriateConstructors
+        {
+            public DoesNotHaveAppropriateConstructors()
+            {
+            }
+
+            public DoesNotHaveAppropriateConstructors(string name)
+            {
+            }
+        }
+
+        [Test]
+        public void MustHaveAppropriateConstructorsConventionSpecification_FailsWhenTypeDoesNotHaveAppropriateConstructors()
+        {
+            var result = typeof (DoesNotHaveAppropriateConstructors)
+                .MustConformTo(Convention.MustHaveAppropriateConstructors);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }

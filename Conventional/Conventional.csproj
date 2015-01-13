@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Conventions\AndSpecification.cs" />
     <Compile Include="Conventions\ConventionSpecification.cs" />
+    <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
     <Compile Include="Conventions\NotSpecification.cs" />
     <Compile Include="Conventions\OrSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs" />

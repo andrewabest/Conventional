@@ -44,5 +44,10 @@ namespace Conventional
         {
             return new MustNotTakeADependencyOnConventionSpecification(type);
         }
+
+        public static MustHaveAppropriateConstructorsConventionSpecification MustHaveAppropriateConstructors
+        {
+            get {  return new MustHaveAppropriateConstructorsConventionSpecification(); }
+        }
     }
 }
