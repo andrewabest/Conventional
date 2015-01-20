@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional", "Conventiona
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Tests", "Conventional.Tests\Conventional.Tests.csproj", "{1C40BCBB-4448-4B43-BB46-494F64D38F4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Cecil", "Conventional.Cecil\Conventional.Cecil.csproj", "{2D591749-E993-41A0-9B3E-7C6BB953A0AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1C40BCBB-4448-4B43-BB46-494F64D38F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C40BCBB-4448-4B43-BB46-494F64D38F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C40BCBB-4448-4B43-BB46-494F64D38F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D591749-E993-41A0-9B3E-7C6BB953A0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D591749-E993-41A0-9B3E-7C6BB953A0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D591749-E993-41A0-9B3E-7C6BB953A0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D591749-E993-41A0-9B3E-7C6BB953A0AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

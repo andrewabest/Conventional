@@ -49,5 +49,10 @@ namespace Conventional
         {
             get {  return new MustHaveAppropriateConstructorsConventionSpecification(); }
         }
+
+        public static RequiresACorrespondingImplementationOfConventionSpecification RequiresACorrespondingImplementationOf(Type required, Type[] subjects)
+        {
+            return new RequiresACorrespondingImplementationOfConventionSpecification(required, subjects);
+        }
     }
 }

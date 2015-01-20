@@ -48,12 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cecil\Conventions\CecilConventionSpecificationTests.cs" />
     <Compile Include="ConformistScenarios.cs" />
-    <Compile Include="Conventions\ConventionSpecificationTests.cs" />
+    <Compile Include="Conventional\Conventions\ConventionSpecificationTests.cs" />
+    <Compile Include="DogFoodConventions.cs" />
     <Compile Include="ExampleOutput\SampleOutputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Conventional.Cecil\Conventional.Cecil.csproj">
+      <Project>{2d591749-e993-41a0-9b3e-7c6bb953a0ae}</Project>
+      <Name>Conventional.Cecil</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Conventional\Conventional.csproj">
       <Project>{e04519c0-36d0-42e9-8af0-b27f2df37a3e}</Project>
       <Name>Conventional</Name>

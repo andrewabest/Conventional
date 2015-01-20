@@ -281,5 +281,42 @@ namespace Conventional.Tests.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
+
+        private class SomeGeneric<T1, T2>
+        {
+        }
+
+        private class SomeClassThatRequiresSomeGenericImplementation
+        {
+        }
+
+        private class SomeGenericImplementation : SomeGeneric<SomeClassThatRequiresSomeGenericImplementation, string>
+        {
+        }
+
+        [Test]
+        public void RequiresACorrespondingImplementationOfConventionSpecification_Success()
+        {
+            typeof(SomeClassThatRequiresSomeGenericImplementation)
+                 .MustConformTo(Convention.RequiresACorrespondingImplementationOf(typeof(SomeGeneric<,>), new [] { typeof(SomeGenericImplementation) }))
+                 .IsSatisfied
+                 .Should()
+                 .BeTrue(); 
+        }
+
+        private class SomeClassWithoutASomeGenericImpelemntation
+        {
+        }
+
+        [Test]
+        public void RequiresACorrespondingImplementationOfConventionSpecification_FailsIfImplementationDoesNotExist()
+        {
+            var result = typeof (SomeClassWithoutASomeGenericImpelemntation)
+                .MustConformTo(Convention.RequiresACorrespondingImplementationOf(typeof (SomeGeneric<,>),
+                    new[] {typeof (SomeGenericImplementation)}));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }

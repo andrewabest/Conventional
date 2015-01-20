@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Conventional
@@ -17,6 +19,13 @@ namespace Conventional
             return new WrappedConventionResult(
                 types, 
                 types.Select(conventionSpecification.IsSatisfiedBy));
+        }
+
+        public static IEnumerable<Type> WhereTypes(this IEnumerable<Assembly> assemblies, Func<Type, bool> predicate)
+        {
+            var types = assemblies.SelectMany(x => x.GetExportedTypes()).Where(predicate).ToArray();
+
+            return types;
         }
 
         public static WrappedConventionResult AndMustConformTo(this WrappedConventionResult results, IConventionSpecification conventionSpecification)

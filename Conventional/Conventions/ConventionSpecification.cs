@@ -17,17 +17,17 @@ namespace Conventional.Conventions
 
         public IConventionSpecification And(IConventionSpecification conventionSpecification)
         {
-            return new AndSpecification(this, conventionSpecification);
+            return new AndConventionSpecification(this, conventionSpecification);
         }
 
         public IConventionSpecification Or(IConventionSpecification conventionSpecification)
         {
-            return new OrSpecification(this, conventionSpecification);
+            return new OrConventionSpecification(this, conventionSpecification);
         }
 
         public IConventionSpecification Not()
         {
-            return new NotSpecification(this);
+            return new NotConventionSpecification(this);
         }
     }
 }

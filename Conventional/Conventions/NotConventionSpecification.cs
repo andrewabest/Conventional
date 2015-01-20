@@ -2,11 +2,11 @@ using System;
 
 namespace Conventional.Conventions
 {
-    public class NotSpecification : ConventionSpecification
+    public class NotConventionSpecification : ConventionSpecification
     {
         private readonly IConventionSpecification _wrapped;
 
-        public NotSpecification(IConventionSpecification x)
+        public NotConventionSpecification(IConventionSpecification x)
         {
             _wrapped = x;
         }

@@ -2,12 +2,12 @@ using System;
 
 namespace Conventional.Conventions
 {
-    public class AndSpecification : ConventionSpecification
+    public class OrConventionSpecification : ConventionSpecification
     {
         private readonly IConventionSpecification _left;
         private readonly IConventionSpecification _right;
 
-        public AndSpecification(IConventionSpecification x, IConventionSpecification y)
+        public OrConventionSpecification(IConventionSpecification x, IConventionSpecification y)
         {
             _left = x;
             _right = y;
@@ -23,7 +23,7 @@ namespace Conventional.Conventions
             var leftResult = _left.IsSatisfiedBy(type);
             var rightResult = _right.IsSatisfiedBy(type);
 
-            return leftResult.And(rightResult);
+            return leftResult.Or(rightResult);
         }
     }
 }
