@@ -47,3 +47,27 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Must have appropriate constructors
 - Must have attribute
 - Must not take a dependency on
+- Requires a corresponding implementation of (T)
+
+Conventional.Cecil
+============
+
+A suite of Mono.Cecil-based convention tests, for when standard reflection just wont cut it.
+
+## To install from NuGet
+
+    Install-Package Best.Conventional.Cecil
+    
+## Sample Usage
+
+```c#
+new[] { myAssembly }
+    .WhereTypes(x => x) // Insert funky type narrowing predicate of choice here
+    .MustConformTo(CecilConvention.MustNotUseDateTimeNow)
+    .WithFailureAssertion(Assert.Fail);
+```
+
+## Supplied Conventions
+
+- Must not use DateTime.Now
+- Must not use DateTimeOffset.Now
