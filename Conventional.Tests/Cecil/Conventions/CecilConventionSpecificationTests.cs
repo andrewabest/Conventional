@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using Conventional.Cecil;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Conventional.Tests.Cecil.Conventinos
+namespace Conventional.Tests.Cecil.Conventions
 {
     public class CecilConventionSpecificationTests
     {
