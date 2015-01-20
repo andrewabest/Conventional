@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Best.$id$</id>
+    <version>$version$</version>
+    <title>Best.$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/andrewabest/Conventional</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <dependencies>
+      <dependency id="Best.Conventional" version="0.0.0.7" />
+      <dependency id="Mono.Cecil" version="0.9.5.4" />
+    </dependencies>
+  </metadata>
+</package>

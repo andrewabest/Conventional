@@ -9,8 +9,14 @@ echo "Could not detect VS version!" & goto ERROR
 call msbuild.exe .\Conventional\Conventional.csproj /p:Configuration=Release /p:Platform=AnyCPU
 IF %ERRORLEVEL% NEQ 0 GOTO ERROR
 
+call msbuild.exe .\Conventional.Cecil\Conventional.Cecil.csproj /p:Configuration=Release /p:Platform=AnyCPU
+IF %ERRORLEVEL% NEQ 0 GOTO ERROR
+
 nuget pack .\Conventional\Conventional.csproj -Prop Configuration=Release
-nuget push .\Best.Conventional.0.0.0.6.nupkg
+nuget push .\Best.Conventional.0.0.0.7.nupkg
+
+nuget pack .\Conventional.Cecil\Conventional.Cecil.csproj -Prop Configuration=Release
+nuget push .\Best.Conventional.Cecil.0.0.0.1.nupkg
 
 echo .
 echo Finished ResetTheWorldWithData on:
