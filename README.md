@@ -1,4 +1,4 @@
-Conventional
+Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y026n60v9oe16?svg=true)](https://ci.appveyor.com/project/andrewabest/conventional)
 ============
 
 A suite of basic convention tests to run over types to make sure your duckies are all in a row.
