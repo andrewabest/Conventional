@@ -318,5 +318,43 @@ namespace Conventional.Tests.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
+
+        private class HasANonAsyncVoidMethod
+        {
+            public void NonAsyncVoidMethod()
+            {
+            }
+        }
+
+        [Test]
+        public void VoidMethodsMustNotBeAsync_Success()
+        {
+            typeof(HasANonAsyncVoidMethod)
+                .MustConformTo(Convention.VoidMethodsMustNotBeAsync)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class HasAnAsyncVoidMethod
+        {
+// disable "This async method lacks 'await' operators and will run synchronously." warning
+#pragma warning disable 1998
+            public async void AsyncVoidMethod()
+            {
+            }
+#pragma warning restore 1998
+
+        }
+
+        [Test]
+        public void VoidMethodsMustNotBeAsync_FailsWhenAsyncVoidMethodExists()
+        {
+            var result = typeof(HasAnAsyncVoidMethod)
+                .MustConformTo(Convention.VoidMethodsMustNotBeAsync);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }

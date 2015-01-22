@@ -54,6 +54,7 @@
     <Compile Include="Conventions\NameMustStartWithConventionSpecification.cs" />
     <Compile Include="Convention.cs" />
     <Compile Include="Conventions\RequiresACorrespondingImplementationOfConventionSpecification.cs" />
+    <Compile Include="Conventions\VoidMethodsMustNotBeAsyncConventionSpecification.cs" />
     <Compile Include="StringConstants.cs" />
     <Compile Include="ConventionResult.cs" />
     <Compile Include="Conformist.cs" />
