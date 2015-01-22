@@ -54,5 +54,11 @@ namespace Conventional
         {
             return new RequiresACorrespondingImplementationOfConventionSpecification(required, subjects);
         }
+
+        public static VoidMethodsMustNotBeAsyncConventionSpecification VoidMethodsMustNotBeAsync
+        {
+            get { return new VoidMethodsMustNotBeAsyncConventionSpecification(); }
+        }
+
     }
 }
