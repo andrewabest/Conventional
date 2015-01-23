@@ -1,4 +1,5 @@
-﻿using Conventional.Cecil.Conventions;
+﻿using System;
+using Conventional.Cecil.Conventions;
 
 namespace Conventional.Cecil
 {
@@ -12,6 +13,11 @@ namespace Conventional.Cecil
         public static MustNotUseDateTimeOffsetNowConventionSpecification MustNotUseDateTimeOffsetNow
         {
             get { return new MustNotUseDateTimeOffsetNowConventionSpecification(); }
+        }
+
+        public static ExceptionsThrownMustBeDerivedFromConventionSpecification ExceptionsThrownMustBeDerivedFrom(Type baseType)
+        {
+            return new ExceptionsThrownMustBeDerivedFromConventionSpecification(baseType);
         }
     }
 }

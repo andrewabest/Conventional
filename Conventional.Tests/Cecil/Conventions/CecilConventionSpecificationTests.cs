@@ -100,6 +100,51 @@ namespace Conventional.Tests.Cecil.Conventions
 
             result.Results.Should().OnlyContain(x => x.IsSatisfied == false);
             result.Failures.Should().HaveCount(2);
+        }
+
+        private class SpecificException : DomainException
+        {
+        }
+
+        internal class DomainException : Exception
+        {
+        }
+
+        private class GoodExceptionThrower
+        {
+            public GoodExceptionThrower()
+            {
+                throw new SpecificException();
+            }
+        }
+
+        [Test]
+        public void ExceptionsThrownMustBeDerivedFromConventionSpecification_Success()
+        {
+            typeof(GoodExceptionThrower)
+                .MustConformTo(CecilConvention.ExceptionsThrownMustBeDerivedFrom(typeof(DomainException)))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class BadExceptionThrower
+        {
+            public BadExceptionThrower()
+            {
+                throw new Exception();
+            }
+        }
+        
+
+        [Test]
+        public void ExceptionsThrownMustBeDerivedFromConventionSpecification_FailsIfExceptionDoesNotDeriveFromCorrectBase()
+        {
+            var result = typeof(BadExceptionThrower)
+                .MustConformTo(CecilConvention.ExceptionsThrownMustBeDerivedFrom(typeof(DomainException)));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
         } 
     }
 }
