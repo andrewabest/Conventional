@@ -42,6 +42,7 @@
     <Compile Include="Conventions\AndConventionSpecification.cs" />
     <Compile Include="Conventions\ConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
+    <Compile Include="Conventions\EnumerablePropertiesMustBeEagerLoaded.cs" />
     <Compile Include="Conventions\NotConventionSpecification.cs" />
     <Compile Include="Conventions\OrConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs" />

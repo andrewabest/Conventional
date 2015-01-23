@@ -60,5 +60,9 @@ namespace Conventional
             get { return new VoidMethodsMustNotBeAsyncConventionSpecification(); }
         }
 
+        public static EnumerablePropertiesMustBeEagerLoadedConventionSpecification EnumerablePropertiesMustBeEagerLoadedConventionSpecification
+        {
+            get { return new EnumerablePropertiesMustBeEagerLoadedConventionSpecification(); }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -352,6 +353,36 @@ namespace Conventional.Tests.Conventions
         {
             var result = typeof(HasAnAsyncVoidMethod)
                 .MustConformTo(Convention.VoidMethodsMustNotBeAsync);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        private class HasEagerLoadedEnumerables
+        {
+            public string[] Names { get; set; }
+        }
+
+        [Test]
+        public void EnumerablePropertiesMustBeEagerLoadedConventionSpecification_Success()
+        {
+            typeof(HasEagerLoadedEnumerables)
+                 .MustConformTo(Convention.EnumerablePropertiesMustBeEagerLoadedConventionSpecification)
+                 .IsSatisfied
+                 .Should()
+                 .BeTrue();
+        }
+
+        private class HasLazilyLoadedEnumerables
+        {
+            public IEnumerable<string> Names { get; set; } 
+        }
+
+        [Test]
+        public void EnumerablePropertiesMustBeEagerLoadedConventionSpecification_FailsWhenTypeHasEnumerablePropertiesThatAreNotEagerlyLoaded()
+        {
+            var result = typeof(HasLazilyLoadedEnumerables)
+                .MustConformTo(Convention.EnumerablePropertiesMustBeEagerLoadedConventionSpecification);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
