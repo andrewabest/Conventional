@@ -49,6 +49,7 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Must not take a dependency on
 - Requires a corresponding implementation of (T)
 - Void methods must not be async
+- Enumerable properties must be eager loaded
 
 Conventional.Cecil
 ============
@@ -72,3 +73,5 @@ new[] { myAssembly }
 
 - Must not use DateTime.Now
 - Must not use DateTimeOffset.Now
+- Exceptions thrown must be derived from specified type
+- Must instantiate properties of specified type in default constructor
