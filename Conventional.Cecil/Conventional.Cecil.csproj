@@ -54,6 +54,7 @@
     <Compile Include="CecilConvention.cs" />
     <Compile Include="CecilExtensions.cs" />
     <Compile Include="Conventions\ExceptionsThrownMustBeDerivedFrom.cs" />
+    <Compile Include="Conventions\MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor.cs" />
     <Compile Include="Conventions\MustNotUseDateTimeNowConventionSpecification.cs" />
     <Compile Include="Conventions\MustNotUseDateTimeOffsetNowConventionSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

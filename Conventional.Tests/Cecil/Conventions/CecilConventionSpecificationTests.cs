@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Conventional.Cecil;
 using FluentAssertions;
 using NUnit.Framework;
@@ -142,6 +143,46 @@ namespace Conventional.Tests.Cecil.Conventions
         {
             var result = typeof(BadExceptionThrower)
                 .MustConformTo(CecilConvention.ExceptionsThrownMustBeDerivedFrom(typeof(DomainException)));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        private class InstantiatesPropertiesProperly
+        {
+            public InstantiatesPropertiesProperly()
+            {
+                Names = new String[0];
+            }
+
+            public IEnumerable<string> Names { get; set; } 
+        }
+
+        [Test]
+        public void MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification_Success()
+        {
+            typeof(InstantiatesPropertiesProperly)
+                .MustConformTo(CecilConvention.MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor(typeof(IEnumerable<>)))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class DoesNotInstantiatePropertiesProperly
+        {
+            public DoesNotInstantiatePropertiesProperly()
+            {
+            }
+
+            public IEnumerable<string> Names { get; set; } 
+        }
+
+
+        [Test]
+        public void MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification_FailsWhenPropertiesAreNotInstantiateInTheDefaultConstructor()
+        {
+            var result = typeof(DoesNotInstantiatePropertiesProperly)
+                .MustConformTo(CecilConvention.MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor(typeof(IEnumerable<>)));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);

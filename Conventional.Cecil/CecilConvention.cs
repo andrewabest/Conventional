@@ -19,5 +19,11 @@ namespace Conventional.Cecil
         {
             return new ExceptionsThrownMustBeDerivedFromConventionSpecification(baseType);
         }
+
+        public static MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification
+            MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor(Type propertyType)
+        {
+            return new MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification(propertyType);
+        }
     }
 }

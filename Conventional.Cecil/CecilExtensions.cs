@@ -32,16 +32,12 @@ namespace Conventional.Cecil
             return (type.BaseType != null && type.BaseType.FullName.Equals(cecilFormattedTypeName)) ||
                    (type.BaseType != null && IsAssignableToBase(type.BaseType.Resolve(), derivedType));
         }
-        
 
-        public static Type AsReflectedType(this TypeDefinition typeDefinition)
+        public static IEnumerable<PropertyDefinition> GetPropertiesOfType(this TypeDefinition typeDefinition, Type type)
         {
-            return Type.GetType(typeDefinition.FullName + ", " + typeDefinition.Module.Assembly.FullName);
-        }
-
-        public static Type AsReflectedType(this TypeReference typeReference)
-        {
-            return Type.GetType(typeReference.FullName + ", " + typeReference.Module.Assembly.FullName);
+            return
+                typeDefinition.Properties.Where(
+                    p => p.PropertyType.Name.StartsWith(type.Name));
         }
 
         public static TypeDefinition ToTypeDefinition(this Type type)
