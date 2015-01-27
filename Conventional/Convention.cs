@@ -64,5 +64,15 @@ namespace Conventional
         {
             get { return new EnumerablePropertiesMustBeEagerLoadedConventionSpecification(); }
         }
+
+        public static CollectionPropertiesMustBeImmutableConventionSpecification CollectionPropertiesMustBeImmutable
+        {
+            get { return new CollectionPropertiesMustBeImmutableConventionSpecification(); }
+        }
+
+        public static AllPropertiesMustBeImmutableConventionSpecification AllPropertiesMustBeImmutable
+        {
+            get { return new AllPropertiesMustBeImmutableConventionSpecification(); }
+        }
     }
 }

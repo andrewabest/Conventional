@@ -39,12 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions\AllPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\AndConventionSpecification.cs" />
+    <Compile Include="Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\ConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
-    <Compile Include="Conventions\EnumerablePropertiesMustBeEagerLoaded.cs" />
+    <Compile Include="Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs" />
     <Compile Include="Conventions\NotConventionSpecification.cs" />
     <Compile Include="Conventions\OrConventionSpecification.cs" />
+    <Compile Include="Conventions\PropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePublicSettersConventionSpecification.cs" />
     <Compile Include="Conventions\NameMustEndWithConventionSpecification.cs" />

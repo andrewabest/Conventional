@@ -17,7 +17,7 @@ namespace Conventional.Conventions
             var enumerables = type
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Select(p => p.PropertyType)
-                .Where(t => t != typeof(string) && t != typeof(byte[]) && (typeof(IEnumerable).IsAssignableFrom(t)))
+                .Where(t => t != typeof(string) && (typeof(IEnumerable).IsAssignableFrom(t)))
                 .ToArray();
 
             var failures = enumerables.Where(x => x.IsArray == false).ToArray();

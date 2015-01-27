@@ -387,5 +387,85 @@ namespace Conventional.Tests.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
+
+        private class HasImmutableCollections
+        {
+            private readonly string[] _names;
+
+            public HasImmutableCollections(string[] names)
+            {
+                _names = names;
+            }
+
+            public string[] Names { get { return _names; } }
+        }
+
+        [Test]
+        public void CollectionPropertiesMustBeImmutable_Success()
+        {
+            typeof(HasImmutableCollections)
+                 .MustConformTo(Convention.CollectionPropertiesMustBeImmutable)
+                 .IsSatisfied
+                 .Should()
+                 .BeTrue();
+        }
+
+        private class HasMutableCollections
+        {
+            public string[] Names { get; set; }
+        }
+
+        [Test]
+        public void CollectionPropertiesMustBeImmutable_FailsWhenAMutableCollectionPropertyExists()
+        {
+            var result = typeof(HasMutableCollections)
+                .MustConformTo(Convention.CollectionPropertiesMustBeImmutable);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        } 
+        
+        private class HasImmutableProperties
+        {
+            private readonly string[] _names;
+            private readonly int _age;
+
+            public HasImmutableProperties(string[] names, int age)
+            {
+                _names = names;
+                _age = age;
+            }
+
+            public string[] Names { get { return _names; } }
+
+            public int Age { get { return _age; } }
+        }
+
+        [Test]
+        public void AllPropertiesMustBeImmutable_Success()
+        {
+            typeof(HasImmutableProperties)
+                 .MustConformTo(Convention.AllPropertiesMustBeImmutable)
+                 .IsSatisfied
+                 .Should()
+                 .BeTrue();
+        }
+
+        private class HasMutableProperties
+        {
+            public string[] Names { get; set; }
+
+            public int Age { get; set; }
+        }
+
+        [Test]
+        public void AllPropertiesMustBeImmutable_FailsWhenMutablePropertiesExists()
+        {
+            var result = typeof(HasMutableProperties)
+                .MustConformTo(Convention.AllPropertiesMustBeImmutable);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }
