@@ -50,6 +50,8 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Requires a corresponding implementation of (T)
 - Void methods must not be async
 - Enumerable properties must be eager loaded
+- Collection properties must be immutable
+- All properties must be immutable
 
 Conventional.Cecil
 ============
