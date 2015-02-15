@@ -48,7 +48,6 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Must have attribute
 - Must not take a dependency on
 - Requires a corresponding implementation of (T)
-
 - Enumerable properties must be eager loaded
 - Collection properties must be immutable
 - All properties must be immutable
