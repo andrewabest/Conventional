@@ -20,7 +20,7 @@ namespace Conventional.Conventions
         {
             if (type.Name.StartsWith(_prefix) == false)
             {
-                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(type.FullName));
+                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(_prefix));
             }
 
             return ConventionResult.Satisfied(type.FullName);
