@@ -48,10 +48,27 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Must have attribute
 - Must not take a dependency on
 - Requires a corresponding implementation of (T)
-- Void methods must not be async
 - Enumerable properties must be eager loaded
 - Collection properties must be immutable
 - All properties must be immutable
+
+Conventional.Async
+============
+
+A suite of async related convention tests. Conventional.Async is packaged within the base Best.Conventional nuget package for projects targeting .Net 4.5+.
+    
+## Sample Usage
+
+```c#
+new[] { myAssembly }
+    .WhereTypes(x => x) // Insert funky type narrowing predicate of choice here
+    .MustConformTo(AsyncConvention.VoidMethodsMustNotBeAsync)
+    .WithFailureAssertion(Assert.Fail);
+```
+
+## Supplied Conventions
+
+- Void methods must not be async
 
 Conventional.Cecil
 ============
