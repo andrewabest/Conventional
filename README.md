@@ -44,6 +44,7 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Name must end with
 - Must live in namespace
 - Must have a default constructor
+- Must have a default non-public constructor
 - Must have appropriate constructors
 - Must have attribute
 - Must not take a dependency on
