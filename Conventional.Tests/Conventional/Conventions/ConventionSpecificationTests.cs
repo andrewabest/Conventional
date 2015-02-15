@@ -204,6 +204,38 @@ namespace Conventional.Tests.Conventional.Conventions
             result.Failures.Should().HaveCount(1);
         }
 
+        private class HasADefaultNonPublicConstructor
+        {
+            protected HasADefaultNonPublicConstructor() { }
+        }
+
+        [Test]
+        public void MustHaveADefaultNonPublicConstructorConventionSpecification_Success()
+        {
+            typeof(HasADefaultNonPublicConstructor)
+                .MustConformTo(Convention.MustHaveANonPublicDefaultConstructor)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class DoesNotHaveADefaultNonPublicConstructor
+        {
+            public DoesNotHaveADefaultNonPublicConstructor()
+            {
+            }
+        }
+
+        [Test]
+        public void MustHaveADefaultNonPublicConstructorConventionSpecification_FailsWhenNoDefaultConstructorExists()
+        {
+            var result = typeof(DoesNotHaveADefaultNonPublicConstructor)
+                .MustConformTo(Convention.MustHaveANonPublicDefaultConstructor);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
         private class Dependency
         {
         }

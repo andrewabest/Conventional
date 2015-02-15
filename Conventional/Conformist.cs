@@ -42,17 +42,22 @@ namespace Conventional
 
         public static void WithFailureAssertion(this IEnumerable<ConventionResult> results, Action<string> failureAssertion)
         {
-            if (results.All(x => x.IsSatisfied))
+            var evaluatedResults = results.ToList();
+
+            if (evaluatedResults.All(x => x.IsSatisfied))
             {
                 return;
             }
 
-            var result =                    
-                results.First().TypeName +
+            var result =
+                evaluatedResults.Where(x => x.IsSatisfied == false).Aggregate(string.Empty, (s, x) =>
+                    s +
+                    x.TypeName +
                     Environment.NewLine +
                     StringConstants.Underline +
                     Environment.NewLine +
-                    results.Where(x => x.IsSatisfied == false).SelectMany(x => x.Failures).Aggregate(string.Empty, (s, x) => s + x + Environment.NewLine);
+                    x.Failures.Aggregate(string.Empty, (s1, s2) => s1 + s2 + Environment.NewLine) +
+                    Environment.NewLine);
 
             failureAssertion(result);
         }

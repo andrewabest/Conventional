@@ -44,6 +44,7 @@
     <Compile Include="Conventions\AndConventionSpecification.cs" />
     <Compile Include="Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\ConventionSpecification.cs" />
+    <Compile Include="Conventions\MustHaveANonPublicDefaultConstructorConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
     <Compile Include="Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs" />
     <Compile Include="Conventions\NotConventionSpecification.cs" />

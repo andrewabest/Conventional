@@ -40,6 +40,11 @@ namespace Conventional
             get { return new MustHaveADefaultConstructorConventionSpecification(); }
         }
 
+        public static MustHaveANonPublicDefaultConstructorConventionSpecification MustHaveANonPublicDefaultConstructor
+        {
+            get { return new MustHaveANonPublicDefaultConstructorConventionSpecification(); }
+        }
+
         public static MustNotTakeADependencyOnConventionSpecification MustNotTakeADependencyOn(Type type)
         {
             return new MustNotTakeADependencyOnConventionSpecification(type);
