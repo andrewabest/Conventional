@@ -17,7 +17,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\debug\Conventional.dll" target="lib\net40" />
-    <file src="bin\debug\Conventional.Cecil.dll" target="lib\net40" />
+    <file src="bin\release\Conventional.dll" target="lib\net40" />
+    <file src="bin\release\Conventional.Cecil.dll" target="lib\net40" />
   </files>
 </package>
