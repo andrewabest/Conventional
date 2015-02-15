@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Conventional.Net45;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Conventional.Tests.Conventions
+namespace Conventional.Tests.Conventional.Conventions
 {
     public class ConventionSpecificationTests
     {
@@ -156,7 +157,7 @@ namespace Conventional.Tests.Conventions
         public void MustLiveInNamespaceConventionSpecification_Success()
         {
             typeof(NamespaceMember)
-                .MustConformTo(Convention.MustLiveInNamespace("Conventional.Tests.Conventions"))
+                .MustConformTo(Convention.MustLiveInNamespace("Conventional.Tests.Conventional.Conventions"))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -331,7 +332,7 @@ namespace Conventional.Tests.Conventions
         public void VoidMethodsMustNotBeAsync_Success()
         {
             typeof(HasANonAsyncVoidMethod)
-                .MustConformTo(Convention.VoidMethodsMustNotBeAsync)
+                .MustConformTo(AsyncConvention.VoidMethodsMustNotBeAsync)
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -352,7 +353,7 @@ namespace Conventional.Tests.Conventions
         public void VoidMethodsMustNotBeAsync_FailsWhenAsyncVoidMethodExists()
         {
             var result = typeof(HasAnAsyncVoidMethod)
-                .MustConformTo(Convention.VoidMethodsMustNotBeAsync);
+                .MustConformTo(AsyncConvention.VoidMethodsMustNotBeAsync);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);

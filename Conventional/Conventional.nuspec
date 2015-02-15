@@ -12,4 +12,8 @@
     <releaseNotes>Initial release.</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
+  <files>
+    <file src="bin\release\Conventional.dll" target="lib\net40" />
+    <file src="..\Conventional.Async\bin\release\Conventional.Async.dll" target="lib\net45" />
+  </files>
 </package>

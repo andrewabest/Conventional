@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Conventional.Conventions
@@ -24,7 +25,7 @@ namespace Conventional.Conventions
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            if (type.GetCustomAttribute(_attributeType) == null)
+            if (type.GetCustomAttributes(_attributeType, false).Any() == false)
             {
                 return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(type.FullName));
             }

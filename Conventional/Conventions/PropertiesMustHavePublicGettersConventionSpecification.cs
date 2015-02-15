@@ -15,7 +15,7 @@ namespace Conventional.Conventions
         {
             var toInspect = type.GetProperties().Where(p => p.CanWrite);
 
-            var failures = toInspect.Where(subject => subject.GetMethod.IsPublic == false).ToArray();
+            var failures = toInspect.Where(subject => subject.GetGetMethod() == null || subject.GetGetMethod().IsPublic == false).ToArray();
 
             if (failures.Any())
             {

@@ -12,7 +12,7 @@ namespace Conventional.Conventions
         {
             var enumerables = GetProperties(type);
 
-            var failures = enumerables.Where(x => x.SetMethod != null).ToArray();
+            var failures = enumerables.Where(x => x.GetSetMethod() != null).ToArray();
 
             if (failures.Any())
             {
