@@ -8,5 +8,10 @@ namespace Conventional.Net45
         {
             get { return new VoidMethodsMustNotBeAsyncConventionSpecification(); }
         }
+
+        public static AsyncMethodsMustHaveAsyncSuffixConventionSpecification AsyncMethodsMustHaveAsyncSuffix
+        {
+            get { return new AsyncMethodsMustHaveAsyncSuffixConventionSpecification(); }
+        }
     }
 }

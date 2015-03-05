@@ -500,5 +500,45 @@ namespace Conventional.Tests.Conventional.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
+
+        private class HasAnAsyncMethodWithAsyncSuffix
+        {
+            // disable "This async method lacks 'await' operators and will run synchronously." warning
+#pragma warning disable 1998
+            public async void AsyncMethodWithSuffixOfAsync()
+            {
+            }
+#pragma warning restore 1998
+        }
+
+        [Test]
+        public void AsyncMethodsMustHaveAsyncSuffix_Success()
+        {
+            typeof(HasAnAsyncMethodWithAsyncSuffix)
+                .MustConformTo(AsyncConvention.AsyncMethodsMustHaveAsyncSuffix)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class HasAnAsyncMethodWithoutAnAsyncSuffix
+        {
+            // disable "This async method lacks 'await' operators and will run synchronously." warning
+#pragma warning disable 1998
+            public async void AsyncMethodWithoutAsyncSuffix()
+            {
+            }
+#pragma warning restore 1998
+        }
+
+        [Test]
+        public void AsyncMethodsMustHaveAsyncSuffix_FailsWhenMethodIsNotSuffixedWithAsync()
+        {
+            var result = typeof(HasAnAsyncMethodWithoutAnAsyncSuffix)
+                .MustConformTo(AsyncConvention.AsyncMethodsMustHaveAsyncSuffix);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }
