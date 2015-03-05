@@ -70,6 +70,7 @@ new[] { myAssembly }
 ## Supplied Conventions
 
 - Void methods must not be async
+- Async methods must have 'Async' suffix
 
 Conventional.Cecil
 ============
