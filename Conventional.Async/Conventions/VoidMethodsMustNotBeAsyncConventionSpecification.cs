@@ -19,11 +19,10 @@ namespace Conventional.Conventions
 
             var failures = toInspect.Where(HasAttribute<AsyncStateMachineAttribute>);
 
-            if (Enumerable.Any<MethodInfo>(failures))
+            if (failures.Any())
             {
-                var failureMessage =
-                    BuildFailureMessage(Enumerable.Aggregate<MethodInfo, string>(failures, string.Empty,
-                        (s, info) => s + "\t- " + info.Name + Environment.NewLine));
+                var details = failures.Aggregate(string.Empty, (s, info) => s + "\t- " + info.Name + Environment.NewLine);
+                var failureMessage = BuildFailureMessage(details);
 
                 return ConventionResult.NotSatisfied(type.FullName, failureMessage);
             }
