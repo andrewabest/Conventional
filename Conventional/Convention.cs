@@ -3,7 +3,7 @@ using Conventional.Conventions;
 
 namespace Conventional
 {
-    public static class Convention
+    public static partial class Convention
     {
         public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters
         {

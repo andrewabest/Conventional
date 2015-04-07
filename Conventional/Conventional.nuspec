@@ -14,7 +14,6 @@
   </metadata>
   <files>
     <file src="bin\release\Conventional.dll" target="lib\net40" />
-    <file src="bin\release\Conventional.dll" target="lib\net45" />
-    <file src="..\Conventional.Async\bin\release\Conventional.Async.dll" target="lib\net45" />
+    <file src="..\Conventional.Net45\bin\release\Conventional.dll" target="lib\net45" />
   </files>
 </package>

@@ -1,8 +1,7 @@
-﻿using Conventional.Cecil;
-using Conventional.Conventions;
+﻿using Conventional.Conventions;
 using NUnit.Framework;
 
-namespace Conventional.Tests
+namespace Conventional.Tests.Net45
 {
     public class DogFoodConventions
     {
