@@ -52,47 +52,20 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Enumerable properties must be eager loaded
 - Collection properties must be immutable
 - All properties must be immutable
-
-Conventional.Async
-============
-
-A suite of async related convention tests. Conventional.Async is packaged within the base Best.Conventional nuget package for projects targeting .Net 4.5+.
-    
-## Sample Usage
-
-```c#
-new[] { myAssembly }
-    .WhereTypes(x => x) // Insert funky type narrowing predicate of choice here
-    .MustConformTo(AsyncConvention.VoidMethodsMustNotBeAsync)
-    .WithFailureAssertion(Assert.Fail);
-```
-
-## Supplied Conventions
-
-- Void methods must not be async
-- Async methods must have 'Async' suffix
-
-Conventional.Cecil
-============
-
-A suite of Mono.Cecil-based convention tests, for when standard reflection just wont cut it.
-
-## To install from NuGet
-
-    Install-Package Best.Conventional.Cecil
-    
-## Sample Usage
-
-```c#
-new[] { myAssembly }
-    .WhereTypes(x => x) // Insert funky type narrowing predicate of choice here
-    .MustConformTo(CecilConvention.MustNotUseDateTimeNow)
-    .WithFailureAssertion(Assert.Fail);
-```
-
-## Supplied Conventions
-
 - Must not use DateTime.Now
 - Must not use DateTimeOffset.Now
 - Exceptions thrown must be derived from specified type
 - Must instantiate properties of specified type in default constructor
+
+## Supplied Conventions (.Net 4.5 Only)
+
+- Void methods must not be async
+- Async methods must have 'Async' suffix
+
+### 2015-04-07 0.1.x Release Breaking Changes
+
+* The Conventional.Async assembly has been merged into the core Conventional assembly, and async conventions are now accessed through the same Convention class as the core conventions.
+
+* The Conventional.Cecil assembly has been merged into the core Conventional assembly, and Mono.Cecil based conventions are now accessed through the same Convention class as the core conventions.
+
+The aim of these changes was to simplify usage of Conventional - there is now one central location for conventions, and only one package regardless of the conventions you wish to enforce. The only side effect of the changes is the core package is now dependent on Mono.Cecil.
