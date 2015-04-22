@@ -68,6 +68,8 @@
     <Compile Include="Conventions\NotConventionSpecification.cs" />
     <Compile Include="Conventions\OrConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustBeImmutableConventionSpecification.cs" />
+    <Compile Include="Conventions\PropertiesMustHavePrivateSettersConventionSpecification.cs" />
+    <Compile Include="Conventions\PropertiesMustHaveProtectedSettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePublicSettersConventionSpecification.cs" />
     <Compile Include="Conventions\NameMustEndWithConventionSpecification.cs" />

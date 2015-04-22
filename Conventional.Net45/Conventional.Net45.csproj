@@ -127,6 +127,12 @@
     <Compile Include="..\Conventional\Conventions\PropertiesMustBeImmutableConventionSpecification.cs">
       <Link>Conventions\PropertiesMustBeImmutableConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\PropertiesMustHavePrivateSettersConventionSpecification.cs">
+      <Link>Conventions\PropertiesMustHavePrivateSettersConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\PropertiesMustHaveProtectedSettersConventionSpecification.cs">
+      <Link>Conventions\PropertiesMustHaveProtectedSettersConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs">
       <Link>Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs</Link>
     </Compile>

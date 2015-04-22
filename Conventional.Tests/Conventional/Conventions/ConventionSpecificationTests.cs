@@ -52,7 +52,7 @@ namespace Conventional.Tests.Conventional.Conventions
                 .BeTrue();
         }
 
-        private class PrivateSetterMock
+        private class AllPrivateSetterMock
         {
             public string PrivateSet { get; private set; }
         }
@@ -60,8 +60,53 @@ namespace Conventional.Tests.Conventional.Conventions
         [Test]
         public void PropertiesMustHavePublicSetters_FailsWhenPrivateSetterExists()
         {
-            var result = typeof (PrivateSetterMock)
+            var result = typeof (AllPrivateSetterMock)
                 .MustConformTo(Convention.PropertiesMustHavePublicSetters);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        private class AllProtectedSetterMock
+        {
+            public string Public { get; protected set; }
+        }
+
+        [Test]
+        public void PropertiesMustHaveProtectedSetters_Success()
+        {
+            typeof(AllProtectedSetterMock)
+                .MustConformTo(Convention.PropertiesMustHaveProtectedSetters)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void PropertiesMustHaveProtectedSetters_FailsWhenOtherSetterExists()
+        {
+            var result = typeof(AllPrivateSetterMock)
+                .MustConformTo(Convention.PropertiesMustHaveProtectedSetters);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void PropertiesMustHavePrivateSetters_Success()
+        {
+            typeof(AllPrivateSetterMock)
+                .MustConformTo(Convention.PropertiesMustHavePrivateSetters)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void PropertiesMustHavePrivateSetters_FailsWhenOtherSetterExists()
+        {
+            var result = typeof(AllProtectedSetterMock)
+                .MustConformTo(Convention.PropertiesMustHavePrivateSetters);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);

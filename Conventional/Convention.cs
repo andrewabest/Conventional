@@ -14,6 +14,16 @@ namespace Conventional
         {
             get {  return new PropertiesMustHavePublicSettersConventionSpecification(); }
         }
+        
+        public static PropertiesMustHaveProtectedSettersConventionSpecification PropertiesMustHaveProtectedSetters
+        {
+            get {  return new PropertiesMustHaveProtectedSettersConventionSpecification(); }
+        }
+        
+        public static PropertiesMustHavePrivateSettersConventionSpecification PropertiesMustHavePrivateSetters
+        {
+            get {  return new PropertiesMustHavePrivateSettersConventionSpecification(); }
+        }
 
         public static MustHaveAttributeConventionSpecification MustHaveAttribute(Type attributeType)
         {

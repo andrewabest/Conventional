@@ -40,6 +40,8 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 
 - Properties must have public getters
 - Properties must have public setters
+- Properties must have protected setters
+- Properties must have private setters
 - Name must start with
 - Name must end with
 - Must live in namespace
