@@ -13,16 +13,16 @@ Standard Syntax
 ```c#
 new[] { typeof(MyType), typeof(MyOtherType) }
     .MustConformTo(
-        Convention.PropertiesShouldHavePublicGetters.And(
-        Convention.PropertiesShouldHavePublicSetters))
+        Convention.PropertiesMustHavePublicGetters.And(
+        Convention.PropertiesMustHavePublicSetters))
     .WithFailureAssertion(Assert.Fail);
 ```
 
 Fluent Syntax
 ```c#
 new[] { typeof(MyType), typeof(MyOtherType) }
-    .MustConformTo(Convention.PropertiesShouldHavePublicGetters)
-    .AndMustConformTo(Convention.PropertiesShouldHavePublicSetters)
+    .MustConformTo(Convention.PropertiesMustHavePublicGetters)
+    .AndMustConformTo(Convention.PropertiesMustHavePublicSetters)
     .WithFailureAssertion(Assert.Fail);
 ```
 
@@ -30,8 +30,8 @@ Or Mix It Up!
 ```c#
 new[] { typeof(MyType), typeof(MyOtherType) }
     .MustConformTo(
-        Convention.PropertiesShouldHavePublicGetters.And(
-        Convention.PropertiesShouldHavePublicSetters))
+        Convention.PropertiesMustHavePublicGetters.And(
+        Convention.PropertiesMustHavePublicSetters))
     .AndMustConformTo(Convention.MustHaveADefaultConstructor)
     .WithFailureAssertion(Assert.Fail);
 ```
