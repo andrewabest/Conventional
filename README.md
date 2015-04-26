@@ -63,6 +63,7 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 
 - Void methods must not be async
 - Async methods must have 'Async' suffix
+- Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
 
 ### 2015-04-07 0.1.x Release Breaking Changes
 
