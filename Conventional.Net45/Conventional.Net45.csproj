@@ -74,6 +74,9 @@
     <Compile Include="..\Conventional\Conventions\AndConventionSpecification.cs">
       <Link>Conventions\AndConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs">
+      <Link>Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Cecil\CecilExtensions.cs">
       <Link>Conventions\Cecil\CecilExtensions.cs</Link>
     </Compile>
