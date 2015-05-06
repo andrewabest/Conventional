@@ -1,5 +1,6 @@
 ﻿using System;
 using Conventional.Cecil.Conventions;
+using Conventional.Conventions.Cecil;
 
 namespace Conventional
 {
@@ -24,6 +25,11 @@ namespace Conventional
             MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor(Type propertyType)
         {
             return new MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification(propertyType);
+        }
+
+        public static AllPropertiesMustBeAssignedDuringConstructionConventionSpecification AllPropertiesMustBeAssignedDuringConstruction
+        {
+            get {  return new AllPropertiesMustBeAssignedDuringConstructionConventionSpecification(); }
         }
     }
 }

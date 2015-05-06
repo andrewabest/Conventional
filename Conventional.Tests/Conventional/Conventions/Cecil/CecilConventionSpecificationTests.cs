@@ -185,6 +185,96 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
-        } 
+        }
+
+        private class AssignsAllPropertiesDuringConstruction
+        {
+            public AssignsAllPropertiesDuringConstruction(int id)
+            {
+                Id = id;
+            }
+
+            public int Id { get; set; }
+        }
+
+        [Test]
+        public void AllPropertiesMustBeAssignedDuringConstructionConventionSpecification_Success()
+        {
+            typeof (AssignsAllPropertiesDuringConstruction)
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class DoesNotAssignAllPropertiesDuringConstruction
+        {
+            public DoesNotAssignAllPropertiesDuringConstruction(int id)
+            {
+                Id = id;
+            }
+
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        [Test]
+        public void
+            AllPropertiesMustBeAssignedDuringConstructionConventionSpecification_FailsWhenNotAllPropertiesAreAssignedDuringConstruction
+            ()
+        {
+            var result = typeof(DoesNotAssignAllPropertiesDuringConstruction)
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        private class DoesNotHaveAParametereizedConstructor
+        {
+            public int Id { get; set; }
+        }
+
+        [Test]
+        public void
+            AllPropertiesMustBeAssignedDuringConstructionConventionSpecification_FailsWhenNoParameterizedConstructorExists
+            ()
+        {
+            var result = typeof(DoesNotHaveAParametereizedConstructor)
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+        
+
+        private class HasMoreThanOneParameterizedConstructor
+        {
+            public HasMoreThanOneParameterizedConstructor(int id)
+            {
+                Id = id;
+            }
+
+            public HasMoreThanOneParameterizedConstructor(int id, string name)
+            {
+                Id = id;
+                Name = name;
+            }
+
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        [Test]
+        public void
+            AllPropertiesMustBeAssignedDuringConstructionConventionSpecification_FailsWhenMoreThanOneParameterizedConstructorExists
+            ()
+        {
+            var result = typeof(HasMoreThanOneParameterizedConstructor)
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }

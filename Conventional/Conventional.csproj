@@ -59,6 +59,7 @@
     <Compile Include="Convention.Cecil.cs" />
     <Compile Include="Conventions\AllPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\AndConventionSpecification.cs" />
+    <Compile Include="Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\CecilExtensions.cs" />
     <Compile Include="Conventions\Cecil\ExceptionsThrownMustBeDerivedFrom.cs" />
     <Compile Include="Conventions\Cecil\MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor.cs" />
