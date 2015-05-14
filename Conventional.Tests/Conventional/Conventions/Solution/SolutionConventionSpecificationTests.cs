@@ -8,7 +8,7 @@ namespace Conventional.Tests.Conventional.Conventions.Solution
         public void Dogfooding_MustOnlyContainToDoAndNoteComments()
         {
             ThisSolution
-                .MustConformTo(Convention.MustOnlyContainToDoAndNoteComments())
+                .MustConformTo(Convention.MustOnlyContainToDoAndNoteComments)
                 .WithFailureAssertion(Assert.Fail);
         }
     }

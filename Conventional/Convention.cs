@@ -91,9 +91,9 @@ namespace Conventional
             return new MustOnlyContainInformativeCommentsConventionSpecification(permittedCommentDelimiters, fileExemptions, fileSearchPattern); 
         } 
         
-        public static MustOnlyContainInformativeCommentsConventionSpecification MustOnlyContainToDoAndNoteComments()
+        public static MustOnlyContainInformativeCommentsConventionSpecification MustOnlyContainToDoAndNoteComments
         {
-            return new MustOnlyContainInformativeCommentsConventionSpecification(new [] { "Todo", "Note" }, new [] { "AssemblyInfo.cs", "GlobalAssemblyInfo.cs" }, "*.cs"); 
+            get { return new MustOnlyContainInformativeCommentsConventionSpecification(new[] {"Todo", "Note"}, new[] {"AssemblyInfo.cs", "GlobalAssemblyInfo.cs"}, "*.cs"); }
         } 
     }
 }
