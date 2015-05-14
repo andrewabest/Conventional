@@ -167,6 +167,9 @@
     <Compile Include="..\Conventional\StringExtensions.cs">
       <Link>StringExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\ThisSolution.cs">
+      <Link>ThisSolution.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\WrappedConventionResult.cs">
       <Link>WrappedConventionResult.cs</Link>
     </Compile>
