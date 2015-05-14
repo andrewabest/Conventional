@@ -1,7 +1,7 @@
 Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y026n60v9oe16?svg=true)](https://ci.appveyor.com/project/andrewabest/conventional)
 ============
 
-A suite of basic convention tests to run over types to make sure your duckies are all in a row.
+A suite of convention tests to run over sets of types _or whole solutions_ to make sure your duckies are all in a row.
 
 ## To install from NuGet
 
@@ -65,6 +65,20 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Void methods must not be async
 - Async methods must have 'Async' suffix
 - Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
+
+## Solution Convention Sample Usage
+
+Standard Syntax
+```c#
+ThisSolution
+    .MustConformTo(Convention.MustOnlyContainToDoAndNoteComments)
+    .WithFailureAssertion(Assert.Fail);
+```
+
+## Supplied Solution Conventions
+
+- Must only contain Toodo and Note comments
+- Must only contain informative comments
 
 ### 2015-04-07 0.1.x Release Breaking Changes
 
