@@ -32,11 +32,14 @@ namespace Conventional.Conventions.Cecil
             return ConventionResult.Satisfied(type.FullName);
         }
 
-        // First we get the type of the compiler generated state machine. This will contain
-        // a MoveNext method containing the implementation.
-        // We then compare the number of calls to async methods (GetAwaiter) to the number
-        // of calls to ConfigureAwait.
-        // see: http://www.codeproject.com/Articles/535635/Async-Await-and-the-Generated-StateMachine
+        
+        /// <summary>
+        /// First we get the type of the compiler generated state machine. This will contain
+        /// a MoveNext method containing the implementation.
+        /// We then compare the number of calls to async methods (GetAwaiter) to the number
+        /// of calls to ConfigureAwait.
+        /// see: http://www.codeproject.com/Articles/535635/Async-Await-and-the-Generated-StateMachine
+        /// </summary>
         private static bool AwaitingTasksWithoutConfigureAwait(MethodDefinition subject)
         {
             Func<Instruction, bool> isGetAwaiterCall = instruction => IsAsyncMethodCall(instruction, "GetAwaiter");
@@ -75,9 +78,11 @@ namespace Conventional.Conventions.Cecil
             return subject.CustomAttributes.FirstOrDefault(attribute => attribute.AttributeType.Name == typeof(TAttribute).Name);
         }
 
-        // An async method will have an AsyncStateMachine attribute pointing to the generated async state machine type 
-        // for example [AsyncStateMachine(typeof(AsyncMethods.<DownloadHtmlAsyncTask>d__0))]
-        // see: http://www.codeproject.com/Articles/535635/Async-Await-and-the-Generated-StateMachine
+        /// <summary>
+        /// An async method will have an AsyncStateMachine attribute pointing to the generated async state machine type 
+        /// for example [AsyncStateMachine(typeof(AsyncMethods.<DownloadHtmlAsyncTask>d__0))]
+        /// see: http://www.codeproject.com/Articles/535635/Async-Await-and-the-Generated-StateMachine
+        /// </summary>
         private static TypeDefinition GetAsyncStateMachineType(MethodDefinition provider)
         {
             var asyncStateMachineAttribute = GetAttribute<AsyncStateMachineAttribute>(provider);

@@ -149,8 +149,17 @@
     <Compile Include="..\Conventional\Conventions\RequiresACorrespondingImplementationOfConventionSpecification.cs">
       <Link>Conventions\RequiresACorrespondingImplementationOfConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Solution\MustOnlyContainInformativeCommentsConventionSpecification.cs">
+      <Link>Conventions\Solution\MustOnlyContainInformativeCommentsConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Solution\SolutionConventionSpecification.cs">
+      <Link>Conventions\Solution\SolutionConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\IConventionSpecification.cs">
       <Link>IConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\ISolutionConventionSpecification.cs">
+      <Link>ISolutionConventionSpecification.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\StringConstants.cs">
       <Link>StringConstants.cs</Link>

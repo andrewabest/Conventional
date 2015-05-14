@@ -57,6 +57,7 @@
     <Compile Include="Conventional\Conventions\Cecil\CecilConventionSpecificationTests.cs" />
     <Compile Include="ConformistScenarios.cs" />
     <Compile Include="Conventional\Conventions\ConventionSpecificationTests.cs" />
+    <Compile Include="Conventional\Conventions\Solution\SolutionConventionSpecificationTests.cs" />
     <Compile Include="DogFoodConventions.cs" />
     <Compile Include="ExampleOutput\SampleOutputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

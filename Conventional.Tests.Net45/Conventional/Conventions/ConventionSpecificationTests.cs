@@ -24,7 +24,7 @@ namespace Conventional.Tests.Net45.Conventional.Conventions
 
         private class HasAnAsyncVoidMethod
         {
-            // disable "This async method lacks 'await' operators and will run synchronously." warning
+            // Note: disable "This async method lacks 'await' operators and will run synchronously." warning
 #pragma warning disable 1998
             public async void AsyncVoidMethod()
             {
@@ -45,7 +45,7 @@ namespace Conventional.Tests.Net45.Conventional.Conventions
 
         private class HasAnAsyncMethodWithAsyncSuffix
         {
-            // disable "This async method lacks 'await' operators and will run synchronously." warning
+            // Note: disable "This async method lacks 'await' operators and will run synchronously." warning
 #pragma warning disable 1998
             public async void AsyncMethodWithSuffixOfAsync()
             {
@@ -65,7 +65,7 @@ namespace Conventional.Tests.Net45.Conventional.Conventions
 
         private class HasAnAsyncMethodWithoutAnAsyncSuffix
         {
-            // disable "This async method lacks 'await' operators and will run synchronously." warning
+            // Note: disable "This async method lacks 'await' operators and will run synchronously." warning
 #pragma warning disable 1998
             public async void AsyncMethodWithoutAsyncSuffix()
             {

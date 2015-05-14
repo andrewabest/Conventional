@@ -30,4 +30,18 @@ namespace Conventional.Conventions
             return new NotConventionSpecification(this);
         }
     }
+
+    public abstract class SolutionConventionSpecification : ISolutionConventionSpecification
+    {
+        protected abstract string FailureMessage { get; }
+
+        protected string BuildFailureMessage(string details)
+        {
+            return FailureMessage +
+                   Environment.NewLine +
+                   details;
+        }
+
+        public abstract ConventionResult IsSatisfiedBy(string solutionRoot);
+    }
 }

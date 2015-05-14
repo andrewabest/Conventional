@@ -9,6 +9,7 @@ namespace Conventional
 {
     public static class Conformist
     {
+
         public static ConventionResult MustConformTo(this Type type, IConventionSpecification conventionSpecification)
         {
             return conventionSpecification.IsSatisfiedBy(type);

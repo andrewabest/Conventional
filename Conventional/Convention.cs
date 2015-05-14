@@ -1,5 +1,6 @@
 using System;
 using Conventional.Conventions;
+using Conventional.Conventions.Solution;
 
 namespace Conventional
 {
@@ -55,9 +56,9 @@ namespace Conventional
             get { return new MustHaveANonPublicDefaultConstructorConventionSpecification(); }
         }
 
-        public static MustNotTakeADependencyOnConventionSpecification MustNotTakeADependencyOn(Type type)
+        public static MustNotTakeADependencyOnConventionSpecification MustNotTakeADependencyOn(Type type, string reason)
         {
-            return new MustNotTakeADependencyOnConventionSpecification(type);
+            return new MustNotTakeADependencyOnConventionSpecification(type, reason);
         }
 
         public static MustHaveAppropriateConstructorsConventionSpecification MustHaveAppropriateConstructors
@@ -84,5 +85,15 @@ namespace Conventional
         {
             get { return new AllPropertiesMustBeImmutableConventionSpecification(); }
         }
+
+        public static MustOnlyContainInformativeCommentsConventionSpecification MustOnlyContainInformativeComments(string[] permittedCommentDelimiters, string[] fileExemptions, string fileSearchPattern)
+        {
+            return new MustOnlyContainInformativeCommentsConventionSpecification(permittedCommentDelimiters, fileExemptions, fileSearchPattern); 
+        } 
+        
+        public static MustOnlyContainInformativeCommentsConventionSpecification MustOnlyContainToDoAndNoteComments()
+        {
+            return new MustOnlyContainInformativeCommentsConventionSpecification(new [] { "Todo", "Note" }, new [] { "AssemblyInfo.cs", "GlobalAssemblyInfo.cs" }, "*.cs"); 
+        } 
     }
 }

@@ -295,7 +295,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void MustNotTakeADependencyOnConventionSpecification_Success()
         {
             typeof(HasNoIllegalDependencies)
-                .MustConformTo(Convention.MustNotTakeADependencyOn(typeof(Dependency)))
+                .MustConformTo(Convention.MustNotTakeADependencyOn(typeof(Dependency), "Because it shouldn't"))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -312,7 +312,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void MustNotTakeADependencyOnConventionSpecification_FailsIfTheIdentifiedConstructorParameterExists()
         {
             var result = typeof (HasIllegalDependencies)
-                .MustConformTo(Convention.MustNotTakeADependencyOn(typeof (Dependency)));
+                .MustConformTo(Convention.MustNotTakeADependencyOn(typeof (Dependency), "Because it shouldn't"));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);

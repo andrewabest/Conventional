@@ -47,14 +47,19 @@ namespace Conventional.Conventions.Cecil
                     .Instructions
                     .Select(i => i.Operand)
                     .OfType<MethodDefinition>()
-                    .Select(m => m.Name);
+                    .Select(m => m.Name)
+                    .ToArray();
 
             if (setters.Count(subjectPropertySetters.Contains) == subjectPropertySetters.Count())
             {
                 return ConventionResult.Satisfied(type.FullName);
             }
 
-            return ConventionResult.NotSatisfied(type.FullName, FailureMessage);
+            var failureMessage =
+                    BuildFailureMessage(setters.Aggregate(string.Empty,
+                        (s, name) => s + "\t- " + name + Environment.NewLine));
+
+            return ConventionResult.NotSatisfied(type.FullName, BuildFailureMessage(failureMessage));
         }
     }
 }

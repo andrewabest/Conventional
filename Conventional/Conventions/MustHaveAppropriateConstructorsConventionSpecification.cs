@@ -15,7 +15,7 @@ namespace Conventional.Conventions
         {
             var constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 
-            // only one constructor? it should be public.
+            // Note: only one constructor? it should be public.
             if (constructors.Count() == 1)
             {
                 if (constructors.Single().IsPublic)
@@ -26,7 +26,7 @@ namespace Conventional.Conventions
                 return ConventionResult.NotSatisfied(type.FullName, FailureMessage);
             }
 
-            // more than one constructor? the default constructor should be protected and the others public.
+            // Note: more than one constructor? the default constructor should be protected and the others public.
             var defaultConstructorIsProtected = constructors.Where(c => c.GetParameters().Any() == false).All(c => c.IsFamily);
             var allNonDefaultConstructorsArePublic = constructors.Where(c => c.GetParameters().Any()).All(c => c.IsPublic);
 
