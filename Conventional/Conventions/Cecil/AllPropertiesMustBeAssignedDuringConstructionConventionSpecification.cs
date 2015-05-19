@@ -57,16 +57,16 @@ namespace Conventional.Conventions.Cecil
                     .Select(m => m.Name)
                     .ToArray();
 
-            if (setters.Count(subjectPropertySetters.Contains) == subjectPropertySetters.Count())
+            if (subjectPropertySetters.All(setters.Contains))
             {
                 return ConventionResult.Satisfied(type.FullName);
             }
 
             var failureMessage =
-                BuildFailureMessage(setters.Aggregate(string.Empty,
+                BuildFailureMessage(subjectPropertySetters.Where(x => setters.Contains(x) == false).Aggregate(string.Empty,
                     (s, name) => s + "\t- " + name + Environment.NewLine));
 
-            return ConventionResult.NotSatisfied(type.FullName, BuildFailureMessage(failureMessage));
+            return ConventionResult.NotSatisfied(type.FullName, failureMessage);
         }
     }
 }
