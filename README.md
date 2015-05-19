@@ -77,7 +77,7 @@ ThisSolution
 
 ## Supplied Solution Conventions
 
-- Must only contain Toodo and Note comments
+- Must only contain Todo and Note comments
 - Must only contain informative comments
 
 ### 2015-04-07 0.1.x Release Breaking Changes
