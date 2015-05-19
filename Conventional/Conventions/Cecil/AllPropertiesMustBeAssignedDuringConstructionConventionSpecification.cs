@@ -8,6 +8,13 @@ namespace Conventional.Conventions.Cecil
 {
     public class AllPropertiesMustBeAssignedDuringConstructionConventionSpecification : ConventionSpecification
     {
+        private readonly bool _ignoreTypesWithoutConstructors;
+
+        public AllPropertiesMustBeAssignedDuringConstructionConventionSpecification(bool ignoreTypesWithoutConstructors = false)
+        {
+            _ignoreTypesWithoutConstructors = ignoreTypesWithoutConstructors;
+        }
+
         protected override string FailureMessage
         {
             get { return "All properties must be instantiated during construction"; }
@@ -38,8 +45,8 @@ namespace Conventional.Conventions.Cecil
             var constructor = constructors.SingleOrDefault();
             if (constructor == null)
             {
-                return ConventionResult.NotSatisfied(type.FullName, FailureMessage + " - could not enforce method of construction due to no parameterized constructor existing");
-            };
+                return _ignoreTypesWithoutConstructors ? ConventionResult.Satisfied(type.FullName) : ConventionResult.NotSatisfied(type.FullName, FailureMessage + " - could not enforce method of construction due to no parameterized constructor existing");
+            }
 
             var setters =
                 constructor
@@ -56,8 +63,8 @@ namespace Conventional.Conventions.Cecil
             }
 
             var failureMessage =
-                    BuildFailureMessage(setters.Aggregate(string.Empty,
-                        (s, name) => s + "\t- " + name + Environment.NewLine));
+                BuildFailureMessage(setters.Aggregate(string.Empty,
+                    (s, name) => s + "\t- " + name + Environment.NewLine));
 
             return ConventionResult.NotSatisfied(type.FullName, BuildFailureMessage(failureMessage));
         }

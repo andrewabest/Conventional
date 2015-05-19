@@ -201,7 +201,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         public void AllPropertiesMustBeAssignedDuringConstructionConventionSpecification_Success()
         {
             typeof (AssignsAllPropertiesDuringConstruction)
-                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction)
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction())
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -224,7 +224,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             ()
         {
             var result = typeof(DoesNotAssignAllPropertiesDuringConstruction)
-                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction);
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction());
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -241,7 +241,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             ()
         {
             var result = typeof(DoesNotHaveAParametereizedConstructor)
-                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction);
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction());
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -264,6 +264,10 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             public int Id { get; set; }
             public string Name { get; set; }
         }
+        
+        private class HasNoConstructors
+        {
+        }
 
         [Test]
         public void
@@ -271,7 +275,31 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             ()
         {
             var result = typeof(HasMoreThanOneParameterizedConstructor)
-                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction);
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction());
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void
+            AllPropertiesMustBeAssignedDuringConstructionConventionSpecification_PassesWhenNoConstructorsExistsAndIsReopinionated
+            ()
+        {
+            var result = typeof(HasNoConstructors)
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction(true));
+
+            result.IsSatisfied.Should().BeTrue();
+            result.Failures.Should().HaveCount(0);
+        }
+
+        [Test]
+        public void
+            AllPropertiesMustBeAssignedDuringConstructionConventionSpecification_FailsWhenNoConstructorsExists
+            ()
+        {
+            var result = typeof(HasNoConstructors)
+                .MustConformTo(Convention.AllPropertiesMustBeAssignedDuringConstruction());
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
