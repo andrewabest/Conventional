@@ -94,6 +94,11 @@ namespace Conventional
         public static MustOnlyContainInformativeCommentsConventionSpecification MustOnlyContainToDoAndNoteComments
         {
             get { return new MustOnlyContainInformativeCommentsConventionSpecification(new[] {"Todo", "Note"}, new[] {"AssemblyInfo.cs", "GlobalAssemblyInfo.cs"}, "*.cs"); }
-        } 
+        }
+
+        public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
+        {
+            return new MustHaveMatchingEmbeddedResourcesConventionSpecification(extension);
+        }
     }
 }

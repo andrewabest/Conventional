@@ -113,6 +113,9 @@
     <Compile Include="..\Conventional\Conventions\MustHaveAttributeConventionSpecification.cs">
       <Link>Conventions\MustHaveAttributeConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\MustHaveMatchingEmbeddedResourcesConventionSpecification.cs">
+      <Link>Conventions\MustHaveMatchingEmbeddedResourcesConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\MustLiveInNamespaceConventionSpecification.cs">
       <Link>Conventions\MustLiveInNamespaceConventionSpecification.cs</Link>
     </Compile>
