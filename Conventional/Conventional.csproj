@@ -67,7 +67,7 @@
     <Compile Include="Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs" />
     <Compile Include="Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\ConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameId.cs" />
+    <Compile Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs" />
     <Compile Include="Conventions\Database\DatabaseConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveANonPublicDefaultConstructorConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
@@ -110,7 +110,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameId.sql" />
+    <EmbeddedResource Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

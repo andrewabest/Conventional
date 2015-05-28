@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -15,8 +16,14 @@ namespace Conventional.Conventions.Database
 
         public ConventionResult IsSatisfiedBy(DatabaseSpecimen databaseSpecimen)
         {
-            string script;
-            using (var stream = typeof(DatabaseConventionSpecification).Assembly.GetManifestResourceStream(GetType().FullName + ".cshtml"))
+            var resourceName = GetType().FullName + ".cshtml";
+
+            var assembly =
+                GetType().Assembly.GetManifestResourceNames().Contains(resourceName) ?
+                GetType().Assembly : typeof(DatabaseConventionSpecification).Assembly;
+
+            string script; 
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var reader = new StreamReader(stream))
             {
                 script = reader.ReadToEnd();
