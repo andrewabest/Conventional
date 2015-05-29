@@ -65,6 +65,12 @@
     <Compile Include="..\Conventional\Convention.cs">
       <Link>Convention.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Convention.Database.cs">
+      <Link>Convention.Database.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Convention.Solution.cs">
+      <Link>Convention.Solution.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\ConventionResult.cs">
       <Link>ConventionResult.cs</Link>
     </Compile>
@@ -97,6 +103,12 @@
     </Compile>
     <Compile Include="..\Conventional\Conventions\ConventionSpecification.cs">
       <Link>Conventions\ConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs">
+      <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\DatabaseConventionSpecification.cs">
+      <Link>Conventions\Database\DatabaseConventionSpecification.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs">
       <Link>Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs</Link>
@@ -161,6 +173,9 @@
     <Compile Include="..\Conventional\IConventionSpecification.cs">
       <Link>IConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\IDatabaseConventionSpecification.cs">
+      <Link>IDatabaseConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\ISolutionConventionSpecification.cs">
       <Link>ISolutionConventionSpecification.cs</Link>
     </Compile>
@@ -169,6 +184,9 @@
     </Compile>
     <Compile Include="..\Conventional\StringExtensions.cs">
       <Link>StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\TheDatabase.cs">
+      <Link>TheDatabase.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\ThisSolution.cs">
       <Link>ThisSolution.cs</Link>
@@ -185,6 +203,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql">
+      <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql</Link>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

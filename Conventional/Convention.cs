@@ -86,16 +86,6 @@ namespace Conventional
             get { return new AllPropertiesMustBeImmutableConventionSpecification(); }
         }
 
-        public static MustOnlyContainInformativeCommentsConventionSpecification MustOnlyContainInformativeComments(string[] permittedCommentDelimiters, string[] fileExemptions, string fileSearchPattern)
-        {
-            return new MustOnlyContainInformativeCommentsConventionSpecification(permittedCommentDelimiters, fileExemptions, fileSearchPattern); 
-        } 
-        
-        public static MustOnlyContainInformativeCommentsConventionSpecification MustOnlyContainToDoAndNoteComments
-        {
-            get { return new MustOnlyContainInformativeCommentsConventionSpecification(new[] {"Todo", "Note"}, new[] {"AssemblyInfo.cs", "GlobalAssemblyInfo.cs"}, "*.cs"); }
-        }
-
         public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
         {
             return new MustHaveMatchingEmbeddedResourcesConventionSpecification(extension);

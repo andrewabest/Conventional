@@ -16,7 +16,7 @@ namespace Conventional.Conventions.Database
 
         public ConventionResult IsSatisfiedBy(DatabaseSpecimen databaseSpecimen)
         {
-            var resourceName = GetType().FullName + ".cshtml";
+            var resourceName = GetType().FullName + ".sql";
 
             var assembly =
                 GetType().Assembly.GetManifestResourceNames().Contains(resourceName) ?

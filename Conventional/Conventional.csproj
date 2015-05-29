@@ -104,6 +104,8 @@
     <Compile Include="WrappedConventionResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Convention.Database.cs" />
+    <Compile Include="Convention.Solution.cs" />
     <None Include="Conventional.nuspec">
       <SubType>Designer</SubType>
     </None>
