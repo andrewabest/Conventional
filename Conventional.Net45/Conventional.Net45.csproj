@@ -170,6 +170,9 @@
     <Compile Include="..\Conventional\Conventions\Solution\SolutionConventionSpecification.cs">
       <Link>Conventions\Solution\SolutionConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\DatabaseSpecimen.cs">
+      <Link>DatabaseSpecimen.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\IConventionSpecification.cs">
       <Link>IConventionSpecification.cs</Link>
     </Compile>
