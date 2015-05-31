@@ -208,9 +208,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql">
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql</Link>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
