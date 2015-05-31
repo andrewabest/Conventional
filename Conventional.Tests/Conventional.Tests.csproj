@@ -72,6 +72,7 @@
     <Compile Include="Conventional\Conventions\Cecil\CecilConventionSpecificationTests.cs" />
     <Compile Include="ConformistScenarios.cs" />
     <Compile Include="Conventional\Conventions\ConventionSpecificationTests.cs" />
+    <Compile Include="Conventional\Conventions\Database\AllTablesMustHaveAClusteredIndex.cs" />
     <Compile Include="Conventional\Conventions\Database\DatabaseConventionSpecificationTests.cs" />
     <Compile Include="Conventional\Conventions\Database\DogFoodConventions.cs" />
     <Compile Include="Conventional\Conventions\Database\SqlScripts.cs" />
@@ -109,6 +110,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql" />
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationFailure.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexSuccess.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexFailure.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

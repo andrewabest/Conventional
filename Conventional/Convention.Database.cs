@@ -8,5 +8,10 @@ namespace Conventional
         {
             get {  return new AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification(); }
         }
+
+        public static AllTablesMustHaveAClusteredIndexConventionSpecification AllTablesMustHaveAClusteredIndex
+        {
+            get { return new AllTablesMustHaveAClusteredIndexConventionSpecification(); }
+        }
     }
 }
