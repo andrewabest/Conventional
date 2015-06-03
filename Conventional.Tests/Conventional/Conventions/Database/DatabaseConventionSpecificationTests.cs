@@ -74,6 +74,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
                 .Should()
                 .BeFalse();
         }
+        
         private static void ExecuteSqlScriptFromResource(string resourceName)
         {
             string script;
