@@ -107,6 +107,9 @@
     <Compile Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs">
+      <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Database\DatabaseConventionSpecification.cs">
       <Link>Conventions\Database\DatabaseConventionSpecification.cs</Link>
     </Compile>
@@ -208,9 +211,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql">
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql</Link>
-    </Content>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql">
+      <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
