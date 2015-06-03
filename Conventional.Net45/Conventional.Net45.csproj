@@ -107,6 +107,9 @@
     <Compile Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs">
+      <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Database\DatabaseConventionSpecification.cs">
       <Link>Conventions\Database\DatabaseConventionSpecification.cs</Link>
     </Compile>
@@ -210,6 +213,11 @@
   <ItemGroup>
     <EmbeddedResource Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql">
+      <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
