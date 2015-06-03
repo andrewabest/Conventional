@@ -48,7 +48,32 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
+        
+        [Test]
+        public void AllTablesMustHaveAClusteredIndex_Success()
+        {
+            ExecuteSqlScriptFromResource("Conventional.Tests.Conventional.Conventions.Database.Scripts.TablesWithoutClusteredIndexSuccess.sql");
 
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllTablesMustHaveAClusteredIndex)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllTablesMustHaveAClusteredIndex_Failure()
+        {
+            ExecuteSqlScriptFromResource("Conventional.Tests.Conventional.Conventions.Database.Scripts.TablesWithoutClusteredIndexFailure.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllTablesMustHaveAClusteredIndex)
+                .IsSatisfied
+                .Should()
+                .BeFalse();
+        }
         private static void ExecuteSqlScriptFromResource(string resourceName)
         {
             string script;

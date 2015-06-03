@@ -82,6 +82,12 @@
     <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql">
       <Link>Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql</Link>
     </Content>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexFailure.sql">
+      <Link>Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexFailure.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexSuccess.sql">
+      <Link>Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexSuccess.sql</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

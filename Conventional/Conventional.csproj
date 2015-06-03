@@ -68,6 +68,7 @@
     <Compile Include="Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\ConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs" />
+    <Compile Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs" />
     <Compile Include="Conventions\Database\DatabaseConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveANonPublicDefaultConstructorConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
@@ -113,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
