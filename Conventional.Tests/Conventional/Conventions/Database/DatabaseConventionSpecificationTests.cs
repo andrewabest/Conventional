@@ -6,10 +6,13 @@ using NUnit.Framework;
 
 namespace Conventional.Tests.Conventional.Conventions.Database
 {
-    [Ignore("Need to sort out CI for these dudes.")]
     public class DatabaseConventionSpecificationTests
     {
+#if DEBUG
         private const string TestDbConnectionString = @"Server=.\SQLEXPRESS;Database=Conventional;Integrated Security=true;";
+#else
+        private const string TestDbConnectionString = @"Server=(local)\SQL2014;Database=Conventional;User ID=sa;Password=Password12!";
+#endif
 
         [SetUp]
         public void Setup()
