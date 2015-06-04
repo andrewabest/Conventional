@@ -1,13 +1,15 @@
 Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y026n60v9oe16?svg=true)](https://ci.appveyor.com/project/andrewabest/conventional)
 ============
 
-A suite of convention tests to run over sets of types _or whole solutions_ to make sure your duckies are all in a row.
+Conventional provides a suite of ready-made tests for enforcing conventions within your types, solutions and databases to make sure your duckies are all in a row.
 
 ## To install from NuGet
 
     Install-Package Best.Conventional 
     
-## Sample Usage
+## Type Conventions
+
+### Sample Usage
 
 Standard Syntax
 ```c#
@@ -36,7 +38,7 @@ new[] { typeof(MyType), typeof(MyOtherType) }
     .WithFailureAssertion(Assert.Fail);
 ```
 
-## Supplied Conventions
+### Supplied Type Conventions
 
 - Properties must have public getters
 - Properties must have public setters
@@ -60,30 +62,39 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Must instantiate properties of specified type in default constructor
 - All properties must be instantiated during construction
 
-## Supplied Conventions (.Net 4.5 Only)
+### Supplied Type Conventions (.Net 4.5 Only)
 
 - Void methods must not be async
 - Async methods must have 'Async' suffix
 - Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
 
-## Solution Convention Sample Usage
+## Solution Conventions
 
-Standard Syntax
+### Sample Usage
+
 ```c#
 ThisSolution
     .MustConformTo(Convention.MustOnlyContainToDoAndNoteComments)
     .WithFailureAssertion(Assert.Fail);
 ```
 
-## Supplied Solution Conventions
+### Supplied Solution Conventions
 
 - Must only contain Todo and Note comments
 - Must only contain informative comments
 
-### 2015-04-07 0.1.x Release Breaking Changes
+## Database Conventions
 
-* The Conventional.Async assembly has been merged into the core Conventional assembly, and async conventions are now accessed through the same Convention class as the core conventions.
+### Sample Usage
 
-* The Conventional.Cecil assembly has been merged into the core Conventional assembly, and Mono.Cecil based conventions are now accessed through the same Convention class as the core conventions.
+```c#
+TheDatabase
+    .WithConnectionString("YourConnectionString")
+    .MustConformTo(Convention.AllIdentityColumnsMustBeNamedTableNameId)
+    .WithFailureAssertion(Assert.Fail);
+```
 
-The aim of these changes was to simplify usage of Conventional - there is now one central location for conventions, and only one package regardless of the conventions you wish to enforce. The only side effect of the changes is the core package is now dependent on Mono.Cecil.
+### Supplied Database Conventions
+
+- All identity columns must be named tablenameId
+- All tables must have a clustered index
