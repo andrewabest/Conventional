@@ -74,6 +74,7 @@
     <Compile Include="Conventional\Conventions\ConventionSpecificationTests.cs" />
     <Compile Include="Conventional\Conventions\Database\DatabaseConventionSpecificationTests.cs" />
     <Compile Include="Conventional\Conventions\Database\DogFoodConventions.cs" />
+    <Compile Include="Conventional\Conventions\Database\ScriptNamespace.cs" />
     <Compile Include="Conventional\Conventions\Database\SqlScripts.cs" />
     <Compile Include="Conventional\Conventions\Solution\SolutionConventionSpecificationTests.cs" />
     <Compile Include="DogFoodConventions.cs" />

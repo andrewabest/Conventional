@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="Conventional\Conventions\Cecil\CecilConventionSpecificationTests.cs" />
     <Compile Include="Conventional\Conventions\ConventionSpecificationTests.cs" />
+    <Compile Include="Conventional\Conventions\Database\ScriptNamespace.cs" />
     <Compile Include="DogFoodConventions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,12 +77,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationFailure.sql">
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationFailure.sql">
       <Link>Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationFailure.sql</Link>
-    </Content>
-    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql">
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql">
       <Link>Conventional\Conventions\Database\Scripts\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql</Link>
-    </Content>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexFailure.sql">
       <Link>Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexFailure.sql</Link>
     </EmbeddedResource>

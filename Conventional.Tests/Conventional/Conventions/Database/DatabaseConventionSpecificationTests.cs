@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Reflection;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -29,7 +30,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         [Test]
         public void AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification_Success()
         {
-            ExecuteSqlScriptFromResource("Conventional.Tests.Conventional.Conventions.Database.Scripts.AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql");
+            ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql");
 
             TheDatabase
                 .WithConnectionString(TestDbConnectionString)
@@ -42,7 +43,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         [Test]
         public void AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification_FailsWhenIdentityColumnIsNotNamedId()
         {
-            ExecuteSqlScriptFromResource("Conventional.Tests.Conventional.Conventions.Database.Scripts.AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationFailure.sql");
+            ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationFailure.sql");
 
             var result = TheDatabase
                 .WithConnectionString(TestDbConnectionString)
@@ -55,7 +56,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         [Test]
         public void AllTablesMustHaveAClusteredIndex_Success()
         {
-            ExecuteSqlScriptFromResource("Conventional.Tests.Conventional.Conventions.Database.Scripts.TablesWithoutClusteredIndexSuccess.sql");
+            ExecuteSqlScriptFromResource("TablesWithoutClusteredIndexSuccess.sql");
 
             TheDatabase
                 .WithConnectionString(TestDbConnectionString)
@@ -68,7 +69,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         [Test]
         public void AllTablesMustHaveAClusteredIndex_Failure()
         {
-            ExecuteSqlScriptFromResource("Conventional.Tests.Conventional.Conventions.Database.Scripts.TablesWithoutClusteredIndexFailure.sql");
+            ExecuteSqlScriptFromResource("TablesWithoutClusteredIndexFailure.sql");
 
             TheDatabase
                 .WithConnectionString(TestDbConnectionString)
@@ -81,7 +82,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         private static void ExecuteSqlScriptFromResource(string resourceName)
         {
             string script;
-            using (var stream = typeof(DatabaseConventionSpecificationTests).Assembly.GetManifestResourceStream(resourceName))
+            using (var stream = typeof(SqlScripts).Assembly.GetManifestResourceStream(ScriptNamespace.Qualifier + "." + resourceName))
             using (var reader = new StreamReader(stream))
             {
                 script = reader.ReadToEnd();
