@@ -3,6 +3,8 @@ Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y02
 
 Conventional provides a suite of ready-made tests for enforcing conventions within your types, solutions and databases to make sure your duckies are all in a row.
 
+Conventional's backlog can be found here https://trello.com/b/kay7a8Ya/conventional
+
 ## To install from NuGet
 
     Install-Package Best.Conventional 
