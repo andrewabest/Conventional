@@ -59,6 +59,8 @@
     <Compile Include="Convention.Cecil.cs" />
     <Compile Include="Conventions\AllPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\AndConventionSpecification.cs" />
+    <Compile Include="Conventions\Assemblies\AssemblyConventionSpecification.cs" />
+    <Compile Include="Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs" />
     <Compile Include="Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\CecilExtensions.cs" />
     <Compile Include="Conventions\Cecil\ExceptionsThrownMustBeDerivedFrom.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Conventions\Solution\MustOnlyContainInformativeCommentsConventionSpecification.cs" />
     <Compile Include="Conventions\Solution\SolutionConventionSpecification.cs" />
     <Compile Include="DatabaseSpecimen.cs" />
+    <Compile Include="IAssemblyConventionSpecification.cs" />
     <Compile Include="IDatabaseConventionSpecification.cs" />
     <Compile Include="ISolutionConventionSpecification.cs" />
     <Compile Include="StringConstants.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="TheDatabase.cs" />
     <Compile Include="ThisSolution.cs" />
     <Compile Include="WrappedConventionResult.cs" />
+    <Compile Include="XmlExpando.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Convention.Database.cs" />

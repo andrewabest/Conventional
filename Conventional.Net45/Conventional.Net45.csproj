@@ -80,6 +80,12 @@
     <Compile Include="..\Conventional\Conventions\AndConventionSpecification.cs">
       <Link>Conventions\AndConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Assemblies\AssemblyConventionSpecification.cs">
+      <Link>Conventions\Assemblies\AssemblyConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs">
+      <Link>Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs">
       <Link>Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs</Link>
     </Compile>
@@ -176,6 +182,9 @@
     <Compile Include="..\Conventional\DatabaseSpecimen.cs">
       <Link>DatabaseSpecimen.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\IAssemblyConventionSpecification.cs">
+      <Link>IAssemblyConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\IConventionSpecification.cs">
       <Link>IConventionSpecification.cs</Link>
     </Compile>
@@ -200,6 +209,9 @@
     <Compile Include="..\Conventional\WrappedConventionResult.cs">
       <Link>WrappedConventionResult.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\XmlExpando.cs">
+      <Link>XmlExpando.cs</Link>
+    </Compile>
     <Compile Include="Convention.Cecil.Net45.cs" />
     <Compile Include="Convention.Net45.cs" />
     <Compile Include="Conventions\AsyncMethodsMustHaveAsyncSuffixConventionSpecification.cs" />
@@ -220,6 +232,7 @@
       <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
