@@ -506,5 +506,31 @@ namespace Conventional.Tests.Conventional.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
+
+        private class HasGenericAndNonGenericProperty
+        {
+            public IEnumerable<string> Names { get; set; }
+            public string[] Nicknames { get; set; }
+        }
+
+        [Test]
+        public void MustNotHaveAPropertyOfTypeIEnumerable_FailsWhenIEnumerablePropertyExists()
+        {
+            var result = typeof(HasGenericAndNonGenericProperty)
+                .MustConformTo(Convention.MustNotHaveAPropertyOfType(typeof(IEnumerable<>), "reason"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void MustNotHaveAPropertyOfTypeStringArray_FailsWhenStringArrayPropertyExists()
+        {
+            var result = typeof(HasGenericAndNonGenericProperty)
+                .MustConformTo(Convention.MustNotHaveAPropertyOfType(typeof(string[]), "reason"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
     }
 }
