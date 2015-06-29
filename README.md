@@ -7,8 +7,8 @@ Conventional's backlog can be found here https://trello.com/b/kay7a8Ya/conventio
 
 ## To install from NuGet
 
-    Install-Package Best.Conventional 
-    
+    Install-Package Best.Conventional
+
 ## Type Conventions
 
 ### Sample Usage
@@ -54,6 +54,7 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Must have appropriate constructors
 - Must have attribute
 - Must not take a dependency on
+- Must not have a property of type
 - Requires a corresponding implementation of (T)
 - Enumerable properties must be eager loaded
 - Collection properties must be immutable
