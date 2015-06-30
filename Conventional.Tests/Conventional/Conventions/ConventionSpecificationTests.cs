@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -191,6 +192,24 @@ namespace Conventional.Tests.Conventional.Conventions
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
+        }
+
+        private interface IFakeBusCommand
+        {
+        }
+
+        private interface IFakeHandleCommand<T> where T : IFakeBusCommand
+        {
+        }
+
+        [Test]
+        public void NameMustEndWithConventionSpecification_HandlesGenericCase()
+        {
+            var result = typeof(IFakeHandleCommand<>)
+                .MustConformTo(Convention.NameMustEndWith("HandleCommand"));
+
+            result.IsSatisfied.Should().BeTrue();
+            result.Failures.Should().HaveCount(0);
         }
 
         private class NamespaceMember

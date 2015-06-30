@@ -18,12 +18,14 @@ namespace Conventional.Conventions
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            if (type.Name.EndsWith(_suffix) == false)
-            {
-                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(_suffix));
-            }
+            var name = type.Name;
 
-            return ConventionResult.Satisfied(type.FullName);
+            if (type.IsGenericType)
+                name = name.Substring(0, name.IndexOf("`", StringComparison.Ordinal));
+
+            return name.EndsWith(_suffix) == false
+                ? ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(_suffix))
+                : ConventionResult.Satisfied(type.FullName);
         }
     }
 }
