@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace Conventional.Conventions.Assemblies
 {
-    public class MustNotReferenceDllsFromBinOrObjDirectories : AssemblyConventionSpecification
+    public class MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification : AssemblyConventionSpecification
     {
         private const string ObjOrBinPattern = @"^(.*?(obj|bin).*?)$";
 

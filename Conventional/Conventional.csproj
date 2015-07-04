@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Convention.Cecil.cs" />
+    <Compile Include="Convention.Assembly.cs" />
     <Compile Include="Conventions\AllPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\AndConventionSpecification.cs" />
     <Compile Include="Conventions\Assemblies\AssemblyConventionSpecification.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Conventions\Cecil\MustNotUseDateTimeNowConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs" />
     <Compile Include="Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs" />
+    <Compile Include="Conventions\ConventionException.cs" />
     <Compile Include="Conventions\ConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="IAssemblyConventionSpecification.cs" />
     <Compile Include="IDatabaseConventionSpecification.cs" />
     <Compile Include="ISolutionConventionSpecification.cs" />
+    <Compile Include="KnownPaths.cs" />
     <Compile Include="StringConstants.cs" />
     <Compile Include="ConventionResult.cs" />
     <Compile Include="Conformist.cs" />

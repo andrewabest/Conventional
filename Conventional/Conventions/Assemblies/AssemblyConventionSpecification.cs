@@ -1,9 +1,12 @@
 using System;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using Conventional.Conventions.Solution;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Mono.Cecil.Pdb;
 
 namespace Conventional.Conventions.Assemblies
 {
@@ -24,43 +27,28 @@ namespace Conventional.Conventions.Assemblies
 
             var projectDocument = XDocument.Load(projectPath);
 
-            return IsSatisfiedByInternal(projectDocument.Expand().Project.PropertyGroup.AssemblyName, projectDocument);
+            return IsSatisfiedByInternal(projectDocument.Expand().Project.PropertyGroup.AssemblyName.Value, projectDocument);
         }
 
         protected abstract ConventionResult IsSatisfiedByInternal(string assemblyName, XDocument projectDocument);
 
         static string ResolveProjectFilePath(Assembly assembly)
         {
-            var readerParameters = new ReaderParameters { ReadSymbols = true, ReadingMode = ReadingMode.Deferred };
-            var definition = AssemblyDefinition.ReadAssembly(assembly.Location, readerParameters);
-            var methodDefinition = GetMethodWithBody(definition);
-            var document = GetMethodDocument(methodDefinition);
-            return document.Url;
-        }
+            var projectFile = assembly.GetName().Name + ".csproj";
 
-        static Document GetMethodDocument(MethodDefinition methodDefinition)
-        {
-            var instruction = methodDefinition.Body.Instructions[0];
-            var document = instruction.SequencePoint.Document;
-            return document;
-        }
+            var candidates = Directory.GetFiles(KnownPaths.SolutionRoot, "*" + projectFile, SearchOption.AllDirectories);
 
-        static MethodDefinition GetMethodWithBody(AssemblyDefinition definition)
-        {
-            foreach (var type in definition.MainModule.Types)
+            if (candidates.Any() == false)
             {
-                if (type.HasMethods == false) continue;
-
-                foreach (var method in type.Methods)
-                {
-                    if (method.HasBody)
-                    {
-                        return method;
-                    }
-                }
+                throw new ConventionException("Could not locate a project file with the name {0}".FormatWith(projectFile));
             }
 
-            throw new InvalidOperationException("Couldn't find any type with methods with a body");
+            if (candidates.Length > 1)
+            {
+                throw new ConventionException("More than one project file was located with the name {0}".FormatWith(projectFile));
+            }
+
+            return candidates[0];
         }
     }
 }

@@ -107,6 +107,9 @@
     <Compile Include="..\Conventional\Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs">
       <Link>Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\ConventionException.cs">
+      <Link>ConventionException.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\ConventionSpecification.cs">
       <Link>Conventions\ConventionSpecification.cs</Link>
     </Compile>
@@ -193,6 +196,9 @@
     </Compile>
     <Compile Include="..\Conventional\ISolutionConventionSpecification.cs">
       <Link>ISolutionConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\KnownPaths.cs">
+      <Link>KnownPaths.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\StringConstants.cs">
       <Link>StringConstants.cs</Link>

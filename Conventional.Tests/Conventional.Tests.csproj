@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventional\Conventions\Assemblies\AssemblyConventionSpecificationTests.cs" />
     <Compile Include="Conventional\Conventions\Cecil\CecilConventionSpecificationTests.cs" />
     <Compile Include="ConformistScenarios.cs" />
     <Compile Include="Conventional\Conventions\ConventionSpecificationTests.cs" />
