@@ -12,9 +12,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         [SetUp]
         public void Setup()
         {
-            var solutionRoot = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"../../../"));
-
-            _testAssembly = Assembly.LoadFrom(solutionRoot + "TestSolution/TestSolution.TestProject/bin/Debug/TestSolution.TestProject.dll");
+            _testAssembly = Assembly.LoadFrom(KnownPaths.SolutionRoot + "TestSolution/TestSolution.TestProject/bin/Debug/TestSolution.TestProject.dll");
         }
 
         [Test]
