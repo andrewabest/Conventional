@@ -149,6 +149,9 @@
     <Compile Include="..\Conventional\Conventions\MustLiveInNamespaceConventionSpecification.cs">
       <Link>Conventions\MustLiveInNamespaceConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\MustNotHaveAPropertyOfTypeConventionSpecification.cs">
+      <Link>Conventions\MustNotHaveAPropertyOfTypeConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\MustNotTakeADependencyOnConventionSpecification.cs">
       <Link>Conventions\MustNotTakeADependencyOnConventionSpecification.cs</Link>
     </Compile>

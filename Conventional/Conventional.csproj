@@ -79,6 +79,7 @@
     <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
     <Compile Include="Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveMatchingEmbeddedResourcesConventionSpecification.cs" />
+    <Compile Include="Conventions\MustNotHaveAPropertyOfTypeConventionSpecification.cs" />
     <Compile Include="Conventions\NotConventionSpecification.cs" />
     <Compile Include="Conventions\OrConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustBeImmutableConventionSpecification.cs" />

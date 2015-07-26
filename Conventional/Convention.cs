@@ -1,6 +1,5 @@
 using System;
 using Conventional.Conventions;
-using Conventional.Conventions.Solution;
 
 namespace Conventional
 {
@@ -89,6 +88,11 @@ namespace Conventional
         public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
         {
             return new MustHaveMatchingEmbeddedResourcesConventionSpecification(extension);
+        }
+
+        public static MustNotHaveAPropertyOfTypeConventionSpecification MustNotHaveAPropertyOfType(Type type, string reason)
+        {
+            return new MustNotHaveAPropertyOfTypeConventionSpecification(type, reason);
         }
     }
 }
