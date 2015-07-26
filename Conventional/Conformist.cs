@@ -28,6 +28,11 @@ namespace Conventional
             return assemblyConventionSpecification.IsSatisfiedBy(assembly);
         }
 
+        public static ConventionResult MustConformTo(this AssemblySpecimen assemblySpecimen, IAssemblyConventionSpecification assemblyConventionSpecification)
+        {
+            return assemblyConventionSpecification.IsSatisfiedBy(assemblySpecimen.ProjectFilePath);
+        }
+
         public static IEnumerable<Type> WhereTypes(this IEnumerable<Assembly> assemblies, Func<Type, bool> predicate)
         {
             var types = assemblies.SelectMany(x => x.GetExportedTypes()).Where(predicate).ToArray();

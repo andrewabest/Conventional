@@ -56,8 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Conventional\AssemblySpecimen.cs">
+      <Link>AssemblySpecimen.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conformist.cs">
       <Link>Conformist.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Convention.Assembly.cs">
+      <Link>Convention.Assembly.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\Convention.Cecil.cs">
       <Link>Convention.Cecil.cs</Link>
@@ -205,6 +211,9 @@
     </Compile>
     <Compile Include="..\Conventional\StringExtensions.cs">
       <Link>StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\TheAssembly.cs">
+      <Link>TheAssembly.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\TheDatabase.cs">
       <Link>TheDatabase.cs</Link>

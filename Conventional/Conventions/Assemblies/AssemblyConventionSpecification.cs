@@ -4,9 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using Conventional.Conventions.Solution;
-using Mono.Cecil;
-using Mono.Cecil.Cil;
-using Mono.Cecil.Pdb;
 
 namespace Conventional.Conventions.Assemblies
 {
@@ -21,13 +18,18 @@ namespace Conventional.Conventions.Assemblies
                    details;
         }
 
-        public ConventionResult IsSatisfiedBy(Assembly assembly)
+        public ConventionResult IsSatisfiedBy(string projectFilePath)
         {
-            var projectPath = ResolveProjectFilePath(assembly);
-
-            var projectDocument = XDocument.Load(projectPath);
+            var projectDocument = XDocument.Load(projectFilePath);
 
             return IsSatisfiedByInternal(projectDocument.Expand().Project.PropertyGroup.AssemblyName.Value, projectDocument);
+        }
+
+        public ConventionResult IsSatisfiedBy(Assembly assembly)
+        {
+            var projectFilePath = ResolveProjectFilePath(assembly);
+
+            return IsSatisfiedBy(projectFilePath);
         }
 
         protected abstract ConventionResult IsSatisfiedByInternal(string assemblyName, XDocument projectDocument);
