@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Conventional.Conventions.Solution;
 
 namespace Conventional
 {
@@ -20,6 +21,16 @@ namespace Conventional
             return new WrappedConventionResult(
                 types, 
                 types.Select(conventionSpecification.IsSatisfiedBy));
+        }
+
+        public static ConventionResult MustConformTo(this Assembly assembly, IAssemblyConventionSpecification assemblyConventionSpecification)
+        {
+            return assemblyConventionSpecification.IsSatisfiedBy(assembly);
+        }
+
+        public static ConventionResult MustConformTo(this AssemblySpecimen assemblySpecimen, IAssemblyConventionSpecification assemblyConventionSpecification)
+        {
+            return assemblyConventionSpecification.IsSatisfiedBy(assemblySpecimen.ProjectFilePath);
         }
 
         public static IEnumerable<Type> WhereTypes(this IEnumerable<Assembly> assemblies, Func<Type, bool> predicate)

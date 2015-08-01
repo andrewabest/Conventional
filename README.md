@@ -1,9 +1,11 @@
 Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y026n60v9oe16?svg=true)](https://ci.appveyor.com/project/andrewabest/conventional)
 ============
 
-Conventional provides a suite of ready-made tests for enforcing conventions within your types, solutions and databases to make sure your duckies are all in a row.
+Conventional provides a suite of ready-made tests for enforcing conventions within your types, assemblies, solutions and databases to make sure your duckies are all in a row.
 
 Conventional's backlog can be found here https://trello.com/b/kay7a8Ya/conventional
+
+![](https://raw.github.com/andrewabest/Conventional/master/duck.png)
 
 ## To install from NuGet
 
@@ -101,3 +103,34 @@ TheDatabase
 
 - All identity columns must be named tablenameId
 - All tables must have a clustered index
+
+## Assembly Conventions
+
+### Sample Usage
+
+Strongly typed
+```c#
+typeof(MyType)
+	.Assembly
+	.MustConformTo(Convention.MustNotReferenceDllsFromBinOrObjDirectories)
+    .WithFailureAssertion(Assert.Fail);
+```
+
+Pattern matched
+```c#
+TheAssembly
+	.WithNameMatching("MySolution.MyProject")
+	.MustConformTo(Convention.MustNotReferenceDllsFromBinOrObjDirectories)
+    .WithFailureAssertion(Assert.Fail);
+```
+
+### Supplied Assembly Conventions
+
+- Must not reference dlls from bin or obj directories
+
+### Dealing with a funky folder structure?
+
+Conventional assumes that your solution root will be three folders (..\..\..\) from where the tests are running. If it is not set your solution root in your global test setup
+```c#
+KnownPaths.SolutionRoot = @"c:\projects\MySolutionRoot"
+```

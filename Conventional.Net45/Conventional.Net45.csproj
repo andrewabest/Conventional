@@ -56,8 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Conventional\AssemblySpecimen.cs">
+      <Link>AssemblySpecimen.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conformist.cs">
       <Link>Conformist.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Convention.Assembly.cs">
+      <Link>Convention.Assembly.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\Convention.Cecil.cs">
       <Link>Convention.Cecil.cs</Link>
@@ -80,6 +86,12 @@
     <Compile Include="..\Conventional\Conventions\AndConventionSpecification.cs">
       <Link>Conventions\AndConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Assemblies\AssemblyConventionSpecification.cs">
+      <Link>Conventions\Assemblies\AssemblyConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs">
+      <Link>Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs">
       <Link>Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs</Link>
     </Compile>
@@ -100,6 +112,9 @@
     </Compile>
     <Compile Include="..\Conventional\Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs">
       <Link>Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\ConventionException.cs">
+      <Link>ConventionException.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\Conventions\ConventionSpecification.cs">
       <Link>Conventions\ConventionSpecification.cs</Link>
@@ -179,6 +194,9 @@
     <Compile Include="..\Conventional\DatabaseSpecimen.cs">
       <Link>DatabaseSpecimen.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\IAssemblyConventionSpecification.cs">
+      <Link>IAssemblyConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\IConventionSpecification.cs">
       <Link>IConventionSpecification.cs</Link>
     </Compile>
@@ -188,11 +206,17 @@
     <Compile Include="..\Conventional\ISolutionConventionSpecification.cs">
       <Link>ISolutionConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\KnownPaths.cs">
+      <Link>KnownPaths.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\StringConstants.cs">
       <Link>StringConstants.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\StringExtensions.cs">
       <Link>StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\TheAssembly.cs">
+      <Link>TheAssembly.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\TheDatabase.cs">
       <Link>TheDatabase.cs</Link>
@@ -202,6 +226,9 @@
     </Compile>
     <Compile Include="..\Conventional\WrappedConventionResult.cs">
       <Link>WrappedConventionResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\XmlExpando.cs">
+      <Link>XmlExpando.cs</Link>
     </Compile>
     <Compile Include="Convention.Cecil.Net45.cs" />
     <Compile Include="Convention.Net45.cs" />
@@ -223,6 +250,7 @@
       <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
