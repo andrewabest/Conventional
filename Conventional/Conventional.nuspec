@@ -9,8 +9,9 @@
     <projectUrl>https://github.com/andrewabest/Conventional</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release.</releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <iconUrl>https://raw.github.com/andrewabest/Conventional/master/duck.png</iconUrl>
+    <tags>Convention Testing</tags>
+    <copyright>Copyright © 2015, Andrew Best</copyright>
   </metadata>
   <files>
     <file src="bin\release\Conventional.dll" target="lib\net40" />

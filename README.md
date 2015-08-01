@@ -5,6 +5,8 @@ Conventional provides a suite of ready-made tests for enforcing conventions with
 
 Conventional's backlog can be found here https://trello.com/b/kay7a8Ya/conventional
 
+![](https://raw.github.com/andrewabest/Conventional/master/duck.png)
+
 ## To install from NuGet
 
     Install-Package Best.Conventional
