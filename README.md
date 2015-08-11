@@ -87,6 +87,7 @@ ThisSolution
 
 - Must only contain Todo and Note comments
 - Must only contain informative comments
+- Files must be embedded resources
 
 ## Database Conventions
 
