@@ -185,6 +185,9 @@
     <Compile Include="..\Conventional\Conventions\RequiresACorrespondingImplementationOfConventionSpecification.cs">
       <Link>Conventions\RequiresACorrespondingImplementationOfConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Solution\FilesMustBeEmbeddedResourcesConventionSpecification.cs">
+      <Link>Conventions\Solution\FilesMustBeEmbeddedResourcesConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Solution\MustOnlyContainInformativeCommentsConventionSpecification.cs">
       <Link>Conventions\Solution\MustOnlyContainInformativeCommentsConventionSpecification.cs</Link>
     </Compile>
@@ -250,7 +253,6 @@
       <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

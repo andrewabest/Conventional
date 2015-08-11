@@ -13,5 +13,10 @@ namespace Conventional
         {
             get { return new MustOnlyContainInformativeCommentsConventionSpecification(new[] { "Todo", "Note" }, new[] { "AssemblyInfo.cs", "GlobalAssemblyInfo.cs" }, "*.cs"); }
         }
+
+        public static FilesMustBeEmbeddedResourcesConventionSpecification FilesMustBeEmbeddedResources(string fileExtension)
+        {
+            return new FilesMustBeEmbeddedResourcesConventionSpecification(fileExtension);
+        }
     }
 }
