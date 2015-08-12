@@ -55,7 +55,7 @@ namespace Conventional.Conventions.Assemblies
 
         private Regex BuildRegExFromFileExtensions(string fileExtension)
         {
-            // fileExtension may be *.sql or sql so handle both cases
+            // Note: fileExtension may be *.sql or sql so handle both cases
             var fileExtensionWithoutLeadingPeriodOrWildcard = fileExtension
                 .TrimStart('*')
                 .TrimStart('.');
