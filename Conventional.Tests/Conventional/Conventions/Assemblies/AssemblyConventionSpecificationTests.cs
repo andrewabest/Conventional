@@ -1,5 +1,6 @@
-﻿using System.IO;
+﻿using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -28,6 +29,74 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         {
             var result = typeof(AssemblyConventionSpecificationTests).Assembly.MustConformTo(Convention.MustNotReferenceDllsFromBinOrObjDirectories);
             result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeEmbeddedResources_Success_WithWildCardedFileExtension()
+        {
+            typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeEmbeddedResources("*.sql"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeEmbeddedResources_Success_WithNonWildcardedFileExtension()
+        {
+            typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeEmbeddedResources("sql"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeEmbeddedResources_Success_RegEx()
+        {
+            var matchSqlFiles = new Regex(@"\.SQL$", RegexOptions.IgnoreCase);
+
+            typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeEmbeddedResources(matchSqlFiles))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeEmbeddedResources_FailsWhenFilesAreNotEmbeddedResources_FileExtension()
+        {
+            var expectedFailureMessage = @"
+All files matching '*.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'
+- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt [type=Content]
+- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt [type=Content]
+".Trim();
+
+            var result = typeof (AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeEmbeddedResources("*.txt"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
+        }
+
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeEmbeddedResources_FailsWhenFilesAreNotEmbeddedResources_RegEx()
+        {
+            var expectedFailureMessage = @"
+All files matching '.*NON_EMBEDDED.*' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'
+- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt [type=Content]
+- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt [type=Content]
+".Trim();
+
+            var matchNonEmbeddedRegEx = new Regex(".*NON_EMBEDDED.*", RegexOptions.IgnoreCase);
+
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeEmbeddedResources(matchNonEmbeddedRegEx));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
         }
     }
 }

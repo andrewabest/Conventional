@@ -127,6 +127,7 @@ TheAssembly
 ### Supplied Assembly Conventions
 
 - Must not reference dlls from bin or obj directories
+- Must have all files be embedded resources
 
 ### Dealing with a funky folder structure?
 

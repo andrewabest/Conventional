@@ -119,6 +119,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexSuccess.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventional\Conventions\Assemblies\embedded_sql_file.sql" />
+    <Content Include="Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt" />
+    <Content Include="Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
