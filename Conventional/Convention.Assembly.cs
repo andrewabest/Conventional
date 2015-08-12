@@ -1,4 +1,5 @@
-﻿using Conventional.Conventions.Assemblies;
+﻿using System.Text.RegularExpressions;
+using Conventional.Conventions.Assemblies;
 
 namespace Conventional
 {
@@ -7,6 +8,16 @@ namespace Conventional
         public static MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification MustNotReferenceDllsFromBinOrObjDirectories
         {
             get {  return new MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification(); }
+        }
+
+        public static MustHaveAllFilesBeEmbeddedResourcesConventionSpecification MustHaveFilesBeEmbeddedResources(string fileExtension)
+        {
+           return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileExtension);
+        }
+
+        public static MustHaveAllFilesBeEmbeddedResourcesConventionSpecification MustHaveFilesBeEmbeddedResources(Regex fileMatchRegex)
+        {
+            return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileMatchRegex);
         }
     }
 }

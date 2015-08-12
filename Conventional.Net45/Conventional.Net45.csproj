@@ -89,6 +89,9 @@
     <Compile Include="..\Conventional\Conventions\Assemblies\AssemblyConventionSpecification.cs">
       <Link>Conventions\Assemblies\AssemblyConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs">
+      <Link>Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs">
       <Link>Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs</Link>
     </Compile>
