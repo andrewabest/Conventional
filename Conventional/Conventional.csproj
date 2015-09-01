@@ -68,7 +68,7 @@
     <Compile Include="Conventions\Cecil\CecilExtensions.cs" />
     <Compile Include="Conventions\Cecil\ExceptionsThrownMustBeDerivedFrom.cs" />
     <Compile Include="Conventions\Cecil\MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor.cs" />
-    <Compile Include="Conventions\Cecil\MustNotUseDateTimeNowConventionSpecification.cs" />
+    <Compile Include="Conventions\Cecil\MustNotResolveCurrentTimeViaDateTimeDirectlyConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs" />
     <Compile Include="Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\ConventionException.cs" />
