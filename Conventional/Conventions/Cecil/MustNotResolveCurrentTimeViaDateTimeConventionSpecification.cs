@@ -6,16 +6,16 @@ using Mono.Cecil.Cil;
 
 namespace Conventional.Cecil.Conventions
 {
-    public class MustNotResolveCurrentTimeViaDateTimeDirectlyConventionSpecification : ConventionSpecification
+    public class MustNotResolveCurrentTimeViaDateTimeConventionSpecification : ConventionSpecification
     {
         protected override string FailureMessage
         {
-            get { return "Must not use DateTime.Now. It is called {0} times in this type."; }
+            get { return "Must not use DateTime directly. It is used {0} times in {1}. "; }
         }
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            var nowAssignments =
+            var forbiddenUsages =
                 type.ToTypeDefinition()
                     .Methods
                     .Where(method => method.HasBody)
@@ -23,9 +23,10 @@ namespace Conventional.Cecil.Conventions
                     .Where(DateTimeForbiddenPropertiesMatcher)
                     .ToArray();
 
-            if (nowAssignments.Any())
+            if (forbiddenUsages.Any())
             {
-                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(nowAssignments.Count()));
+                var failureMessage = FailureMessage.FormatWith(forbiddenUsages.Count(), type.FullName);
+                return ConventionResult.NotSatisfied(type.FullName, failureMessage);
             }
 
             return ConventionResult.Satisfied(type.FullName);

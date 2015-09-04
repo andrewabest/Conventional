@@ -5,6 +5,8 @@ using NUnit.Framework;
 
 namespace Conventional.Tests.Conventional.Conventions.Cecil
 {
+    using System.Linq;
+
     public class CecilConventionSpecificationTests
     {
         private interface IClock
@@ -26,7 +28,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         public void MustNotUseDateTimeNowConventionSpecification_Success()
         {
             typeof(GoodDateTimeCitizen)
-                .MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTimeDirectly)
+                .MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTime)
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -66,12 +68,13 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         [TestCase(typeof(OffendingDateTimeNowCitizen))]
         [TestCase(typeof(OffendingDateTimeTodayCitizen))]
         [TestCase(typeof(OffendingDateTimeUtcNowCitizen))]
-        public void MustNotUseDateTimeNowConventionSpecification_FailsWhenACallToDateTimeNowExists(Type offendingType)
+        public void MustNotUseDateTimeNowConventionSpecification_FailsWhenACallToDateTimeExists(Type offendingType)
         {
-            var result = offendingType.MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTimeDirectly);
+            var result = offendingType.MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTime);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
+            result.Failures.First().Should().Contain(offendingType.FullName);
         } 
         
         private class GoodDateTimeOffsetCitizen
