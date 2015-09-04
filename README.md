@@ -61,7 +61,7 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Enumerable properties must be eager loaded
 - Collection properties must be immutable
 - All properties must be immutable
-- Must not use DateTime.Now
+- Must not resolve current time via DateTime
 - Must not use DateTimeOffset.Now
 - Exceptions thrown must be derived from specified type
 - Must instantiate properties of specified type in default constructor
