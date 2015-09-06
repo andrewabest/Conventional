@@ -6,9 +6,9 @@ namespace Conventional
 {
     public static partial class Convention
     {
-        public static MustNotUseDateTimeNowConventionSpecification MustNotUseDateTimeNow
+        public static MustNotResolveCurrentTimeViaDateTimeConventionSpecification MustNotResolveCurrentTimeViaDateTime
         {
-            get { return new MustNotUseDateTimeNowConventionSpecification(); }
+            get { return new MustNotResolveCurrentTimeViaDateTimeConventionSpecification(); }
         }
 
         public static MustNotUseDateTimeOffsetNowConventionSpecification MustNotUseDateTimeOffsetNow

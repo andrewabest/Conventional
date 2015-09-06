@@ -107,8 +107,8 @@
     <Compile Include="..\Conventional\Conventions\Cecil\MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor.cs">
       <Link>Conventions\Cecil\MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor.cs</Link>
     </Compile>
-    <Compile Include="..\Conventional\Conventions\Cecil\MustNotUseDateTimeNowConventionSpecification.cs">
-      <Link>Conventions\Cecil\MustNotUseDateTimeNowConventionSpecification.cs</Link>
+    <Compile Include="..\Conventional\Conventions\Cecil\MustNotResolveCurrentTimeViaDateTimeConventionSpecification.cs">
+      <Link>Conventions\Cecil\MustNotResolveCurrentTimeViaDateTimeConventionSpecification.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs">
       <Link>Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs</Link>

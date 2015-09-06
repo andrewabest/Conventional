@@ -5,6 +5,8 @@ using NUnit.Framework;
 
 namespace Conventional.Tests.Conventional.Conventions.Cecil
 {
+    using System.Linq;
+
     public class CecilConventionSpecificationTests
     {
         private interface IClock
@@ -26,30 +28,53 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         public void MustNotUseDateTimeNowConventionSpecification_Success()
         {
             typeof(GoodDateTimeCitizen)
-                .MustConformTo(Convention.MustNotUseDateTimeNow)
+                .MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTime)
                 .IsSatisfied
                 .Should()
                 .BeTrue();
         }
 
-        private class OffendingDateTimeCitizen
+        private class OffendingDateTimeNowCitizen
         {
-             private DateTime _current;
+            private DateTime _current;
 
-             public OffendingDateTimeCitizen()
+            public OffendingDateTimeNowCitizen()
             {
                 _current = DateTime.Now;
             }
         }
 
-        [Test]
-        public void MustNotUseDateTimeNowConventionSpecification_FailsWhenACallToDateTimeNowExists()
+        private class OffendingDateTimeTodayCitizen
         {
-            var result = typeof (OffendingDateTimeCitizen)
-                .MustConformTo(Convention.MustNotUseDateTimeNow);
+            private DateTime _current;
+
+            public OffendingDateTimeTodayCitizen()
+            {
+                _current = DateTime.Today;
+            }
+        }
+
+        private class OffendingDateTimeUtcNowCitizen
+        {
+            private DateTime _current;
+
+            public OffendingDateTimeUtcNowCitizen()
+            {
+                _current = DateTime.UtcNow;
+            }
+        }
+
+        [Test]
+        [TestCase(typeof(OffendingDateTimeNowCitizen))]
+        [TestCase(typeof(OffendingDateTimeTodayCitizen))]
+        [TestCase(typeof(OffendingDateTimeUtcNowCitizen))]
+        public void MustNotUseDateTimeNowConventionSpecification_FailsWhenACallToDateTimeExists(Type offendingType)
+        {
+            var result = offendingType.MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTime);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
+            result.Failures.First().Should().Contain(offendingType.FullName);
         } 
         
         private class GoodDateTimeOffsetCitizen
