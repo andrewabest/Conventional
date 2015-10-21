@@ -78,6 +78,10 @@
     <Compile Include="Conventional\Conventions\Database\ScriptNamespace.cs" />
     <Compile Include="Conventional\Conventions\Database\SqlScripts.cs" />
     <Compile Include="Conventional\Conventions\Solution\SolutionConventionSpecificationTests.cs" />
+    <EmbeddedResource Include="Conventional\Conventions\TestData\HasMatchingEmbeddedResource.testdata" />
+    <Compile Include="Conventional\Conventions\TestData\HasMatchingNonEmbeddedResource.cs" />
+    <Compile Include="Conventional\Conventions\TestData\HasMatchingEmbeddedResource.cs" />
+    <Compile Include="Conventional\Conventions\TestData\HasNoMatchingFile.cs" />
     <Compile Include="DogFoodConventions.cs" />
     <Compile Include="ExampleOutput\SampleOutputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,6 +124,7 @@
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexSuccess.sql" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Conventional\Conventions\TestData\HasMatchingNonEmbeddedResource.testdata" />
     <EmbeddedResource Include="Conventional\Conventions\Assemblies\embedded_sql_file.sql" />
     <Content Include="Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt" />
     <Content Include="Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt" />

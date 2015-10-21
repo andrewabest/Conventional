@@ -90,6 +90,11 @@ namespace Conventional
             return new MustHaveMatchingEmbeddedResourcesConventionSpecification(extension);
         }
 
+        public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResourcesConventionSpecification(Func<Type, string> resourceNameMatcher)
+        {
+            return new MustHaveMatchingEmbeddedResourcesConventionSpecification(resourceNameMatcher);
+        }
+
         public static MustNotHaveAPropertyOfTypeConventionSpecification MustNotHaveAPropertyOfType(Type type, string reason)
         {
             return new MustNotHaveAPropertyOfTypeConventionSpecification(type, reason);

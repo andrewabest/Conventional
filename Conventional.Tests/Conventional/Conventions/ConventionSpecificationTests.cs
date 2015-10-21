@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Conventional.Tests.Conventional.Conventions.TestData;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -550,6 +551,66 @@ namespace Conventional.Tests.Conventional.Conventions
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void MustHaveMatchingEmbeddedResourcesConventionSpecification_Success_WithWildcardFileExtension()
+        {
+            var result = typeof(HasMatchingEmbeddedResource)
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification("*.testdata"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustHaveMatchingEmbeddedResourcesConventionSpecification_Success_WithNonWildcardFileExtension()
+        {
+            var result = typeof(HasMatchingEmbeddedResource)
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification("testdata"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustHaveMatchingEmbeddedResourcesConventionSpecification_Success_WithResourceNameMatcher()
+        {
+            var result = typeof(HasMatchingEmbeddedResource)
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification(t =>
+                    t.FullName + ".testdata"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustHaveMatchingEmbeddedResourcesConventionSpecification_FailsWhenFileNotEmbeddedResource_FileExtension()
+        {
+            var result = typeof (HasMatchingNonEmbeddedResource)
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification("testdata"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Count().Should().Be(1);
+        }
+
+        [Test]
+        public void MustHaveMatchingEmbeddedResourcesConventionSpecification_FailsWhenFileNotEmbeddedResource_ResourceNameMatcher()
+        {
+            var result = typeof (HasMatchingNonEmbeddedResource)
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification(t =>
+                    t.FullName + ".testdata"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Count().Should().Be(1);
+        }
+
+        [Test]
+        public void MustHaveMatchingEmbeddedResourcesConventionSpecification_FailsWhenFileDoesntExist_ResourceNameMatcher()
+        {
+            var result = typeof(HasNoMatchingFile)
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification(t =>
+                    t.FullName + ".testdata"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Count().Should().Be(1);
         }
     }
 }

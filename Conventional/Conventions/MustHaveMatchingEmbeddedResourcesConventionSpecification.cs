@@ -4,29 +4,41 @@ namespace Conventional.Conventions
 {
     public class MustHaveMatchingEmbeddedResourcesConventionSpecification : ConventionSpecification
     {
-        private readonly string _extension;
-
-        public MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
-        {
-            _extension = extension;
-        }
+        private readonly Func<Type, string> _resourceNameMatcher;
 
         protected override string FailureMessage
         {
-            get { return "Type {0} must have embedded resources with matching name (expected {1})"; }
+            get
+            {
+                return "Type {0} must have embedded resource {1}";
+            }
+        }
+
+        public MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
+        {
+            _resourceNameMatcher = t =>
+            {
+                // Note: Support both wildcard and non-wildcard extensions
+                var fileExtensionWithoutLeadingPeriodOrWildcard = extension
+                    .TrimStart('*')
+                    .TrimStart('.');
+                return string.Join(".", t.FullName, fileExtensionWithoutLeadingPeriodOrWildcard);
+            };
+        }
+
+        public MustHaveMatchingEmbeddedResourcesConventionSpecification(Func<Type, string> resourceNameMatcher)
+        {
+            _resourceNameMatcher = resourceNameMatcher;
         }
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            var resourceName = type.FullName + _extension;
-            using (var stream = type.Assembly.GetManifestResourceStream(resourceName))
+            var name = _resourceNameMatcher(type);
+            using (var manifestResourceStream = type.Assembly.GetManifestResourceStream(name))
             {
-                if (stream == null)
-                {
-                    return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(type.FullName, resourceName));
-                }
+                if (manifestResourceStream == null)
+                    return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(type.FullName, name));
             }
-
             return ConventionResult.Satisfied(type.FullName);
         }
     }
