@@ -66,6 +66,7 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Exceptions thrown must be derived from specified type
 - Must instantiate properties of specified type in default constructor
 - All properties must be instantiated during construction
+- Must have matching embedded resource
 
 ### Supplied Type Conventions (.Net 4.5 Only)
 
