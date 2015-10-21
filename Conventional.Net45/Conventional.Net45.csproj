@@ -113,6 +113,9 @@
     <Compile Include="..\Conventional\Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs">
       <Link>Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Cecil\MustNotUsePropertyGetterSpecification.cs">
+      <Link>Conventions\Cecil\MustNotUsePropertyGetterSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs">
       <Link>Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs</Link>
     </Compile>

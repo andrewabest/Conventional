@@ -70,6 +70,7 @@
     <Compile Include="Conventions\Cecil\MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor.cs" />
     <Compile Include="Conventions\Cecil\MustNotResolveCurrentTimeViaDateTimeConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs" />
+    <Compile Include="Conventions\Cecil\MustNotUsePropertyGetterSpecification.cs" />
     <Compile Include="Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\ConventionException.cs" />
     <Compile Include="Conventions\ConventionSpecification.cs" />

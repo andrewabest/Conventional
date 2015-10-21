@@ -1,0 +1,90 @@
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using Conventional.Conventions;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+
+namespace Conventional.Cecil.Conventions
+{
+    public abstract class MustNotUsePropertyGetterSpecification<TClass, TMember> : ConventionSpecification
+    {
+        private class GetterDetails
+        {
+            public GetterDetails(string declaringType, string methodName)
+            {
+                DeclaringType = declaringType;
+                MethodName = methodName;
+            }
+            public string DeclaringType { get; set; }
+            public string MethodName { get; set; }
+        }
+
+        private readonly string _failureMessage;
+
+        private readonly GetterDetails[] _getterDetails;
+
+        protected MustNotUsePropertyGetterSpecification(Expression<Func<TClass, TMember>> expression,
+            string failureMessage)
+            :this(new[] {expression},failureMessage)
+        {
+            
+        }
+
+        protected MustNotUsePropertyGetterSpecification(Expression<Func<TClass, TMember>>[] expressions, string failureMessage)
+        {
+            _failureMessage = failureMessage;
+
+            _getterDetails = expressions.Select(e =>
+            {
+                var memberExpression = (MemberExpression) e.Body;
+                var propertyInfo = memberExpression.Member as PropertyInfo;
+                if (propertyInfo == null)
+                    throw new ArgumentException("Expression must be a memberexpression selecting a single property.",
+                        "expressions");
+                return new GetterDetails(typeof (TClass).FullName, propertyInfo.GetGetMethod().Name);
+            }).ToArray();
+
+
+
+        }
+
+
+        protected override string FailureMessage
+        {
+            get { return _failureMessage; }
+        }
+
+        public override ConventionResult IsSatisfiedBy(Type type)
+        {
+            var nowAssignments =
+                type.ToTypeDefinition()
+                    .Methods
+                    .Where(method => method.HasBody)
+                    .SelectMany(method => method.Body.Instructions)
+                    .Where(x =>
+                        x.OpCode == OpCodes.Call && x.Operand is MethodReference)
+                    .Join(_getterDetails, 
+                        x=>new
+                        {
+                            DeclaringType = ((MethodReference)x.Operand).DeclaringType.FullName,
+                            MethodName = ((MethodReference)x.Operand).Name
+                        },
+                        g=>new
+                        {
+                            g.DeclaringType,
+                            g.MethodName
+                        },
+                        (x,g)=>x)
+                    .ToArray();
+
+            if (nowAssignments.Any())
+            {
+                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(nowAssignments.Count(), type.FullName));
+            }
+
+            return ConventionResult.Satisfied(type.FullName);
+        }
+    }
+}
