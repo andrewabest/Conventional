@@ -132,7 +132,7 @@ TheAssembly
 
 ### Dealing with a funky folder structure?
 
-Conventional assumes that your solution root will be three folders (..\..\..\) from where the tests are running. If it is not set your solution root in your global test setup
+Conventional assumes that your solution root will be three folders (..\\..\\..\\) from where the tests are running. If it is not set your solution root in your global test setup
 ```c#
 KnownPaths.SolutionRoot = @"c:\projects\MySolutionRoot"
 ```
