@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblySpecimen.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Convention.Cecil.cs" />
     <Compile Include="Convention.Assembly.cs" />
     <Compile Include="Conventions\AllPropertiesMustBeImmutableConventionSpecification.cs" />
