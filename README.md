@@ -130,6 +130,17 @@ TheAssembly
 - Must not reference dlls from bin or obj directories
 - Must have all files be embedded resources
 
+## Configuration
+
+### Default failure assertion
+
+To configure a default failure assertion method, use the default failure assertion callback (example using NUnit) in your global test setup
+```c#
+ConventionConfiguration.DefaultFailureAssertionCallback = Assert.Fail
+```
+
+Alternatively, you can assert failure by using the fluent syntax displayed in the above samples.
+
 ### Dealing with a funky folder structure?
 
 Conventional assumes that your solution root will be three folders (..\\..\\..\\) from where the tests are running. If it is not set your solution root in your global test setup

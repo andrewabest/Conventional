@@ -17,8 +17,9 @@ namespace Conventional.Cecil.Conventions
                 DeclaringType = declaringType;
                 MethodName = methodName;
             }
-            public string DeclaringType { get; set; }
-            public string MethodName { get; set; }
+
+            public string DeclaringType { get; private set; }
+            public string MethodName { get; private set; }
         }
 
         private readonly string _failureMessage;
@@ -45,11 +46,7 @@ namespace Conventional.Cecil.Conventions
                         "expressions");
                 return new GetterDetails(typeof (TClass).FullName, propertyInfo.GetGetMethod().Name);
             }).ToArray();
-
-
-
         }
-
 
         protected override string FailureMessage
         {
@@ -58,7 +55,7 @@ namespace Conventional.Cecil.Conventions
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            var nowAssignments =
+            var assignments =
                 type.ToTypeDefinition()
                     .Methods
                     .Where(method => method.HasBody)
@@ -79,9 +76,9 @@ namespace Conventional.Cecil.Conventions
                         (x,g)=>x)
                     .ToArray();
 
-            if (nowAssignments.Any())
+            if (assignments.Any())
             {
-                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(nowAssignments.Count(), type.FullName));
+                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(assignments.Count(), type.FullName));
             }
 
             return ConventionResult.Satisfied(type.FullName);

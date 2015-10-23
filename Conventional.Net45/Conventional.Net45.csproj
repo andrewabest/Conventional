@@ -238,6 +238,7 @@
     </Compile>
     <Compile Include="Convention.Cecil.Net45.cs" />
     <Compile Include="Convention.Net45.cs" />
+    <Compile Include="ConventionConfiguration.cs" />
     <Compile Include="Conventions\AsyncMethodsMustHaveAsyncSuffixConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasksConventionSpecification.cs" />
     <Compile Include="Conventions\VoidMethodsMustNotBeAsyncConventionSpecification.cs" />

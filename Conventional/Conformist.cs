@@ -1,36 +1,36 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Conventional.Conventions.Solution;
 
 namespace Conventional
 {
     public static class Conformist
     {
-
         public static ConventionResult MustConformTo(this Type type, IConventionSpecification conventionSpecification)
         {
-            return conventionSpecification.IsSatisfiedBy(type);
+            return EnforceConformance(
+                conventionSpecification.IsSatisfiedBy(type));
         }
 
         public static WrappedConventionResult MustConformTo(this IEnumerable<Type> types, IConventionSpecification conventionSpecification)
         {
-            return new WrappedConventionResult(
+            return EnforceConformance(new WrappedConventionResult(
                 types, 
-                types.Select(conventionSpecification.IsSatisfiedBy));
+                types.Select(conventionSpecification.IsSatisfiedBy)));
         }
 
         public static ConventionResult MustConformTo(this Assembly assembly, IAssemblyConventionSpecification assemblyConventionSpecification)
         {
-            return assemblyConventionSpecification.IsSatisfiedBy(assembly);
+            return EnforceConformance(
+                assemblyConventionSpecification.IsSatisfiedBy(assembly));
         }
 
         public static ConventionResult MustConformTo(this AssemblySpecimen assemblySpecimen, IAssemblyConventionSpecification assemblyConventionSpecification)
         {
-            return assemblyConventionSpecification.IsSatisfiedBy(assemblySpecimen.ProjectFilePath);
+            return EnforceConformance(
+                assemblyConventionSpecification.IsSatisfiedBy(assemblySpecimen.ProjectFilePath));
         }
 
         public static IEnumerable<Type> WhereTypes(this IEnumerable<Assembly> assemblies, Func<Type, bool> predicate)
@@ -42,9 +42,29 @@ namespace Conventional
 
         public static WrappedConventionResult AndMustConformTo(this WrappedConventionResult results, IConventionSpecification conventionSpecification)
         {
-            return new WrappedConventionResult(
-                results.Types, 
-                results.Results.Union(results.Types.Select(conventionSpecification.IsSatisfiedBy)));
+            return EnforceConformance(new WrappedConventionResult(
+                results.Types,
+                results.Results.Union(results.Types.Select(conventionSpecification.IsSatisfiedBy))));
+        }
+
+        private static ConventionResult EnforceConformance(ConventionResult result)
+        {
+            if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
+            {
+                new[] { result }.WithFailureAssertion(ConventionConfiguration.DefaultFailureAssertionCallback);
+            }
+
+            return result;
+        }
+
+        private static WrappedConventionResult EnforceConformance(WrappedConventionResult results)
+        {
+            if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
+            {
+                results.WithFailureAssertion(ConventionConfiguration.DefaultFailureAssertionCallback);
+            }
+
+            return results;
         }
 
         public static void WithFailureAssertion(this ConventionResult result, Action<string> failureAssertion)
