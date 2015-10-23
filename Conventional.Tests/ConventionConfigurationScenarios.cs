@@ -2,12 +2,12 @@
 
 namespace Conventional.Tests
 {
-    public class ConfigurationScenarios
+    public class ConventionConfigurationScenarios
     {
         [SetUp]
         public void Setup()
         {
-            Configuration.DefaultFailureAssertionCallback = Assert.Pass;
+            ConventionConfiguration.DefaultFailureAssertionCallback = Assert.Pass;
         }
 
         private class AbjectConformanceFailure
@@ -43,7 +43,7 @@ namespace Conventional.Tests
         [TearDown]
         public void TearDown()
         {
-            Configuration.DefaultFailureAssertionCallback = null;
+            ConventionConfiguration.DefaultFailureAssertionCallback = null;
         }
     }
 }

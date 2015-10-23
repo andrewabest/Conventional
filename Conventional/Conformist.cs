@@ -49,9 +49,9 @@ namespace Conventional
 
         private static ConventionResult EnforceConformance(ConventionResult result)
         {
-            if (Configuration.DefaultFailureAssertionCallback != null)
+            if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
             {
-                new[] { result }.WithFailureAssertion(Configuration.DefaultFailureAssertionCallback);
+                new[] { result }.WithFailureAssertion(ConventionConfiguration.DefaultFailureAssertionCallback);
             }
 
             return result;
@@ -59,9 +59,9 @@ namespace Conventional
 
         private static WrappedConventionResult EnforceConformance(WrappedConventionResult results)
         {
-            if (Configuration.DefaultFailureAssertionCallback != null)
+            if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
             {
-                results.WithFailureAssertion(Configuration.DefaultFailureAssertionCallback);
+                results.WithFailureAssertion(ConventionConfiguration.DefaultFailureAssertionCallback);
             }
 
             return results;
