@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Conventional.Conventions;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
@@ -9,11 +10,16 @@ namespace Conventional.Cecil.Conventions
 {
     public class MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification : ConventionSpecification
     {
-        private readonly Type _propertyType;
+        private readonly Type[] _propertyTypes;
 
         public MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification(Type propertyType)
         {
-            _propertyType = propertyType;
+            _propertyTypes = new [] { propertyType };
+        }
+
+        public MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification(Type[] propertyTypes)
+        {
+            _propertyTypes = propertyTypes;
         }
 
         protected override string FailureMessage
@@ -25,7 +31,7 @@ namespace Conventional.Cecil.Conventions
         {
             var typeDefinition = type.ToTypeDefinition();
 
-            var subjects = typeDefinition.GetPropertiesOfType(_propertyType);
+            var subjects = _propertyTypes.SelectMany(x => typeDefinition.GetPropertiesOfType(x));
 
             var subjectPropertySetters = subjects
                 .Where(p => p.SetMethod != null)
@@ -55,7 +61,9 @@ namespace Conventional.Cecil.Conventions
                 return ConventionResult.Satisfied(type.FullName);
             }
 
-            return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(_propertyType));
+            var propertyTypeNames = _propertyTypes.Aggregate(string.Empty, (x, t) => t.Name + ", " + x).TrimEnd(' ', ',');
+
+            return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(propertyTypeNames));
         }
     }
 }
