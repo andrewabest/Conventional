@@ -27,6 +27,12 @@ namespace Conventional
             return new MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification(propertyType);
         }
 
+        public static MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification
+            MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor(Type[] propertyTypes)
+        {
+            return new MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification(propertyTypes);
+        }
+
         public static AllPropertiesMustBeAssignedDuringConstructionConventionSpecification AllPropertiesMustBeAssignedDuringConstruction(bool ignoreTypesWithoutConstructors = false)
         {
             return new AllPropertiesMustBeAssignedDuringConstructionConventionSpecification(ignoreTypesWithoutConstructors);

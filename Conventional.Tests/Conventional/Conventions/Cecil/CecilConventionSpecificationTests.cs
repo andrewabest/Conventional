@@ -172,14 +172,21 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             result.Failures.Should().HaveCount(1);
         }
 
+        private class Money
+        {
+        }
+
         private class InstantiatesPropertiesProperly
         {
             public InstantiatesPropertiesProperly()
             {
                 Names = new String[0];
+                Amount = new Money();
             }
 
             public IEnumerable<string> Names { get; set; } 
+
+            public Money Amount { get; set; }
         }
 
         [Test]
@@ -192,13 +199,25 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
                 .BeTrue();
         }
 
+        [Test]
+        public void MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification_SuccessWithMultipleTypes()
+        {
+            typeof(InstantiatesPropertiesProperly)
+                .MustConformTo(Convention.MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor(new [] { typeof(IEnumerable<>), typeof(Money) }))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
         private class DoesNotInstantiatePropertiesProperly
         {
             public DoesNotInstantiatePropertiesProperly()
             {
             }
 
-            public IEnumerable<string> Names { get; set; } 
+            public IEnumerable<string> Names { get; set; }
+
+            public Money Amount { get; set; }
         }
 
 
@@ -207,6 +226,16 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         {
             var result = typeof(DoesNotInstantiatePropertiesProperly)
                 .MustConformTo(Convention.MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor(typeof(IEnumerable<>)));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification_FailsWhenPropertiesAreNotInstantiateInTheDefaultConstructor_WithMultipleTypes()
+        {
+            var result = typeof(DoesNotInstantiatePropertiesProperly)
+                .MustConformTo(Convention.MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor(new[] { typeof(IEnumerable<>), typeof(Money) }));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
