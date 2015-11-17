@@ -1,8 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Conventional.Conventions
 {
+    public static class TypeExtensions
+    {
+        public static bool IsGenericImplementation(this Type type)
+        {
+            return (type.BaseType != null && type.BaseType.IsGenericType) ||
+                    type.GetInterfaces().Any(i => i.IsGenericType);
+        }
+    }
+
+
     public class RequiresACorrespondingImplementationOfConventionSpecification : ConventionSpecification
     {
         private readonly Type _required;
@@ -27,8 +39,10 @@ namespace Conventional.Conventions
         public override ConventionResult IsSatisfiedBy(Type type)
         {
             if (_subjects
-                .Where(x => x.BaseType != null && x.BaseType.IsGenericType)
-                .Any(x => _required.GetGenericTypeDefinition() == x.BaseType.GetGenericTypeDefinition() && x.BaseType.GetGenericArguments().Any(g => g == type)))
+                .Where(x => x.IsGenericImplementation())
+                .Any(x =>  
+                    (x.GetInterfaces().Any(i => i.IsGenericType && (i.GetGenericTypeDefinition() == _required.GetGenericTypeDefinition()) && i.GetGenericArguments().Any(g => g == type))) ||
+                    (x.BaseType != null && x.BaseType.IsGenericType && x.BaseType.GetGenericTypeDefinition() == _required.GetGenericTypeDefinition() && x.BaseType.GetGenericArguments().Any(g => g == type))))
             {
                 return ConventionResult.Satisfied(type.FullName);
             }
@@ -36,4 +50,6 @@ namespace Conventional.Conventions
             return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(_required.FullName));
         }
     }
+
+
 }
