@@ -402,6 +402,28 @@ namespace Conventional.Tests.Conventional.Conventions
                  .BeTrue(); 
         }
 
+        private interface ISomeGeneric<T1, T2>
+        {
+        }
+
+        private class SomeClassThatRequiresSomeGenericInterfaceImplementation
+        {
+        }
+
+        private class SomeGenericInterfaceImplementation : ISomeGeneric<SomeClassThatRequiresSomeGenericInterfaceImplementation, string>
+        {
+        }
+
+        [Test]
+        public void RequiresACorrespondingImplementationOfConventionSpecification_ImplementsGenericInterface_Success()
+        {
+            typeof(SomeClassThatRequiresSomeGenericInterfaceImplementation)
+                 .MustConformTo(Convention.RequiresACorrespondingImplementationOf(typeof(ISomeGeneric<,>), new[] { typeof(SomeGenericInterfaceImplementation) }))
+                 .IsSatisfied
+                 .Should()
+                 .BeTrue();
+        }
+
         private class SomeClassWithoutASomeGenericImpelemntation
         {
         }
