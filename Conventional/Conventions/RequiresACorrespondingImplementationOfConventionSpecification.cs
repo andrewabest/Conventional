@@ -42,7 +42,7 @@ namespace Conventional.Conventions
                 .Where(x => x.IsGenericImplementation())
                 .Any(x =>  
                     (x.GetInterfaces().Any(i => i.IsGenericType && (i.GetGenericTypeDefinition() == _required.GetGenericTypeDefinition()) && i.GetGenericArguments().Any(g => g == type))) ||
-                    (x.BaseType != null && _required.GetGenericTypeDefinition() == x.BaseType.GetGenericTypeDefinition() && x.BaseType.GetGenericArguments().Any(g => g == type))))
+                    (x.BaseType != null && x.BaseType.IsGenericType && x.BaseType.GetGenericTypeDefinition() == _required.GetGenericTypeDefinition() && x.BaseType.GetGenericArguments().Any(g => g == type))))
             {
                 return ConventionResult.Satisfied(type.FullName);
             }
