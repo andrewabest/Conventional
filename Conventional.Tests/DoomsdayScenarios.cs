@@ -125,6 +125,19 @@ namespace Conventional.Tests
         }
 
         [Test]
+        public void WhenDoomsdayIsSupplied_AndANumberOfKnownOffendersIsSupplied_FailsWithDoomsdayMessageRegardlessOfNumberOfOffenders()
+        {
+            var doomsday = new DateTime(2015, 11, 16);
+
+            new[] { typeof(OffenderOne), typeof(OffenderTwo) }
+                .WithKnownOffenders(1)
+                .ByDoomsday(doomsday)
+                .MustConformTo(Convention.NameMustEndWith("Esquire"));
+
+            _failure.Should().Be("Doomsday is upon us! \r\nConventional.Tests.DoomsdayScenarios+OffenderOne\r\n---------------------------------------------------\r\nType name does not end with Esquire\r\n\r\nConventional.Tests.DoomsdayScenarios+OffenderTwo\r\n---------------------------------------------------\r\nType name does not end with Esquire\r\n\r\n");
+        }
+
+        [Test]
         public void WhenDoomsdayIsSupplied_SucceedsIfThereAreNoOffendersAfterDoomsday()
         {
             var doomsday = new DateTime(2015, 11, 16);
@@ -156,9 +169,9 @@ namespace Conventional.Tests
                 .WithKnownOffenders(1)
                 .ByDoomsday(doomsday)
                 .WithWarningWithin(TimeSpan.FromDays(3))
-                .MustConformTo(Convention.NameMustEndWith("Esquire"));
+                .MustConformTo(Convention.NameMustEndWith("Two"));
 
-            _warning.Should().Be("Doomsday approaches! \r\nConventional.Tests.DoomsdayScenarios+OffenderOne\r\n---------------------------------------------------\r\nType name does not end with Esquire\r\n\r\nConventional.Tests.DoomsdayScenarios+OffenderTwo\r\n---------------------------------------------------\r\nType name does not end with Esquire\r\n\r\n");
+            _warning.Should().Be("Doomsday approaches! \r\nConventional.Tests.DoomsdayScenarios+OffenderOne\r\n---------------------------------------------------\r\nType name does not end with Two\r\n\r\n");
         }
 
         [Test]
@@ -173,6 +186,20 @@ namespace Conventional.Tests
                 .MustConformTo(Convention.NameMustEndWith("One"));
 
             _warning.Should().BeNull();
+        }
+
+        [Test]
+        public void WhenWarnWithinIsSupplied_AndWhenWithinTheTimespanOfDoomsday_FailsIfOffendersHaveIncreased()
+        {
+            var doomsday = new DateTime(2015, 11, 20);
+
+            new[] { typeof(OffenderOne), typeof(OffenderTwo) }
+                .WithKnownOffenders(1)
+                .ByDoomsday(doomsday)
+                .WithWarningWithin(TimeSpan.FromDays(3))
+                .MustConformTo(Convention.NameMustEndWith("Esquire"));
+
+            _failure.Should().Be("Expected 1 or less offenders but found 2: \r\nConventional.Tests.DoomsdayScenarios+OffenderOne\r\n---------------------------------------------------\r\nType name does not end with Esquire\r\n\r\nConventional.Tests.DoomsdayScenarios+OffenderTwo\r\n---------------------------------------------------\r\nType name does not end with Esquire\r\n\r\n");
         }
 
         [Test]

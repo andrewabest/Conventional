@@ -64,17 +64,17 @@ namespace Conventional
 
                 ConventionConfiguration.DefaultFailureAssertionCallback(message);
             }
-            else if (specimen.WarnWithin.HasValue && currentDate.Add(specimen.WarnWithin.Value) > specimen.Doomsday)
-            {
-                var message = "Doomsday approaches! " + specimen.Message + Environment.NewLine + result;
-
-                ConventionConfiguration.DefaultWarningAssertionCallback(message);
-            }
             else if (currentOffenders > specimen.KnownOffenders)
             {
                 var message = $"Expected {specimen.KnownOffenders} or less offenders but found {currentOffenders}: " + specimen.Message + Environment.NewLine + result;
 
                 ConventionConfiguration.DefaultFailureAssertionCallback(message);
+            }
+            else if (specimen.WarnWithin.HasValue && currentDate.Add(specimen.WarnWithin.Value) > specimen.Doomsday)
+            {
+                var message = "Doomsday approaches! " + specimen.Message + Environment.NewLine + result;
+
+                ConventionConfiguration.DefaultWarningAssertionCallback(message);
             }
         }
     }
