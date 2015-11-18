@@ -95,7 +95,7 @@ new[] { typeof(OldType), typeof(NewType) }
     .MustConformTo(Convention.NameMustStartWith("New"));
 ```
 
-When using `Known Offenders` or `Doomsday` tests, you *must* make sure to configure the default failure and warning assertions using ```[Conventionals configuration](#Configuration)```
+When using `Known Offenders` or `Doomsday` tests, you *must* make sure to configure the default failure and warning assertions using [Conventional's configuration](#Configuration)
 
 ## Solution Conventions
 
