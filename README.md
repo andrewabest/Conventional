@@ -184,3 +184,7 @@ Conventional assumes that your solution root will be three folders (..\\..\\..\\
 ```c#
 KnownPaths.SolutionRoot = @"c:\projects\MySolutionRoot"
 ```
+
+## Examples
+
+Not sure how to get started with Conventional? Check out [The sample repository](https://github.com/andrewabest/Conventional.Samples) which contains a bunch of real-world usage examples
