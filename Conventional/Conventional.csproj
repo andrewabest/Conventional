@@ -101,6 +101,8 @@
     <Compile Include="Conventions\Solution\MustOnlyContainInformativeCommentsConventionSpecification.cs" />
     <Compile Include="Conventions\Solution\SolutionConventionSpecification.cs" />
     <Compile Include="DatabaseSpecimen.cs" />
+    <Compile Include="Doomsday.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="IAssemblyConventionSpecification.cs" />
     <Compile Include="IDatabaseConventionSpecification.cs" />
     <Compile Include="ISolutionConventionSpecification.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="TheAssembly.cs" />
     <Compile Include="TheDatabase.cs" />
     <Compile Include="ThisSolution.cs" />
+    <Compile Include="TypeConformanceSpecimen.cs" />
     <Compile Include="WrappedConventionResult.cs" />
     <Compile Include="XmlExpando.cs" />
   </ItemGroup>

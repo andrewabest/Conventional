@@ -77,6 +77,9 @@
     <Compile Include="..\Conventional\Convention.Solution.cs">
       <Link>Convention.Solution.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\ConventionConfiguration.cs">
+      <Link>ConventionConfiguration.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\ConventionResult.cs">
       <Link>ConventionResult.cs</Link>
     </Compile>
@@ -200,6 +203,12 @@
     <Compile Include="..\Conventional\DatabaseSpecimen.cs">
       <Link>DatabaseSpecimen.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Doomsday.cs">
+      <Link>Doomsday.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Extensions\TypeExtensions.cs">
+      <Link>Extensions\TypeExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\IAssemblyConventionSpecification.cs">
       <Link>IAssemblyConventionSpecification.cs</Link>
     </Compile>
@@ -230,6 +239,9 @@
     <Compile Include="..\Conventional\ThisSolution.cs">
       <Link>ThisSolution.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\TypeConformanceSpecimen.cs">
+      <Link>TypeConformanceSpecimen.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\WrappedConventionResult.cs">
       <Link>WrappedConventionResult.cs</Link>
     </Compile>
@@ -238,7 +250,6 @@
     </Compile>
     <Compile Include="Convention.Cecil.Net45.cs" />
     <Compile Include="Convention.Net45.cs" />
-    <Compile Include="ConventionConfiguration.cs" />
     <Compile Include="Conventions\AsyncMethodsMustHaveAsyncSuffixConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasksConventionSpecification.cs" />
     <Compile Include="Conventions\VoidMethodsMustNotBeAsyncConventionSpecification.cs" />

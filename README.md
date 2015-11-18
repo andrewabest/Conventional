@@ -74,6 +74,29 @@ new[] { typeof(MyType), typeof(MyOtherType) }
 - Async methods must have 'Async' suffix
 - Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
 
+### Known offenders and Doomsday tests
+
+If you are in a scenario where you want to acknowledge previous types that break a convention you are introducing - but prevent more from being introduced, `WithKnownOffenders` can be supplied
+
+```c#
+new[] { typeof(OldType), typeof(NewType) }
+    .WithKnownOffenders(1)
+    .MustConformTo(Convention.NameMustStartWith("New"));
+```
+
+Taking this further, if you want to enforce that the existing offenders be compliant by a given date, you can supply `ByDoomsday`, along with an optional `WithWarningWithin` to warn as the date approaches, and `WithMessage` to supply extra context to the output
+
+```c#
+new[] { typeof(OldType), typeof(NewType) }
+    .WithKnownOffenders(1)
+    .ByDoomsday(new DateTime(2015,11,18))
+    .WithWarningWithin(TimeSpan.FromDays(14))
+    .WithMessage("Names must start with 'New'")
+    .MustConformTo(Convention.NameMustStartWith("New"));
+```
+
+When using `Known Offenders` or `Doomsday` tests, you *must* make sure to configure the default failure and warning assertions using ```[Conventionals configuration](#Configuration)```
+
 ## Solution Conventions
 
 ### Sample Usage
@@ -140,6 +163,20 @@ ConventionConfiguration.DefaultFailureAssertionCallback = Assert.Fail
 ```
 
 Alternatively, you can assert failure by using the fluent syntax displayed in the above samples.
+
+### Default warning assertion
+
+To configure a default warning assertion method, use the default warning assertion callback (example using NUnit) in your global test setup
+```c#
+ConventionConfiguration.DefaultWarningAssertionCallback = Assert.Inconclusive
+```
+
+### Default current date resolution
+
+Certain Conventional features rely on Conventional being able to resolve the current date, which by default it will via `DateTime.UtcNow`. If this does not work in your scenario, set the default current date resolver in your global test setup 
+```c#
+ConventionConfiguration.DefaultCurrentDateResolver = DateTime.Now
+```
 
 ### Dealing with a funky folder structure?
 

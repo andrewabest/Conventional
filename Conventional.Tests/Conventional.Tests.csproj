@@ -84,6 +84,7 @@
     <Compile Include="Conventional\Conventions\TestData\HasMatchingEmbeddedResource.cs" />
     <Compile Include="Conventional\Conventions\TestData\HasNoMatchingFile.cs" />
     <Compile Include="DogFoodConventions.cs" />
+    <Compile Include="DoomsdayScenarios.cs" />
     <Compile Include="ExampleOutput\SampleOutputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThisAssemblyScenarios.cs" />

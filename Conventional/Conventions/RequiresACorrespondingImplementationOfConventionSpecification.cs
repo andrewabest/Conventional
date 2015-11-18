@@ -2,19 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Conventional.Extensions;
 
 namespace Conventional.Conventions
 {
-    public static class TypeExtensions
-    {
-        public static bool IsGenericImplementation(this Type type)
-        {
-            return (type.BaseType != null && type.BaseType.IsGenericType) ||
-                    type.GetInterfaces().Any(i => i.IsGenericType);
-        }
-    }
-
-
     public class RequiresACorrespondingImplementationOfConventionSpecification : ConventionSpecification
     {
         private readonly Type _required;
@@ -24,7 +15,7 @@ namespace Conventional.Conventions
         {
             if (required.IsGenericTypeDefinition == false)
             {
-                throw new ArgumentException("The required type must be a generic", "required");
+                throw new ArgumentException("The required type must be a generic", nameof(required));
             }
 
             _required = required;

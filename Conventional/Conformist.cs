@@ -33,13 +33,6 @@ namespace Conventional
                 assemblyConventionSpecification.IsSatisfiedBy(assemblySpecimen.ProjectFilePath));
         }
 
-        public static IEnumerable<Type> WhereTypes(this IEnumerable<Assembly> assemblies, Func<Type, bool> predicate)
-        {
-            var types = assemblies.SelectMany(x => x.GetExportedTypes()).Where(predicate).ToArray();
-
-            return types;
-        }
-
         public static WrappedConventionResult AndMustConformTo(this WrappedConventionResult results, IConventionSpecification conventionSpecification)
         {
             return EnforceConformance(new WrappedConventionResult(

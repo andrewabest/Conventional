@@ -1,5 +1,6 @@
 ﻿using Conventional.Cecil;
 using Conventional.Conventions;
+using Conventional.Extensions;
 using NUnit.Framework;
 
 namespace Conventional.Tests
