@@ -40,7 +40,7 @@ namespace Conventional
                 results.Results.Union(results.Types.Select(conventionSpecification.IsSatisfiedBy))));
         }
 
-        private static ConventionResult EnforceConformance(ConventionResult result)
+        internal static ConventionResult EnforceConformance(ConventionResult result)
         {
             if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
             {

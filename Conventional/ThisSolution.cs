@@ -6,7 +6,8 @@ namespace Conventional
     {
         public static ConventionResult MustConformTo(ISolutionConventionSpecification solutionConventionSpecification)
         {
-            return solutionConventionSpecification.IsSatisfiedBy(KnownPaths.SolutionRoot);
+            return Conformist.EnforceConformance(
+                solutionConventionSpecification.IsSatisfiedBy(KnownPaths.SolutionRoot));
         }
     }
 }
