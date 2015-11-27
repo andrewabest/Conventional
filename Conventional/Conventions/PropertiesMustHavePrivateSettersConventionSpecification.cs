@@ -7,7 +7,7 @@ namespace Conventional.Conventions
     {
         protected override string FailureMessage
         {
-            get { return "All properties must have protected setters"; }
+            get { return "All properties must have private setters"; }
         }
 
         public override ConventionResult IsSatisfiedBy(Type type)
