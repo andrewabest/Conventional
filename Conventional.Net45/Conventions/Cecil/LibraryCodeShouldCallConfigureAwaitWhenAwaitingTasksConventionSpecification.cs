@@ -11,7 +11,7 @@ namespace Conventional.Conventions.Cecil
     {
         protected override string FailureMessage
         {
-            get { return "Libraries should call Task.ConfigureAwait(false) to prevent deadlocks"; }
+            get { return "Libraries must call Task.ConfigureAwait(false) to prevent deadlocks"; }
         }
 
         public override ConventionResult IsSatisfiedBy(Type type)

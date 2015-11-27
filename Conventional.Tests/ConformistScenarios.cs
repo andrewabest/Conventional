@@ -29,8 +29,8 @@ namespace Conventional.Tests
                     Convention.MustHaveADefaultConstructor)));
 
             results.Failures.Should().HaveCount(3);
-            results.Failures[0].Should().StartWith("All properties should have public getters");
-            results.Failures[1].Should().StartWith("All properties should have public setters");
+            results.Failures[0].Should().StartWith("All properties must have public getters");
+            results.Failures[1].Should().StartWith("All properties must have public setters");
             results.Failures[2].Should().StartWith("Does not have a default constructor");
         }
 
@@ -43,8 +43,8 @@ namespace Conventional.Tests
                 .AndMustConformTo(Convention.MustHaveADefaultConstructor);
 
             results.Failures.Should().HaveCount(3);
-            results.Failures[0].Should().StartWith("All properties should have public getters");
-            results.Failures[1].Should().StartWith("All properties should have public setters");
+            results.Failures[0].Should().StartWith("All properties must have public getters");
+            results.Failures[1].Should().StartWith("All properties must have public setters");
             results.Failures[2].Should().StartWith("Does not have a default constructor");
         }
 
@@ -58,8 +58,8 @@ namespace Conventional.Tests
                 .AndMustConformTo(Convention.MustHaveADefaultConstructor);
 
             results.Failures.Should().HaveCount(3);
-            results.Failures[0].Should().StartWith("All properties should have public getters");
-            results.Failures[1].Should().StartWith("All properties should have public setters");
+            results.Failures[0].Should().StartWith("All properties must have public getters");
+            results.Failures[1].Should().StartWith("All properties must have public setters");
             results.Failures[2].Should().StartWith("Does not have a default constructor");
         }
 
@@ -92,12 +92,12 @@ namespace Conventional.Tests
                 Environment.NewLine +
                 StringConstants.Underline +
                 Environment.NewLine +
-                "All properties should have public getters" +
+                "All properties must have public getters" +
                 Environment.NewLine +
                 "\t- Description" +
                 Environment.NewLine +
                 Environment.NewLine +
-                "All properties should have public setters" +
+                "All properties must have public setters" +
                 Environment.NewLine +
                 "\t- Name" +
                 Environment.NewLine +
@@ -109,12 +109,12 @@ namespace Conventional.Tests
                 Environment.NewLine +
                 StringConstants.Underline +
                 Environment.NewLine +
-                "All properties should have public getters" +
+                "All properties must have public getters" +
                 Environment.NewLine +
                 "\t- Description" +
                 Environment.NewLine +
                 Environment.NewLine +
-                "All properties should have public setters" +
+                "All properties must have public setters" +
                 Environment.NewLine +
                 "\t- Name" +
                 Environment.NewLine +

@@ -37,7 +37,7 @@ namespace Conventional.Tests.Net45.Conventional.Conventions.Cecil
         public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalled()
         {
             var expectedFailureMessage = @"
-Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
+Libraries must call Task.ConfigureAwait(false) to prevent deadlocks
 	- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwait.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait
 ".TrimStart();
 
@@ -65,7 +65,7 @@ Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
         public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalledButIsCalledForOtherMethods()
         {
             var expectedFailureMessage = @"
-Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
+Libraries must call Task.ConfigureAwait(false) to prevent deadlocks
 	- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait
 ".TrimStart();
 
@@ -89,7 +89,7 @@ Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
         public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalledForASingleTask()
         {
             var expectedFailureMessage = @"
-Libraries should call Task.ConfigureAwait(false) to prevent deadlocks
+Libraries must call Task.ConfigureAwait(false) to prevent deadlocks
 	- HasAnAsyncMethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne.MethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne
 ".TrimStart();
 

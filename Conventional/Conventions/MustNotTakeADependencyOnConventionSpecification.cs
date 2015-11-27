@@ -16,7 +16,7 @@ namespace Conventional.Conventions
 
         protected override string FailureMessage
         {
-            get { return "Has a dependency on {0} and should not:" ; }
+            get { return "Has a dependency on {0} and must not:" ; }
         }
 
         public override ConventionResult IsSatisfiedBy(Type type)
