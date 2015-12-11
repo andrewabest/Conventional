@@ -50,6 +50,16 @@ namespace Conventional
             return result;
         }
 
+        internal static IEnumerable<ConventionResult> EnforceConformance(IEnumerable<ConventionResult> results)
+        {
+            if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
+            {
+                results.WithFailureAssertion(ConventionConfiguration.DefaultFailureAssertionCallback);
+            }
+
+            return results;
+        }
+
         private static WrappedConventionResult EnforceConformance(WrappedConventionResult results)
         {
             if (ConventionConfiguration.DefaultFailureAssertionCallback != null)

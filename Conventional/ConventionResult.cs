@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Conventional
 {
+    // TODO: See if this needs to be refactored into some different types of results.
     public class ConventionResult
     {
         public ConventionResult(string typeName)
@@ -12,7 +13,7 @@ namespace Conventional
             Failures = new string[0];
         }
 
-        public string TypeName { get; set; }
+        public string TypeName { get; }
 
         public bool IsSatisfied { get; set; }
 
