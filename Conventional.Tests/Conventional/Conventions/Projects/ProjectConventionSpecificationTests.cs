@@ -29,9 +29,25 @@ namespace Conventional.Tests.Conventional.Conventions.Projects
         }
 
         [Test]
-        public void MustIncludeAllMatchingFilesInFolder_SucceedsWhenAllMatchingFilesAreReferenced()
+        public void MustIncludeAllMatchingFilesInFolder_SucceedsWhenAllMatchingFilesAreCompiled()
         {
             var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.cs"));
+            result.IsSatisfied.Should().BeTrue();
+            result.Failures.Should().HaveCount(0);
+        }
+
+        [Test]
+        public void MustIncludeAllMatchingFilesInFolder_SucceedsWhenAllMatchingFilesAreResources()
+        {
+            var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.sql"));
+            result.IsSatisfied.Should().BeTrue();
+            result.Failures.Should().HaveCount(0);
+        }
+
+        [Test]
+        public void MustIncludeAllMatchingFilesInFolder_SucceedsWhenAllMatchingFilesAreContent()
+        {
+            var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.txt"));
             result.IsSatisfied.Should().BeTrue();
             result.Failures.Should().HaveCount(0);
         }
@@ -40,7 +56,11 @@ namespace Conventional.Tests.Conventional.Conventions.Projects
         public void MustIncludeAllMatchingFilesInFolder_ProducesAppropriateErrorMessage()
         {
             var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.js"));
-            result.Should().Be(result.Failures.Single(f => f.Contains(string.Format(@"All files matching '*.js' within project folder for 'I:\Dev\Conventional\TestSolution\TestSolution.TestProject\TestSolution.TestProject.csproj' must be included in the project.{0}- I:\Dev\Conventional\TestSolution\TestSolution.TestProject\unincludedJsFile.js", Environment.NewLine))));
+            var failureText = result.Failures.Single();
+            failureText.Should().Contain(@"All files matching '*.js' within project folder for");
+            failureText.Should().Contain(@"\TestSolution\TestSolution.TestProject\TestSolution.TestProject.csproj' must be included in the project.");
+            failureText.Should().Contain(@"\TestSolution\TestSolution.TestProject\unincludedJsFile.js");
+            failureText.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries).Length.Should().Be(2);
         }
     }
 }
