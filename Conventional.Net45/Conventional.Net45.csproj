@@ -98,6 +98,9 @@
     <Compile Include="..\Conventional\Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs">
       <Link>Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecification.cs">
+      <Link>Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs">
       <Link>Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs</Link>
     </Compile>
@@ -209,11 +212,17 @@
     <Compile Include="..\Conventional\Extensions\TypeExtensions.cs">
       <Link>Extensions\TypeExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Extensions\AssemblyExtensions.cs">
+      <Link>Extensions\AssemblyExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\IAssemblyConventionSpecification.cs">
       <Link>IAssemblyConventionSpecification.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\IConventionSpecification.cs">
       <Link>IConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\ItemGroupItem.cs">
+      <Link>ItemGroupItem.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\IDatabaseConventionSpecification.cs">
       <Link>IDatabaseConventionSpecification.cs</Link>

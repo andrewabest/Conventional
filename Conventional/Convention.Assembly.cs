@@ -19,5 +19,10 @@ namespace Conventional
         {
             return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileMatchRegex);
         }
+
+        public static MustIncludeAllMatchingFilesInFolderConventionSpecification MustIncludeAllMatchingFilesInFolder(string filePattern)
+        {
+            return new MustIncludeAllMatchingFilesInFolderConventionSpecification(filePattern);
+        }
     }
 }

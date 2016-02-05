@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
-using Conventional.Tests.Conventional.Conventions.Assemblies;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Conventional.Tests.Conventional.Conventions.Projects
+namespace Conventional.Tests.Conventional.Conventions.Assemblies
 {
-    public class ProjectConventionSpecificationTests
+    public class MatchingFilesConventionTests
     {
         private Assembly _testAssembly;
 

@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Conventional.Conventions.Projects
+namespace Conventional.Conventions.Assemblies
 {
-    public class MustIncludeAllMatchingFilesInFolderConventionSpecification : ProjectConventionSpecification
+    public class MustIncludeAllMatchingFilesInFolderConventionSpecification : AssemblyConventionSpecification
     {
         private readonly string _pattern;
 

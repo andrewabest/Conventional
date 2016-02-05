@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conventional\Conventions\Projects\ProjectConventionSpecificationTests.cs" />
+    <Compile Include="Conventional\Conventions\Assemblies\MatchingFilesConventionTests.cs" />
     <Compile Include="ConventionConfigurationScenarios.cs" />
     <Compile Include="Conventional\Conventions\Assemblies\AssemblyConventionSpecificationTests.cs" />
     <Compile Include="Conventional\Conventions\Cecil\CecilConventionSpecificationTests.cs" />

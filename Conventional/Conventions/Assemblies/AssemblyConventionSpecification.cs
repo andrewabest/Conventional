@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
 using Conventional.Conventions.Solution;
@@ -8,6 +9,8 @@ namespace Conventional.Conventions.Assemblies
 {
     public abstract class AssemblyConventionSpecification : IAssemblyConventionSpecification
     {
+        protected string ProjectFilePath;
+        protected string ProjectFolder { get { return new FileInfo(ProjectFilePath).DirectoryName; } }
         protected abstract string FailureMessage { get; }
 
         protected string BuildFailureMessage(string details)
@@ -19,7 +22,8 @@ namespace Conventional.Conventions.Assemblies
 
         public ConventionResult IsSatisfiedBy(string projectFilePath)
         {
-            var projectDocument = XDocument.Load(projectFilePath);
+            ProjectFilePath = projectFilePath;
+            var projectDocument = XDocument.Load(ProjectFilePath);
 
             return IsSatisfiedByInternal(projectDocument.Expand().Project.PropertyGroup.AssemblyName.Value,
                 projectDocument);
@@ -27,9 +31,9 @@ namespace Conventional.Conventions.Assemblies
 
         public ConventionResult IsSatisfiedBy(Assembly assembly)
         {
-            var projectFilePath = assembly.ResolveProjectFilePath();
+            ProjectFilePath = assembly.ResolveProjectFilePath();
 
-            return IsSatisfiedBy(projectFilePath);
+            return IsSatisfiedBy(ProjectFilePath);
         }
 
         protected abstract ConventionResult IsSatisfiedByInternal(string assemblyName, XDocument projectDocument);

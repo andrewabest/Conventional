@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblySpecimen.cs" />
-    <Compile Include="Convention.Project.cs" />
     <Compile Include="ConventionConfiguration.cs" />
     <Compile Include="Convention.Cecil.cs" />
     <Compile Include="Convention.Assembly.cs" />
@@ -86,8 +85,8 @@
     <Compile Include="Conventions\MustNotHaveAPropertyOfTypeConventionSpecification.cs" />
     <Compile Include="Conventions\NotConventionSpecification.cs" />
     <Compile Include="Conventions\OrConventionSpecification.cs" />
-    <Compile Include="Conventions\Projects\MustIncludeAllMatchingFilesInFolderConventionSpecification.cs" />
     <Compile Include="Conventions\Projects\ProjectConventionSpecification.cs" />
+    <Compile Include="Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePrivateSettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHaveProtectedSettersConventionSpecification.cs" />
