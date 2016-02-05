@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Conventional.Conventions.Assemblies;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -55,10 +56,24 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         {
             var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.js"));
             var failureText = result.Failures.Single();
-            failureText.Should().Contain(@"All files matching '*.js' within project folder for");
-            failureText.Should().Contain(@"\TestSolution\TestSolution.TestProject\TestSolution.TestProject.csproj' must be included in the project.");
-            failureText.Should().Contain(@"\TestSolution\TestSolution.TestProject\unincludedJsFile.js");
+            failureText.Should().Contain(@"All files matching '*.js' within ");
+            failureText.Should().Contain(@"\TestSolution\TestSolution.TestProject' must be included in the project.");
+            failureText.Should().Contain(@"\TestSolution\TestSolution.TestProject\Scripts\unincludedJsFile.js");
             failureText.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries).Length.Should().Be(2);
+        }
+
+        [Test]
+        public void WhenAnExtensionIsExcluded_FilesWithThatExtensionAreIgnored()
+        {
+            var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.*").WithExcludedExtensions("csproj", ".SLN", ".js"));
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void WhenASubfolderIsProvided_FilesOutsideThatSubfolderMayBeLeftOut()
+        {
+            var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.csproj", "Scripts"));
+            result.IsSatisfied.Should().BeTrue();
         }
     }
 }

@@ -20,9 +20,25 @@ namespace Conventional
             return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileMatchRegex);
         }
 
+        /// <summary>
+        /// Requires all files which match a certain pattern to be included in the project file. You might use this if you have some
+        /// developers using a different editor, and want to ensure they add all new files to the project.
+        /// </summary>
+        /// <param name="filePattern">Any pattern which can be used with Directory.GetFiles</param>
         public static MustIncludeAllMatchingFilesInFolderConventionSpecification MustIncludeAllMatchingFilesInFolder(string filePattern)
         {
             return new MustIncludeAllMatchingFilesInFolderConventionSpecification(filePattern);
+        }
+
+        /// <summary>
+        /// Requires all files which match a certain pattern to be included in the project file. You might use this if you have some
+        /// developers using a different editor, and want to ensure they add all new files to the project.
+        /// </summary>
+        /// <param name="filePattern">Any pattern which can be used with Directory.GetFiles</param>
+        /// <param name="subfolder">A subfolder path to limit the convention to</param>
+        public static MustIncludeAllMatchingFilesInFolderConventionSpecification MustIncludeAllMatchingFilesInFolder(string filePattern, string subfolder)
+        {
+            return new MustIncludeAllMatchingFilesInFolderConventionSpecification(filePattern, subfolder);
         }
     }
 }

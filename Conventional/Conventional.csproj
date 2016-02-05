@@ -64,6 +64,7 @@
     <Compile Include="Conventions\AndConventionSpecification.cs" />
     <Compile Include="Conventions\Assemblies\AssemblyConventionSpecification.cs" />
     <Compile Include="Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs" />
+    <Compile Include="Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecificationExtensions.cs" />
     <Compile Include="Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs" />
     <Compile Include="Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\CecilExtensions.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Conventions\MustNotHaveAPropertyOfTypeConventionSpecification.cs" />
     <Compile Include="Conventions\NotConventionSpecification.cs" />
     <Compile Include="Conventions\OrConventionSpecification.cs" />
-    <Compile Include="Conventions\Projects\ProjectConventionSpecification.cs" />
     <Compile Include="Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePrivateSettersConventionSpecification.cs" />
