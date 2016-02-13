@@ -64,6 +64,7 @@
     <Compile Include="Conventions\AndConventionSpecification.cs" />
     <Compile Include="Conventions\Assemblies\AssemblyConventionSpecification.cs" />
     <Compile Include="Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs" />
+    <Compile Include="Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecificationExtensions.cs" />
     <Compile Include="Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs" />
     <Compile Include="Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\CecilExtensions.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Conventions\MustNotHaveAPropertyOfTypeConventionSpecification.cs" />
     <Compile Include="Conventions\NotConventionSpecification.cs" />
     <Compile Include="Conventions\OrConventionSpecification.cs" />
+    <Compile Include="Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustBeImmutableConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePrivateSettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHaveProtectedSettersConventionSpecification.cs" />
@@ -102,10 +104,12 @@
     <Compile Include="Conventions\Solution\SolutionConventionSpecification.cs" />
     <Compile Include="DatabaseSpecimen.cs" />
     <Compile Include="Doomsday.cs" />
+    <Compile Include="Extensions\AssemblyExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="IAssemblyConventionSpecification.cs" />
     <Compile Include="IDatabaseConventionSpecification.cs" />
     <Compile Include="ISolutionConventionSpecification.cs" />
+    <Compile Include="ItemGroupItem.cs" />
     <Compile Include="KnownPaths.cs" />
     <Compile Include="StringConstants.cs" />
     <Compile Include="ConventionResult.cs" />
@@ -134,6 +138,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
