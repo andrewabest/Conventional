@@ -152,6 +152,7 @@ TheAssembly
 
 - Must not reference dlls from bin or obj directories
 - Must have all files be embedded resources
+- Must include all matching files in folder
 
 ## Configuration
 
