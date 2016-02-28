@@ -52,12 +52,14 @@ namespace Conventional
 
         internal static IEnumerable<ConventionResult> EnforceConformance(IEnumerable<ConventionResult> results)
         {
+            var evaluatedResults = results.ToArray();
+
             if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
             {
-                results.WithFailureAssertion(ConventionConfiguration.DefaultFailureAssertionCallback);
+                evaluatedResults.WithFailureAssertion(ConventionConfiguration.DefaultFailureAssertionCallback);
             }
 
-            return results;
+            return evaluatedResults;
         }
 
         private static WrappedConventionResult EnforceConformance(WrappedConventionResult results)

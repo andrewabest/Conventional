@@ -37,7 +37,9 @@ namespace Conventional.Conventions
             using (var manifestResourceStream = type.Assembly.GetManifestResourceStream(name))
             {
                 if (manifestResourceStream == null)
+                {
                     return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(type.FullName, name));
+                }
             }
             return ConventionResult.Satisfied(type.FullName);
         }

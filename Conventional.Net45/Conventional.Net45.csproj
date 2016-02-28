@@ -319,6 +319,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Convention.Roslyn.cs" />
     <None Include="packages.config" />
     <Compile Include="ThisSolution.Net45.cs" />
   </ItemGroup>

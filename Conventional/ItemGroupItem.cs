@@ -20,8 +20,15 @@ namespace Conventional
 
         public bool MatchesPatternAndIsNotAnEmbeddedResourceOrReference(Regex fileMatchRegex)
         {
-            if (_type == "EmbeddedResource") return false;
-            if (_type == "Reference") return false;
+            if (_type == "EmbeddedResource")
+            {
+                return false;
+            }
+
+            if (_type == "Reference")
+            {
+                return false;
+            }
 
             return fileMatchRegex.IsMatch(_include);
         }

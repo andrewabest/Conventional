@@ -115,6 +115,7 @@
     <Compile Include="Conventional\Conventions\Roslyn\SolutionDiagnosticAnalyzerConventionSpecificationTests.cs" />
     <Compile Include="DogFoodConventions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestSolution.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 
 namespace Conventional
 {
@@ -10,7 +11,27 @@ namespace Conventional
         public static string SolutionRoot
         {
             get { return _solutionRoot ?? DefaultSolutionRoot; }
-            set { _solutionRoot = value; }
+            set
+            {
+                if (value.EndsWith(@"\") == false)
+                {
+                    value += @"\";
+                }
+
+                _solutionRoot = value;
+            }
+        }
+
+        private static string DefaultPathToSolution()
+        {
+            return Directory.GetFiles(SolutionRoot, "*.sln", SearchOption.AllDirectories).FirstOrDefault();
+        }
+
+        private static string _fullPathToSolution;
+        public static string FullPathToSolution
+        {
+            get { return _fullPathToSolution ?? DefaultPathToSolution(); }
+            set { _fullPathToSolution = value; }
         }
     }
 }

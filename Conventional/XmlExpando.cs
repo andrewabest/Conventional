@@ -11,10 +11,14 @@ namespace Conventional.Conventions.Solution
         public static dynamic Expand(this XDocument xDocument)
         {
             if (xDocument == null)
+            {
                 throw new ArgumentNullException("xDocument");
+            }
 
             if (xDocument.Root == null)
+            {
                 throw new ArgumentException("Document contains no elements", "xDocument");
+            }
 
             var xmlExpando = new ExpandoObject();
             ((IDictionary<string, object>)xmlExpando)[xDocument.Root.Name.LocalName] = new ExpandoObject();
@@ -47,7 +51,10 @@ namespace Conventional.Conventions.Solution
 
         private static string BuildName(IDictionary<string, object> indexableXmlExpando, string childElementKey, IDictionary<string, int> duplicateKeyTracker)
         {
-            if (!indexableXmlExpando.ContainsKey(childElementKey)) return childElementKey;
+            if (!indexableXmlExpando.ContainsKey(childElementKey))
+            {
+                return childElementKey;
+            }
             
             int duplicateCount;
             var hasExistingDuplicates = duplicateKeyTracker.TryGetValue(childElementKey, out duplicateCount);

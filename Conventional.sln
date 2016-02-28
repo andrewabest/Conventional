@@ -11,12 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Net45", "Conve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Tests.Net45", "Conventional.Tests.Net45\Conventional.Tests.Net45.csproj", "{72189960-28E2-402F-8F51-992ED2515B76}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Conventional.Core", "Conventional.Core\Conventional.Core.shproj", "{CF2E86AA-F6A0-4588-A7B1-3901E489E6B7}"
-EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Conventional.Core\Conventional.Core.projitems*{cf2e86aa-f6a0-4588-a7b1-3901e489e6b7}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

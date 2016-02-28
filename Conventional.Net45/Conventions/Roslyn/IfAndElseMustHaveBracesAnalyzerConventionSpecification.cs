@@ -44,14 +44,12 @@ namespace Conventional.Conventions.Roslyn
         {
             var ifStatement = node as IfStatementSyntax;
 
-            // Is this an if statement followed directly by a call with no braces?
             if ((ifStatement?.Statement != null) &&
                 (ifStatement.Statement.IsKind(SyntaxKind.Block) == false))
             {
                 return DiagnosticResult.Failed("if", GetLineNumber(document, node));
             }
 
-            // Is this an else clause followed by a call with no braces?
             var elseSyntax = node as ElseClauseSyntax;
             if (elseSyntax?.Statement != null && 
                 (elseSyntax.Statement.IsKind(SyntaxKind.IfStatement) == false) && 

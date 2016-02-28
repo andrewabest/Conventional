@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Conventional.Conventions.Roslyn;
 using FluentAssertions;
 using NUnit.Framework;
@@ -12,11 +11,35 @@ namespace Conventional.Tests.Net45.Conventional.Conventions.Roslyn
         public void IfAndElseMustHaveBracesAnalyzer_Success()
         {
             ThisSolution.MustConformTo(
-                // Todo, need to add this to static Convention.Solution.Net45 factory
-                new IfAndElseMustHaveBracesAnalyzerConventionSpecification())
+                Convention.IfAndElseMustHaveBraces())
                 .All(x => x.IsSatisfied)
                 .Should()
                 .BeTrue();
-        } 
+        }
+
+        [Test]
+        public void IfAndElseMustHaveBracesAnalyzer_FailsWhenIfBlockDoesNotHaveBrace()
+        {
+            using (new TestSolution("TestSolution"))
+            {
+                ThisSolution.MustConformTo(
+                    Convention.IfAndElseMustHaveBraces())
+                    .Where(x => x.IsSatisfied == false)
+                    .Should()
+                    .Contain(x => x.IsSatisfied == false && x.TypeName.EndsWith("IfBracelessWonder.cs"));
+            }
+        }
+
+        [Test]
+        public void IfAndElseMustHaveBracesAnalyzer_FailsWhenElseBlockDoesNotHaveBrace()
+        {
+            using (new TestSolution("TestSolution"))
+            {
+                ThisSolution.MustConformTo(
+                    Convention.IfAndElseMustHaveBraces())
+                    .Should()
+                    .Contain(x => x.IsSatisfied == false && x.TypeName.EndsWith("ElseBracelessWonder.cs"));
+            }
+        }
     }
 }

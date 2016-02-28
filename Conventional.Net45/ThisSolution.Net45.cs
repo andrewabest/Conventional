@@ -11,8 +11,7 @@ namespace Conventional
         {
             var workspace = MSBuildWorkspace.Create();
 
-            // TODO: make a generic search for the .sln file here, allow it to be overridden to return a specific one.
-            var solution = workspace.OpenSolutionAsync(KnownPaths.SolutionRoot + "Conventional.sln").Result;
+            var solution = workspace.OpenSolutionAsync(KnownPaths.FullPathToSolution).Result;
 
             return Conformist.EnforceConformance(
                 convention.IsSatisfiedBy(solution));
