@@ -313,7 +313,7 @@
     <Compile Include="Conventions\AsyncMethodsMustHaveAsyncSuffixConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasksConventionSpecification.cs" />
     <Compile Include="Conventions\Roslyn\DiagnosticResult.cs" />
-    <Compile Include="Conventions\Roslyn\IfAndElseMustHaveBracesAnalyzerConventionSpecification.cs" />
+    <Compile Include="Conventions\Roslyn\IfAndElseMustHaveBracesConventionSpecification.cs" />
     <Compile Include="Conventions\Roslyn\SolutionDiagnosticAnalyzerConventionSpecification.cs" />
     <Compile Include="Conventions\VoidMethodsMustNotBeAsyncConventionSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

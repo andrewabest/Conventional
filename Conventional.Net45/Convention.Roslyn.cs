@@ -9,9 +9,9 @@ namespace Conventional
 {
     public static partial class Convention
     {
-        public static IfAndElseMustHaveBracesAnalyzerConventionSpecification IfAndElseMustHaveBraces()
+        public static IfAndElseMustHaveBracesConventionSpecification IfAndElseMustHaveBraces()
         {
-            return new IfAndElseMustHaveBracesAnalyzerConventionSpecification();
+            return new IfAndElseMustHaveBracesConventionSpecification();
         }
     }
 }

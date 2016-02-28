@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Conventional.Conventions.Roslyn
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class IfAndElseMustHaveBracesAnalyzerConventionSpecification : SolutionDiagnosticAnalyzerConventionSpecification
+    public class IfAndElseMustHaveBracesConventionSpecification : SolutionDiagnosticAnalyzerConventionSpecification
     {
         protected override string FailureMessage => "If and else must have braces, and {0} statement on line {1} does not";
 
