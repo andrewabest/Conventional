@@ -26,7 +26,7 @@ namespace Conventional.Tests.Net45.Conventional.Conventions.Roslyn
                     Convention.IfAndElseMustHaveBraces())
                     .Where(x => x.IsSatisfied == false)
                     .Should()
-                    .Contain(x => x.IsSatisfied == false && x.TypeName.EndsWith("IfBracelessWonder.cs"));
+                    .Contain(x => x.IsSatisfied == false && x.SubjectName.EndsWith("IfBracelessWonder.cs"));
             }
         }
 
@@ -38,7 +38,7 @@ namespace Conventional.Tests.Net45.Conventional.Conventions.Roslyn
                 ThisSolution.MustConformTo(
                     Convention.IfAndElseMustHaveBraces())
                     .Should()
-                    .Contain(x => x.IsSatisfied == false && x.TypeName.EndsWith("ElseBracelessWonder.cs"));
+                    .Contain(x => x.IsSatisfied == false && x.SubjectName.EndsWith("ElseBracelessWonder.cs"));
             }
         }
     }

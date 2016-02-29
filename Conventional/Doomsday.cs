@@ -51,7 +51,7 @@ namespace Conventional
             var result =
                 evaluatedResults.Where(x => x.IsSatisfied == false).Aggregate(string.Empty, (s, x) =>
                     s +
-                    x.TypeName +
+                    x.SubjectName +
                     Environment.NewLine +
                     StringConstants.Underline +
                     Environment.NewLine +

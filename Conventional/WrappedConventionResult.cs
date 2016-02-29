@@ -13,8 +13,8 @@ namespace Conventional
             Results = results;
         }
 
-        public IEnumerable<Type> Types { get; private set; }
-        public IEnumerable<ConventionResult> Results { get; private set; }
+        public IEnumerable<Type> Types { get; }
+        public IEnumerable<ConventionResult> Results { get; }
         public string[] Failures { get { return Results.Where(x => x.IsSatisfied == false).SelectMany(x => x.Failures).ToArray(); } }
 
         public IEnumerator<ConventionResult> GetEnumerator()
