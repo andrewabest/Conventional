@@ -21,7 +21,9 @@ namespace Conventional.Conventions
             var name = type.Name;
 
             if (type.IsGenericType)
+            {
                 name = name.Substring(0, name.IndexOf("`", StringComparison.Ordinal));
+            }
 
             return name.EndsWith(_suffix) == false
                 ? ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(_suffix))

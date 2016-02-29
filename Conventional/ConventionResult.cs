@@ -6,26 +6,26 @@ namespace Conventional
 {
     public class ConventionResult
     {
-        public ConventionResult(string typeName)
+        public ConventionResult(string subjectName)
         {
-            TypeName = typeName;
+            SubjectName = subjectName;
             Failures = new string[0];
         }
 
-        public string TypeName { get; set; }
+        public string SubjectName { get; }
 
         public bool IsSatisfied { get; set; }
 
         public string[] Failures { get; set; }
 
-        public static ConventionResult Satisfied(string typeName)
+        public static ConventionResult Satisfied(string subjectName)
         {
-            return new ConventionResult(typeName) { IsSatisfied = true };
+            return new ConventionResult(subjectName) { IsSatisfied = true };
         }
 
-        public static ConventionResult NotSatisfied(string typeName, string failureMessage)
+        public static ConventionResult NotSatisfied(string subjectName, string failureMessage)
         {
-            return new ConventionResult(typeName) { Failures = new[] { failureMessage } };
+            return new ConventionResult(subjectName) { Failures = new[] { failureMessage } };
         }
     }
 
@@ -33,7 +33,7 @@ namespace Conventional
     {
         public static ConventionResult And(this ConventionResult left, ConventionResult right)
         {
-            return new ConventionResult(left.TypeName)
+            return new ConventionResult(left.SubjectName)
             {
                 IsSatisfied = left.IsSatisfied && right.IsSatisfied,
                 Failures = left.Failures.Union(right.Failures).ToArray()
@@ -42,7 +42,7 @@ namespace Conventional
         
         public static ConventionResult Or(this ConventionResult left, ConventionResult right)
         {
-            return new ConventionResult(left.TypeName)
+            return new ConventionResult(left.SubjectName)
             {
                 IsSatisfied = left.IsSatisfied || right.IsSatisfied,
                 Failures = left.Failures.Union(right.Failures).ToArray()
@@ -51,7 +51,7 @@ namespace Conventional
         
         public static ConventionResult Not(this ConventionResult left)
         {
-            return new ConventionResult(left.TypeName)
+            return new ConventionResult(left.SubjectName)
             {
                 IsSatisfied = !left.IsSatisfied,
                 Failures = left.Failures.ToArray()

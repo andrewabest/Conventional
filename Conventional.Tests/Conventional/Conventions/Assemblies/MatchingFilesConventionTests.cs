@@ -65,7 +65,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         [Test]
         public void WhenAnExtensionIsExcluded_FilesWithThatExtensionAreIgnored()
         {
-            var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.*").WithExcludedExtensions("csproj", ".SLN", ".js"));
+            var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.*").WithExcludedExtensions("csproj", ".SLN", ".js", ".suo", ".user"));
             result.IsSatisfied.Should().BeTrue();
         }
 

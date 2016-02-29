@@ -50,6 +50,18 @@ namespace Conventional
             return result;
         }
 
+        internal static IEnumerable<ConventionResult> EnforceConformance(IEnumerable<ConventionResult> results)
+        {
+            var evaluatedResults = results.ToArray();
+
+            if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
+            {
+                evaluatedResults.WithFailureAssertion(ConventionConfiguration.DefaultFailureAssertionCallback);
+            }
+
+            return evaluatedResults;
+        }
+
         private static WrappedConventionResult EnforceConformance(WrappedConventionResult results)
         {
             if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
@@ -77,7 +89,7 @@ namespace Conventional
             var result =
                 evaluatedResults.Where(x => x.IsSatisfied == false).Aggregate(string.Empty, (s, x) =>
                     s +
-                    x.TypeName +
+                    x.SubjectName +
                     Environment.NewLine +
                     StringConstants.Underline +
                     Environment.NewLine +

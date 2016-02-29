@@ -66,9 +66,12 @@ namespace Conventional.Conventions.Assemblies
         private static readonly string[] ProjectOutputFolders = {"obj", "bin"};
         private IEnumerable<string> AllMatchingFilesInFolder(string path, bool skipProjectOutputFolders = true)
         {
-            if (skipProjectOutputFolders && 
+            if (skipProjectOutputFolders &&
                 ProjectOutputFolders.Any(p => Path.Combine(ProjectFolder, p).ToLower() == path.ToLower()))
+            {
                 return new string[0];
+            }
+
             return
                 Directory.GetFiles(path, _pattern).Where(p => !_excludedExtensions.Contains(new FileInfo(p).Extension.ToLower()))
                     .Union(

@@ -42,8 +42,10 @@ namespace Conventional.Cecil.Conventions
                 var memberExpression = (MemberExpression) e.Body;
                 var propertyInfo = memberExpression.Member as PropertyInfo;
                 if (propertyInfo == null)
+                {
                     throw new ArgumentException("Expression must be a memberexpression selecting a single property.",
-                        "expressions");
+                        nameof(expressions));
+                }
                 return new GetterDetails(typeof (TClass).FullName, propertyInfo.GetGetMethod().Name);
             }).ToArray();
         }

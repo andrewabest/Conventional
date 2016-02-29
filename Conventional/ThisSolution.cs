@@ -2,7 +2,7 @@ using System.IO;
 
 namespace Conventional
 {
-    public static class ThisSolution
+    public static partial class ThisSolution
     {
         public static ConventionResult MustConformTo(ISolutionConventionSpecification solutionConventionSpecification)
         {
