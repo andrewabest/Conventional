@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Net45", "Conve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Tests.Net45", "Conventional.Tests.Net45\Conventional.Tests.Net45.csproj", "{72189960-28E2-402F-8F51-992ED2515B76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Roslyn", "Conventional.Roslyn\Conventional.Roslyn.csproj", "{7D0DAF28-CA63-49F8-A9C2-25729C731948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Tests.Roslyn", "Conventional.Tests.Roslyn\Conventional.Tests.Roslyn.csproj", "{10DC5795-E692-4B6E-854B-E1E1AA9F1B36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{72189960-28E2-402F-8F51-992ED2515B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72189960-28E2-402F-8F51-992ED2515B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72189960-28E2-402F-8F51-992ED2515B76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D0DAF28-CA63-49F8-A9C2-25729C731948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D0DAF28-CA63-49F8-A9C2-25729C731948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D0DAF28-CA63-49F8-A9C2-25729C731948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D0DAF28-CA63-49F8-A9C2-25729C731948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10DC5795-E692-4B6E-854B-E1E1AA9F1B36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10DC5795-E692-4B6E-854B-E1E1AA9F1B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10DC5795-E692-4B6E-854B-E1E1AA9F1B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10DC5795-E692-4B6E-854B-E1E1AA9F1B36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,6 @@ using System.Linq;
 using Conventional.Conventions;
 using Conventional.Conventions.Assemblies;
 using Conventional.Conventions.Database;
-using Conventional.Conventions.Roslyn;
 using Conventional.Conventions.Solution;
 using Conventional.Extensions;
 using NUnit.Framework;
@@ -28,8 +27,7 @@ namespace Conventional.Tests.Net45
             typeof (ConventionSpecification),
             typeof (AssemblyConventionSpecification),
             typeof (DatabaseConventionSpecification),
-            typeof (SolutionConventionSpecification),
-            typeof (SolutionDiagnosticAnalyzerConventionSpecification)
+            typeof (SolutionConventionSpecification)
         };
     }
 }
