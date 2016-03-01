@@ -12,6 +12,9 @@
     <iconUrl>https://raw.github.com/andrewabest/Conventional/master/duck.png</iconUrl>
     <tags>Convention Testing</tags>
     <copyright>Copyright © 2015, Andrew Best</copyright>
+    <dependencies>
+      <dependency id="Best.Conventional" version="$version$" />
+    </dependencies>
   </metadata>
   <files>
     <file src="bin\release\Conventional.Roslyn.dll" target="lib\net45" />
