@@ -79,6 +79,7 @@
     <Compile Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs" />
     <Compile Include="Conventions\Database\DatabaseConventionSpecification.cs" />
+    <Compile Include="Conventions\MustHaveCorrespondingEnumConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveANonPublicDefaultConstructorConventionSpecification.cs" />
     <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
     <Compile Include="Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs" />
