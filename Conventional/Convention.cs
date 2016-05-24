@@ -8,22 +8,22 @@ namespace Conventional
     {
         public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters
         {
-            get { return new PropertiesMustHavePublicGettersConventionSpecification(); }
+            get {  return new PropertiesMustHavePublicGettersConventionSpecification(); }
         }
-
+        
         public static PropertiesMustHavePublicSettersConventionSpecification PropertiesMustHavePublicSetters
         {
-            get { return new PropertiesMustHavePublicSettersConventionSpecification(); }
+            get {  return new PropertiesMustHavePublicSettersConventionSpecification(); }
         }
-
+        
         public static PropertiesMustHaveProtectedSettersConventionSpecification PropertiesMustHaveProtectedSetters
         {
-            get { return new PropertiesMustHaveProtectedSettersConventionSpecification(); }
+            get {  return new PropertiesMustHaveProtectedSettersConventionSpecification(); }
         }
-
+        
         public static PropertiesMustHavePrivateSettersConventionSpecification PropertiesMustHavePrivateSetters
         {
-            get { return new PropertiesMustHavePrivateSettersConventionSpecification(); }
+            get {  return new PropertiesMustHavePrivateSettersConventionSpecification(); }
         }
 
         public static MustHaveAttributeConventionSpecification MustHaveAttribute(Type attributeType)
@@ -35,7 +35,7 @@ namespace Conventional
         {
             return new NameMustStartWithConventionSpecification(prefix);
         }
-
+        
         public static NameMustEndWithConventionSpecification NameMustEndWith(string suffix)
         {
             return new NameMustEndWithConventionSpecification(suffix);
@@ -63,7 +63,7 @@ namespace Conventional
 
         public static MustHaveAppropriateConstructorsConventionSpecification MustHaveAppropriateConstructors
         {
-            get { return new MustHaveAppropriateConstructorsConventionSpecification(); }
+            get {  return new MustHaveAppropriateConstructorsConventionSpecification(); }
         }
 
         public static RequiresACorrespondingImplementationOfConventionSpecification RequiresACorrespondingImplementationOf(Type required, Type[] subjects)
