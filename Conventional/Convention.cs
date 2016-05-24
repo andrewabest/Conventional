@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Conventional.Conventions;
 
 namespace Conventional
@@ -98,6 +99,11 @@ namespace Conventional
         public static MustNotHaveAPropertyOfTypeConventionSpecification MustNotHaveAPropertyOfType(Type type, string reason)
         {
             return new MustNotHaveAPropertyOfTypeConventionSpecification(type, reason);
+        }
+
+        public static MustHaveCorrespondingEnumConventionSpecification MustHaveCorrespondingEnum(IEnumerable<Type> sourceTypes)
+        {
+            return new MustHaveCorrespondingEnumConventionSpecification(sourceTypes);
         }
     }
 }
