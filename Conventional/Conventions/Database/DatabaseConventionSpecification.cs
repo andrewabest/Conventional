@@ -1,10 +1,10 @@
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Resources;
 
 namespace Conventional.Conventions.Database
 {
@@ -16,18 +16,7 @@ namespace Conventional.Conventions.Database
 
         public ConventionResult IsSatisfiedBy(DatabaseSpecimen databaseSpecimen)
         {
-            var resourceName = GetType().FullName + ".sql";
-
-            var assembly =
-                GetType().Assembly.GetManifestResourceNames().Contains(resourceName) ?
-                GetType().Assembly : typeof(DatabaseConventionSpecification).Assembly;
-
-            string script; 
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
-            using (var reader = new StreamReader(stream))
-            {
-                script = reader.ReadToEnd();
-            }
+            var script = GetScript();
 
             if (string.IsNullOrWhiteSpace(script))
             {
@@ -58,6 +47,27 @@ namespace Conventional.Conventions.Database
             }
 
             return ConventionResult.Satisfied(DatabaseConventionResultIdentifier);
+        }
+
+        protected virtual string GetScript()
+        {
+            var resourceName = GetType().FullName + ".sql";
+
+            var assembly =
+                GetType().Assembly.GetManifestResourceNames().Contains(resourceName) ?
+                GetType().Assembly : typeof(DatabaseConventionSpecification).Assembly;
+
+            string script;
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null) throw new MissingManifestResourceException(resourceName);
+                
+                using (var reader = new StreamReader(stream))
+                {
+                    script = reader.ReadToEnd();
+                }
+            }
+            return script;
         }
     }
 }
