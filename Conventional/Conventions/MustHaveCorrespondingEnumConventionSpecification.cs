@@ -22,7 +22,9 @@ namespace Conventional.Conventions
         {
             var sourceType = _sourceTypes.FirstOrDefault(t => t.IsEnum && t.Name == type.Name);
             if (sourceType == null)
+            {
                 return ConventionResult.NotSatisfied(type.Name, "does not match any of the supplied type names");
+            }
 
             var subjectValueNames = ToValueNameDictionary(type);
             var sourceValueNames = ToValueNameDictionary(sourceType);
@@ -39,10 +41,13 @@ namespace Conventional.Conventions
             foreach (var leftValue in left)
             {
                 if (!right.ContainsKey(leftValue.Key))
+                {
                     result = result.And(ConventionResult.NotSatisfied(leftValue.Value, string.Format("{0} ({1}) does not match any values", leftValue.Value, leftValue.Key)));
-
+                }
                 else if (right[leftValue.Key] != leftValue.Value)
+                {
                     result = result.And(ConventionResult.NotSatisfied(leftValue.Value, string.Format("{0} ({1}) does not match names with the corresponding value", leftValue.Value, leftValue.Key)));
+                }
             }
             return result;
         }
