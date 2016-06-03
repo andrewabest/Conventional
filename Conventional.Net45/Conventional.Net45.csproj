@@ -292,6 +292,20 @@
       <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
