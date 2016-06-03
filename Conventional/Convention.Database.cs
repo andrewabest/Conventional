@@ -13,5 +13,10 @@ namespace Conventional
         {
             get { return new AllTablesMustHaveAClusteredIndexConventionSpecification(); }
         }
+
+        public static AllCheckConstraintsMustBeNamedConventionSpecification AllCheckConstraintsMustBeNamed
+        {
+            get { return new AllCheckConstraintsMustBeNamedConventionSpecification(); }
+        }
     }
 }
