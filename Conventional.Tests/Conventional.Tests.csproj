@@ -128,6 +128,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllCheckConstraintsMustBeNamedConventionalSpecification_Success.sql" />
+    <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllReferenceConstraintsMustBeNamedConventionalSpecification_Success.sql" />
+    <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail.sql" />
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllCheckConstraintsMustBeNamedConventionalSpecification_Fail.sql" />
     <Content Include="Conventional\Conventions\TestData\HasMatchingNonEmbeddedResource.testdata" />
     <EmbeddedResource Include="Conventional\Conventions\Assemblies\embedded_sql_file.sql" />
