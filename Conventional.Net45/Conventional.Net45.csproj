@@ -134,11 +134,23 @@
     <Compile Include="..\Conventional\Conventions\ConventionSpecification.cs">
       <Link>Conventions\ConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs">
       <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\Conventions\Database\DatabaseConventionSpecification.cs">
       <Link>Conventions\Database\DatabaseConventionSpecification.cs</Link>
