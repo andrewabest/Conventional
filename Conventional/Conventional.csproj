@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.cs" />
     <Compile Include="AssemblySpecimen.cs" />
@@ -145,6 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

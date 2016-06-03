@@ -54,6 +54,32 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        public void AllDefaultConstraintsMustBeNamedConventionalSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllDefaultConstraintsMustBeNamed)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail()
+        {
+            ExecuteSqlScriptFromResource("AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllDefaultConstraintsMustBeNamed);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
         public void AllReferenceConstraintsMustBeNamedConventionalSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllReferenceConstraintsMustBeNamedConventionalSpecification_Success.sql");
