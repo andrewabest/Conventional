@@ -105,6 +105,33 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             result.Failures.Should().HaveCount(1);
         }
 
+
+        [Test]
+        public void AllUniqueConstraintsMustBeNamedConventionalSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllUniqueConstraintsMustBeNamedConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllUniqueConstraintsMustBeNamed)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail()
+        {
+            ExecuteSqlScriptFromResource("AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllUniqueConstraintsMustBeNamed);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
         [Test]
         public void AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification_Success()
         {

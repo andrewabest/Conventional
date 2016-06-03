@@ -28,5 +28,11 @@ namespace Conventional
         {
             get { return new AllReferenceConstraintsMustBeNamedConventionSpecification(); }
         }
+
+        public static AllUniqueConstraintsMustBeNamedConventionSpecification AllUniqueConstraintsMustBeNamed
+        {
+            get { return new AllUniqueConstraintsMustBeNamedConventionSpecification(); }
+        }
+
     }
 }
