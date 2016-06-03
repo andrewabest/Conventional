@@ -158,6 +158,32 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        public void AllNamedColumnsMustBeNullableConventionSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllIdentityColumnsMustBeNamedTableNameId)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllNamedColumnsMustBeNullableConventionSpecification_Fails()
+        {
+            ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
         public void AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql");

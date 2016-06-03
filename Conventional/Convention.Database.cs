@@ -24,6 +24,12 @@ namespace Conventional
             get { return new AllDefaultConstraintsMustBeNamedConventionSpecification(); }
         }
 
+        public static AllNamedColumnsMustBeNullable AllNamedColumnsMustBeNullable(string columnName)
+        {
+            return new AllNamedColumnsMustBeNullable(columnName);
+        }
+
+
         public static AllPrimaryKeyConstraintsMustBeNamedConventionSpecification AllPrimaryKeyConstraintsMustBeNamed
         {
             get { return new AllPrimaryKeyConstraintsMustBeNamedConventionSpecification(); }
@@ -38,6 +44,5 @@ namespace Conventional
         {
             get { return new AllUniqueConstraintsMustBeNamedConventionSpecification(); }
         }
-
     }
 }
