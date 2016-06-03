@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Conventional.Conventions;
 using Conventional.Tests.Conventional.Conventions.TestData;
 using FluentAssertions;
 using NUnit.Framework;
@@ -633,6 +634,125 @@ namespace Conventional.Tests.Conventional.Conventions
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Count().Should().Be(1);
+        }
+
+        private enum SourceEnum
+        {
+            Value1 = 1,
+            Value2 = 2
+        }
+
+        public class SameValueAndNames
+        {
+            public enum SourceEnum
+            {
+                Value1 = 1,
+                Value2 = 2
+            }
+        }
+
+        private enum DifferentNamedEnum
+        {
+            Value1 = 1,
+            Value2 = 2
+        }
+
+        public class MissingValue
+        {
+            public enum SourceEnum
+            {
+                Value1 = 1,
+            }
+        }
+
+        public class ExtraValue
+        {
+
+            public enum SourceEnum
+            {
+                Value1 = 1,
+                Value2 = 2,
+                Value3 = 3,
+            }
+        }
+
+        public class DifferenValue
+        {
+            public enum SourceEnum
+            {
+                Value1 = 2,
+                Value2 = 1
+            }
+        }
+
+        public class DifferentName
+        {
+            public enum SourceEnum
+            {
+                Value1 = 1,
+                Value3 = 2
+            }
+        }
+
+
+        [Test]
+        public void MustHaveCorrespondingEnumConventionSpecification_SucceedsWhenValuesAndNamesMatch()
+        {
+            new MustHaveCorrespondingEnumConventionSpecification(typeof(SourceEnum))
+                .IsSatisfiedBy(typeof(SameValueAndNames.SourceEnum))
+                .IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustHaveCorrespondingEnumConventionSpecification_FailsWhenNoMatchingName()
+        {
+            var result = new MustHaveCorrespondingEnumConventionSpecification(typeof(SourceEnum))
+                .IsSatisfiedBy(typeof(DifferentNamedEnum));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().Contain("does not match any of the supplied type names");
+        }
+
+        [Test]
+        public void MustHaveCorrespondingEnumConventionSpecification_FailsWhenMissingValue()
+        {
+            var result = new MustHaveCorrespondingEnumConventionSpecification(typeof(SourceEnum))
+                .IsSatisfiedBy(typeof(MissingValue.SourceEnum));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().Contain("Value2 (2) does not match any values");
+        }
+
+        [Test]
+        public void MustHaveCorrespondingEnumConventionSpecification_FailsWhenExtraValue()
+        {
+            var result = new MustHaveCorrespondingEnumConventionSpecification(typeof(SourceEnum))
+                .IsSatisfiedBy(typeof(ExtraValue.SourceEnum));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().Contain("Value3 (3) does not match any values");
+        }
+
+        [Test]
+        public void MustHaveCorrespondingEnumConventionSpecification_FailsWhenDifferentValue()
+        {
+            var result = new MustHaveCorrespondingEnumConventionSpecification(typeof(SourceEnum))
+                .IsSatisfiedBy(typeof(DifferenValue.SourceEnum));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().Contain("Value1 (2) does not match names with the corresponding value");
+            result.Failures.Should().Contain("Value2 (1) does not match names with the corresponding value");
+        }
+
+        [Test]
+        public void MustHaveCorrespondingEnumConventionSpecification_FailsWhenDifferentName()
+        {
+            var result = new MustHaveCorrespondingEnumConventionSpecification(typeof(SourceEnum))
+                .IsSatisfiedBy(typeof(DifferentName.SourceEnum));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().Contain("Value2 (2) does not match names with the corresponding value");
+            result.Failures.Should().Contain("Value3 (2) does not match names with the corresponding value");
         }
     }
 }
