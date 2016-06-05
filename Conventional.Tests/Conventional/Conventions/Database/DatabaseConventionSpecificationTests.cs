@@ -259,7 +259,33 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
-        
+
+        [Test]
+        public void EachRowMustHaveACorrespondingEnum_Success()
+        {
+            ExecuteSqlScriptFromResource("EachRowMustHaveACorrespondingEnum_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.EachRowMustHaveACorrespondingEnum<CloudServiceEnum>("dbo.CloudService", "CloudServiceId"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void EachRowMustHaveACorrespondingEnum_Fail()
+        {
+            ExecuteSqlScriptFromResource("EachRowMustHaveACorrespondingEnum_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.EachRowMustHaveACorrespondingEnum<CloudServiceEnum>("dbo.CloudService", "CloudServiceId"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
         private static void ExecuteSqlScriptFromResource(string resourceName)
         {
             string script;

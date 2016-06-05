@@ -164,6 +164,9 @@
     <Compile Include="..\Conventional\Conventions\Database\DatabaseConventionSpecification.cs">
       <Link>Conventions\Database\DatabaseConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\EachRowMustHaveACorrespondingEnumConventionSpecification.cs">
+      <Link>Conventions\Database\EachRowMustHaveACorrespondingEnumConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs">
       <Link>Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs</Link>
     </Compile>
@@ -329,6 +332,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.sql">
       <Link>Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\EachRowMustHaveACorrespondingEnumConventionSpecification.sql">
+      <Link>Conventions\Database\EachRowMustHaveACorrespondingEnumConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

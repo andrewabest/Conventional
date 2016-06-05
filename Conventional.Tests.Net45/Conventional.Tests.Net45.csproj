@@ -55,6 +55,9 @@
     <Compile Include="..\Conventional.Tests\Conventional\Conventions\Database\DatabaseConventionSpecificationTests.cs">
       <Link>Conventional\Conventions\Database\DatabaseConventionSpecificationTests.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional.Tests\Conventional\Conventions\Database\DatabaseConventionSpecificationTests.Support.cs">
+      <Link>Conventional\Conventions\Database\DatabaseConventionSpecificationTests.Support.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional.Tests\Conventional\Conventions\Database\DogFoodConventions.cs">
       <Link>Conventional\Conventions\Database\DogFoodConventions.cs</Link>
     </Compile>
@@ -137,6 +140,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNonNullableConventionalSpecification_Success.sql">
       <Link>Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNonNullableConventionalSpecification_Success.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\EachRowMustHaveACorrespondingEnum_Success.sql">
+      <Link>Conventional\Conventions\Database\Scripts\EachRowMustHaveACorrespondingEnum_Success.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\EachRowMustHaveACorrespondingEnum_Fail.sql">
+      <Link>Conventional\Conventions\Database\Scripts\EachRowMustHaveACorrespondingEnum_Fail.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

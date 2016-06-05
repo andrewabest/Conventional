@@ -1,4 +1,5 @@
-﻿using Conventional.Conventions.Database;
+﻿using System;
+using Conventional.Conventions.Database;
 
 namespace Conventional
 {
@@ -48,6 +49,11 @@ namespace Conventional
         public static AllUniqueConstraintsMustBeNamedConventionSpecification AllUniqueConstraintsMustBeNamed
         {
             get { return new AllUniqueConstraintsMustBeNamedConventionSpecification(); }
+        }
+
+        public static EachRowMustHaveACorrespondingEnumConventionSpecification EachRowMustHaveACorrespondingEnum<T>(string tableName, string columnName) where T: struct
+        {
+            return new EachRowMustHaveACorrespondingEnumConventionSpecification(tableName, columnName, typeof(T));
         }
     }
 }
