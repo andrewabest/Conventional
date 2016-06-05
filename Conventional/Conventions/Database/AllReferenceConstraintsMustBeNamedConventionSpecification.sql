@@ -1,3 +1,4 @@
-﻿SELECT constraint_name
-FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS
-WHERE constraint_name LIKE '%[_][_][0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F]'
+﻿SELECT name
+FROM sys.foreign_keys
+WHERE is_system_named = 1
+ORDER BY name
