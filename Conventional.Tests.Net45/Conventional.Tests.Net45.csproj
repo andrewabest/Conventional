@@ -91,6 +91,32 @@
       <Link>Conventional\Conventions\Database\Scripts\TablesWithoutClusteredIndexSuccess.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllCheckConstraintsMustBeNamedConventionalSpecification_Fail.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllCheckConstraintsMustBeNamedConventionalSpecification_Fail.sql</Link>
+    </Content>
+    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllCheckConstraintsMustBeNamedConventionalSpecification_Success.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllCheckConstraintsMustBeNamedConventionalSpecification_Success.sql</Link>
+    </Content>
+    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail.sql</Link>
+    </Content>
+    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql</Link>
+    </Content>
+    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail.sql</Link>
+    </Content>
+    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllReferenceConstraintsMustBeNamedConventionalSpecification_Success.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllReferenceConstraintsMustBeNamedConventionalSpecification_Success.sql</Link>
+    </Content>
+    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail.sql</Link>
+    </Content>
+    <Content Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllUniqueConstraintsMustBeNamedConventionalSpecification_Success.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllUniqueConstraintsMustBeNamedConventionalSpecification_Success.sql</Link>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
