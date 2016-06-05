@@ -60,7 +60,7 @@ namespace Conventional.Conventions.Database
             string script;
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
-                if (stream == null) throw new MissingManifestResourceException(resourceName);
+                if (stream == null) { throw new MissingManifestResourceException(resourceName); }
                 
                 using (var reader = new StreamReader(stream))
                 {

@@ -267,7 +267,8 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             var fullResourceName = ScriptNamespace.Qualifier + "." + resourceName;
             using (var stream = typeof (SqlScripts).Assembly.GetManifestResourceStream(fullResourceName))
             {
-                if (stream == null) throw new MissingManifestResourceException(fullResourceName);
+                if (stream == null) { throw new MissingManifestResourceException(fullResourceName); }
+
                 using (var reader = new StreamReader(stream))
                 {
                     script = reader.ReadToEnd();
