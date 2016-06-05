@@ -24,14 +24,14 @@ namespace Conventional
             get { return new AllDefaultConstraintsMustBeNamedConventionSpecification(); }
         }
 
-        public static AllNamedColumnsMustBeNullable AllNamedColumnsMustBeNullable(string columnName)
+        public static AllNamedColumnsMustBeNullableConventionSpecification AllNamedColumnsMustBeNullable(string columnName)
         {
-            return new AllNamedColumnsMustBeNullable(columnName);
+            return new AllNamedColumnsMustBeNullableConventionSpecification(columnName);
         }
 
-        public static AllNamedColumnsMustBeNonNullable AllNamedColumnsMustBeNonNullable(string columnName)
+        public static AllNamedColumnsMustBeNonNullableConventionSpecification AllNamedColumnsMustBeNonNullable(string columnName)
         {
-            return new AllNamedColumnsMustBeNonNullable(columnName);
+            return new AllNamedColumnsMustBeNonNullableConventionSpecification(columnName);
         }
 
 

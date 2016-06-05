@@ -1,10 +1,10 @@
 namespace Conventional.Conventions.Database
 {
-    public class AllNamedColumnsMustBeNonNullable : DatabaseConventionSpecification
+    public class AllNamedColumnsMustBeNonNullableConventionSpecification : DatabaseConventionSpecification
     {
         private readonly string _columnName;
 
-        public AllNamedColumnsMustBeNonNullable(string columnName)
+        public AllNamedColumnsMustBeNonNullableConventionSpecification(string columnName)
         {
             _columnName = columnName;
         }

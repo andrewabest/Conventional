@@ -143,11 +143,11 @@
     <Compile Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs</Link>
     </Compile>
-    <Compile Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNonNullable.cs">
-      <Link>Conventions\Database\AllNamedColumnsMustBeNonNullable.cs</Link>
+    <Compile Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNonNullableConventionSpecification.cs">
+      <Link>Conventions\Database\AllNamedColumnsMustBeNonNullableConventionSpecification.cs</Link>
     </Compile>
-    <Compile Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNullable.cs">
-      <Link>Conventions\Database\AllNamedColumnsMustBeNullable.cs</Link>
+    <Compile Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.cs">
+      <Link>Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs">
       <Link>Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs</Link>
@@ -316,18 +316,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNullable.sql">
-      <Link>Conventions\Database\AllNamedColumnsMustBeNullable.sql</Link>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNonNullable.sql">
-      <Link>Conventions\Database\AllNamedColumnsMustBeNonNullable.sql</Link>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="..\Conventional\Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql">
       <Link>Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNonNullableConventionSpecification.sql">
+      <Link>Conventions\Database\AllNamedColumnsMustBeNonNullableConventionSpecification.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.sql">
+      <Link>Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
