@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs" />
+    <Compile Include="Conventions\Database\AllNamedColumnsMustBeNonNullable.cs" />
     <Compile Include="Conventions\Database\AllNamedColumnsMustBeNullable.cs" />
     <Compile Include="Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.cs" />
@@ -158,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Conventions\Database\AllNamedColumnsMustBeNullable.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllNamedColumnsMustBeNonNullable.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql" />

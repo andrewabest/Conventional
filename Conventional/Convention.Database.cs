@@ -29,6 +29,11 @@ namespace Conventional
             return new AllNamedColumnsMustBeNullable(columnName);
         }
 
+        public static AllNamedColumnsMustBeNonNullable AllNamedColumnsMustBeNonNullable(string columnName)
+        {
+            return new AllNamedColumnsMustBeNonNullable(columnName);
+        }
+
 
         public static AllPrimaryKeyConstraintsMustBeNamedConventionSpecification AllPrimaryKeyConstraintsMustBeNamed
         {

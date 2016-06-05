@@ -143,6 +143,9 @@
     <Compile Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNonNullable.cs">
+      <Link>Conventions\Database\AllNamedColumnsMustBeNonNullable.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNullable.cs">
       <Link>Conventions\Database\AllNamedColumnsMustBeNullable.cs</Link>
     </Compile>
@@ -316,6 +319,11 @@
     <EmbeddedResource Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNullable.sql">
       <Link>Conventions\Database\AllNamedColumnsMustBeNullable.sql</Link>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNonNullable.sql">
+      <Link>Conventions\Database\AllNamedColumnsMustBeNonNullable.sql</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Conventional\Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql">

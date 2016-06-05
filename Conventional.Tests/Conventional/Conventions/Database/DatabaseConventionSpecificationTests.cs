@@ -164,7 +164,32 @@ namespace Conventional.Tests.Conventional.Conventions.Database
 
             TheDatabase
                 .WithConnectionString(TestDbConnectionString)
-                .MustConformTo(Convention.AllIdentityColumnsMustBeNamedTableNameId)
+                .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllNamedColumnsMustBeNonNullableConventionSpecification_Fails()
+        {
+            ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        public void AllNamedColumnsMustBeNonNullableConventionSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllNamedColumnsMustBeNonNullable("CreatedDateTime"))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
