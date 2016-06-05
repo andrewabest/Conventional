@@ -321,9 +321,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNonNullable.sql">
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllNamedColumnsMustBeNonNullable.sql">
       <Link>Conventions\Database\AllNamedColumnsMustBeNonNullable.sql</Link>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Conventional\Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql">
