@@ -104,6 +104,12 @@
     <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql">
       <Link>Conventional\Conventions\Database\Scripts\AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql</Link>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail.sql">
       <Link>Conventional\Conventions\Database\Scripts\AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail.sql</Link>
     </EmbeddedResource>
@@ -123,6 +129,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql">
       <Link>Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNonNullableConventionalSpecification_Fail.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNonNullableConventionalSpecification_Fail.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNonNullableConventionalSpecification_Success.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllNamedColumnsMustBeNonNullableConventionalSpecification_Success.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Reflection;
+using System.Resources;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -158,6 +158,57 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        public void AllNamedColumnsMustBeNullableConventionSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllNamedColumnsMustBeNonNullableConventionSpecification_Fails()
+        {
+            ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        public void AllNamedColumnsMustBeNonNullableConventionSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllNamedColumnsMustBeNonNullable("CreatedDateTime"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllNamedColumnsMustBeNullableConventionSpecification_Fails()
+        {
+            ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
         public void AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql");
@@ -201,21 +252,27 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         {
             ExecuteSqlScriptFromResource("TablesWithoutClusteredIndexFailure.sql");
 
-            TheDatabase
+            var result = TheDatabase
                 .WithConnectionString(TestDbConnectionString)
-                .MustConformTo(Convention.AllTablesMustHaveAClusteredIndex)
-                .IsSatisfied
-                .Should()
-                .BeFalse();
+                .MustConformTo(Convention.AllTablesMustHaveAClusteredIndex);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
         }
         
         private static void ExecuteSqlScriptFromResource(string resourceName)
         {
             string script;
-            using (var stream = typeof(SqlScripts).Assembly.GetManifestResourceStream(ScriptNamespace.Qualifier + "." + resourceName))
-            using (var reader = new StreamReader(stream))
+
+            var fullResourceName = ScriptNamespace.Qualifier + "." + resourceName;
+            using (var stream = typeof (SqlScripts).Assembly.GetManifestResourceStream(fullResourceName))
             {
-                script = reader.ReadToEnd();
+                if (stream == null) { throw new MissingManifestResourceException(fullResourceName); }
+
+                using (var reader = new StreamReader(stream))
+                {
+                    script = reader.ReadToEnd();
+                }
             }
 
             using (IDbConnection dbConnection = new SqlConnection(TestDbConnectionString))
