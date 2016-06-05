@@ -1,0 +1,4 @@
+﻿CREATE TABLE Persons
+(
+  IsMarried INT NOT NULL CONSTRAINT DF_Persons_IsMarried DEFAULT 0
+)

@@ -56,6 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs" />
+    <Compile Include="Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs" />
+    <Compile Include="Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.cs" />
+    <Compile Include="Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs" />
+    <Compile Include="Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.cs" />
     <Compile Include="AssemblySpecimen.cs" />
     <Compile Include="ConventionConfiguration.cs" />
     <Compile Include="Convention.Cecil.cs" />
@@ -139,7 +144,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

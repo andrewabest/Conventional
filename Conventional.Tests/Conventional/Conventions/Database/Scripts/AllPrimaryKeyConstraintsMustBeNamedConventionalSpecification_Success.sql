@@ -1,0 +1,4 @@
+﻿CREATE TABLE Persons
+(
+  Id INT CONSTRAINT PK_Persons_Id PRIMARY KEY
+)

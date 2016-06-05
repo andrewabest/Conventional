@@ -134,11 +134,26 @@
     <Compile Include="..\Conventional\Conventions\ConventionSpecification.cs">
       <Link>Conventions\ConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs">
       <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.cs</Link>
     </Compile>
     <Compile Include="..\Conventional\Conventions\Database\DatabaseConventionSpecification.cs">
       <Link>Conventions\Database\DatabaseConventionSpecification.cs</Link>
@@ -281,6 +296,25 @@
   <ItemGroup>
     <EmbeddedResource Include="..\Conventional\Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql">
       <Link>Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

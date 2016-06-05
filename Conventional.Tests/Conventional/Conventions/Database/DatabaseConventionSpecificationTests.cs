@@ -28,6 +28,136 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        public void AllCheckConstraintsMustBeNamedConventionalSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllCheckConstraintsMustBeNamedConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllCheckConstraintsMustBeNamed)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllCheckConstraintsMustBeNamedConventionalSpecification_Fail()
+        {
+            ExecuteSqlScriptFromResource("AllCheckConstraintsMustBeNamedConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllCheckConstraintsMustBeNamed);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void AllDefaultConstraintsMustBeNamedConventionalSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllDefaultConstraintsMustBeNamed)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail()
+        {
+            ExecuteSqlScriptFromResource("AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllDefaultConstraintsMustBeNamed);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllPrimaryKeyConstraintsMustBeNamed)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Fail()
+        {
+            ExecuteSqlScriptFromResource("AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllPrimaryKeyConstraintsMustBeNamed);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void AllReferenceConstraintsMustBeNamedConventionalSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllReferenceConstraintsMustBeNamedConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllReferenceConstraintsMustBeNamed)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail()
+        {
+            ExecuteSqlScriptFromResource("AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllReferenceConstraintsMustBeNamed);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void AllUniqueConstraintsMustBeNamedConventionalSpecification_Success()
+        {
+            ExecuteSqlScriptFromResource("AllUniqueConstraintsMustBeNamedConventionalSpecification_Success.sql");
+
+            TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllUniqueConstraintsMustBeNamed)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail()
+        {
+            ExecuteSqlScriptFromResource("AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail.sql");
+
+            var result = TheDatabase
+                .WithConnectionString(TestDbConnectionString)
+                .MustConformTo(Convention.AllUniqueConstraintsMustBeNamed);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
         public void AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql");
