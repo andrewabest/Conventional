@@ -143,6 +143,9 @@
     <Compile Include="..\Conventional\Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs">
       <Link>Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs">
+      <Link>Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs">
       <Link>Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs</Link>
     </Compile>
@@ -304,6 +307,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\Conventional\Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql">
       <Link>Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional\Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql">
+      <Link>Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

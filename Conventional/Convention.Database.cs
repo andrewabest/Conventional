@@ -23,7 +23,12 @@ namespace Conventional
         {
             get { return new AllDefaultConstraintsMustBeNamedConventionSpecification(); }
         }
-    
+
+        public static AllPrimaryKeyConstraintsMustBeNamedConventionSpecification AllPrimaryKeyConstraintsMustBeNamed
+        {
+            get { return new AllPrimaryKeyConstraintsMustBeNamedConventionSpecification(); }
+        }
+
         public static AllReferenceConstraintsMustBeNamedConventionSpecification AllReferenceConstraintsMustBeNamed
         {
             get { return new AllReferenceConstraintsMustBeNamedConventionSpecification(); }

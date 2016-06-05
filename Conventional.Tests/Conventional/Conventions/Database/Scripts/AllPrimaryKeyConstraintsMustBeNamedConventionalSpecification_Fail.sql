@@ -1,0 +1,4 @@
+﻿CREATE TABLE Persons
+(
+  Id INT PRIMARY KEY
+)

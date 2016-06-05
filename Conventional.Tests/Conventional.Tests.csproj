@@ -135,6 +135,8 @@
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql" />
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllUniqueConstraintsMustBeNamedConventionalSpecification_Success.sql" />
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail.sql" />
+    <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Fail.sql" />
+    <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql" />
     <Content Include="Conventional\Conventions\TestData\HasMatchingNonEmbeddedResource.testdata" />
     <EmbeddedResource Include="Conventional\Conventions\Assemblies\embedded_sql_file.sql" />
     <Content Include="Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt" />

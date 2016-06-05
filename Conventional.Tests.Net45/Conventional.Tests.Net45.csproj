@@ -117,6 +117,14 @@
       <Link>Conventional\Conventions\Database\Scripts\AllUniqueConstraintsMustBeNamedConventionalSpecification_Success.sql</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Fail.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Fail.sql</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Conventional.Tests\Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql">
+      <Link>Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql</Link>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
