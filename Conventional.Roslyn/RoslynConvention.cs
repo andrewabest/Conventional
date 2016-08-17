@@ -8,5 +8,10 @@ namespace Conventional.Roslyn
         {
             return new IfAndElseMustHaveBracesConventionSpecification();
         }
+
+        public static UsingsStatementsMustNotBeNestedConventionSpecification UsingStatementsMustNotBeNested()
+        {
+            return new UsingsStatementsMustNotBeNestedConventionSpecification();
+        }
     }
 }

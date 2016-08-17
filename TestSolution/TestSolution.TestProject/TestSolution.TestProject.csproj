@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="IfBracelessWonder.cs" />
     <Compile Include="ElseBracelessWonder.cs" />
+    <Compile Include="SplitNamespaces.cs" />
     <Compile Include="Thinger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
