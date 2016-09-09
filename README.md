@@ -20,3 +20,7 @@ To get started with Conventional, please check out [the wiki](https://github.com
 ## Examples
 
 Not sure how to get started with Conventional? Check out [the sample repository](https://github.com/andrewabest/Conventional.Samples) which contains a bunch of real-world usage examples
+
+## License
+
+Licensed under the terms of the [MS-PL](https://opensource.org/licenses/MS-PL) license
