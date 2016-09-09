@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 
 namespace Conventional.Tests.Conventional.Conventions.Cecil
 {
-    using System.Linq;
-
     public class CecilConventionSpecificationTests
     {
         private interface IClock

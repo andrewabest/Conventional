@@ -41,5 +41,27 @@ namespace Conventional.Tests.Roslyn.Conventions
                     .Contain(x => x.IsSatisfied == false && x.SubjectName.EndsWith("ElseBracelessWonder.cs"));
             }
         }
+
+        [Test]
+        public void UsingStatementsMustNotBeNestedAnalyzer_Success()
+        {
+            ThisCodebase.MustConformTo(
+                RoslynConvention.UsingStatementsMustNotBeNested())
+                .All(x => x.IsSatisfied)
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void UsingStatementsMustNotBeNestedAnalyzer_FailesWhenFileHasUsingsInsideNamespace()
+        {
+            using (new TestSolution("TestSolution"))
+            {
+                ThisCodebase.MustConformTo(
+                    RoslynConvention.UsingStatementsMustNotBeNested())
+                    .Should()
+                    .Contain(x => x.IsSatisfied == false && x.SubjectName.EndsWith("SplitNamespaces.cs"));
+            }
+        }
     }
 }
