@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 
@@ -5,7 +6,7 @@ namespace Conventional
 {
     public static class KnownPaths
     {
-        private static readonly string DefaultSolutionRoot = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"../../../"));
+        private static readonly string DefaultSolutionRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, @"..\..\..\"));
 
         private static string _solutionRoot;
         public static string SolutionRoot
