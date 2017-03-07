@@ -10,6 +10,38 @@ namespace Conventional.Tests.Conventional.Conventions
 {
     public class ConventionSpecificationTests
     {
+        private class PublicPropertyMock
+        {
+            public string Public { get; set; }
+            public string AnotherPublic { get; private set; }
+        }
+
+        [Test]
+        public void PropertiesMustBePublic_Success()
+        {
+            typeof(PublicPropertyMock)
+                .MustConformTo(Convention.PropertiesMustBePublic)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class PrivatePropertyMock
+        {
+            string Private { get; set; }
+            public string Public { get; set; }
+        }
+
+        [Test]
+        public void PropertiesMustBePublic_FailsWhenPrivatePropertyExists()
+        {
+            var result = typeof(PrivatePropertyMock)
+                .MustConformTo(Convention.PropertiesMustBePublic);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
         private class AllPublicGetterMock
         {
             public string Public { get; set; }
