@@ -24,8 +24,8 @@ namespace Conventional.Tests
         {
             var results = typeof (AbjectConformanceFailure)
                 .MustConformTo(
-                    Convention.PropertiesMustHavePublicGetters.And(
-                    Convention.PropertiesMustHavePublicSetters.And(
+                    Convention.PropertiesMustHavePublicGetters().And(
+                    Convention.PropertiesMustHavePublicSetters().And(
                     Convention.MustHaveADefaultConstructor)));
 
             results.Failures.Should().HaveCount(3);
@@ -38,8 +38,8 @@ namespace Conventional.Tests
         public void FluentSyntax_OutputsExpectedFailuresInCorrectOrder()
         {
             var results = new [] { typeof(AbjectConformanceFailure) }
-                .MustConformTo(Convention.PropertiesMustHavePublicGetters)
-                .AndMustConformTo(Convention.PropertiesMustHavePublicSetters)
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters())
+                .AndMustConformTo(Convention.PropertiesMustHavePublicSetters())
                 .AndMustConformTo(Convention.MustHaveADefaultConstructor);
 
             results.Failures.Should().HaveCount(3);
@@ -53,8 +53,8 @@ namespace Conventional.Tests
         {
             var results = new [] { typeof(AbjectConformanceFailure) }
                 .MustConformTo(
-                    Convention.PropertiesMustHavePublicGetters.And(
-                    Convention.PropertiesMustHavePublicSetters))
+                    Convention.PropertiesMustHavePublicGetters().And(
+                    Convention.PropertiesMustHavePublicSetters()))
                 .AndMustConformTo(Convention.MustHaveADefaultConstructor);
 
             results.Failures.Should().HaveCount(3);
@@ -82,8 +82,8 @@ namespace Conventional.Tests
 
             new[] { typeof (AbjectConformanceFailure), typeof (AnotherAbjectConformanceFailure) }
                 .MustConformTo(
-                    Convention.PropertiesMustHavePublicGetters.And(
-                    Convention.PropertiesMustHavePublicSetters.And(
+                    Convention.PropertiesMustHavePublicGetters().And(
+                    Convention.PropertiesMustHavePublicSetters().And(
                     Convention.MustHaveADefaultConstructor)))
                 .WithFailureAssertion(x => output = x);
 
