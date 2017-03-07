@@ -1,21 +1,32 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Conventional.Conventions;
 
 namespace Conventional
 {
     public static partial class Convention
     {
-        public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters
+        public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters()
         {
-            get {  return new PropertiesMustHavePublicGettersConventionSpecification(); }
+            return new PropertiesMustHavePublicGettersConventionSpecification(); 
         }
-        
-        public static PropertiesMustHavePublicSettersConventionSpecification PropertiesMustHavePublicSetters
+
+        public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters(BindingFlags bindingFlags)
         {
-            get {  return new PropertiesMustHavePublicSettersConventionSpecification(); }
+            return new PropertiesMustHavePublicGettersConventionSpecification(bindingFlags);
         }
-        
+
+        public static PropertiesMustHavePublicSettersConventionSpecification PropertiesMustHavePublicSetters()
+        {
+            return new PropertiesMustHavePublicSettersConventionSpecification();
+        }
+
+        public static PropertiesMustHavePublicSettersConventionSpecification PropertiesMustHavePublicSetters(BindingFlags bindingFlags)
+        {
+            return new PropertiesMustHavePublicSettersConventionSpecification(bindingFlags);
+        }
+
         public static PropertiesMustHaveProtectedSettersConventionSpecification PropertiesMustHaveProtectedSetters
         {
             get {  return new PropertiesMustHaveProtectedSettersConventionSpecification(); }

@@ -16,7 +16,7 @@ namespace Conventional.Tests.ExampleOutput
         public void PropertiesMustHavePublicGettersAndSettersConformanceSpecification_FailsOnPrivatePropertyAccessors()
         {
             new[] { typeof(PropertiesMustHavePublicGettersAndSettersMock) }
-                .MustConformTo(Convention.PropertiesMustHavePublicGetters.And(Convention.PropertiesMustHavePublicSetters))
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters().And(Convention.PropertiesMustHavePublicSetters()))
                 .WithFailureAssertion(Assert.Fail);
         }
         
@@ -24,8 +24,8 @@ namespace Conventional.Tests.ExampleOutput
         public void PropertiesMustHavePublicGettersAndSettersConformanceSpecification_FailsOnPrivatePropertyAccessors_ChainedFluentSyntax()
         {
             new[] { typeof(PropertiesMustHavePublicGettersAndSettersMock) }
-                .MustConformTo(Convention.PropertiesMustHavePublicGetters)
-                .AndMustConformTo(Convention.PropertiesMustHavePublicSetters)
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters())
+                .AndMustConformTo(Convention.PropertiesMustHavePublicSetters())
                 .WithFailureAssertion(Assert.Fail);
         }
     }

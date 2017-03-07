@@ -27,7 +27,7 @@ namespace Conventional.Tests
         {
             typeof(AbjectConformanceFailure)
                 .MustConformTo(
-                    Convention.PropertiesMustHavePublicGetters);
+                    Convention.PropertiesMustHavePublicGetters());
         }
 
         [Test]
@@ -35,8 +35,8 @@ namespace Conventional.Tests
         {
             typeof(AbjectConformanceFailure)
                 .MustConformTo(
-                    Convention.PropertiesMustHavePublicGetters.And(
-                        Convention.PropertiesMustHavePublicSetters.And(
+                    Convention.PropertiesMustHavePublicGetters().And(
+                        Convention.PropertiesMustHavePublicSetters().And(
                             Convention.MustHaveADefaultConstructor)));
         }
 

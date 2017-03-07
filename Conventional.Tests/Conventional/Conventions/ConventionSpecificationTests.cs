@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Conventional.Conventions;
 using Conventional.Tests.Conventional.Conventions.TestData;
 using FluentAssertions;
@@ -19,7 +20,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesMustHavePublicGetters_Success()
         {
             typeof(AllPublicGetterMock)
-                .MustConformTo(Convention.PropertiesMustHavePublicGetters)
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters())
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -34,12 +35,28 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesMustHavePublicGetters_FailsWhenPrivateGetterExists()
         {
             var result = typeof (PrivateGetterMock)
-                .MustConformTo(Convention.PropertiesMustHavePublicGetters);
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters());
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
-        
+
+        private class PrivatePropertyGetterMock
+        {
+            public string PublicGet { get; set; }
+            string PrivateGet { get; set; }
+        }
+
+        [Test]
+        public void PropertiesMustHavePublicGetters_FailsWhenPrivatePropertyExists_AndNonPublicPropertiesAreBeingInspected()
+        {
+            var result = typeof(PrivatePropertyGetterMock)
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
         private class AllPublicSetterMock
         {
             public string Public { get; set; }
@@ -49,7 +66,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesMustHavePublicSetters_Success()
         {
             typeof(AllPublicSetterMock)
-                .MustConformTo(Convention.PropertiesMustHavePublicSetters)
+                .MustConformTo(Convention.PropertiesMustHavePublicSetters())
                 .IsSatisfied
                 .Should()
                 .BeTrue();
@@ -64,7 +81,23 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesMustHavePublicSetters_FailsWhenPrivateSetterExists()
         {
             var result = typeof (AllPrivateSetterMock)
-                .MustConformTo(Convention.PropertiesMustHavePublicSetters);
+                .MustConformTo(Convention.PropertiesMustHavePublicSetters());
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        private class PrivatePropertySetterMock
+        {
+            public string PublicSet { get; set; }
+            string PrivateSet { get; set; }
+        }
+
+        [Test]
+        public void PropertiesMustHavePublicSetters_FailsWhenPrivatePropertyExists_AndNonPublicPropertiesAreBeingInspected()
+        {
+            var result = typeof(PrivatePropertySetterMock)
+                .MustConformTo(Convention.PropertiesMustHavePublicSetters(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
