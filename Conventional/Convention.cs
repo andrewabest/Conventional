@@ -6,6 +6,11 @@ namespace Conventional
 {
     public static partial class Convention
     {
+        public static PropertiesMustBePublicConventionSpecification PropertiesMustBePublic
+        {
+            get { return new PropertiesMustBePublicConventionSpecification(); }
+        }
+
         public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters
         {
             get {  return new PropertiesMustHavePublicGettersConventionSpecification(); }

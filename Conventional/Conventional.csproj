@@ -97,6 +97,7 @@
     <Compile Include="Conventions\OrConventionSpecification.cs" />
     <Compile Include="Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustBeImmutableConventionSpecification.cs" />
+    <Compile Include="Conventions\PropertiesMustBePublicConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePrivateSettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHaveProtectedSettersConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs" />
