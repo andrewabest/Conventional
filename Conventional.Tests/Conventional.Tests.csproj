@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllAssembliesScenarios.cs" />
     <Compile Include="Conventional\Conventions\Assemblies\MatchingFilesConventionTests.cs" />
     <Compile Include="Conventional\Conventions\Database\DatabaseConventionSpecificationTests.Support.cs" />
     <Compile Include="ConventionConfigurationScenarios.cs" />

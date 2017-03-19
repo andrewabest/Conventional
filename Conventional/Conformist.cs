@@ -33,6 +33,12 @@ namespace Conventional
                 assemblyConventionSpecification.IsSatisfiedBy(assemblySpecimen.ProjectFilePath));
         }
 
+        public static IEnumerable<ConventionResult> MustConformTo(this AssemblySpecimen[] assemblySpecimens, IAssemblyConventionSpecification assemblyConventionSpecification)
+        {
+            return EnforceConformance(
+                assemblySpecimens.Select(x => assemblyConventionSpecification.IsSatisfiedBy(x.ProjectFilePath)));
+        }
+
         public static WrappedConventionResult AndMustConformTo(this WrappedConventionResult results, IConventionSpecification conventionSpecification)
         {
             return EnforceConformance(new WrappedConventionResult(
