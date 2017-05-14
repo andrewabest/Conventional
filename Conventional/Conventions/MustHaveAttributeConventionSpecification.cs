@@ -27,7 +27,7 @@ namespace Conventional.Conventions
         {
             if (type.GetCustomAttributes(_attributeType, false).Any() == false)
             {
-                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(type.FullName));
+                return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(_attributeType.FullName));
             }
 
             return ConventionResult.Satisfied(type.FullName);
