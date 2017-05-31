@@ -95,6 +95,9 @@
     <Compile Include="..\Conventional\Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs">
       <Link>Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Assemblies\MustHaveFilesBeContentConventionSpecification.cs">
+      <Link>Conventions\Assemblies\MustHaveFilesBeContentConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs">
       <Link>Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs</Link>
     </Compile>
@@ -289,7 +292,6 @@
     </Compile>
     <Compile Include="Convention.Cecil.Net45.cs" />
     <Compile Include="Convention.Net45.cs" />
-    <Compile Include="Conventions\Assemblies\MustHaveFilesBeContentConventionSpecification.cs" />
     <Compile Include="Conventions\AsyncMethodsMustHaveAsyncSuffixConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasksConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustBePublicConventionSpecification.cs" />
