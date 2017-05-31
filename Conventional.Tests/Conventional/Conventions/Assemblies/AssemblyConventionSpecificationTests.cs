@@ -65,6 +65,28 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         }
 
         [Test]
+        public void MustHaveFilesWithACertainExtensionBeResources_Success_FileExtension()
+        {
+            typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeResources(".resx"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeResources_Success_RegEx()
+        {
+            var matchResxFiles = new Regex(@"\.RESX$", RegexOptions.IgnoreCase);
+
+            typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeResources(matchResxFiles))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
         public void MustHaveFilesWithACertainExtensionBeResources_FailsWhenFilesAreNotResources_Regex()
         {
             var expectedFailureMessage = @"
