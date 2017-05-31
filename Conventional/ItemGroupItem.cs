@@ -24,6 +24,16 @@ namespace Conventional
 
         }
 
+        public bool MatchesPatternAndIsNotAnResourceOrReference(Regex fileMatchRegex)
+        {
+            if (_type == "Resource")
+            {
+                return false;
+            }
+
+            return fileMatchRegex.IsMatch(_include);
+        }
+
         public bool MatchesPatternAndIsNotAnEmbeddedResourceOrReference(Regex fileMatchRegex)
         {
             if (_type == "EmbeddedResource")

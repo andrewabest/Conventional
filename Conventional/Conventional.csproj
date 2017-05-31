@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="AllAssemblies.cs" />
     <Compile Include="Conventions\Assemblies\MustHaveFilesBeContentConventionSpecification.cs" />
+    <Compile Include="Conventions\Assemblies\MustAllAllFilesBeResourcesConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllNamedColumnsMustBeNonNullableConventionSpecification.cs" />
     <Compile Include="Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.cs" />
