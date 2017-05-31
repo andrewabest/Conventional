@@ -100,6 +100,24 @@ All files matching '.*NON_EMBEDDED.*' within assembly 'Conventional.Tests' must 
         }
 
         [Test]
+        public void MustHaveCertainFilesBeContentCopyIfNewer_FileExtension_Success()
+        {
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeContent(".svg"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustHaveCertainFilesBeContentCopyIfNewer_Regex_Success()
+        {
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeContent(new Regex(@".+\.svg")));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
         public void MustHaveCertainFilesBeContentCopyIfNewer_FileExtension()
         {
             var expectedFailureMessage = @"

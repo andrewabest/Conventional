@@ -145,6 +145,9 @@
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql" />
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\EachRowMustHaveACorrespondingEnum_Success.sql" />
     <EmbeddedResource Include="Conventional\Conventions\Database\Scripts\EachRowMustHaveACorrespondingEnum_Fail.sql" />
+    <Content Include="Conventional\Conventions\Assemblies\content-copy-if-newer.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Conventional\Conventions\Assemblies\copy-not.png" />
     <Content Include="Conventional\Conventions\TestData\HasMatchingNonEmbeddedResource.testdata" />
     <EmbeddedResource Include="Conventional\Conventions\Assemblies\embedded_sql_file.sql" />
