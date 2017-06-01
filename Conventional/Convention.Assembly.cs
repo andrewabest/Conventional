@@ -20,6 +20,16 @@ namespace Conventional
             return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileMatchRegex);
         }
 
+        public static MustHaveFilesBeContentConventionSpecification MustHaveFilesBeContent(string fileExtension)
+        {
+            return new MustHaveFilesBeContentConventionSpecification(fileExtension);
+        }
+
+        public static MustHaveFilesBeContentConventionSpecification MustHaveFilesBeContent(Regex fileMatchRegex)
+        {
+            return new MustHaveFilesBeContentConventionSpecification(fileMatchRegex);
+        }
+
         /// <summary>
         /// Requires all files which match a certain pattern to be included in the project file. You might use this if you have some
         /// developers using a different editor, and want to ensure they add all new files to the project.

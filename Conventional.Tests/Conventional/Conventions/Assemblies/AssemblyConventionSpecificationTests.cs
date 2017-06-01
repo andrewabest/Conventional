@@ -98,5 +98,54 @@ All files matching '.*NON_EMBEDDED.*' within assembly 'Conventional.Tests' must 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Single().Should().Be(expectedFailureMessage);
         }
+
+        [Test]
+        public void MustHaveCertainFilesBeContentCopyIfNewer_FileExtension_Success()
+        {
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeContent(".svg"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustHaveCertainFilesBeContentCopyIfNewer_Regex_Success()
+        {
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeContent(new Regex(@".+\.svg")));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustHaveCertainFilesBeContentCopyIfNewer_FileExtension()
+        {
+            var expectedFailureMessage = @"
+All files matching '.png' within assembly 'Conventional.Tests' must have their build action set to 'Content - Copy if newer'
+- Conventional\Conventions\Assemblies\copy-not.png [type=Content]
+".Trim();
+
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeContent(".png"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
+        }
+
+        [Test]
+        public void MustHaveCertainFilesBeContentCopyIfNewer_Regex()
+        {
+            var expectedFailureMessage = @"
+All files matching '.*\.png' within assembly 'Conventional.Tests' must have their build action set to 'Content - Copy if newer'
+- Conventional\Conventions\Assemblies\copy-not.png [type=Content]
+".Trim();
+
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeContent(new Regex(@".*\.png")));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
+        }
+
     }
 }

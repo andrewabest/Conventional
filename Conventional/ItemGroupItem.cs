@@ -9,13 +9,19 @@ namespace Conventional
     {
         private readonly string _type;
         private readonly string _include;
+        private readonly bool _preserveNewest;
+        private readonly XNamespace _msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
 
         public ItemGroupItem(XElement itemGroupItemAsXml)
         {
             _type = itemGroupItemAsXml.Name.LocalName;
 
             var includeAttribute = itemGroupItemAsXml.Attributes().SingleOrDefault(a => a.Name.LocalName == "Include");
-            _include = includeAttribute == null ? "" : includeAttribute.Value;
+            _include = includeAttribute?.Value ?? "";
+
+            var copyToOutputDirectory = itemGroupItemAsXml.Descendants(_msbuild + "CopyToOutputDirectory").FirstOrDefault();
+            _preserveNewest = copyToOutputDirectory != null && copyToOutputDirectory.Value == "PreserveNewest";
+
         }
 
         public bool MatchesPatternAndIsNotAnEmbeddedResourceOrReference(Regex fileMatchRegex)
@@ -26,6 +32,16 @@ namespace Conventional
             }
 
             if (_type == "Reference")
+            {
+                return false;
+            }
+
+            return fileMatchRegex.IsMatch(_include);
+        }
+
+        public bool MatchesPatternAndIsNotContentCopyNewest(Regex fileMatchRegex)
+        {
+            if (_type == "Content" && _preserveNewest)
             {
                 return false;
             }
@@ -50,5 +66,6 @@ namespace Conventional
                 .Elements().Where(x => x.Name.LocalName == "ItemGroup")
                 .SelectMany(x => x.Elements().Select(element => new ItemGroupItem(element)));
         }
+
     }
 }
