@@ -64,6 +64,7 @@
     <Compile Include="..\Conventional.Tests\Conventional\Conventions\Database\SqlScripts.cs">
       <Link>Conventional\Conventions\Database\SqlScripts.cs</Link>
     </Compile>
+    <Compile Include="AsyncConformistScenarios.cs" />
     <Compile Include="Conventional\Conventions\Cecil\CecilConventionSpecificationTests.cs" />
     <Compile Include="Conventional\Conventions\ConventionSpecificationTests.cs" />
     <Compile Include="Conventional\Conventions\Database\ScriptNamespace.cs" />

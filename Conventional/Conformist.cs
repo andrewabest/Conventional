@@ -68,7 +68,7 @@ namespace Conventional
             return evaluatedResults;
         }
 
-        private static WrappedConventionResult EnforceConformance(WrappedConventionResult results)
+        internal static WrappedConventionResult EnforceConformance(WrappedConventionResult results)
         {
             if (ConventionConfiguration.DefaultFailureAssertionCallback != null)
             {

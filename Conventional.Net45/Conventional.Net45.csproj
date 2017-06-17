@@ -290,12 +290,15 @@
     <Compile Include="..\Conventional\XmlExpando.cs">
       <Link>XmlExpando.cs</Link>
     </Compile>
+    <Compile Include="AsyncConformist.cs" />
     <Compile Include="Convention.Cecil.Net45.cs" />
     <Compile Include="Convention.Net45.cs" />
+    <Compile Include="Conventions\AsyncConventionSpecification.cs" />
     <Compile Include="Conventions\AsyncMethodsMustHaveAsyncSuffixConventionSpecification.cs" />
     <Compile Include="Conventions\Cecil\LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasksConventionSpecification.cs" />
     <Compile Include="Conventions\PropertiesMustBePublicConventionSpecification.cs" />
     <Compile Include="Conventions\VoidMethodsMustNotBeAsyncConventionSpecification.cs" />
+    <Compile Include="IAsyncConventionSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
