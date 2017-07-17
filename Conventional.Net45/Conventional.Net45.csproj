@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Conventional\AllAssemblies.cs">
+      <Link>AllAssemblies.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\AssemblySpecimen.cs">
       <Link>AssemblySpecimen.cs</Link>
     </Compile>
