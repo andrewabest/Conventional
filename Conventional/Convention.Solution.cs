@@ -11,7 +11,7 @@ namespace Conventional
 
         public static MustOnlyContainInformativeCommentsConventionSpecification MustOnlyContainToDoAndNoteComments
         {
-            get { return new MustOnlyContainInformativeCommentsConventionSpecification(new[] { "Todo", "Note" }, new[] { "AssemblyInfo.cs", "GlobalAssemblyInfo.cs" }, "*.cs"); }
+            get { return new MustOnlyContainInformativeCommentsConventionSpecification(new[] { "Todo", "Note" }, new[] { "AssemblyInfo.cs", "GlobalAssemblyInfo.cs", ".Designer.cs" }, "*.cs"); }
         }
     }
 }
