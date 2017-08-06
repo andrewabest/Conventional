@@ -11,6 +11,11 @@ namespace Conventional.Roslyn.Conventions
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class UsingsStatementsMustNotBeNestedConventionSpecification : SolutionDiagnosticAnalyzerConventionSpecification
     {
+        public UsingsStatementsMustNotBeNestedConventionSpecification(string[] fileExemptions) : base(fileExemptions)
+        {
+
+        }
+
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(AnalyzeUsingsAndNamespace, SyntaxKind.NamespaceDeclaration);
