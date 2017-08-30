@@ -71,6 +71,11 @@
   <ItemGroup>
     <Compile Include="AllAssembliesScenarios.cs" />
     <Compile Include="Conventional\Conventions\Assemblies\MatchingFilesConventionTests.cs" />
+    <Compile Include="Conventional\Conventions\Assemblies\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Conventional\Conventions\Database\DatabaseConventionSpecificationTests.Support.cs" />
     <Compile Include="ConventionConfigurationScenarios.cs" />
     <Compile Include="Conventional\Conventions\Assemblies\AssemblyConventionSpecificationTests.cs" />
@@ -82,6 +87,10 @@
     <Compile Include="Conventional\Conventions\Database\ScriptNamespace.cs" />
     <Compile Include="Conventional\Conventions\Database\SqlScripts.cs" />
     <Compile Include="Conventional\Conventions\Solution\SolutionConventionSpecificationTests.cs" />
+    <Resource Include="Conventional\Conventions\Assemblies\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </Resource>
     <EmbeddedResource Include="Conventional\Conventions\TestData\HasMatchingEmbeddedResource.testdata" />
     <Compile Include="Conventional\Conventions\TestData\HasMatchingNonEmbeddedResource.cs" />
     <Compile Include="Conventional\Conventions\TestData\HasMatchingEmbeddedResource.cs" />

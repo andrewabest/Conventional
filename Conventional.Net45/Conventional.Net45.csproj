@@ -95,6 +95,9 @@
     <Compile Include="..\Conventional\Conventions\Assemblies\AssemblyConventionSpecification.cs">
       <Link>Conventions\Assemblies\AssemblyConventionSpecification.cs</Link>
     </Compile>
+    <Compile Include="..\Conventional\Conventions\Assemblies\MustAllAllFilesBeResourcesConventionSpecification.cs">
+      <Link>Conventions\Assemblies\MustAllAllFilesBeResourcesConventionSpecification.cs</Link>
+    </Compile>
     <Compile Include="..\Conventional\Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs">
       <Link>Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs</Link>
     </Compile>

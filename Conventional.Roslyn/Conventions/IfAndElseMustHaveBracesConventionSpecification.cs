@@ -9,6 +9,11 @@ namespace Conventional.Roslyn.Conventions
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class IfAndElseMustHaveBracesConventionSpecification : SolutionDiagnosticAnalyzerConventionSpecification
     {
+        public IfAndElseMustHaveBracesConventionSpecification(string[] fileExemptions) : base(fileExemptions)
+        {
+            
+        }
+
         protected override string FailureMessage => "If and else must have braces, and {0} statement on line {1} does not";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor("Conventional.IfAndElseMustHaveBracesAnalyzer",

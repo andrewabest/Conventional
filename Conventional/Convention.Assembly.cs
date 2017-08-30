@@ -10,6 +10,16 @@ namespace Conventional
             get {  return new MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification(); }
         }
 
+        public static MustHaveAllFilesBeResourcesConventionSpecification MustHaveFilesBeResources(string fileExtension)
+        {
+            return new MustHaveAllFilesBeResourcesConventionSpecification(fileExtension);
+        }
+
+        public static MustHaveAllFilesBeResourcesConventionSpecification MustHaveFilesBeResources(Regex fileMatchRegex)
+        {
+            return new MustHaveAllFilesBeResourcesConventionSpecification(fileMatchRegex);
+        }
+
         public static MustHaveAllFilesBeEmbeddedResourcesConventionSpecification MustHaveFilesBeEmbeddedResources(string fileExtension)
         {
            return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileExtension);

@@ -13,10 +13,19 @@ namespace Conventional.Roslyn.Conventions
     public abstract class SolutionDiagnosticAnalyzerConventionSpecification : DiagnosticAnalyzer, ISolutionDiagnosticAnalyzerConventionSpecification
     {
         protected abstract string FailureMessage { get; }
+        private readonly string[] _fileExemptions;
+
+        protected SolutionDiagnosticAnalyzerConventionSpecification(string[] fileExemptions)
+        {
+            _fileExemptions = fileExemptions;
+        }
 
         public IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution)
         {
-            return solution.Projects.SelectMany(x => x.Documents.Where(d => d.SupportsSyntaxTree)).SelectMany(IsSatisfiedBy);
+            return solution.Projects.SelectMany(x => x.Documents
+                    .Where(d => d.SupportsSyntaxTree)
+                    .Where(d => !_fileExemptions.Any(d.FilePath.EndsWith)))
+                .SelectMany(IsSatisfiedBy);
         }
 
         private IEnumerable<ConventionResult> IsSatisfiedBy(Document document)
