@@ -1,8 +1,4 @@
-﻿using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Conventional
+﻿namespace Conventional
 {
     internal static class StringConstants
     {

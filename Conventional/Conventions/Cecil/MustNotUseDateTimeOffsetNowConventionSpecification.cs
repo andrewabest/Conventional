@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Conventional.Cecil.Conventions
+namespace Conventional.Conventions.Cecil
 {
     public class MustNotUseDateTimeOffsetNowConventionSpecification : MustNotUsePropertyGetterSpecification<DateTimeOffset, DateTimeOffset>
     {

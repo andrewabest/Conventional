@@ -7,10 +7,7 @@ namespace Conventional.Conventions
 {
     public class CollectionPropertiesMustBeImmutableConventionSpecification : PropertiesMustBeImmutableConventionSpecification
     {
-        protected override string FailureMessage
-        {
-            get { return "Collection properties must be immutable"; }
-        }
+        protected override string FailureMessage => "Collection properties must be immutable";
 
         protected override PropertyInfo[] GetProperties(Type type)
         {

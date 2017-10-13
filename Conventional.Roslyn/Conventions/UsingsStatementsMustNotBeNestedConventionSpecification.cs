@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -11,11 +10,6 @@ namespace Conventional.Roslyn.Conventions
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class UsingsStatementsMustNotBeNestedConventionSpecification : SolutionDiagnosticAnalyzerConventionSpecification
     {
-        public UsingsStatementsMustNotBeNestedConventionSpecification(string[] fileExemptions) : base(fileExemptions)
-        {
-
-        }
-
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(AnalyzeUsingsAndNamespace, SyntaxKind.NamespaceDeclaration);
@@ -45,6 +39,9 @@ namespace Conventional.Roslyn.Conventions
 
         protected override string FailureMessage => "{0} statements must not be nested within the namespace, using on line {1} does not conform";
 
+        public UsingsStatementsMustNotBeNestedConventionSpecification(string[] fileExemptions) : base(fileExemptions)
+        {
+        }
 
         protected override DiagnosticResult CheckNode(SyntaxNode node, Document document = null)
         {

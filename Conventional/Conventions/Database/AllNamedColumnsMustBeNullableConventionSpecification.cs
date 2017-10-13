@@ -14,6 +14,6 @@
             return base.GetScript().Replace("{COLUMN_NAME}", _columnName);
         }
 
-        protected override string FailureMessage { get { return $"{{TableName}}.{_columnName} must be nullable"; } }
+        protected override string FailureMessage => $"{{TableName}}.{_columnName} must be nullable";
     }
 }

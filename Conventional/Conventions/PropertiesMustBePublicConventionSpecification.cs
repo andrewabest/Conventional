@@ -6,10 +6,7 @@ namespace Conventional.Conventions
 {
     public class PropertiesMustBePublicConventionSpecification : ConventionSpecification
     {
-        protected override string FailureMessage
-        {
-            get { return "All properties must be public"; }
-        }
+        protected override string FailureMessage => "All properties must be public";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

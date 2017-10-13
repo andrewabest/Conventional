@@ -5,10 +5,7 @@ namespace Conventional.Conventions
 {
     public class PropertiesMustHavePrivateSettersConventionSpecification : ConventionSpecification
     {
-        protected override string FailureMessage
-        {
-            get { return "All properties must have private setters"; }
-        }
+        protected override string FailureMessage => "All properties must have private setters";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

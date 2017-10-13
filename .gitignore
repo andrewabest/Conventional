@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+.vs/
 
 # Build results
 [Dd]ebug/
@@ -166,3 +167,4 @@ FakesAssemblies/
 
 # nuget pack output
 *.nupkg
+

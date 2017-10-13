@@ -10,7 +10,8 @@ namespace Conventional.Roslyn.Conventions
         IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution);
     }
 
-    public abstract class SolutionDiagnosticAnalyzerConventionSpecification : DiagnosticAnalyzer, ISolutionDiagnosticAnalyzerConventionSpecification
+    public abstract class SolutionDiagnosticAnalyzerConventionSpecification : DiagnosticAnalyzer,
+        ISolutionDiagnosticAnalyzerConventionSpecification
     {
         protected abstract string FailureMessage { get; }
         private readonly string[] _fileExemptions;
@@ -49,9 +50,10 @@ namespace Conventional.Roslyn.Conventions
         {
             var result = CheckNode(node, document);
 
-            return result.Success 
-                ? ConventionResult.Satisfied(document.FilePath) 
-                : ConventionResult.NotSatisfied(document.FilePath, FailureMessage.FormatWith(result.Message, result.LineNumber));
+            return result.Success
+                ? ConventionResult.Satisfied(document.FilePath)
+                : ConventionResult.NotSatisfied(document.FilePath,
+                    FailureMessage.FormatWith(result.Message, result.LineNumber));
         }
 
         protected abstract DiagnosticResult CheckNode(SyntaxNode node, Document document = null);

@@ -6,10 +6,7 @@ namespace Conventional.Conventions
 {
     public class MustHaveANonPublicDefaultConstructorConventionSpecification : ConventionSpecification
     {
-        protected override string FailureMessage
-        {
-            get { return "Does not have a non-public default constructor"; }
-        }
+        protected override string FailureMessage => "Does not have a non-public default constructor";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

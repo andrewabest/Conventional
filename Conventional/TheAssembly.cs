@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
-using Conventional.Conventions.Assemblies;
+using Conventional.Conventions;
 
 namespace Conventional
 {

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Reflection;
 
 namespace Conventional.Conventions
 {
@@ -18,10 +17,7 @@ namespace Conventional.Conventions
             _attributeType = attributeType;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "Attribute {0} not found"; }
-        }
+        protected override string FailureMessage => "Attribute {0} not found";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

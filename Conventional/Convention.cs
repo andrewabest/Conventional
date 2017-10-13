@@ -6,30 +6,15 @@ namespace Conventional
 {
     public static partial class Convention
     {
-        public static PropertiesMustBePublicConventionSpecification PropertiesMustBePublic
-        {
-            get { return new PropertiesMustBePublicConventionSpecification(); }
-        }
+        public static PropertiesMustBePublicConventionSpecification PropertiesMustBePublic => new PropertiesMustBePublicConventionSpecification();
 
-        public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters
-        {
-            get {  return new PropertiesMustHavePublicGettersConventionSpecification(); }
-        }
-        
-        public static PropertiesMustHavePublicSettersConventionSpecification PropertiesMustHavePublicSetters
-        {
-            get {  return new PropertiesMustHavePublicSettersConventionSpecification(); }
-        }
-        
-        public static PropertiesMustHaveProtectedSettersConventionSpecification PropertiesMustHaveProtectedSetters
-        {
-            get {  return new PropertiesMustHaveProtectedSettersConventionSpecification(); }
-        }
-        
-        public static PropertiesMustHavePrivateSettersConventionSpecification PropertiesMustHavePrivateSetters
-        {
-            get {  return new PropertiesMustHavePrivateSettersConventionSpecification(); }
-        }
+        public static PropertiesMustHavePublicGettersConventionSpecification PropertiesMustHavePublicGetters => new PropertiesMustHavePublicGettersConventionSpecification();
+
+        public static PropertiesMustHavePublicSettersConventionSpecification PropertiesMustHavePublicSetters => new PropertiesMustHavePublicSettersConventionSpecification();
+
+        public static PropertiesMustHaveProtectedSettersConventionSpecification PropertiesMustHaveProtectedSetters => new PropertiesMustHaveProtectedSettersConventionSpecification();
+
+        public static PropertiesMustHavePrivateSettersConventionSpecification PropertiesMustHavePrivateSetters => new PropertiesMustHavePrivateSettersConventionSpecification();
 
         public static MustHaveAttributeConventionSpecification MustHaveAttribute(Type attributeType)
         {
@@ -51,45 +36,27 @@ namespace Conventional
             return new MustLiveInNamespaceConventionSpecification(nameSpace);
         }
 
-        public static MustHaveADefaultConstructorConventionSpecification MustHaveADefaultConstructor
-        {
-            get { return new MustHaveADefaultConstructorConventionSpecification(); }
-        }
+        public static MustHaveADefaultConstructorConventionSpecification MustHaveADefaultConstructor => new MustHaveADefaultConstructorConventionSpecification();
 
-        public static MustHaveANonPublicDefaultConstructorConventionSpecification MustHaveANonPublicDefaultConstructor
-        {
-            get { return new MustHaveANonPublicDefaultConstructorConventionSpecification(); }
-        }
+        public static MustHaveANonPublicDefaultConstructorConventionSpecification MustHaveANonPublicDefaultConstructor => new MustHaveANonPublicDefaultConstructorConventionSpecification();
 
         public static MustNotTakeADependencyOnConventionSpecification MustNotTakeADependencyOn(Type type, string reason)
         {
             return new MustNotTakeADependencyOnConventionSpecification(type, reason);
         }
 
-        public static MustHaveAppropriateConstructorsConventionSpecification MustHaveAppropriateConstructors
-        {
-            get {  return new MustHaveAppropriateConstructorsConventionSpecification(); }
-        }
+        public static MustHaveAppropriateConstructorsConventionSpecification MustHaveAppropriateConstructors => new MustHaveAppropriateConstructorsConventionSpecification();
 
         public static RequiresACorrespondingImplementationOfConventionSpecification RequiresACorrespondingImplementationOf(Type required, Type[] subjects)
         {
             return new RequiresACorrespondingImplementationOfConventionSpecification(required, subjects);
         }
 
-        public static EnumerablePropertiesMustBeEagerLoadedConventionSpecification EnumerablePropertiesMustBeEagerLoadedConventionSpecification
-        {
-            get { return new EnumerablePropertiesMustBeEagerLoadedConventionSpecification(); }
-        }
+        public static EnumerablePropertiesMustBeEagerLoadedConventionSpecification EnumerablePropertiesMustBeEagerLoadedConventionSpecification => new EnumerablePropertiesMustBeEagerLoadedConventionSpecification();
 
-        public static CollectionPropertiesMustBeImmutableConventionSpecification CollectionPropertiesMustBeImmutable
-        {
-            get { return new CollectionPropertiesMustBeImmutableConventionSpecification(); }
-        }
+        public static CollectionPropertiesMustBeImmutableConventionSpecification CollectionPropertiesMustBeImmutable => new CollectionPropertiesMustBeImmutableConventionSpecification();
 
-        public static AllPropertiesMustBeImmutableConventionSpecification AllPropertiesMustBeImmutable
-        {
-            get { return new AllPropertiesMustBeImmutableConventionSpecification(); }
-        }
+        public static AllPropertiesMustBeImmutableConventionSpecification AllPropertiesMustBeImmutable => new AllPropertiesMustBeImmutableConventionSpecification();
 
         public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
         {
@@ -110,5 +77,9 @@ namespace Conventional
         {
             return new MustHaveCorrespondingEnumConventionSpecification(sourceTypes);
         }
+
+        public static VoidMethodsMustNotBeAsyncConventionSpecification VoidMethodsMustNotBeAsync => new VoidMethodsMustNotBeAsyncConventionSpecification();
+
+        public static AsyncMethodsMustHaveAsyncSuffixConventionSpecification AsyncMethodsMustHaveAsyncSuffix => new AsyncMethodsMustHaveAsyncSuffixConventionSpecification();
     }
 }

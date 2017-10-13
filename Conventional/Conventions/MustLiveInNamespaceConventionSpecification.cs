@@ -11,10 +11,7 @@ namespace Conventional.Conventions
             _nameSpace = nameSpace;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "Must live in namespace {0} but actually lives in namespace {1}"; }
-        }
+        protected override string FailureMessage => "Must live in namespace {0} but actually lives in namespace {1}";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

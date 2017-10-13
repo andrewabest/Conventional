@@ -6,13 +6,7 @@ namespace Conventional.Conventions
     {
         private readonly Func<Type, string> _resourceNameMatcher;
 
-        protected override string FailureMessage
-        {
-            get
-            {
-                return "Type {0} must have embedded resource {1}";
-            }
-        }
+        protected override string FailureMessage => "Type {0} must have embedded resource {1}";
 
         public MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
         {

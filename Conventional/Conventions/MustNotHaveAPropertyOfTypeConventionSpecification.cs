@@ -14,10 +14,7 @@ namespace Conventional.Conventions
             _reason = reason;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "Has a property of type {0} and must not:"; }
-        }
+        protected override string FailureMessage => "Has a property of type {0} and must not:";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

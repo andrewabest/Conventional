@@ -11,10 +11,7 @@ namespace Conventional.Conventions
             _prefix = prefix;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "Type name does not start with {0}"; }
-        }
+        protected override string FailureMessage => "Type name does not start with {0}";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

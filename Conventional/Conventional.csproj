@@ -1,186 +1,51 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E04519C0-36D0-42E9-8AF0-B27F2DF37A3E}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Conventional</RootNamespace>
-    <AssemblyName>Conventional</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Best.Conventional</PackageId>
+    <Title>Best.Conventional</Title>
+    <Authors>Andrew Best</Authors>
+    <Owners>Andrew Best</Owners>
+    <ProjectUrl>https://github.com/andrewabest/Conventional</ProjectUrl>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Description>A suite of convention specifications for enforcing type conventions in your codebase</Description>
+    <IconUrl>https://raw.github.com/andrewabest/Conventional/master/duck.png</IconUrl>
+    <Tags>Convention Testing</Tags>
+    <Copyright>Copyright © 2017, Andrew Best</Copyright>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Pdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AllAssemblies.cs" />
-    <Compile Include="Conventions\Assemblies\MustHaveFilesBeContentConventionSpecification.cs" />
-    <Compile Include="Conventions\Assemblies\MustAllAllFilesBeResourcesConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllNamedColumnsMustBeNonNullableConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.cs" />
-    <Compile Include="AssemblySpecimen.cs" />
-    <Compile Include="ConventionConfiguration.cs" />
-    <Compile Include="Convention.Cecil.cs" />
-    <Compile Include="Convention.Assembly.cs" />
-    <Compile Include="Conventions\AllPropertiesMustBeImmutableConventionSpecification.cs" />
-    <Compile Include="Conventions\AndConventionSpecification.cs" />
-    <Compile Include="Conventions\Assemblies\AssemblyConventionSpecification.cs" />
-    <Compile Include="Conventions\Assemblies\MustHaveAllFilesBeEmbeddedResourcesConventionSpecification.cs" />
-    <Compile Include="Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecificationExtensions.cs" />
-    <Compile Include="Conventions\Assemblies\MustNotReferenceDllsFromBinOrObjDirectories.cs" />
-    <Compile Include="Conventions\Cecil\AllPropertiesMustBeAssignedDuringConstructionConventionSpecification.cs" />
-    <Compile Include="Conventions\Cecil\CecilExtensions.cs" />
-    <Compile Include="Conventions\Cecil\ExceptionsThrownMustBeDerivedFrom.cs" />
-    <Compile Include="Conventions\Cecil\MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructor.cs" />
-    <Compile Include="Conventions\Cecil\MustNotResolveCurrentTimeViaDateTimeConventionSpecification.cs" />
-    <Compile Include="Conventions\Cecil\MustNotUseDateTimeOffsetNowConventionSpecification.cs" />
-    <Compile Include="Conventions\Cecil\MustNotUsePropertyGetterSpecification.cs" />
-    <Compile Include="Conventions\CollectionPropertiesMustBeImmutableConventionSpecification.cs" />
-    <Compile Include="Conventions\ConventionException.cs" />
-    <Compile Include="Conventions\ConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\DatabaseConventionSpecification.cs" />
-    <Compile Include="Conventions\MustHaveCorrespondingEnumConventionSpecification.cs" />
-    <Compile Include="Conventions\Database\EachRowMustHaveACorrespondingEnumConventionSpecification.cs" />
-    <Compile Include="Conventions\MustHaveANonPublicDefaultConstructorConventionSpecification.cs" />
-    <Compile Include="Conventions\MustHaveAppropriateConstructorsConventionSpecification.cs" />
-    <Compile Include="Conventions\EnumerablePropertiesMustBeEagerLoadedConventionSpecification.cs" />
-    <Compile Include="Conventions\MustHaveMatchingEmbeddedResourcesConventionSpecification.cs" />
-    <Compile Include="Conventions\MustNotHaveAPropertyOfTypeConventionSpecification.cs" />
-    <Compile Include="Conventions\NotConventionSpecification.cs" />
-    <Compile Include="Conventions\OrConventionSpecification.cs" />
-    <Compile Include="Conventions\Assemblies\MustIncludeAllMatchingFilesInFolderConventionSpecification.cs" />
-    <Compile Include="Conventions\PropertiesMustBeImmutableConventionSpecification.cs" />
-    <Compile Include="Conventions\PropertiesMustBePublicConventionSpecification.cs" />
-    <Compile Include="Conventions\PropertiesMustHavePrivateSettersConventionSpecification.cs" />
-    <Compile Include="Conventions\PropertiesMustHaveProtectedSettersConventionSpecification.cs" />
-    <Compile Include="Conventions\PropertiesMustHavePublicGettersConventionSpecification.cs" />
-    <Compile Include="Conventions\PropertiesMustHavePublicSettersConventionSpecification.cs" />
-    <Compile Include="Conventions\NameMustEndWithConventionSpecification.cs" />
-    <Compile Include="Conventions\MustHaveADefaultConstructorConventionSpecification.cs" />
-    <Compile Include="Conventions\MustHaveAttributeConventionSpecification.cs" />
-    <Compile Include="Conventions\MustLiveInNamespaceConventionSpecification.cs" />
-    <Compile Include="Conventions\MustNotTakeADependencyOnConventionSpecification.cs" />
-    <Compile Include="Conventions\NameMustStartWithConventionSpecification.cs" />
-    <Compile Include="Convention.cs" />
-    <Compile Include="Conventions\RequiresACorrespondingImplementationOfConventionSpecification.cs" />
-    <Compile Include="Conventions\Solution\MustOnlyContainInformativeCommentsConventionSpecification.cs" />
-    <Compile Include="Conventions\Solution\SolutionConventionSpecification.cs" />
-    <Compile Include="DatabaseSpecimen.cs" />
-    <Compile Include="Doomsday.cs" />
-    <Compile Include="Extensions\AssemblyExtensions.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="IAssemblyConventionSpecification.cs" />
-    <Compile Include="IDatabaseConventionSpecification.cs" />
-    <Compile Include="ISolutionConventionSpecification.cs" />
-    <Compile Include="ItemGroupItem.cs" />
-    <Compile Include="KnownPaths.cs" />
-    <Compile Include="StringConstants.cs" />
-    <Compile Include="ConventionResult.cs" />
-    <Compile Include="Conformist.cs" />
-    <Compile Include="IConventionSpecification.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="TheAssembly.cs" />
-    <Compile Include="TheDatabase.cs" />
-    <Compile Include="ThisSolution.cs" />
-    <Compile Include="TypeConformanceSpecimen.cs" />
-    <Compile Include="WrappedConventionResult.cs" />
-    <Compile Include="XmlExpando.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Convention.Database.cs" />
-    <Compile Include="Convention.Solution.cs" />
-    <None Include="Conventional.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllNamedColumnsMustBeNonNullableConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql" />
+    <None Remove="Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql" />
+    <None Remove="Conventions\Database\EachRowMustHaveACorrespondingEnumConventionSpecification.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Conventions\Database\AllDefaultConstraintsMustBeNamedConventionSpecification.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.sql" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification.sql" />
     <EmbeddedResource Include="Conventions\Database\AllNamedColumnsMustBeNonNullableConventionSpecification.sql" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllNamedColumnsMustBeNullableConventionSpecification.sql" />
     <EmbeddedResource Include="Conventions\Database\AllPrimaryKeyConstraintsMustBeNamedConventionSpecification.sql" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Conventions\Database\AllReferenceConstraintsMustBeNamedConventionSpecification.sql" />
+    <EmbeddedResource Include="Conventions\Database\AllTablesMustHaveAClusteredIndexConventionSpecification.sql" />
+    <EmbeddedResource Include="Conventions\Database\AllUniqueConstraintsMustBeNamedConventionSpecification.sql" />
     <EmbeddedResource Include="Conventions\Database\EachRowMustHaveACorrespondingEnumConventionSpecification.sql" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <PackageReference Include="Mono.Cecil" Version="0.10.0-beta6" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

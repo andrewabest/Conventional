@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Conventional.Conventions.Solution
+namespace Conventional
 {
     public static class XmlExpando
     {
@@ -55,9 +55,8 @@ namespace Conventional.Conventions.Solution
             {
                 return childElementKey;
             }
-            
-            int duplicateCount;
-            var hasExistingDuplicates = duplicateKeyTracker.TryGetValue(childElementKey, out duplicateCount);
+
+            var hasExistingDuplicates = duplicateKeyTracker.TryGetValue(childElementKey, out var duplicateCount);
             if (hasExistingDuplicates)
             {
                 duplicateCount = ++duplicateKeyTracker[childElementKey];

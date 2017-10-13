@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Conventional.Conventions;
 using Mono.Cecil;
+using System.Linq;
 
-namespace Conventional.Cecil.Conventions
+namespace Conventional.Conventions.Cecil
 {
     public class ExceptionsThrownMustBeDerivedFromConventionSpecification : ConventionSpecification
     {
@@ -15,10 +14,7 @@ namespace Conventional.Cecil.Conventions
             _baseType = baseType;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "All thrown exceptions must derive from base type {0}"; }
-        }
+        protected override string FailureMessage => "All thrown exceptions must derive from base type {0}";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
@@ -27,7 +23,7 @@ namespace Conventional.Cecil.Conventions
             var exceptions =
                 methodsWithBodies.SelectMany(method => method.Body.Instructions
                     .Select(instr => new { Method = method, MemberReference = instr.Operand as MemberReference })
-                    .Where(m => m.MemberReference != null && m.MemberReference.DeclaringType != null && m.MemberReference.DeclaringType.FullName.EndsWith("Exception"))
+                    .Where(m => m.MemberReference?.DeclaringType != null && m.MemberReference.DeclaringType.FullName.EndsWith("Exception"))
                     .Select(m => new KeyValuePair<TypeDefinition, string>(
                         m.MemberReference.DeclaringType.Resolve(),
                         m.Method.DeclaringType.FullName + "::" + m.Method.Name + "(" + m.MemberReference.DeclaringType.FullName + ")")));

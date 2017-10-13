@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Conventional.Extensions;
 
 namespace Conventional.Conventions.Solution
 {
@@ -38,7 +39,8 @@ namespace Conventional.Conventions.Solution
         public override ConventionResult IsSatisfiedBy(string solutionRoot)
         {
             var failures = new List<string>();
-            foreach (var filePath in Directory.GetFiles(solutionRoot, _fileSearchPattern, SearchOption.AllDirectories).Where(x => _fileExemptions.Any(x.EndsWith) == false))
+
+            foreach (var filePath in DirectoryEx.GetFilesExceptOutput(solutionRoot, _fileSearchPattern).Where(x => _fileExemptions.Any(x.EndsWith) == false))
             {
                 var fileContents = File.ReadAllText(filePath);
                 var matches = Regex.Matches(

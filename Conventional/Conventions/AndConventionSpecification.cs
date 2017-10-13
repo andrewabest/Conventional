@@ -13,10 +13,7 @@ namespace Conventional.Conventions
             _right = y;
         }
 
-        protected override string FailureMessage
-        {
-            get { throw new NotImplementedException(); }
-        }
+        protected override string FailureMessage => throw new NotImplementedException();
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

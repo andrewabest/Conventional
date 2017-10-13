@@ -9,21 +9,30 @@ namespace Conventional.Conventions.Assemblies
     {
         private const string ObjOrBinPattern = @"^(.*?(obj|bin).*?)$";
 
-        // NOTE: The nesting we are looking for is Project > ItemGroup > Reference > HintPath
-        protected override string FailureMessage
+        protected override string FailureMessage => "Assembly {0} must not reference Dlls from Bin or Obj directories.";
+
+        protected override ConventionResult IsSatisfiedByLegacyCsprojFormat(string assemblyName, XDocument projectDocument)
         {
-            get { return "Assembly {0} must not reference Dlls from Bin or Obj directories."; }
+            // NOTE: legacy Csproj refs follow the same format as 2017 Csproj
+
+            return IsSatisfiedBy(assemblyName, projectDocument);
         }
 
-        protected override ConventionResult IsSatisfiedByInternal(string assemblyName, XDocument projectDocument)
+        protected override ConventionResult IsSatisfiedBy(string assemblyName, XDocument projectDocument)
         {
+            // NOTE: The nesting we are looking for is Project > ItemGroup > Reference > HintPath
+            // NOTE: <ItemGroup>
+            // NOTE:     <Reference Include = "Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+            // NOTE:     <SpecificVersion> False </SpecificVersion>
+            // NOTE:     <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll </HintPath>
+            // NOTE:     </Reference>
+
             var references =
                 projectDocument.Elements()
                     .Single(x => x.Name.LocalName == "Project")
                     .Elements()
                     .Where(x => x.Name.LocalName == "ItemGroup")
                     .SelectMany(x => x.Elements().Where(e => e.Name.LocalName == "Reference"));
-
 
             var failures =
                 references
@@ -56,8 +65,8 @@ namespace Conventional.Conventions.Assemblies
                 Location = location;
             }
 
-            public string Reference { get; set; }
-            public string Location { get; set; }
+            public string Reference { get; }
+            public string Location { get; }
         }
     }
 }

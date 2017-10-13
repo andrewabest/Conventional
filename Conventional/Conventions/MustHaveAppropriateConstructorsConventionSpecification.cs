@@ -6,10 +6,7 @@ namespace Conventional.Conventions
 {
     public class MustHaveAppropriateConstructorsConventionSpecification : ConventionSpecification
     {
-        protected override string FailureMessage
-        {
-            get { return "Must have either a public default constructor, or one protected default constructor with public non-default constructors."; }
-        }
+        protected override string FailureMessage => "Must have either a public default constructor, or one protected default constructor with public non-default constructors.";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

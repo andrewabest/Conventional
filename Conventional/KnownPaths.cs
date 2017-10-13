@@ -6,12 +6,21 @@ namespace Conventional
 {
     public static class KnownPaths
     {
-        private static readonly string DefaultSolutionRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, @"..\..\..\"));
+        private static readonly Func<string, string> DefaultSolutionRootFinder = x => x.Substring(0, x.LastIndexOf("\\bin\\", StringComparison.Ordinal));
+        private static readonly string DefaultSolutionRoot = Path.GetFullPath(Path.Combine(SolutionRootFinder(AppContext.BaseDirectory), @"..\"));
+        private static readonly Func<string> DefaultPathToSolutionRoot = () => Directory.GetFiles(SolutionRoot, "*.sln", SearchOption.AllDirectories).FirstOrDefault();
+
+        private static Func<string, string> _solutionRootFinder;
+        public static Func<string, string> SolutionRootFinder
+        {
+            get => _solutionRootFinder ?? DefaultSolutionRootFinder;
+            set => _solutionRootFinder = value;
+        }
 
         private static string _solutionRoot;
         public static string SolutionRoot
         {
-            get { return _solutionRoot ?? DefaultSolutionRoot; }
+            get => _solutionRoot ?? DefaultSolutionRoot;
             set
             {
                 if (value.EndsWith(@"\") == false)
@@ -23,16 +32,11 @@ namespace Conventional
             }
         }
 
-        private static string DefaultPathToSolution()
-        {
-            return Directory.GetFiles(SolutionRoot, "*.sln", SearchOption.AllDirectories).FirstOrDefault();
-        }
-
         private static string _fullPathToSolution;
         public static string FullPathToSolution
         {
-            get { return _fullPathToSolution ?? DefaultPathToSolution(); }
-            set { _fullPathToSolution = value; }
+            get => _fullPathToSolution ?? DefaultPathToSolutionRoot();
+            set => _fullPathToSolution = value;
         }
     }
 }

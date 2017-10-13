@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Conventional.Conventions.Solution
+namespace Conventional
 {
     public interface IAssemblyConventionSpecification
     {
