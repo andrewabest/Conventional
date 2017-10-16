@@ -11,7 +11,8 @@
     <IconUrl>https://raw.github.com/andrewabest/Conventional/master/duck.png</IconUrl>
     <Tags>Convention Testing</Tags>
     <Copyright>Copyright © 2017, Andrew Best</Copyright>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Version>0.0.0.0</Version>
+    <PackageVersion>0.0.0.0</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql" />
