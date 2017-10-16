@@ -10,7 +10,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
     public class DatabaseConventionSpecificationTests
     {
 #if DEBUG
-        private const string TestDbConnectionString = @"Server=(localdb)\MSSQLLOCALDB;Database=Conventional;Integrated Security=true;";
+        private const string TestDbConnectionString = @"Server=.\SQLEXPRESS;Database=Conventional;Integrated Security=true;";
 #else
         private const string TestDbConnectionString = @"Server=(local)\SQL2014;Database=Conventional;User ID=sa;Password=Password12!";
 #endif
