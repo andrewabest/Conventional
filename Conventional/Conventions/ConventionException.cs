@@ -1,6 +1,6 @@
 using System;
 
-namespace Conventional.Conventions.Assemblies
+namespace Conventional.Conventions
 {
     public class ConventionException : Exception
     {

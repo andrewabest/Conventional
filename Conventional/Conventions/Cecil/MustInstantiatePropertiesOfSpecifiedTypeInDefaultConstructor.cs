@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using Conventional.Conventions;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
 
-namespace Conventional.Cecil.Conventions
+namespace Conventional.Conventions.Cecil
 {
     public class MustInstantiatePropertiesOfSpecifiedTypeInDefaultConstructorConventionSpecification : ConventionSpecification
     {
@@ -22,10 +19,7 @@ namespace Conventional.Cecil.Conventions
             _propertyTypes = propertyTypes;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "Properties of type {0} must be instantiated in the default constructor"; }
-        }
+        protected override string FailureMessage => "Properties of type {0} must be instantiated in the default constructor";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

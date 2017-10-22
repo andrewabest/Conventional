@@ -2,6 +2,6 @@
 {
     public class AllReferenceConstraintsMustBeNamedConventionSpecification : DatabaseConventionSpecification
     {
-        protected override string FailureMessage { get { return "All reference constraints must be explicitly named. {ConstraintName} is not."; } }
+        protected override string FailureMessage => "All reference constraints must be explicitly named. {ConstraintName} is not.";
     }
 }

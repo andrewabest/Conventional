@@ -10,11 +10,14 @@ namespace Conventional.Tests.Roslyn.Conventions
         [Test]
         public void IfAndElseMustHaveBracesAnalyzer_Success()
         {
-            ThisCodebase.MustConformTo(
-                RoslynConvention.IfAndElseMustHaveBraces())
-                .All(x => x.IsSatisfied)
-                .Should()
-                .BeTrue();
+            using (new TestSolution("TestSolutionSuccess"))
+            {
+                ThisCodebase.MustConformTo(
+                        RoslynConvention.IfAndElseMustHaveBraces())
+                    .All(x => x.IsSatisfied)
+                    .Should()
+                    .BeTrue();
+            }
         }
 
         [Test]
@@ -45,11 +48,14 @@ namespace Conventional.Tests.Roslyn.Conventions
         [Test]
         public void UsingStatementsMustNotBeNestedAnalyzer_Success()
         {
-            ThisCodebase.MustConformTo(
-                RoslynConvention.UsingStatementsMustNotBeNested())
-                .All(x => x.IsSatisfied)
-                .Should()
-                .BeTrue();
+            using (new TestSolution("TestSolutionSuccess"))
+            {
+                ThisCodebase.MustConformTo(
+                        RoslynConvention.UsingStatementsMustNotBeNested())
+                    .All(x => x.IsSatisfied)
+                    .Should()
+                    .BeTrue();
+            }
         }
 
         [Test]

@@ -60,6 +60,6 @@ namespace Conventional.Conventions
                 );
         }
 
-        protected override string FailureMessage { get { return "Must have a corresponding type"; } }
+        protected override string FailureMessage => "Must have a corresponding type";
     }
 }

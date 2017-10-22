@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Mono.Cecil;
+using System.Linq;
 
-namespace Conventional.Cecil
+namespace Conventional.Conventions.Cecil
 {
     public static class CecilExtensions
     {
@@ -21,8 +19,8 @@ namespace Conventional.Cecil
 
             return type.Interfaces.Any(
                 i =>
-                    i.FullName.Equals(cecilFormattedTypeName) ||
-                    i.Resolve().Interfaces.Any(x => IsAssignableToInterface(x.Resolve(), derivedType)));
+                    i.InterfaceType.FullName.Equals(cecilFormattedTypeName) ||
+                    i.InterfaceType.Resolve().Interfaces.Any(x => IsAssignableToInterface(x.InterfaceType.Resolve(), derivedType)));
         }
         
         public static bool IsAssignableToBase(this TypeDefinition type, Type derivedType)
@@ -42,7 +40,7 @@ namespace Conventional.Cecil
 
         public static TypeDefinition ToTypeDefinition(this Type type)
         {
-            return (TypeDefinition)ModuleDefinition.ReadModule(type.Assembly.Location)
+            return (TypeDefinition)ModuleDefinition.ReadModule(type.Assembly.Location, new ReaderParameters { AssemblyResolver = new ConventionalAssemblyResolver() })
                 .GetType(type.FullName, true);
         }
 
@@ -58,5 +56,16 @@ namespace Conventional.Cecil
             } while (typeDefinition != null && typeDefinition.BaseType.Name != "Object");
         }
 
+    }
+
+    public sealed class AssemblyResolutionException : Exception
+    {
+        public AssemblyNameReference AssemblyReference { get; }
+
+        public AssemblyResolutionException (AssemblyNameReference reference)
+            : base ($"Failed to resolve assembly: '${reference}'")
+        {
+            AssemblyReference = reference;
+        }
     }
 }

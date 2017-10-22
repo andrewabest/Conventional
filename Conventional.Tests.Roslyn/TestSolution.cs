@@ -10,7 +10,7 @@ namespace Conventional.Tests.Roslyn
         {
             _previousSolutionRoot = KnownPaths.SolutionRoot;
 
-            KnownPaths.SolutionRoot = KnownPaths.SolutionRoot + "TestSolution";
+            KnownPaths.SolutionRoot = KnownPaths.SolutionRoot + extendedPath;
         }
 
         public void Dispose()

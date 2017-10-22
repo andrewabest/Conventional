@@ -2,11 +2,10 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Conventional.Conventions;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-namespace Conventional.Cecil.Conventions
+namespace Conventional.Conventions.Cecil
 {
     public abstract class MustNotUsePropertyGetterSpecification<TClass, TMember> : ConventionSpecification
     {
@@ -50,10 +49,7 @@ namespace Conventional.Cecil.Conventions
             }).ToArray();
         }
 
-        protected override string FailureMessage
-        {
-            get { return _failureMessage; }
-        }
+        protected override string FailureMessage => _failureMessage;
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

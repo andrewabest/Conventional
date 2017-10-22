@@ -1,15 +1,11 @@
 using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Conventional.Conventions
 {
     public class PropertiesMustHavePublicGettersConventionSpecification : ConventionSpecification
     {
-        protected override string FailureMessage
-        {
-            get { return "All properties must have public getters"; }
-        }
+        protected override string FailureMessage => "All properties must have public getters";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

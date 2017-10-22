@@ -1,20 +1,13 @@
 ﻿using System;
-using Conventional.Cecil.Conventions;
 using Conventional.Conventions.Cecil;
 
 namespace Conventional
 {
     public static partial class Convention
     {
-        public static MustNotResolveCurrentTimeViaDateTimeConventionSpecification MustNotResolveCurrentTimeViaDateTime
-        {
-            get { return new MustNotResolveCurrentTimeViaDateTimeConventionSpecification(); }
-        }
+        public static MustNotResolveCurrentTimeViaDateTimeConventionSpecification MustNotResolveCurrentTimeViaDateTime => new MustNotResolveCurrentTimeViaDateTimeConventionSpecification();
 
-        public static MustNotUseDateTimeOffsetNowConventionSpecification MustNotUseDateTimeOffsetNow
-        {
-            get { return new MustNotUseDateTimeOffsetNowConventionSpecification(); }
-        }
+        public static MustNotUseDateTimeOffsetNowConventionSpecification MustNotUseDateTimeOffsetNow => new MustNotUseDateTimeOffsetNowConventionSpecification();
 
         public static ExceptionsThrownMustBeDerivedFromConventionSpecification ExceptionsThrownMustBeDerivedFrom(Type baseType)
         {
@@ -37,5 +30,7 @@ namespace Conventional
         {
             return new AllPropertiesMustBeAssignedDuringConstructionConventionSpecification(ignoreTypesWithoutConstructors);
         }
+
+        public static LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasksConventionSpecification LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks => new LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasksConventionSpecification();
     }
 }

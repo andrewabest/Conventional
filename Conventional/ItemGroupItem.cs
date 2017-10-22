@@ -2,51 +2,53 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Conventional.Conventions.Assemblies;
 
 namespace Conventional
 {
     internal class ItemGroupItem
     {
         private readonly string _type;
-        private readonly string _include;
         private readonly bool _preserveNewest;
-        private readonly XNamespace _msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
 
-        public ItemGroupItem(XElement itemGroupItemAsXml)
+        protected ItemGroupItem(XElement itemGroupItemAsXml, bool isLegacyCsprojFormat)
         {
             _type = itemGroupItemAsXml.Name.LocalName;
 
             var includeAttribute = itemGroupItemAsXml.Attributes().SingleOrDefault(a => a.Name.LocalName == "Include");
-            _include = includeAttribute?.Value ?? "";
+            Include = includeAttribute?.Value ?? "";
 
-            var copyToOutputDirectory = itemGroupItemAsXml.Descendants(_msbuild + "CopyToOutputDirectory").FirstOrDefault();
+            var updateAttribute = itemGroupItemAsXml.Attributes().SingleOrDefault(a => a.Name.LocalName == "Update");
+            Update = updateAttribute?.Value ?? "";
+
+            var copyToOutputDirectoryName =
+                isLegacyCsprojFormat
+                    ? XName.Get("CopyToOutputDirectory", LegacyCsprojConstants.Namespace)
+                    : XName.Get("CopyToOutputDirectory");
+
+            var copyToOutputDirectory =
+                itemGroupItemAsXml.Descendants(copyToOutputDirectoryName).FirstOrDefault();
+
             _preserveNewest = copyToOutputDirectory != null && copyToOutputDirectory.Value == "PreserveNewest";
-
         }
+
+        public string Include { get; }
+
+        public string Update { get; }
 
         public bool MatchesPatternAndIsNotAnResourceOrReference(Regex fileMatchRegex)
         {
-            if (_type == "Resource")
-            {
-                return false;
-            }
+            return _type != "Resource" && fileMatchRegex.IsMatch(Include);
+        }
 
-            return fileMatchRegex.IsMatch(_include);
+        public bool MatchesPatternAndIsNotAnEmbeddedResource(Regex fileMatchRegex)
+        {
+            return _type != "EmbeddedResource" && fileMatchRegex.IsMatch(Include);
         }
 
         public bool MatchesPatternAndIsNotAnEmbeddedResourceOrReference(Regex fileMatchRegex)
         {
-            if (_type == "EmbeddedResource")
-            {
-                return false;
-            }
-
-            if (_type == "Reference")
-            {
-                return false;
-            }
-
-            return fileMatchRegex.IsMatch(_include);
+            return _type != "Reference" && MatchesPatternAndIsNotAnEmbeddedResource(fileMatchRegex);
         }
 
         public bool MatchesPatternAndIsNotContentCopyNewest(Regex fileMatchRegex)
@@ -56,17 +58,17 @@ namespace Conventional
                 return false;
             }
 
-            return fileMatchRegex.IsMatch(_include);
+            return fileMatchRegex.IsMatch(Include);
         }
 
         public bool MatchesAbsolutePath(string path)
         {
-            return _include == path;
+            return Include == path;
         }
 
         public override string ToString()
         {
-            return "{0} [type={1}]".FormatWith(_include, _type);
+            return "{0} [type={1}]".FormatWith(Include, _type);
         }
 
         public static IEnumerable<ItemGroupItem> FromProjectDocument(XDocument projectDocument)
@@ -74,8 +76,7 @@ namespace Conventional
             return projectDocument
                 .Elements().Single(x => x.Name.LocalName == "Project")
                 .Elements().Where(x => x.Name.LocalName == "ItemGroup")
-                .SelectMany(x => x.Elements().Select(element => new ItemGroupItem(element)));
+                .SelectMany(x => x.Elements().Select(element => new ItemGroupItem(element, projectDocument.IsLegacyCsprojFormat())));
         }
-
     }
 }

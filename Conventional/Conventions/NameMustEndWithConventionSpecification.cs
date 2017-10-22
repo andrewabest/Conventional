@@ -11,10 +11,7 @@ namespace Conventional.Conventions
             _suffix = suffix;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "Type name does not end with {0}"; }
-        }
+        protected override string FailureMessage => "Type name does not end with {0}";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

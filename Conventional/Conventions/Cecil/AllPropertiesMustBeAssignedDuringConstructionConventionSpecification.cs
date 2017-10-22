@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
-using Conventional.Cecil;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
+using System.Linq;
 
 namespace Conventional.Conventions.Cecil
 {
@@ -15,10 +14,7 @@ namespace Conventional.Conventions.Cecil
             _ignoreTypesWithoutConstructors = ignoreTypesWithoutConstructors;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "All properties must be instantiated during construction"; }
-        }
+        protected override string FailureMessage => "All properties must be instantiated during construction";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Conventional.Extensions;
 
 namespace Conventional.Conventions
@@ -22,10 +20,7 @@ namespace Conventional.Conventions
             _subjects = subjects;
         }
 
-        protected override string FailureMessage
-        {
-            get { return "Could not find required corresponding implementation of {0}"; }
-        }
+        protected override string FailureMessage => "Could not find required corresponding implementation of {0}";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

@@ -34,6 +34,6 @@ namespace Conventional.Conventions.Database
             return _enumType.GetEnumValues().Cast<int>().Select(x => x.ToString());
         }
 
-        protected override string FailureMessage { get { return $"{_tableName}.{_columnName} = {{value}} is not present in {_enumType}"; } }
+        protected override string FailureMessage => $"{_tableName}.{_columnName} = {{value}} is not present in {_enumType}";
     }
 }

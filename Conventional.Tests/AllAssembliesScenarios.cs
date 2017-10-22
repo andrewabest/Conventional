@@ -10,7 +10,7 @@ namespace Conventional.Tests
         {
             var assemblySpecimen = AllAssemblies.WithNamesMatching("*");
 
-            assemblySpecimen.Should().HaveCount(8);
+            assemblySpecimen.Should().HaveCount(7);
         }
     }
 }

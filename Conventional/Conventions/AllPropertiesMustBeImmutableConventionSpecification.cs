@@ -6,10 +6,7 @@ namespace Conventional.Conventions
 {
     public class AllPropertiesMustBeImmutableConventionSpecification : PropertiesMustBeImmutableConventionSpecification
     {
-        protected override string FailureMessage
-        {
-            get { return "All properties must be immutable"; }
-        }
+        protected override string FailureMessage => "All properties must be immutable";
 
         protected override PropertyInfo[] GetProperties(Type type)
         {

@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace Conventional
 {
     public static class ThisSolution

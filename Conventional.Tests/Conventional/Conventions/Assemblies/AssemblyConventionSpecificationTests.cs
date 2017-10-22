@@ -13,7 +13,8 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         [SetUp]
         public void Setup()
         {
-            _testAssembly = Assembly.LoadFrom(KnownPaths.SolutionRoot + "TestSolution/TestSolution.TestProject/bin/Debug/TestSolution.TestProject.dll");
+            _testAssembly = Assembly.LoadFrom(KnownPaths.SolutionRoot +
+                                              "TestSolution/TestSolution.TestProject/bin/Debug/TestSolution.TestProject.dll");
         }
 
         [Test]
@@ -27,9 +28,66 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         [Test]
         public void MustNotReferenceDllsFromBinOrObjDirectories_Success()
         {
-            var result = typeof(AssemblyConventionSpecificationTests).Assembly.MustConformTo(Convention.MustNotReferenceDllsFromBinOrObjDirectories);
+            var result =
+                typeof(AssemblyConventionSpecificationTests).Assembly.MustConformTo(Convention
+                    .MustNotReferenceDllsFromBinOrObjDirectories);
             result.IsSatisfied.Should().BeTrue();
         }
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeResources_Success_FileExtension()
+        {
+            typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeResources(".resx"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        public void MustHaveFilesWithACertainExtensionBeResources_Success_RegEx()
+        {
+            var matchResxFiles = new Regex(@"\.RESX$", RegexOptions.IgnoreCase);
+
+            typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeResources(matchResxFiles))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeResources_FailsWhenFilesAreNotResources_Regex()
+        {
+            var expectedFailureMessage = @"
+ All files matching '.\.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'
+- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt
+- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt
+ ".Trim();
+
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeResources(new Regex(@".\.txt")));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
+        }
+
+
+        [Test]
+        public void MustHaveFilesWithACertainExtensionBeResources_FailsWhenFilesAreNotResources_FileExtension()
+        {
+            var expectedFailureMessage = @"
+ All files matching '*.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'
+- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt
+- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt
+ ".Trim();
+
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
+                .MustConformTo(Convention.MustHaveFilesBeResources("*.txt"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
+        }
+
 
         [Test]
         public void MustHaveFilesWithACertainExtensionBeEmbeddedResources_Success_WithWildCardedFileExtension()
@@ -65,71 +123,15 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         }
 
         [Test]
-        public void MustHaveFilesWithACertainExtensionBeResources_Success_FileExtension()
-        {
-            typeof(AssemblyConventionSpecificationTests).Assembly
-                .MustConformTo(Convention.MustHaveFilesBeResources(".resx"))
-                .IsSatisfied
-                .Should()
-                .BeTrue();
-        }
-
-        [Test]
-        public void MustHaveFilesWithACertainExtensionBeResources_Success_RegEx()
-        {
-            var matchResxFiles = new Regex(@"\.RESX$", RegexOptions.IgnoreCase);
-
-            typeof(AssemblyConventionSpecificationTests).Assembly
-                .MustConformTo(Convention.MustHaveFilesBeResources(matchResxFiles))
-                .IsSatisfied
-                .Should()
-                .BeTrue();
-        }
-
-        [Test]
-        public void MustHaveFilesWithACertainExtensionBeResources_FailsWhenFilesAreNotResources_Regex()
-        {
-            var expectedFailureMessage = @"
-All files matching '.+\.txt' within assembly 'Conventional.Tests' must have their build action set to 'Resource'
-- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt [type=Content]
-- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt [type=Content]
-".Trim();
-
-            var result = typeof(AssemblyConventionSpecificationTests).Assembly
-                .MustConformTo(Convention.MustHaveFilesBeResources(new Regex(@".+\.txt")));
-
-            result.IsSatisfied.Should().BeFalse();
-            result.Failures.Single().Should().Be(expectedFailureMessage);
-        }
-
-
-        [Test]
-        public void MustHaveFilesWithACertainExtensionBeResources_FailsWhenFilesAreNotResources_FileExtension()
-        {
-            var expectedFailureMessage = @"
-All files matching '*.txt' within assembly 'Conventional.Tests' must have their build action set to 'Resource'
-- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt [type=Content]
-- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt [type=Content]
-".Trim();
-
-            var result = typeof(AssemblyConventionSpecificationTests).Assembly
-                .MustConformTo(Convention.MustHaveFilesBeResources("*.txt"));
-
-            result.IsSatisfied.Should().BeFalse();
-            result.Failures.Single().Should().Be(expectedFailureMessage);
-        }
-
-
-        [Test]
-        public void MustHaveFilesWithACertainExtensionBeEmbeddedResources_FailsWhenFilesAreNotEmbeddedResources_FileExtension()
+        public void
+            MustHaveFilesWithACertainExtensionBeEmbeddedResources_FailsWhenFilesAreNotEmbeddedResources_FileExtension()
         {
             var expectedFailureMessage = @"
 All files matching '*.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'
-- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt [type=Content]
-- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt [type=Content]
-".Trim();
+- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt
+- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt".Trim();
 
-            var result = typeof (AssemblyConventionSpecificationTests).Assembly
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly
                 .MustConformTo(Convention.MustHaveFilesBeEmbeddedResources("*.txt"));
 
             result.IsSatisfied.Should().BeFalse();
@@ -142,8 +144,8 @@ All files matching '*.txt' within assembly 'Conventional.Tests' must have their 
         {
             var expectedFailureMessage = @"
 All files matching '.*NON_EMBEDDED.*' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'
-- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt [type=Content]
-- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt [type=Content]
+- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt
+- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt
 ".Trim();
 
             var matchNonEmbeddedRegEx = new Regex(".*NON_EMBEDDED.*", RegexOptions.IgnoreCase);
@@ -176,32 +178,21 @@ All files matching '.*NON_EMBEDDED.*' within assembly 'Conventional.Tests' must 
         [Test]
         public void MustHaveCertainFilesBeContentCopyIfNewer_FileExtension()
         {
-            var expectedFailureMessage = @"
-All files matching '.png' within assembly 'Conventional.Tests' must have their build action set to 'Content - Copy if newer'
-- Conventional\Conventions\Assemblies\copy-not.png [type=Content]
-".Trim();
-
             var result = typeof(AssemblyConventionSpecificationTests).Assembly
                 .MustConformTo(Convention.MustHaveFilesBeContent(".png"));
 
             result.IsSatisfied.Should().BeFalse();
-            result.Failures.Single().Should().Be(expectedFailureMessage);
+            result.Failures.Single().Should().EndWith("copy-not.png");
         }
 
         [Test]
         public void MustHaveCertainFilesBeContentCopyIfNewer_Regex()
         {
-            var expectedFailureMessage = @"
-All files matching '.*\.png' within assembly 'Conventional.Tests' must have their build action set to 'Content - Copy if newer'
-- Conventional\Conventions\Assemblies\copy-not.png [type=Content]
-".Trim();
-
             var result = typeof(AssemblyConventionSpecificationTests).Assembly
                 .MustConformTo(Convention.MustHaveFilesBeContent(new Regex(@".*\.png")));
 
             result.IsSatisfied.Should().BeFalse();
-            result.Failures.Single().Should().Be(expectedFailureMessage);
+            result.Failures.Single().Should().EndWith("copy-not.png");
         }
-
     }
 }

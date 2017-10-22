@@ -7,10 +7,7 @@ namespace Conventional.Conventions
 {
     public class EnumerablePropertiesMustBeEagerLoadedConventionSpecification : ConventionSpecification
     {
-        protected override string FailureMessage
-        {
-            get { return "All enumerable properties must be eager loaded"; }
-        }
+        protected override string FailureMessage => "All enumerable properties must be eager loaded";
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {

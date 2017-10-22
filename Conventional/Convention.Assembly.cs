@@ -5,10 +5,9 @@ namespace Conventional
 {
     public static partial class Convention
     {
-        public static MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification MustNotReferenceDllsFromBinOrObjDirectories
-        {
-            get {  return new MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification(); }
-        }
+        public static MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification
+            MustNotReferenceDllsFromBinOrObjDirectories =>
+            new MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification();
 
         public static MustHaveAllFilesBeResourcesConventionSpecification MustHaveFilesBeResources(string fileExtension)
         {
@@ -20,12 +19,14 @@ namespace Conventional
             return new MustHaveAllFilesBeResourcesConventionSpecification(fileMatchRegex);
         }
 
-        public static MustHaveAllFilesBeEmbeddedResourcesConventionSpecification MustHaveFilesBeEmbeddedResources(string fileExtension)
+        public static MustHaveAllFilesBeEmbeddedResourcesConventionSpecification MustHaveFilesBeEmbeddedResources(
+            string fileExtension)
         {
-           return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileExtension);
+            return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileExtension);
         }
 
-        public static MustHaveAllFilesBeEmbeddedResourcesConventionSpecification MustHaveFilesBeEmbeddedResources(Regex fileMatchRegex)
+        public static MustHaveAllFilesBeEmbeddedResourcesConventionSpecification MustHaveFilesBeEmbeddedResources(
+            Regex fileMatchRegex)
         {
             return new MustHaveAllFilesBeEmbeddedResourcesConventionSpecification(fileMatchRegex);
         }
@@ -45,7 +46,8 @@ namespace Conventional
         /// developers using a different editor, and want to ensure they add all new files to the project.
         /// </summary>
         /// <param name="filePattern">Any pattern which can be used with Directory.GetFiles</param>
-        public static MustIncludeAllMatchingFilesInFolderConventionSpecification MustIncludeAllMatchingFilesInFolder(string filePattern)
+        public static MustIncludeAllMatchingFilesInFolderConventionSpecification MustIncludeAllMatchingFilesInFolder(
+            string filePattern)
         {
             return new MustIncludeAllMatchingFilesInFolderConventionSpecification(filePattern);
         }
@@ -56,7 +58,8 @@ namespace Conventional
         /// </summary>
         /// <param name="filePattern">Any pattern which can be used with Directory.GetFiles</param>
         /// <param name="subfolder">A subfolder path to limit the convention to</param>
-        public static MustIncludeAllMatchingFilesInFolderConventionSpecification MustIncludeAllMatchingFilesInFolder(string filePattern, string subfolder)
+        public static MustIncludeAllMatchingFilesInFolderConventionSpecification MustIncludeAllMatchingFilesInFolder(
+            string filePattern, string subfolder)
         {
             return new MustIncludeAllMatchingFilesInFolderConventionSpecification(filePattern, subfolder);
         }

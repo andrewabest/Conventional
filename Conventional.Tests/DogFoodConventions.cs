@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Conventional.Cecil;
 using Conventional.Conventions;
 using Conventional.Conventions.Assemblies;
 using Conventional.Conventions.Database;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -356,6 +357,97 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
+        }
+
+        private class HasAnAsyncMethodThatAwaitsATaskAndCallsConfigureAwait
+        {
+            public async Task MethodThatAwaitsATaskAndCallsConfigureAwait()
+            {
+                await Task.FromResult(0).ConfigureAwait(false);
+            }
+        }
+
+        [Test]
+        public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_Success()
+        {
+            typeof(HasAnAsyncMethodThatAwaitsATaskAndCallsConfigureAwait)
+                .MustConformTo(Convention.LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwait
+        {
+            public async Task MethodThatAwaitsATaskAndDoesNotCallConfigureAwait()
+            {
+                await Task.FromResult(0);
+            }
+        }
+
+        [Test]
+        public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalled()
+        {
+
+            const string expectedFailureMessage = @"Libraries must call Task.ConfigureAwait(false) to prevent deadlocks
+	- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwait.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait
+";
+
+            var result = typeof(HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwait)
+                .MustConformTo(Convention.LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
+        }
+
+        private class HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes
+        {
+            public async Task MethodThatAwaitsATaskAndDoesNotCallConfigureAwait()
+            {
+                await Task.FromResult(0);
+            }
+
+            public async Task MethodThatAwaitsATaskAndCallsConfigureAwait()
+            {
+                await Task.FromResult(0).ConfigureAwait(false);
+            }
+        }
+
+        [Test]
+        public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalledButIsCalledForOtherMethods()
+        {
+            const string expectedFailureMessage = @"Libraries must call Task.ConfigureAwait(false) to prevent deadlocks
+	- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait
+";
+  
+            var result = typeof(HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes)
+                .MustConformTo(Convention.LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
+        }
+
+        private class HasAnAsyncMethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne
+        {
+            public async Task MethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne()
+            {
+                await Task.FromResult(0).ConfigureAwait(false);
+                await Task.FromResult(0);
+            }
+        }
+
+        [Test]
+        public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalledForASingleTask()
+        {
+            const string expectedFailureMessage = @"Libraries must call Task.ConfigureAwait(false) to prevent deadlocks
+	- HasAnAsyncMethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne.MethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne
+";
+
+            var result = typeof(HasAnAsyncMethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne)
+                .MustConformTo(Convention.LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be(expectedFailureMessage);
         }
     }
 }
