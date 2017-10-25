@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using System.Runtime.Loader;
 using Mono.Cecil;
 
 namespace Conventional.Conventions.Cecil
@@ -32,7 +31,7 @@ namespace Conventional.Conventions.Cecil
             if (name == null)
                 throw new ArgumentNullException("name");
 
-            var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(name.Name));
+            var assembly = Assembly.Load(name.Name);
 
             return AssemblyDefinition.ReadAssembly(GetPathToAssembly(assembly), new ReaderParameters { AssemblyResolver = this });
         }
