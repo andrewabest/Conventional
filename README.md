@@ -3,7 +3,7 @@ Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y02
 
 Conventional provides a suite of ready-made tests for enforcing conventions within your types, assemblies, solutions and databases to make sure your duckies are all in a row.
 
-Conventional's backlog can be found here https://trello.com/b/kay7a8Ya/conventional
+Conventional 3.x targets .NET Standard 2.0
 
 ![](https://raw.github.com/andrewabest/Conventional/master/duck.png)
 
