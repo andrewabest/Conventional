@@ -9,9 +9,11 @@ Conventional 3.x targets .NET Standard 2.0
 
 ## To install from NuGet
 
-    Install-Package Best.Conventional -Pre
+    Install-Package Best.Conventional
 
 Looking for Roslyn-based conventions? Check out [the documentation](https://github.com/andrewabest/Conventional/wiki/Roslyn-Conventions) for more information.
+
+Conventional.Roslyn does not target .NET Standard 2.0 due to there being no official .NET Core support for `MSBuildWorkspace`, a core building block of Roslyn. 
 
 ## Documentation
 
