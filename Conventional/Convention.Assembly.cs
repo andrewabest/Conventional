@@ -1,13 +1,17 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using Conventional.Conventions.Assemblies;
 
 namespace Conventional
 {
     public static partial class Convention
     {
-        public static MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification
-            MustNotReferenceDllsFromBinOrObjDirectories =>
-            new MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification();
+        [Obsolete("Replace with MustNotReferenceDllsFromTransientOrSdkDirectories")]
+        public static MustNotReferenceDllsFromTransientOrSdkDirectoriesConventionSpecification MustNotReferenceDllsFromBinOrObjDirectories =>
+            new MustNotReferenceDllsFromTransientOrSdkDirectoriesConventionSpecification();
+
+        public static MustNotReferenceDllsFromTransientOrSdkDirectoriesConventionSpecification MustNotReferenceDllsFromTransientOrSdkDirectories =>
+            new MustNotReferenceDllsFromTransientOrSdkDirectoriesConventionSpecification();
 
         public static MustHaveAllFilesBeResourcesConventionSpecification MustHaveFilesBeResources(string fileExtension)
         {

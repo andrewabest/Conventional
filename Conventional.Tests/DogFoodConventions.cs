@@ -22,7 +22,15 @@ namespace Conventional.Tests
                 .WithFailureAssertion(Assert.Fail);
         }
 
-        private Type[] ConventionTypes => new[]
+        [Test]
+        public void MustNotReferenceDllsFromTransientOrSdkDirectories()
+        {
+            AllAssemblies.WithNamesMatching("Conventional*")
+                .MustConformTo(Convention.MustNotReferenceDllsFromTransientOrSdkDirectories)
+                .WithFailureAssertion(Assert.Fail);
+        }
+
+        private static Type[] ConventionTypes => new[]
         {
             typeof (ConventionSpecification),
             typeof (AssemblyConventionSpecification),
