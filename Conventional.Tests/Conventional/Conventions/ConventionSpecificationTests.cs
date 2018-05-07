@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Conventional.Conventions;
 using Conventional.Tests.Conventional.Conventions.TestData;
@@ -445,6 +446,37 @@ namespace Conventional.Tests.Conventional.Conventions
 
         private class SomeGenericInterfaceImplementation : ISomeGeneric<SomeClassThatRequiresSomeGenericInterfaceImplementation, string>
         {
+        }
+
+        private class MockWithPropertyAttribute
+        {
+            [MaxLength(255)]
+            public string Name { get; set; }
+        }
+
+        private class MockWithoutPropertyAttribute
+        {
+            public string Name { get; set; }
+        }
+
+        [Test]
+        public void PropertiesOfTypeMustHaveAttributeConventionSpecification_Success()
+        {
+            typeof(MockWithPropertyAttribute)
+                .MustConformTo(Convention.PropertiesOfTypeMustHaveAttribute(typeof(string), typeof(MaxLengthAttribute)))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void PropertiesOfTypeMustHaveAttributeConventionSpecification_Fails()
+        {
+            typeof(MockWithoutPropertyAttribute)
+                .MustConformTo(Convention.PropertiesOfTypeMustHaveAttribute(typeof(string), typeof(MockAttribute)))
+                .IsSatisfied
+                .Should()
+                .BeFalse();
         }
 
         [Test]

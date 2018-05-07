@@ -11,7 +11,7 @@ namespace Conventional.Conventions
         {
             if (typeof (Attribute).IsAssignableFrom(attributeType) == false)
             {
-                throw new ArgumentException("Type supplied must be an attribute", "attributeType");
+                throw new ArgumentException("Type supplied must be an attribute", nameof(attributeType));
             }
 
             _attributeType = attributeType;
