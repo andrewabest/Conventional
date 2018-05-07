@@ -23,9 +23,9 @@ namespace Conventional.Tests
         }
 
         [Test]
-        public void GivenAPattern_LocatesAndReturnsAllAssembliesForThatPattern()
+        public void MustNotReferenceDllsFromTransientOrSdkDirectories()
         {
-            AllAssemblies.WithNamesMatching("*")
+            AllAssemblies.WithNamesMatching("Conventional*")
                 .MustConformTo(Convention.MustNotReferenceDllsFromTransientOrSdkDirectories)
                 .WithFailureAssertion(Assert.Fail);
         }

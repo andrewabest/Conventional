@@ -18,19 +18,25 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         }
 
         [Test]
-        public void MustNotReferenceDllsFromBinOrObjDirectories_FailsWhenAssemblyReferencesDllsFromBinDirectory()
+        public void MustNotReferenceDllsFromTransientOrSdkDirectories_FailsWhenAssemblyReferencesDllsFromBinDirectory()
         {
-            var result = _testAssembly.MustConformTo(Convention.MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification);
+            var result = _testAssembly.MustConformTo(Convention.MustNotReferenceDllsFromTransientOrSdkDirectories);
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
 
         [Test]
-        public void MustNotReferenceDllsFromBinOrObjDirectories_Success()
+        public void MustNotReferenceDllsFromTransientOrSdkDirectories_FailsWhenAssemblyReferencesDllsFromReferenceAssembliesDirectory()
         {
-            var result =
-                typeof(AssemblyConventionSpecificationTests).Assembly.MustConformTo(Convention
-                    .MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification);
+            var result = _testAssembly.MustConformTo(Convention.MustNotReferenceDllsFromTransientOrSdkDirectories);
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void MustNotReferenceDllsFromTransientOrSdkDirectories_Success()
+        {
+            var result = typeof(AssemblyConventionSpecificationTests).Assembly.MustConformTo(Convention.MustNotReferenceDllsFromTransientOrSdkDirectories);
             result.IsSatisfied.Should().BeTrue();
         }
 

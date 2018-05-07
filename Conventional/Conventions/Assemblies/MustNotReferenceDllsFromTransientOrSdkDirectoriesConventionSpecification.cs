@@ -7,7 +7,7 @@ namespace Conventional.Conventions.Assemblies
 {
     public class MustNotReferenceDllsFromTransientOrSdkDirectoriesConventionSpecification : AssemblyConventionSpecification
     {
-        private const string FindPattern = @"^(.*?(obj|bin|dotnet|sdk|Reference Assemblies).*?)$";
+        private const string FindPattern = @"^(.*?(obj|bin|NuGetFallbackFolder|Reference Assemblies).*?)$";
 
         protected override string FailureMessage => "Assembly {0} must not reference Dlls from transient (bin, obj) directories, package caches, or reference assemblies.";
 
