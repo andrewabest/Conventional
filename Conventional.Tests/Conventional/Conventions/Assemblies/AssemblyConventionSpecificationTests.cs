@@ -20,7 +20,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         [Test]
         public void MustNotReferenceDllsFromBinOrObjDirectories_FailsWhenAssemblyReferencesDllsFromBinDirectory()
         {
-            var result = _testAssembly.MustConformTo(Convention.MustNotReferenceDllsFromBinOrObjDirectories);
+            var result = _testAssembly.MustConformTo(Convention.MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification);
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
@@ -30,7 +30,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         {
             var result =
                 typeof(AssemblyConventionSpecificationTests).Assembly.MustConformTo(Convention
-                    .MustNotReferenceDllsFromBinOrObjDirectories);
+                    .MustNotReferenceDllsFromBinOrObjDirectoriesConventionSpecification);
             result.IsSatisfied.Should().BeTrue();
         }
 
