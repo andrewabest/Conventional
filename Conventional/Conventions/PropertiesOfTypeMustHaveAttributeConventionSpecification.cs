@@ -8,13 +8,13 @@ namespace Conventional.Conventions
     {
         private readonly Type _propertyType;
         private readonly Type _attributeType;
-        private readonly bool _inheritAttributes;
+        private readonly bool _writablePropertiesOnly;
 
-        public PropertiesOfTypeMustHaveAttributeConventionSpecification(Type propertyType, Type attributeType, bool inheritAttributes = false)
+        public PropertiesOfTypeMustHaveAttributeConventionSpecification(Type propertyType, Type attributeType, bool writablePropertiesOnly = true)
         {
             _propertyType = propertyType;
             _attributeType = attributeType;
-            _inheritAttributes = inheritAttributes;
+            _writablePropertiesOnly = writablePropertiesOnly;
         }
 
         protected override string FailureMessage => "Properties of {0} must have {1} attribute";
@@ -24,9 +24,10 @@ namespace Conventional.Conventions
             var properties = type
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Where(p => _propertyType.IsAssignableFrom(p.PropertyType))
+                .Where(p => _writablePropertiesOnly && p.CanWrite)
                 .ToArray();
 
-            var failures = properties.Where(x => !x.GetCustomAttributes(_attributeType, _inheritAttributes).Any()).ToArray();
+            var failures = properties.Where(x => !x.GetCustomAttributes(_attributeType, false).Any()).ToArray();
 
             if (failures.Any())
             {
