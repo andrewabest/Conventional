@@ -16,9 +16,9 @@ namespace Conventional
 
         public static PropertiesMustHavePrivateSettersConventionSpecification PropertiesMustHavePrivateSetters => new PropertiesMustHavePrivateSettersConventionSpecification();
 
-        public static PropertiesOfTypeMustHaveAttributeConventionSpecification PropertiesOfTypeMustHaveAttribute(Type propertyType, Type attributeType)
+        public static PropertiesOfTypeMustHaveAttributeConventionSpecification PropertiesOfTypeMustHaveAttribute(Type propertyType, Type attributeType, bool writablePropertiesOnly = true)
         {
-            return new PropertiesOfTypeMustHaveAttributeConventionSpecification(propertyType, attributeType);
+            return new PropertiesOfTypeMustHaveAttributeConventionSpecification(propertyType, attributeType, writablePropertiesOnly);
         }
 
         public static MustHaveAttributeConventionSpecification MustHaveAttribute(Type attributeType)

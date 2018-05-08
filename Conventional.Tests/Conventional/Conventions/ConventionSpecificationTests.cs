@@ -454,6 +454,12 @@ namespace Conventional.Tests.Conventional.Conventions
             public string Name { get; set; }
         }
 
+        private class MockWithGetOnlyPropertyAttribute
+        {
+            [MaxLength(255)]
+            public string Name { get; private set; }
+        }
+
         private class MockWithoutPropertyAttribute
         {
             public string Name { get; set; }
@@ -464,6 +470,16 @@ namespace Conventional.Tests.Conventional.Conventions
         {
             typeof(MockWithPropertyAttribute)
                 .MustConformTo(Convention.PropertiesOfTypeMustHaveAttribute(typeof(string), typeof(MaxLengthAttribute)))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void PropertiesOfTypeMustHaveAttributeConventionSpecification_WriteOnlySuccess()
+        {
+            typeof(MockWithGetOnlyPropertyAttribute)
+                .MustConformTo(Convention.PropertiesOfTypeMustHaveAttribute(typeof(string), typeof(MaxLengthAttribute), false))
                 .IsSatisfied
                 .Should()
                 .BeTrue();
