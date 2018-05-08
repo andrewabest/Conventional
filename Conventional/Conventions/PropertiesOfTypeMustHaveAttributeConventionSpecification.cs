@@ -22,15 +22,16 @@ namespace Conventional.Conventions
             var properties = type
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Where(p => _propertyType.IsAssignableFrom(p.PropertyType))
+                .Where(p => p.CanWrite)
                 .ToArray();
 
-            var failures = properties.Where(x => !x.GetCustomAttributes(_attributeType, false).Any()).ToArray();
+            var failures = properties.Where(x => !x.GetCustomAttributes(_attributeType, true).Any()).ToArray();
 
             if (failures.Any())
             {
                 return ConventionResult.NotSatisfied(type.FullName,
                     BuildFailureMessage(failures.Aggregate(string.Empty,
-                        (s, t) => s + "\t" + type.FullName + Environment.NewLine)).FormatWith(_propertyType.Name, _attributeType.Name));
+                        (s, info) => s + "\t" + info.Name + Environment.NewLine)).FormatWith(_propertyType.Name, _attributeType.Name));
             }
 
             return ConventionResult.Satisfied(type.FullName);
