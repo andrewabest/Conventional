@@ -24,6 +24,10 @@ To get started with Conventional, please check out [the wiki](https://github.com
 
 Not sure how to get started with Conventional? Check out [the sample repository](https://github.com/andrewabest/Conventional.Samples) which contains a bunch of real-world usage examples
 
+## Contributing
+
+Conventional's test suite requires a default named `.\SQLEXPRESS` instance. If you have another instance you would like to use for development, create a copy of `development.settings.example` in the solution root and rename to `development.settings`, and supply your own connection string.
+
 ## License
 
 Licensed under the terms of the [MS-PL](https://opensource.org/licenses/MS-PL) license

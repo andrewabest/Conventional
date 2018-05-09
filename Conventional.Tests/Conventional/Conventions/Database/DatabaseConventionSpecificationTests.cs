@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Resources;
 using FluentAssertions;
@@ -9,16 +11,26 @@ namespace Conventional.Tests.Conventional.Conventions.Database
 {
     public class DatabaseConventionSpecificationTests
     {
-#if DEBUG
-        private const string TestDbConnectionString = @"Server=.\SQLEXPRESS;Database=Conventional;Integrated Security=true;";
-#else
-        private const string TestDbConnectionString = @"Server=(local)\SQL2014;Database=Conventional;User ID=sa;Password=Password12!";
-#endif
+        private readonly DevelopmentSettings _settings = DevelopmentSettings.Create();
 
         [SetUp]
         public void Setup()
         {
-            CreateDatabase();
+            try
+            {
+                CreateDatabase();
+            }
+            catch (SqlException e)
+            {
+                Assert.Fail(
+                    "Conventional's test suite requires a default named .\\SQLEXPRESS instance. If you want to use an alternative database instance, create a development.json file in the solution root with your desired connection string.\n See development.json.example in the solution root for an example that uses LocalDB."
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + $"Exception Message: {e.Message}"
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + $"Stack Trace: {e.StackTrace}");
+            }
         }
 
         [TearDown]
@@ -33,7 +45,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllCheckConstraintsMustBeNamedConventionalSpecification_Success.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllCheckConstraintsMustBeNamed)
                 .IsSatisfied
                 .Should()
@@ -46,7 +58,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllCheckConstraintsMustBeNamedConventionalSpecification_Fail.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllCheckConstraintsMustBeNamed);
 
             result.IsSatisfied.Should().BeFalse();
@@ -59,7 +71,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllDefaultConstraintsMustBeNamed)
                 .IsSatisfied
                 .Should()
@@ -72,7 +84,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllDefaultConstraintsMustBeNamed);
 
             result.IsSatisfied.Should().BeFalse();
@@ -85,7 +97,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllPrimaryKeyConstraintsMustBeNamed)
                 .IsSatisfied
                 .Should()
@@ -98,7 +110,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Fail.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllPrimaryKeyConstraintsMustBeNamed);
 
             result.IsSatisfied.Should().BeFalse();
@@ -111,7 +123,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllReferenceConstraintsMustBeNamedConventionalSpecification_Success.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllReferenceConstraintsMustBeNamed)
                 .IsSatisfied
                 .Should()
@@ -124,7 +136,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllReferenceConstraintsMustBeNamed);
 
             result.IsSatisfied.Should().BeFalse();
@@ -137,7 +149,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllUniqueConstraintsMustBeNamedConventionalSpecification_Success.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllUniqueConstraintsMustBeNamed)
                 .IsSatisfied
                 .Should()
@@ -150,7 +162,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllUniqueConstraintsMustBeNamed);
 
             result.IsSatisfied.Should().BeFalse();
@@ -163,7 +175,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"))
                 .IsSatisfied
                 .Should()
@@ -176,19 +188,20 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
 
+        [Test]
         public void AllNamedColumnsMustBeNonNullableConventionSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllNamedColumnsMustBeNonNullable("CreatedDateTime"))
                 .IsSatisfied
                 .Should()
@@ -201,7 +214,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllNamedColumnsMustBeNullable("UpdatedDateTime"));
 
             result.IsSatisfied.Should().BeFalse();
@@ -214,7 +227,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllIdentityColumnsMustBeNamedTableNameId)
                 .IsSatisfied
                 .Should()
@@ -227,7 +240,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationFailure.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllIdentityColumnsMustBeNamedTableNameId);
 
             result.IsSatisfied.Should().BeFalse();
@@ -240,7 +253,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("TablesWithoutClusteredIndexSuccess.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllTablesMustHaveAClusteredIndex)
                 .IsSatisfied
                 .Should()
@@ -253,7 +266,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("TablesWithoutClusteredIndexFailure.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.AllTablesMustHaveAClusteredIndex);
 
             result.IsSatisfied.Should().BeFalse();
@@ -266,7 +279,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("EachRowMustHaveACorrespondingEnum_Success.sql");
 
             TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.EachRowMustHaveACorrespondingEnum<CloudServiceEnum>("dbo.CloudService", "CloudServiceId"))
                 .IsSatisfied
                 .Should()
@@ -279,14 +292,14 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             ExecuteSqlScriptFromResource("EachRowMustHaveACorrespondingEnum_Fail.sql");
 
             var result = TheDatabase
-                .WithConnectionString(TestDbConnectionString)
+                .WithConnectionString(_settings.ConnectionString)
                 .MustConformTo(Convention.EachRowMustHaveACorrespondingEnum<CloudServiceEnum>("dbo.CloudService", "CloudServiceId"));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
 
-        private static void ExecuteSqlScriptFromResource(string resourceName)
+        private void ExecuteSqlScriptFromResource(string resourceName)
         {
             string script;
 
@@ -301,7 +314,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
                 }
             }
 
-            using (IDbConnection dbConnection = new SqlConnection(TestDbConnectionString))
+            using (IDbConnection dbConnection = new SqlConnection(_settings.ConnectionString))
             {
                 dbConnection.Open();
                 var command = dbConnection.CreateCommand();
@@ -310,9 +323,9 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             }
         }
 
-        private static void CreateDatabase()
+        private void CreateDatabase()
         {
-            var sb = new SqlConnectionStringBuilder(TestDbConnectionString);
+            var sb = new SqlConnectionStringBuilder(_settings.ConnectionString);
             var dbName = sb.InitialCatalog;
             sb.InitialCatalog = "master";
 
@@ -325,9 +338,9 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             }
         }
         
-        private static void DropDatabase()
+        private void DropDatabase()
         {
-            var sb = new SqlConnectionStringBuilder(TestDbConnectionString);
+            var sb = new SqlConnectionStringBuilder(_settings.ConnectionString);
             var dbName = sb.InitialCatalog;
             sb.InitialCatalog = "master";
 
