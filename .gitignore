@@ -168,3 +168,4 @@ FakesAssemblies/
 # nuget pack output
 *.nupkg
 
+/development.json

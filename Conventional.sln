@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Tests.Roslyn",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Getting Started", "Getting Started", "{C38DA37B-5388-4443-8C6C-617A677D86AD}"
 	ProjectSection(SolutionItems) = preProject
+		development.json.example = development.json.example
 		README.md = README.md
 	EndProjectSection
 EndProject
