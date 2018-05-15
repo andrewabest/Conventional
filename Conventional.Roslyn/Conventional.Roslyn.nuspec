@@ -11,7 +11,7 @@
     <description>$description$</description>
     <iconUrl>https://raw.github.com/andrewabest/Conventional/master/duck.png</iconUrl>
     <tags>Convention Testing</tags>
-    <copyright>Copyright © 2015, Andrew Best</copyright>
+    <copyright>Copyright © 2018, Andrew Best</copyright>
     <dependencies>
       <dependency id="Best.Conventional" version="$version$" />
     </dependencies>
