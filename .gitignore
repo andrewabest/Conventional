@@ -165,7 +165,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-# nuget pack output
-*.nupkg
-
 /development.json
