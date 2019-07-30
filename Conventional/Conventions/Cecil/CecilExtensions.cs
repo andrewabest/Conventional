@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Mono.Cecil;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Conventional.Conventions.Cecil
 {
@@ -56,6 +57,26 @@ namespace Conventional.Conventions.Cecil
             } while (typeDefinition != null && typeDefinition.BaseType.Name != "Object");
         }
 
+        /// <summary>
+        /// An async method will have an AsyncStateMachine attribute pointing to the generated async state machine type 
+        /// for example [AsyncStateMachine(typeof(AsyncMethods.<DownloadHtmlAsyncTask>d__0))]
+        /// see: http://www.codeproject.com/Articles/535635/Async-Await-and-the-Generated-StateMachine
+        /// </summary>
+        public static TypeDefinition GetAsyncStateMachineType(this MethodDefinition provider)
+        {
+            var asyncStateMachineAttribute = provider.GetAttribute<AsyncStateMachineAttribute>();
+            return (TypeDefinition)asyncStateMachineAttribute.ConstructorArguments[0].Value;
+        }
+
+        public static bool HasAttribute<TAttribute>(this MethodDefinition subject) where TAttribute : Attribute
+        {
+            return GetAttribute<TAttribute>(subject) != null;
+        }
+
+        public static CustomAttribute GetAttribute<TAttribute>(this MethodDefinition subject) where TAttribute : Attribute
+        {
+            return subject.CustomAttributes.FirstOrDefault(attribute => attribute.AttributeType.Name == typeof(TAttribute).Name);
+        }
     }
 
     public sealed class AssemblyResolutionException : Exception
