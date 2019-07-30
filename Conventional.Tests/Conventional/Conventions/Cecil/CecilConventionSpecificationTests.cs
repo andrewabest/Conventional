@@ -25,7 +25,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         }
 
         [Test]
-        public void MustNotUseDateTimeNowConventionSpecification_Success()
+        public void MustNotResolveCurrentTimeViaDateTimeConventionSpecification_Success()
         {
             typeof(GoodDateTimeCitizen)
                 .MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTime)
@@ -68,14 +68,37 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         [TestCase(typeof(OffendingDateTimeNowCitizen))]
         [TestCase(typeof(OffendingDateTimeTodayCitizen))]
         [TestCase(typeof(OffendingDateTimeUtcNowCitizen))]
-        public void MustNotUseDateTimeNowConventionSpecification_FailsWhenACallToDateTimeExists(Type offendingType)
+        public void MustNotResolveCurrentTimeViaDateTimeConventionSpecification_FailsWhenACallToDateTimeExists(Type offendingType)
         {
             var result = offendingType.MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTime);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
             result.Failures.First().Should().Contain(offendingType.FullName);
-        } 
+        }
+
+        private class OffendingDateTimeNowAsyncCitizen
+        {
+            private DateTime _current;
+
+            public async Task<DateTime> GetTime()
+            {
+                await Task.Delay(1);
+                _current = DateTime.UtcNow;
+                return _current;
+            }
+        }
+
+        [Test]
+        [TestCase(typeof(OffendingDateTimeNowAsyncCitizen))]
+        public void MustNotResolveCurrentTimeViaDateTimeConventionSpecification_FailsWhenACallToDateTimeExistsInAsyncMethod(Type offendingType)
+        {
+            var result = offendingType.MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTime);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+            result.Failures.First().Should().Contain(offendingType.FullName);
+        }
         
         private class GoodDateTimeOffsetCitizen
         {
@@ -117,14 +140,31 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             }
         }
 
+        private class AsyncOffendingDateTimeOffsetCitizen
+        {
+            private DateTimeOffset _current;
+
+            public async Task<DateTimeOffset> GetTime()
+            {
+                await Task.Delay(1);
+                _current = DateTimeOffset.UtcNow;
+                return _current;
+            }
+        }
+
         [Test]
         public void MustNotUseDateTimeOffsetNowConventionSpecification_FailsWhenACallToDateTimeOffsetNowOrDateTimeOffsetUtcNowExists()
         {
-            var result = new [] {  typeof (OffendingDateTimeOffsetCitizen), typeof(AnotherOffendingDateTimeOffsetCitizen) }
+            var result = new []
+                {
+                    typeof (OffendingDateTimeOffsetCitizen), 
+                    typeof(AnotherOffendingDateTimeOffsetCitizen),
+                    typeof(AsyncOffendingDateTimeOffsetCitizen)
+                }
                 .MustConformTo(Convention.MustNotUseDateTimeOffsetNow);
 
             result.Results.Should().OnlyContain(x => x.IsSatisfied == false);
-            result.Failures.Should().HaveCount(2);
+            result.Failures.Should().HaveCount(3);
         }
 
         private class SpecificException : DomainException

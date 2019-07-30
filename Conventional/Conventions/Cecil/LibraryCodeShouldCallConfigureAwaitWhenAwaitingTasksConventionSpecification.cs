@@ -14,8 +14,9 @@ namespace Conventional.Conventions.Cecil
         {
             var failures = type.ToTypeDefinition()
                 .Methods
-                .Where(HasAttribute<AsyncStateMachineAttribute>)
-                .Where(AwaitingTasksWithoutConfigureAwait);
+                .Where(x => x.HasAttribute<AsyncStateMachineAttribute>())
+                .Where(AwaitingTasksWithoutConfigureAwait)
+                .ToArray();
 
             if (failures.Any())
             {
@@ -28,7 +29,6 @@ namespace Conventional.Conventions.Cecil
             return ConventionResult.Satisfied(type.FullName);
         }
 
-        
         /// <summary>
         /// First we get the type of the compiler generated state machine. This will contain
         /// a MoveNext method containing the implementation.
@@ -41,14 +41,17 @@ namespace Conventional.Conventions.Cecil
             bool IsGetAwaiterCall(Instruction instruction) => IsAsyncMethodCall(instruction, "GetAwaiter");
             bool IsConfigureAwaitCall(Instruction instruction) => IsAsyncMethodCall(instruction, "ConfigureAwait");
 
-            var numberOfGetAwaiterCallsWithoutAConfigureAwaitCall = GetAsyncStateMachineType(subject)
-                                        .Methods
-                                        .Single(m => m.Name == "MoveNext")
-                                        .Body
-                                        .Instructions
-                                        .Aggregate(0, (sum, next) => IsGetAwaiterCall(next) 
-                                                            ? sum + 1 
-                                                            : IsConfigureAwaitCall(next) ? sum - 1 : sum);
+            var numberOfGetAwaiterCallsWithoutAConfigureAwaitCall =
+                subject.GetAsyncStateMachineType()
+                    .Methods
+                    .Single(m => m.Name == "MoveNext")
+                    .Body
+                    .Instructions
+                    .Aggregate(0, (sum, next) => IsGetAwaiterCall(next)
+                        ? sum + 1
+                        : IsConfigureAwaitCall(next)
+                            ? sum - 1
+                            : sum);
 
             return numberOfGetAwaiterCallsWithoutAConfigureAwaitCall > 0;
         }
@@ -62,27 +65,6 @@ namespace Conventional.Conventions.Cecil
                         ((MethodReference)instruction.Operand).DeclaringType.Resolve().FullName == "System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1"
                     ) &&
                     ((MethodReference)instruction.Operand).Name == methodName;
-        }
-
-        private static bool HasAttribute<TAttribute>(MethodDefinition subject) where TAttribute : Attribute
-        {
-            return GetAttribute<TAttribute>(subject) != null;
-        }
-
-        private static CustomAttribute GetAttribute<TAttribute>(MethodDefinition subject) where TAttribute : Attribute
-        {
-            return subject.CustomAttributes.FirstOrDefault(attribute => attribute.AttributeType.Name == typeof(TAttribute).Name);
-        }
-
-        /// <summary>
-        /// An async method will have an AsyncStateMachine attribute pointing to the generated async state machine type 
-        /// for example [AsyncStateMachine(typeof(AsyncMethods.<DownloadHtmlAsyncTask>d__0))]
-        /// see: http://www.codeproject.com/Articles/535635/Async-Await-and-the-Generated-StateMachine
-        /// </summary>
-        private static TypeDefinition GetAsyncStateMachineType(MethodDefinition provider)
-        {
-            var asyncStateMachineAttribute = GetAttribute<AsyncStateMachineAttribute>(provider);
-            return (TypeDefinition)asyncStateMachineAttribute.ConstructorArguments[0].Value;
         }
     }
 }
