@@ -54,7 +54,7 @@ namespace Conventional.Conventions.Cecil
                         x => (((MethodReference)x.Operand).DeclaringType.FullName, ((MethodReference)x.Operand).Name),
                         g => (g.DeclaringType?.FullName, g.Name),
                         (x,g) => x)
-                    .ToArray();
+                    .Distinct().ToArray();
 
             if (assignments.Any())
             {
