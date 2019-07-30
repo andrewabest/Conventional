@@ -99,6 +99,27 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             result.Failures.Should().HaveCount(1);
             result.Failures.First().Should().Contain(offendingType.FullName);
         }
+
+        private class OffendingDateTimeNowIteratorCitizen
+        {
+            public IEnumerable<DateTime> GetTimes()
+            {
+                yield return DateTime.Now;
+            }
+        }
+
+        [Test]
+        [TestCase(typeof(OffendingDateTimeNowIteratorCitizen))]
+        public void
+            MustNotResolveCurrentTimeViaDateTimeConventionSpecification_FailsWhenACallToDateTimeExistsInIteratorBlock(
+                Type offendingType)
+        {
+            var result = offendingType.MustConformTo(Convention.MustNotResolveCurrentTimeViaDateTime);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+            result.Failures.First().Should().Contain(offendingType.FullName);
+        }
         
         private class GoodDateTimeOffsetCitizen
         {
