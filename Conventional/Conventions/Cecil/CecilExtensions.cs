@@ -68,6 +68,12 @@ namespace Conventional.Conventions.Cecil
             return (TypeDefinition)asyncStateMachineAttribute.ConstructorArguments[0].Value;
         }
 
+        public static TypeDefinition GetIteratorStateMachineType(this MethodDefinition provider)
+        {
+            var iteratorStateMachineAttribute = provider.GetAttribute<IteratorStateMachineAttribute>();
+            return (TypeDefinition) iteratorStateMachineAttribute.ConstructorArguments[0].Value;
+        }
+
         public static bool HasAttribute<TAttribute>(this MethodDefinition subject) where TAttribute : Attribute
         {
             return GetAttribute<TAttribute>(subject) != null;

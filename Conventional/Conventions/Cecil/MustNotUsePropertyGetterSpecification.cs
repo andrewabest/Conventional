@@ -49,8 +49,13 @@ namespace Conventional.Conventions.Cecil
                             .Methods
                             .Where(x => x.HasAttribute<AsyncStateMachineAttribute>())
                             .SelectMany(x => x.GetAsyncStateMachineType().Methods.Where(method => method.HasBody))
-                            .SelectMany(method => method.Body.Instructions)
-                    );
+                            .SelectMany(method => method.Body.Instructions))
+                    .Union(
+                        type.ToTypeDefinition()
+                            .Methods
+                            .Where(x => x.HasAttribute<IteratorStateMachineAttribute>())
+                            .SelectMany(x => x.GetIteratorStateMachineType().Methods.Where(method => method.HasBody))
+                            .SelectMany(method => method.Body.Instructions));
 
             var assignments =
                 typeInstructions
