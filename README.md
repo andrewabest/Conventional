@@ -14,7 +14,7 @@ Conventional targets .NET Standard 2.0
 
 Looking for Roslyn-based conventions? Check out [the documentation](https://github.com/andrewabest/Conventional/wiki/Roslyn-Conventions) for more information.
 
-Conventional.Roslyn does not target .NET Standard 2.0 due to there being no official .NET Core support for `MSBuildWorkspace`, a core building block of Roslyn. 
+Conventional.Roslyn does not target .NET Standard 2.0 due to there being [no official .NET Core support](https://github.com/dotnet/roslyn/issues/17974) for `MSBuildWorkspace`, a core building block of Roslyn. 
 
 ## Documentation
 
