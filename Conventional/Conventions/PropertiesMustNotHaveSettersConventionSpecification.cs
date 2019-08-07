@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Conventional.Conventions
 {
-    public class PropertiesMustNotHaveSetters : PropertyConventionSpecification
+    public class PropertiesMustNotHaveSettersConventionSpecification : PropertyConventionSpecification
     {
         protected override string FailureMessage => "All properties must be immutable";
 

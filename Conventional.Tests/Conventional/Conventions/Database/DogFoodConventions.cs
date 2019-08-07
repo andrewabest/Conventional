@@ -11,7 +11,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         {
             typeof (DatabaseConventionSpecification).Assembly.GetExportedTypes()
                 .Where(x => typeof (DatabaseConventionSpecification).IsAssignableFrom(x) && !x.IsAbstract)
-                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification(".sql"))
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResources(".sql"))
                 .WithFailureAssertion(Assert.Fail);
         }
     }
