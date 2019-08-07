@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Conventional.Conventions
 {
-    public class CollectionPropertiesMustNotHaveSetters : PropertyConventionSpecification
+    public class CollectionPropertiesMustNotHaveSettersConventionSpecification : PropertyConventionSpecification
     {
         protected override string FailureMessage => "Collection properties must be immutable";
 

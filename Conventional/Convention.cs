@@ -57,18 +57,18 @@ namespace Conventional
             return new RequiresACorrespondingImplementationOfConventionSpecification(required, subjects);
         }
 
-        public static EnumerablePropertiesMustBeEagerLoadedConventionSpecification EnumerablePropertiesMustBeEagerLoadedConventionSpecification => new EnumerablePropertiesMustBeEagerLoadedConventionSpecification();
+        public static EnumerablePropertiesMustBeEagerLoadedConventionSpecification EnumerablePropertiesMustBeEagerLoaded => new EnumerablePropertiesMustBeEagerLoadedConventionSpecification();
 
-        public static CollectionPropertiesMustNotHaveSetters CollectionPropertiesMustNotHaveSetters => new CollectionPropertiesMustNotHaveSetters();
+        public static CollectionPropertiesMustNotHaveSettersConventionSpecification CollectionPropertiesMustNotHaveSetters => new CollectionPropertiesMustNotHaveSettersConventionSpecification();
 
-        public static PropertiesMustNotHaveSetters PropertiesMustNotHaveSetters => new PropertiesMustNotHaveSetters();
+        public static PropertiesMustNotHaveSettersConventionSpecification PropertiesMustNotHaveSetters => new PropertiesMustNotHaveSettersConventionSpecification();
 
-        public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
+        public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResources(string extension)
         {
             return new MustHaveMatchingEmbeddedResourcesConventionSpecification(extension);
         }
 
-        public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResourcesConventionSpecification(Func<Type, string> resourceNameMatcher)
+        public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResources(Func<Type, string> resourceNameMatcher)
         {
             return new MustHaveMatchingEmbeddedResourcesConventionSpecification(resourceNameMatcher);
         }

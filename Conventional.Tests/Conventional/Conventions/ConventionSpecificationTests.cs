@@ -529,7 +529,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void EnumerablePropertiesMustBeEagerLoadedConventionSpecification_Success()
         {
             typeof(HasEagerLoadedEnumerables)
-                 .MustConformTo(Convention.EnumerablePropertiesMustBeEagerLoadedConventionSpecification)
+                 .MustConformTo(Convention.EnumerablePropertiesMustBeEagerLoaded)
                  .IsSatisfied
                  .Should()
                  .BeTrue();
@@ -544,7 +544,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void EnumerablePropertiesMustBeEagerLoadedConventionSpecification_FailsWhenTypeHasEnumerablePropertiesThatAreNotEagerlyLoaded()
         {
             var result = typeof(HasLazilyLoadedEnumerables)
-                .MustConformTo(Convention.EnumerablePropertiesMustBeEagerLoadedConventionSpecification);
+                .MustConformTo(Convention.EnumerablePropertiesMustBeEagerLoaded);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -660,7 +660,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void MustHaveMatchingEmbeddedResourcesConventionSpecification_Success_WithWildcardFileExtension()
         {
             var result = typeof(HasMatchingEmbeddedResource)
-                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification("*.testdata"));
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResources("*.testdata"));
 
             result.IsSatisfied.Should().BeTrue();
         }
@@ -669,7 +669,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void MustHaveMatchingEmbeddedResourcesConventionSpecification_Success_WithNonWildcardFileExtension()
         {
             var result = typeof(HasMatchingEmbeddedResource)
-                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification("testdata"));
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResources("testdata"));
 
             result.IsSatisfied.Should().BeTrue();
         }
@@ -678,7 +678,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void MustHaveMatchingEmbeddedResourcesConventionSpecification_Success_WithResourceNameMatcher()
         {
             var result = typeof(HasMatchingEmbeddedResource)
-                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification(t =>
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResources(t =>
                     t.FullName + ".testdata"));
 
             result.IsSatisfied.Should().BeTrue();
@@ -688,7 +688,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void MustHaveMatchingEmbeddedResourcesConventionSpecification_FailsWhenFileNotEmbeddedResource_FileExtension()
         {
             var result = typeof (HasMatchingNonEmbeddedResource)
-                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification("testdata"));
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResources("testdata"));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Count().Should().Be(1);
@@ -698,7 +698,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void MustHaveMatchingEmbeddedResourcesConventionSpecification_FailsWhenFileNotEmbeddedResource_ResourceNameMatcher()
         {
             var result = typeof (HasMatchingNonEmbeddedResource)
-                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification(t =>
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResources(t =>
                     t.FullName + ".testdata"));
 
             result.IsSatisfied.Should().BeFalse();
@@ -709,7 +709,7 @@ namespace Conventional.Tests.Conventional.Conventions
         public void MustHaveMatchingEmbeddedResourcesConventionSpecification_FailsWhenFileDoesntExist_ResourceNameMatcher()
         {
             var result = typeof(HasNoMatchingFile)
-                .MustConformTo(Convention.MustHaveMatchingEmbeddedResourcesConventionSpecification(t =>
+                .MustConformTo(Convention.MustHaveMatchingEmbeddedResources(t =>
                     t.FullName + ".testdata"));
 
             result.IsSatisfied.Should().BeFalse();
