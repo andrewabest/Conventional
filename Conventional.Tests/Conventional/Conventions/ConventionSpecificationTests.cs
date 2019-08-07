@@ -563,10 +563,10 @@ namespace Conventional.Tests.Conventional.Conventions
         }
 
         [Test]
-        public void CollectionPropertiesMustBeImmutable_Success()
+        public void CollectionPropertiesMustNotHaveSetters_Success()
         {
             typeof(HasImmutableCollections)
-                 .MustConformTo(Convention.CollectionPropertiesMustBeImmutable)
+                 .MustConformTo(Convention.CollectionPropertiesMustNotHaveSetters)
                  .IsSatisfied
                  .Should()
                  .BeTrue();
@@ -578,10 +578,10 @@ namespace Conventional.Tests.Conventional.Conventions
         }
 
         [Test]
-        public void CollectionPropertiesMustBeImmutable_FailsWhenAMutableCollectionPropertyExists()
+        public void CollectionPropertiesMustNotHaveSetters_FailsWhenAMutableCollectionPropertyExists()
         {
             var result = typeof(HasMutableCollections)
-                .MustConformTo(Convention.CollectionPropertiesMustBeImmutable);
+                .MustConformTo(Convention.CollectionPropertiesMustNotHaveSetters);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -604,10 +604,10 @@ namespace Conventional.Tests.Conventional.Conventions
         }
 
         [Test]
-        public void AllPropertiesMustBeImmutable_Success()
+        public void PropertiesMustNotHaveSetters_Success()
         {
             typeof(HasImmutableProperties)
-                 .MustConformTo(Convention.AllPropertiesMustBeImmutable)
+                 .MustConformTo(Convention.PropertiesMustNotHaveSetters)
                  .IsSatisfied
                  .Should()
                  .BeTrue();
@@ -621,10 +621,10 @@ namespace Conventional.Tests.Conventional.Conventions
         }
 
         [Test]
-        public void AllPropertiesMustBeImmutable_FailsWhenMutablePropertiesExists()
+        public void PropertiesMustNotHaveSetters_FailsWhenMutablePropertiesExists()
         {
             var result = typeof(HasMutableProperties)
-                .MustConformTo(Convention.AllPropertiesMustBeImmutable);
+                .MustConformTo(Convention.PropertiesMustNotHaveSetters);
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);

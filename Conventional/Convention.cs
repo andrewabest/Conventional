@@ -59,9 +59,9 @@ namespace Conventional
 
         public static EnumerablePropertiesMustBeEagerLoadedConventionSpecification EnumerablePropertiesMustBeEagerLoadedConventionSpecification => new EnumerablePropertiesMustBeEagerLoadedConventionSpecification();
 
-        public static CollectionPropertiesMustBeImmutableConventionSpecification CollectionPropertiesMustBeImmutable => new CollectionPropertiesMustBeImmutableConventionSpecification();
+        public static CollectionPropertiesMustNotHaveSetters CollectionPropertiesMustNotHaveSetters => new CollectionPropertiesMustNotHaveSetters();
 
-        public static AllPropertiesMustBeImmutableConventionSpecification AllPropertiesMustBeImmutable => new AllPropertiesMustBeImmutableConventionSpecification();
+        public static PropertiesMustNotHaveSetters PropertiesMustNotHaveSetters => new PropertiesMustNotHaveSetters();
 
         public static MustHaveMatchingEmbeddedResourcesConventionSpecification MustHaveMatchingEmbeddedResourcesConventionSpecification(string extension)
         {
