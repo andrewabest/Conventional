@@ -6,11 +6,11 @@ namespace Conventional.Conventions
 {
     public class PropertiesMustNotHaveSettersConventionSpecification : PropertyConventionSpecification
     {
-        protected override string FailureMessage => "All properties must be immutable";
+        protected override string FailureMessage => "All properties must not have setters";
 
         protected override PropertyInfo[] GetNonConformingProperties(Type type)
         {
-            return type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+            return type.GetProperties()
                 .Where(x => x.GetSetMethod(true) != null)
                 .ToArray();
         }

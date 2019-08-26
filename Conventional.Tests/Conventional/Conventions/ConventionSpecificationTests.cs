@@ -72,7 +72,7 @@ namespace Conventional.Tests.Conventional.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
-        
+
         private class AllPublicSetterMock
         {
             public string Public { get; set; }
@@ -97,6 +97,22 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesMustHavePublicSetters_FailsWhenPrivateSetterExists()
         {
             var result = typeof (AllPrivateSetterMock)
+                .MustConformTo(Convention.PropertiesMustHavePublicSetters);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        private class AllNoSetterMock
+        {
+            // ReSharper disable once UnusedMember.Local
+            public string PrivateSet { get; }
+        }
+
+        [Test]
+        public void PropertiesMustHavePublicSetters_FailsWhenNoSetterExists()
+        {
+            var result = typeof (AllNoSetterMock)
                 .MustConformTo(Convention.PropertiesMustHavePublicSetters);
 
             result.IsSatisfied.Should().BeFalse();
@@ -129,6 +145,16 @@ namespace Conventional.Tests.Conventional.Conventions
         }
 
         [Test]
+        public void PropertiesMustHaveProtectedSetters_FailsWhenNoSetterExists()
+        {
+            var result = typeof(AllNoSetterMock)
+                .MustConformTo(Convention.PropertiesMustHaveProtectedSetters);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
         public void PropertiesMustHavePrivateSetters_Success()
         {
             typeof(AllPrivateSetterMock)
@@ -142,6 +168,16 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesMustHavePrivateSetters_FailsWhenOtherSetterExists()
         {
             var result = typeof(AllProtectedSetterMock)
+                .MustConformTo(Convention.PropertiesMustHavePrivateSetters);
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void PropertiesMustHavePrivateSetters_FailsWhenNoSetterExists()
+        {
+            var result = typeof(AllNoSetterMock)
                 .MustConformTo(Convention.PropertiesMustHavePrivateSetters);
 
             result.IsSatisfied.Should().BeFalse();
