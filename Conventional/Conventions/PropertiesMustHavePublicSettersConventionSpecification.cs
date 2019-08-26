@@ -11,8 +11,7 @@ namespace Conventional.Conventions
         protected override PropertyInfo[] GetNonConformingProperties(Type type)
         {
             return type.GetProperties()
-                .Where(p => p.CanWrite)
-                .Where(subject => subject.GetSetMethod(true).IsPublic == false)
+                .Where(subject => subject.CanWrite == false || subject.GetSetMethod(true).IsPublic == false)
                 .ToArray();
         }
     }
