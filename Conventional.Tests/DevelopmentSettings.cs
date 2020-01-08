@@ -12,7 +12,7 @@ namespace Conventional.Tests
 #if DEBUG
         public string ConnectionString { get; set; } = @"Server=.\SQLEXPRESS;Database=Conventional;Integrated Security=true;";
 #else
-        public string ConnectionString { get; set; } = @"Server=(local)\SQL2014;Database=Conventional;User ID=sa;Password=Password12!";
+        public string ConnectionString { get; set; } = @"Server=(local)\SQL2017;Database=Conventional;User ID=sa;Password=Password12!";
 #endif
 
         public static DevelopmentSettings Create()
