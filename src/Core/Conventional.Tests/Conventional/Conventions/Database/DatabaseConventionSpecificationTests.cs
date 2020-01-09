@@ -40,6 +40,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllCheckConstraintsMustBeNamedConventionalSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllCheckConstraintsMustBeNamedConventionalSpecification_Success.sql");
@@ -53,6 +54,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllCheckConstraintsMustBeNamedConventionalSpecification_Fail()
         {
             ExecuteSqlScriptFromResource("AllCheckConstraintsMustBeNamedConventionalSpecification_Fail.sql");
@@ -66,6 +68,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllDefaultConstraintsMustBeNamedConventionalSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllDefaultConstraintsMustBeNamedConventionalSpecification_Success.sql");
@@ -79,6 +82,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail()
         {
             ExecuteSqlScriptFromResource("AllDefaultConstraintsMustBeNamedConventionalSpecification_Fail.sql");
@@ -92,6 +96,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Success.sql");
@@ -105,6 +110,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Fail()
         {
             ExecuteSqlScriptFromResource("AllPrimaryKeyConstraintsMustBeNamedConventionalSpecification_Fail.sql");
@@ -118,6 +124,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllReferenceConstraintsMustBeNamedConventionalSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllReferenceConstraintsMustBeNamedConventionalSpecification_Success.sql");
@@ -131,6 +138,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail()
         {
             ExecuteSqlScriptFromResource("AllReferenceConstraintsMustBeNamedConventionalSpecification_Fail.sql");
@@ -144,6 +152,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllUniqueConstraintsMustBeNamedConventionalSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllUniqueConstraintsMustBeNamedConventionalSpecification_Success.sql");
@@ -157,6 +166,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail()
         {
             ExecuteSqlScriptFromResource("AllUniqueConstraintsMustBeNamedConventionalSpecification_Fail.sql");
@@ -170,6 +180,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllNamedColumnsMustBeNullableConventionSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql");
@@ -183,6 +194,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllNamedColumnsMustBeNonNullableConventionSpecification_Fails()
         {
             ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql");
@@ -196,6 +208,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllNamedColumnsMustBeNonNullableConventionSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Success.sql");
@@ -209,6 +222,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllNamedColumnsMustBeNullableConventionSpecification_Fails()
         {
             ExecuteSqlScriptFromResource("AllNamedColumnsMustBeNullableConventionalSpecification_Fail.sql");
@@ -222,6 +236,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification_Success()
         {
             ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationSuccess.sql");
@@ -235,6 +250,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
         
         [Test]
+        [Category("Database")]
         public void AllIdentityColumnsMustBeNamedTableNameIdConventionSpecification_FailsWhenIdentityColumnIsNotNamedId()
         {
             ExecuteSqlScriptFromResource("AllIdentityColumnsMustBeNamedTableNameIdConventionSpecificationFailure.sql");
@@ -248,6 +264,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
         
         [Test]
+        [Category("Database")]
         public void AllTablesMustHaveAClusteredIndex_Success()
         {
             ExecuteSqlScriptFromResource("TablesWithoutClusteredIndexSuccess.sql");
@@ -261,6 +278,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void AllTablesMustHaveAClusteredIndex_Failure()
         {
             ExecuteSqlScriptFromResource("TablesWithoutClusteredIndexFailure.sql");
@@ -274,6 +292,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void EachRowMustHaveACorrespondingEnum_Success()
         {
             ExecuteSqlScriptFromResource("EachRowMustHaveACorrespondingEnum_Success.sql");
@@ -287,6 +306,7 @@ namespace Conventional.Tests.Conventional.Conventions.Database
         }
 
         [Test]
+        [Category("Database")]
         public void EachRowMustHaveACorrespondingEnum_Fail()
         {
             ExecuteSqlScriptFromResource("EachRowMustHaveACorrespondingEnum_Fail.sql");
@@ -308,19 +328,15 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             {
                 if (stream == null) { throw new MissingManifestResourceException(fullResourceName); }
 
-                using (var reader = new StreamReader(stream))
-                {
-                    script = reader.ReadToEnd();
-                }
+                using var reader = new StreamReader(stream);
+                script = reader.ReadToEnd();
             }
 
-            using (IDbConnection dbConnection = new SqlConnection(_settings.ConnectionString))
-            {
-                dbConnection.Open();
-                var command = dbConnection.CreateCommand();
-                command.CommandText = script;
-                command.ExecuteNonQuery();
-            }
+            using var dbConnection = new SqlConnection(_settings.ConnectionString);
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = script;
+            command.ExecuteNonQuery();
         }
 
         private void CreateDatabase()
@@ -329,13 +345,11 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             var dbName = sb.InitialCatalog;
             sb.InitialCatalog = "master";
 
-            using (IDbConnection dbConnection = new SqlConnection(sb.ConnectionString))
-            {
-                dbConnection.Open();
-                var command = dbConnection.CreateCommand();
-                command.CommandText = SqlScripts.CreateDb(dbName);
-                command.ExecuteNonQuery();
-            }
+            using var dbConnection = new SqlConnection(sb.ConnectionString);
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = SqlScripts.CreateDb(dbName);
+            command.ExecuteNonQuery();
         }
         
         private void DropDatabase()
@@ -344,13 +358,11 @@ namespace Conventional.Tests.Conventional.Conventions.Database
             var dbName = sb.InitialCatalog;
             sb.InitialCatalog = "master";
 
-            using (IDbConnection dbConnection = new SqlConnection(sb.ConnectionString))
-            {
-                dbConnection.Open();
-                var command = dbConnection.CreateCommand();
-                command.CommandText = SqlScripts.DropDb(dbName);
-                command.ExecuteNonQuery();
-            }
+            using var dbConnection = new SqlConnection(sb.ConnectionString);
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = SqlScripts.DropDb(dbName);
+            command.ExecuteNonQuery();
         }
     }
 }
