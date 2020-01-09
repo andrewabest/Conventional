@@ -450,9 +450,9 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalled()
         {
 
-            var expectedFailureMessage = @"Libraries must call Task.ConfigureAwait(false) to prevent deadlocks"
+            var expectedFailureMessage = "Libraries must call Task.ConfigureAwait(false) to prevent deadlocks"
                                          + Environment.NewLine
-                                         + @"- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwait.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait";
+                                         + "- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwait.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait";
 
             var result = typeof(HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwait)
                 .MustConformTo(Convention.LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks);
@@ -477,9 +477,9 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         [Test]
         public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalledButIsCalledForOtherMethods()
         {
-            var expectedFailureMessage = @"Libraries must call Task.ConfigureAwait(false) to prevent deadlocks"
+            var expectedFailureMessage = "Libraries must call Task.ConfigureAwait(false) to prevent deadlocks"
                                          + Environment.NewLine
-                                         + @"- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait";
+                                         + "- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait";
   
             var result = typeof(HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes)
                 .MustConformTo(Convention.LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks);
@@ -500,9 +500,9 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         [Test]
         public void LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks_FailsWhenConfigureAwaitIsNotCalledForASingleTask()
         {
-            const string expectedFailureMessage = @"Libraries must call Task.ConfigureAwait(false) to prevent deadlocks
-	- HasAnAsyncMethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne.MethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne
-";
+            var expectedFailureMessage = "Libraries must call Task.ConfigureAwait(false) to prevent deadlocks"
+                                         + Environment.NewLine
+                                         + "- HasAnAsyncMethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne.MethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne";
 
             var result = typeof(HasAnAsyncMethodThatAwaitsMultipleTasksAndDoesNotCallConfigureAwaitForOne)
                 .MustConformTo(Convention.LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks);

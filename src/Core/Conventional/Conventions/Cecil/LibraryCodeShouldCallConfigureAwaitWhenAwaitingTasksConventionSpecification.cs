@@ -20,7 +20,7 @@ namespace Conventional.Conventions.Cecil
 
             if (failures.Any())
             {
-                var details = failures.Aggregate(string.Empty, (s, info) => s + "- " + type.Name + "." + info.Name + Environment.NewLine);
+                var details = string.Join(Environment.NewLine, failures.Select(info => "- " + type.Name + "." + info.Name));
                 var failureMessage = BuildFailureMessage(details);
 
                 return ConventionResult.NotSatisfied(type.FullName, failureMessage);

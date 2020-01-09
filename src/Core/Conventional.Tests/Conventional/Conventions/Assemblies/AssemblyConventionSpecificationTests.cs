@@ -66,7 +66,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         public void MustHaveFilesWithACertainExtensionBeResources_FailsWhenFilesAreNotResources_Regex()
         {
             var expectedFailureMessage =
-                @" All files matching '.\.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'"
+                @"All files matching '.\.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'"
                 + Environment.NewLine
                 + @"- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt"
                 + Environment.NewLine
@@ -84,7 +84,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         public void MustHaveFilesWithACertainExtensionBeResources_FailsWhenFilesAreNotResources_FileExtension()
         {
             var expectedFailureMessage =
-                @" All files matching '*.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'"
+                @"All files matching '*.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'"
                 + Environment.NewLine
                 + @"- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt"
                 + Environment.NewLine
