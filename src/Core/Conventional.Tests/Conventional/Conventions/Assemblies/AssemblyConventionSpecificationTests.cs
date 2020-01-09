@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -15,7 +16,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         public void Setup()
         {
             _testAssembly = Assembly.LoadFrom(KnownPaths.SolutionRoot +
-                                              "TestSolution/TestSolution.TestProject/bin/Debug/TestSolution.TestProject.dll");
+                $"TestSolution{Path.DirectorySeparatorChar}TestSolution.TestProject{Path.DirectorySeparatorChar}bin{Path.DirectorySeparatorChar}Debug{Path.DirectorySeparatorChar}TestSolution.TestProject.dll");
         }
 
         [Test]
@@ -51,6 +52,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
                 .BeTrue();
         }
 
+        [Test]
         public void MustHaveFilesWithACertainExtensionBeResources_Success_RegEx()
         {
             var matchResxFiles = new Regex(@"\.RESX$", RegexOptions.IgnoreCase);
