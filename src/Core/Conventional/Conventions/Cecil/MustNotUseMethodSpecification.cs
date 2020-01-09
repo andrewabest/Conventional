@@ -9,7 +9,6 @@ namespace Conventional.Conventions.Cecil
 {
     public abstract class MustNotUseMethodSpecification : ConventionSpecification
     {
-        private readonly (string DeclaringType, string MethodName)[] _getterDetails;
         private readonly MethodInfo[] _methodInfos;
 
         protected MustNotUseMethodSpecification(MethodInfo methodInfo,

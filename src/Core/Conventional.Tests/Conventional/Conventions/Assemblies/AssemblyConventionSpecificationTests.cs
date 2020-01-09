@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using FluentAssertions;
@@ -132,10 +133,12 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         public void
             MustHaveFilesWithACertainExtensionBeEmbeddedResources_FailsWhenFilesAreNotEmbeddedResources_FileExtension()
         {
-            var expectedFailureMessage = @"
-All files matching '*.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'
-- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt
-- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt".Trim();
+            var expectedFailureMessage =
+                "All files matching '*.txt' within assembly 'Conventional.Tests' must have their build action set to 'Embedded Resource'"
+                + Environment.NewLine
+                + @"- Conventional\Conventions\Assemblies\non_embedded_text_file_first.txt"
+                + Environment.NewLine
+                + @"- Conventional\Conventions\Assemblies\non_embedded_text_file_second.txt";
 
             var result = typeof(AssemblyConventionSpecificationTests).Assembly
                 .MustConformTo(Convention.MustHaveFilesBeEmbeddedResources("*.txt"));
