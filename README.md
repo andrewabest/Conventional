@@ -4,7 +4,7 @@ Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y02
 
 Conventional provides a suite of ready-made tests for enforcing conventions within your types, assemblies, solutions and databases to make sure your duckies are all in a row.
 
-Conventional targets .NET Standard 2.0
+Conventional targets .NET Standard 2.0, and as of Conventional 7.x, Conventional ❤'s Linux!
 
 ![](https://raw.github.com/andrewabest/Conventional/master/duck.png)
 
