@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Mono.Cecil;
 
 namespace Conventional.Conventions.Cecil
@@ -16,7 +18,7 @@ namespace Conventional.Conventions.Cecil
         public virtual AssemblyDefinition Resolve(string fullName, ReaderParameters parameters)
         {
             if (fullName == null)
-                throw new ArgumentNullException("fullName");
+                throw new ArgumentNullException(nameof(fullName));
 
             return Resolve(AssemblyNameReference.Parse(fullName), parameters);
         }
@@ -29,7 +31,7 @@ namespace Conventional.Conventions.Cecil
         public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             var assembly = Assembly.Load(name.Name);
 
@@ -38,7 +40,11 @@ namespace Conventional.Conventions.Cecil
 
         private static string GetPathToAssembly(Assembly assembly)
         {
-            return assembly.CodeBase.Replace(FileSchemePrefix, string.Empty);
+            var codebase = assembly.CodeBase.Replace(FileSchemePrefix, string.Empty);
+
+            return 
+                RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ?
+                $"/{codebase}" : codebase;
         }
 
         protected virtual void Dispose(bool disposing)
