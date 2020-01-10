@@ -48,11 +48,13 @@ namespace Conventional.Conventions.Assemblies
                     .Select(x => x.Replace($"{ProjectFolder}{Path.DirectorySeparatorChar}", ""))
                     .ToArray();
 
+            var normalisedIncludes = children.Select(c => c.Include.Replace('\\', Path.DirectorySeparatorChar));
+
             var failures =
                 children
                     .Where(itemGroupItem => itemGroupItem.MatchesPatternAndIsNotAnEmbeddedResourceOrReference(_fileMatchRegex))
                     .Select(itemGroupItem => itemGroupItem.ToString())
-                    .Union(projectFiles.Where(x => children.None(child => child.Include.Equals(x))))
+                    .Union(projectFiles.Where(x => normalisedIncludes.None(include => include.Equals(x))))
                     .ToArray();
 
             return BuildResult(assemblyName, failures);

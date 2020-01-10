@@ -49,11 +49,13 @@ namespace Conventional.Conventions.Assemblies
                     .Select(x => x.Replace($"{ProjectFolder}{Path.DirectorySeparatorChar}", ""))
                     .ToArray();
 
+            var normalisedUpdates = children.Select(c => c.Update.Replace('\\', Path.DirectorySeparatorChar));
+
             var failures =
                 children
                     .Where(itemGroupItem => itemGroupItem.MatchesPatternAndIsNotAnEmbeddedResource(_fileMatchRegex))
                     .Select(itemGroupItem => itemGroupItem.ToString())
-                    .Union(projectFiles.Where(x => children.None(child => child.Update.Equals(x))))
+                    .Union(projectFiles.Where(x => normalisedUpdates.None(update => update.Equals(x))))
                     .ToArray();
 
             return BuildResult(assemblyName, failures, "Embedded Resource");
