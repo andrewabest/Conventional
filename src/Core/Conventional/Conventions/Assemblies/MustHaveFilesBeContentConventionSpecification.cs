@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -44,7 +45,7 @@ namespace Conventional.Conventions.Assemblies
                 DirectoryEx
                     .GetFilesExceptOutput(ProjectFolder, "*")
                     .Where(x => _fileMatchRegex.IsMatch(x))
-                    .Select(x => x.Replace($"{ProjectFolder}\\", ""))
+                    .Select(x => x.Replace($"{ProjectFolder}{Path.DirectorySeparatorChar}", ""))
                     .ToArray();
 
             var failures =

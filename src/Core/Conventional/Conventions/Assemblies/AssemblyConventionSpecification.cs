@@ -34,8 +34,8 @@ namespace Conventional.Conventions.Assemblies
             {
                 assemblyName =
                     projectFilePath.Substring(
-                        projectFilePath.LastIndexOf("\\", StringComparison.Ordinal) + 1,
-                        projectFilePath.LastIndexOf(".", StringComparison.Ordinal) - projectFilePath.LastIndexOf("\\", StringComparison.Ordinal) - 1);
+                        projectFilePath.LastIndexOf(Path.DirectorySeparatorChar) + 1,
+                        projectFilePath.LastIndexOf(".", StringComparison.Ordinal) - projectFilePath.LastIndexOf(Path.DirectorySeparatorChar) - 1);
             }
 
             return
