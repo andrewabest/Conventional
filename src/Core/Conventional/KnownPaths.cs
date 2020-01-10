@@ -6,9 +6,6 @@ namespace Conventional
 {
     public static class KnownPaths
     {
-        //private static readonly Func<string, string> DefaultSolutionRootFinder = x => x.Substring(0, x.LastIndexOf("\\bin\\", StringComparison.Ordinal));
-        //private static readonly Func<string> DefaultSolutionRoot = () => Path.GetFullPath(Path.Combine(SolutionRootFinder(AppContext.BaseDirectory), @"..\"));
-
         private static readonly Func<string, string> DefaultSolutionRootFinder = x => x.Substring(0, x.LastIndexOf($"{Path.DirectorySeparatorChar}bin{Path.DirectorySeparatorChar}", StringComparison.Ordinal));
         private static readonly Func<string> DefaultSolutionRoot = () => Directory.GetParent(SolutionRootFinder(AppContext.BaseDirectory)).FullName + Path.DirectorySeparatorChar;
         private static readonly Func<string> DefaultPathToSolutionRoot = () => Directory.GetFiles(SolutionRoot, "*.sln", SearchOption.AllDirectories).FirstOrDefault();
