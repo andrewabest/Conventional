@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Conventional.Conventions.Assemblies;
@@ -16,7 +17,7 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         {
             _testAssembly =
                 Assembly.LoadFrom(KnownPaths.SolutionRoot +
-                                  "TestSolution/TestSolution.TestProject/bin/Debug/TestSolution.TestProject.dll");
+                    $"TestSolution{Path.DirectorySeparatorChar}TestSolution.TestProject{Path.DirectorySeparatorChar}bin{Path.DirectorySeparatorChar}Debug{Path.DirectorySeparatorChar}TestSolution.TestProject.dll");
         }
 
         [Test]
@@ -56,9 +57,8 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
         {
             var result = _testAssembly.MustConformTo(Convention.MustIncludeAllMatchingFilesInFolder("*.js"));
             var failureText = result.Failures.Single();
-            failureText.Should().Contain(@"All files matching '*.js' within ");
-            failureText.Should().Contain(@"\TestSolution\TestSolution.TestProject' must be included in the project.");
-            failureText.Should().Contain(@"\TestSolution\TestSolution.TestProject\Scripts\unincludedJsFile.js");
+            failureText.Should().Contain("TestSolution.TestProject");
+            failureText.Should().Contain("unincludedJsFile.js");
             failureText.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries).Length.Should().Be(2);
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -44,14 +45,16 @@ namespace Conventional.Conventions.Assemblies
                 DirectoryEx
                     .GetFilesExceptOutput(ProjectFolder, "*")
                     .Where(x => _fileMatchRegex.IsMatch(x))
-                    .Select(x => x.Replace($"{ProjectFolder}\\", ""))
+                    .Select(x => x.Replace($"{ProjectFolder}{Path.DirectorySeparatorChar}", ""))
                     .ToArray();
+
+            var normalisedIncludes = children.Select(c => c.Include.Replace('\\', Path.DirectorySeparatorChar));
 
             var failures =
                 children
                     .Where(itemGroupItem => itemGroupItem.MatchesPatternAndIsNotAnEmbeddedResourceOrReference(_fileMatchRegex))
                     .Select(itemGroupItem => itemGroupItem.ToString())
-                    .Union(projectFiles.Where(x => children.None(child => child.Include.Equals(x))))
+                    .Union(projectFiles.Where(x => normalisedIncludes.None(include => include.Equals(x))))
                     .ToArray();
 
             return BuildResult(assemblyName, failures);

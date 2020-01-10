@@ -14,7 +14,7 @@ namespace Conventional.Extensions
             string filePattern)
         {
             return GetFiles(rootPath,
-                x => ProjectOutputFolders.Select(folder => $"\\{folder}\\").None(x.Contains), filePattern);
+                x => ProjectOutputFolders.Select(folder => $"{Path.DirectorySeparatorChar}{folder}{Path.DirectorySeparatorChar}").None(x.Contains), filePattern);
         }
 
         public static IEnumerable<string> GetFiles(
