@@ -37,8 +37,11 @@ namespace Conventional.Conventions.Assemblies
         {
             var files = AllMatchingFilesInFolder(ConventionTargetFolder);
 
-            var failures = files.Where(file =>
-                ItemGroupItem.FromProjectDocument(projectDocument).None(igi => igi.MatchesAbsolutePath(file.Replace(ProjectFolder, "").TrimStart(Path.DirectorySeparatorChar))))
+            var normalisedIncludes = ItemGroupItem.FromProjectDocument(projectDocument)
+                .Select(item => item.Include.Replace('\\', Path.DirectorySeparatorChar));
+
+
+            var failures = files.Where(file => normalisedIncludes.None(include => include == file.Replace(ProjectFolder, "").TrimStart(Path.DirectorySeparatorChar)))
                 .ToArray();
 
             if (failures.Any())
