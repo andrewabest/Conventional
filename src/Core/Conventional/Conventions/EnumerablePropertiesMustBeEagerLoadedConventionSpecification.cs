@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Reflection;
+using Conventional.Extensions;
 
 namespace Conventional.Conventions
 {
@@ -12,7 +13,7 @@ namespace Conventional.Conventions
         public override ConventionResult IsSatisfiedBy(Type type)
         {
             var enumerables = type
-                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .GetDeclaredProperties()
                 .Select(p => p.PropertyType)
                 .Where(t => t != typeof(string) && (typeof(IEnumerable).IsAssignableFrom(t)))
                 .ToArray();

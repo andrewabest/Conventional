@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Reflection;
+using Conventional.Extensions;
 
 namespace Conventional.Conventions
 {
@@ -12,7 +13,7 @@ namespace Conventional.Conventions
         protected override PropertyInfo[] GetNonConformingProperties(Type type)
         {
             return type
-                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .GetDeclaredProperties()
                 .Where(p => p.PropertyType != typeof (string) && (typeof (IEnumerable).IsAssignableFrom(p.PropertyType)))
                 .Where(p => p.GetSetMethod(true) != null)
                 .ToArray();
