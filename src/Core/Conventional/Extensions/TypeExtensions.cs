@@ -7,6 +7,12 @@ namespace Conventional.Extensions
 {
     public static class TypeExtensions
     {
+        internal static PropertyInfo[] GetDeclaredProperties(this Type type)
+        {
+            return type.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static |
+                                      BindingFlags.Public);
+        }
+
         internal static bool IsGenericImplementation(this Type type)
         {
             return (type.BaseType != null && type.BaseType.IsGenericType) ||

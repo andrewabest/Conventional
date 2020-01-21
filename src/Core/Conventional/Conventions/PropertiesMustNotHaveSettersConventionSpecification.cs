@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Conventional.Extensions;
 
 namespace Conventional.Conventions
 {
@@ -10,7 +11,7 @@ namespace Conventional.Conventions
 
         protected override PropertyInfo[] GetNonConformingProperties(Type type)
         {
-            return type.GetProperties()
+            return type.GetDeclaredProperties()
                 .Where(x => x.GetSetMethod(true) != null)
                 .ToArray();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Conventional.Extensions;
 
 namespace Conventional.Conventions
 {
@@ -22,7 +23,7 @@ namespace Conventional.Conventions
         public override ConventionResult IsSatisfiedBy(Type type)
         {
             var properties = type
-                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .GetDeclaredProperties()
                 .Where(p => _propertyType.IsAssignableFrom(p.PropertyType))
                 .Where(p => _writablePropertiesOnly && p.CanWrite)
                 .ToArray();

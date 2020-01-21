@@ -58,6 +58,26 @@ namespace Conventional.Tests.Conventional.Conventions
                 .BeTrue();
         }
 
+        private class AllPublicGetterMockBase
+        {
+            public string Private { private get; set; }
+        }
+
+        private class AllPublicGetterMockDerived : AllPublicGetterMockBase
+        {
+            public string Public { get; set; }
+        }
+
+        [Test]
+        public void PropertiesMustHavePublicGetters_IgnoresInheritedProperties()
+        {
+            typeof(AllPublicGetterMockDerived)
+                .MustConformTo(Convention.PropertiesMustHavePublicGetters)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
         private class PrivateGetterMock
         {
             public string PrivateGet { private get; set; }
@@ -82,6 +102,26 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesMustHavePublicSetters_Success()
         {
             typeof(AllPublicSetterMock)
+                .MustConformTo(Convention.PropertiesMustHavePublicSetters)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class AllPublicSetterMockBase
+        {
+            public string Private { get; private set; }
+        }
+
+        private class AllPublicSetterMockDerived : AllPublicSetterMockBase
+        {
+            public string Public { get; set; }
+        }
+
+        [Test]
+        public void PropertiesMustHavePublicSetters_IgnoresInheritedProperties()
+        {
+            typeof(AllPublicSetterMockDerived)
                 .MustConformTo(Convention.PropertiesMustHavePublicSetters)
                 .IsSatisfied
                 .Should()
@@ -134,6 +174,26 @@ namespace Conventional.Tests.Conventional.Conventions
                 .BeTrue();
         }
 
+        private class AllProtectedSetterMockBase
+        {
+            public string Private { get; private set; }
+        }
+
+        private class AllProtectedSetterMockDerived : AllProtectedSetterMockBase
+        {
+            public string Public { get; protected set; }
+        }
+
+        [Test]
+        public void PropertiesMustHaveProtectedSetters_IgnoresInheritedProperties()
+        {
+            typeof(AllProtectedSetterMockDerived)
+                .MustConformTo(Convention.PropertiesMustHaveProtectedSetters)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
         [Test]
         public void PropertiesMustHaveProtectedSetters_FailsWhenOtherSetterExists()
         {
@@ -158,6 +218,26 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesMustHavePrivateSetters_Success()
         {
             typeof(AllPrivateSetterMock)
+                .MustConformTo(Convention.PropertiesMustHavePrivateSetters)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class AllPrivateSetterMockBase
+        {
+            public string Public { get; set; }
+        }
+
+        private class AllPrivateSetterMockDerived : AllPrivateSetterMockBase
+        {
+            public string Private { get; private set; }
+        }
+
+        [Test]
+        public void PropertiesMustHavePrivateSetters_IgnoresInheritedProperties()
+        {
+            typeof(AllPrivateSetterMockDerived)
                 .MustConformTo(Convention.PropertiesMustHavePrivateSetters)
                 .IsSatisfied
                 .Should()
@@ -484,6 +564,17 @@ namespace Conventional.Tests.Conventional.Conventions
         {
         }
 
+        private class MockWithoutPropertyAttributeBase
+        {
+            public string Description { get; set; }
+        }
+
+        private class MockWithPropertyAttributeDerived : MockWithoutPropertyAttributeBase
+        {
+            [MaxLength(255)]
+            public string Name { get; set; }
+        }
+
         private class MockWithPropertyAttribute
         {
             [MaxLength(255)]
@@ -505,6 +596,16 @@ namespace Conventional.Tests.Conventional.Conventions
         public void PropertiesOfTypeMustHaveAttributeConventionSpecification_Success()
         {
             typeof(MockWithPropertyAttribute)
+                .MustConformTo(Convention.PropertiesOfTypeMustHaveAttribute(typeof(string), typeof(MaxLengthAttribute)))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void PropertiesOfTypeMustHaveAttributeConventionSpecification_IgnoresInheritedProperties()
+        {
+            typeof(MockWithPropertyAttributeDerived)
                 .MustConformTo(Convention.PropertiesOfTypeMustHaveAttribute(typeof(string), typeof(MaxLengthAttribute)))
                 .IsSatisfied
                 .Should()
@@ -571,6 +672,26 @@ namespace Conventional.Tests.Conventional.Conventions
                  .BeTrue();
         }
 
+        private class HasLazilyLoadedEnumerablesBase
+        {
+            public IEnumerable<string> Descriptions { get; set; }
+        }
+
+        private class HasEagerLoadedEnumerablesDerived : HasLazilyLoadedEnumerablesBase
+        {
+            public string[] Names { get; set; }
+        }
+
+        [Test]
+        public void EnumerablePropertiesMustBeEagerLoadedConventionSpecification_IgnoresInheritedProperties()
+        {
+            typeof(HasEagerLoadedEnumerablesDerived)
+                .MustConformTo(Convention.EnumerablePropertiesMustBeEagerLoaded)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
         private class HasLazilyLoadedEnumerables
         {
             public IEnumerable<string> Names { get; set; } 
@@ -608,6 +729,31 @@ namespace Conventional.Tests.Conventional.Conventions
                  .BeTrue();
         }
 
+        private class HasMutableCollectionsBase
+        {
+            public string[] Colours { get; set; }
+        }
+
+        private class HasImmutableCollectionsDerived : HasMutableCollectionsBase
+        {
+            public HasImmutableCollectionsDerived(string[] names)
+            {
+                Names = names;
+            }
+
+            public string[] Names { get; }
+        }
+
+        [Test]
+        public void CollectionPropertiesMustNotHaveSetters_IgnoresInheritedProperties()
+        {
+            typeof(HasImmutableCollectionsDerived)
+                .MustConformTo(Convention.CollectionPropertiesMustNotHaveSetters)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
         private class HasMutableCollections
         {
             public string[] Names { get; set; }
@@ -625,18 +771,15 @@ namespace Conventional.Tests.Conventional.Conventions
         
         private class HasImmutableProperties
         {
-            private readonly string[] _names;
-            private readonly int _age;
-
             public HasImmutableProperties(string[] names, int age)
             {
-                _names = names;
-                _age = age;
+                Names = names;
+                Age = age;
             }
 
-            public string[] Names => _names;
+            public string[] Names { get; }
 
-            public int Age => _age;
+            public int Age { get; }
         }
 
         [Test]
@@ -647,6 +790,34 @@ namespace Conventional.Tests.Conventional.Conventions
                  .IsSatisfied
                  .Should()
                  .BeTrue();
+        }
+
+        private class HasMutablePropertiesBase
+        {
+            public int Age { get; set; }
+        }
+
+        private class HasImmutablePropertiesDerived : HasMutablePropertiesBase
+        {
+            public HasImmutablePropertiesDerived(string[] names, int age)
+            {
+                Names = names;
+                Age = age;
+            }
+
+            public string[] Names { get; }
+
+            public int Age { get; }
+        }
+
+        [Test]
+        public void PropertiesMustNotHaveSetters_IgnoresInheritedProperties()
+        {
+            typeof(HasImmutablePropertiesDerived)
+                .MustConformTo(Convention.PropertiesMustNotHaveSetters)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
         }
 
         private class HasMutableProperties
@@ -664,6 +835,41 @@ namespace Conventional.Tests.Conventional.Conventions
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
+        }
+
+        private class DoesNotHaveEnumerableProperty
+        {
+            public long Ticks { get; set; }
+        }
+
+        [Test]
+        public void MustNotHaveAPropertyOfType_Success()
+        {
+            var result = typeof(DoesNotHaveEnumerableProperty)
+                .MustConformTo(Convention.MustNotHaveAPropertyOfType(typeof(IEnumerable<>), "reason"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class HasEnumerablePropertyBase
+        {
+            public IEnumerable<int> Numbers { get; set; }
+        }
+
+        private class DoesNotHaveEnumerablePropertyDerived : HasEnumerablePropertyBase
+        {
+            public long Ticks { get; set; }
+        }
+
+        [Test]
+        public void MustNotHaveAPropertyOfType_IgnoresInheritedProperties()
+        {
+            var result = typeof(DoesNotHaveEnumerablePropertyDerived)
+                .MustConformTo(Convention.MustNotHaveAPropertyOfType(typeof(IEnumerable<>), "reason"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
         }
 
         private class HasGenericAndNonGenericProperty

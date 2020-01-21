@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Conventional.Extensions;
 
 namespace Conventional.Conventions
 {
@@ -20,14 +21,14 @@ namespace Conventional.Conventions
         {
             if (_propertyType.IsGenericTypeDefinition)
             {
-                return type.GetProperties()
+                return type.GetDeclaredProperties()
                     .Any(p => p.PropertyType.IsGenericType &&
                               p.PropertyType.GetGenericTypeDefinition() == _propertyType)
                     ? NotSatisfied(type)
                     : ConventionResult.Satisfied(type.FullName);
             }
 
-            return type.GetProperties().Any(p => p.PropertyType == _propertyType)
+            return type.GetDeclaredProperties().Any(p => p.PropertyType == _propertyType)
                 ? NotSatisfied(type)
                 : ConventionResult.Satisfied(type.FullName);
         }
