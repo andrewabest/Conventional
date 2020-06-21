@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+<!--    <TargetFramework>netstandard2.0</TargetFramework>-->
+<!--    <PackageId>Best.Conventional</PackageId>-->
+<!--    <Title>Best.Conventional</Title>-->
+<!--    <Authors>Andrew Best</Authors>-->
+<!--    <Owners>Andrew Best</Owners>-->
+<!--    <PackageProjectUrl>https://github.com/andrewabest/Conventional</PackageProjectUrl>-->
+<!--    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>-->
+<!--    <Description>A suite of convention specifications for enforcing type conventions in your codebase</Description>-->
+<!--    <PackageIconUrl>https://raw.github.com/andrewabest/Conventional/master/duck.png</PackageIconUrl>-->
+<!--    <Tags>Convention Testing</Tags>-->
+<!--    <Copyright>Copyright © 2017, Andrew Best</Copyright>-->
+<!--    <Version>0.0.0.0</Version>-->
+<!--    <PackageVersion>0.0.0.0</PackageVersion>-->
+
+<!--    <package >-->
+<!--        <metadata>-->
+<!--            <id>Best.$id$</id>-->
+<!--            <version>$version$</version>-->
+<!--            <title>Best.$title$</title>-->
+<!--            <authors>$author$</authors>-->
+<!--            <owners>$author$</owners>-->
+<!--            <projectUrl>https://github.com/andrewabest/Conventional</projectUrl>-->
+<!--            <requireLicenseAcceptance>false</requireLicenseAcceptance>-->
+<!--            <description>$description$</description>-->
+<!--            <iconUrl>https://raw.github.com/andrewabest/Conventional/master/duck.png</iconUrl>-->
+<!--            <tags>Convention Testing</tags>-->
+<!--            <copyright>Copyright © 2018, Andrew Best</copyright>-->
+<!--            <dependencies>-->
+<!--                <dependency id="Best.Conventional" version="6.0" />-->
+<!--            </dependencies>-->
+<!--        </metadata>-->
+<!--        <files>-->
+<!--            <file src="bin\release\Conventional.Roslyn.dll" target="lib\net45" />-->
+<!--        </files>-->
+<!--    </package>-->
+
+    <ItemGroup>
+      <PackageReference Include="Best.Conventional" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0-2.final" />
+      <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.7.0-2.final" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Conventional.Roslyn.Analyzers\Conventional.Roslyn.Analyzers.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Roslyn", "Conventional.Roslyn\Conventional.Roslyn.csproj", "{DCDC83C2-C01D-4A13-99D7-B312665D238D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Roslyn.Tests", "Conventional.Roslyn.Tests\Conventional.Roslyn.Tests.csproj", "{1F5EFA38-0FB1-41CB-B856-DE4AA55D07AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conventional.Roslyn.Analyzers", "Conventional.Roslyn.Analyzers\Conventional.Roslyn.Analyzers.csproj", "{3546B173-D100-47AE-BF78-15DDBA903B20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCDC83C2-C01D-4A13-99D7-B312665D238D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDC83C2-C01D-4A13-99D7-B312665D238D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDC83C2-C01D-4A13-99D7-B312665D238D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDC83C2-C01D-4A13-99D7-B312665D238D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F5EFA38-0FB1-41CB-B856-DE4AA55D07AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F5EFA38-0FB1-41CB-B856-DE4AA55D07AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F5EFA38-0FB1-41CB-B856-DE4AA55D07AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F5EFA38-0FB1-41CB-B856-DE4AA55D07AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3546B173-D100-47AE-BF78-15DDBA903B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3546B173-D100-47AE-BF78-15DDBA903B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3546B173-D100-47AE-BF78-15DDBA903B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3546B173-D100-47AE-BF78-15DDBA903B20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
