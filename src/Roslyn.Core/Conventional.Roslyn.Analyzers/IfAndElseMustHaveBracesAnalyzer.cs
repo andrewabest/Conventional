@@ -8,7 +8,7 @@ namespace Conventional.Roslyn.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class IfAndElseMustHaveBracesAnalyzer : ConventionalSyntaxNodeAnalyzer
     {
-        protected override DiagnosticDescriptor Rule => new DiagnosticDescriptor("Conventional.IfAndElseMustHaveBracesAnalyzer",
+        protected override DiagnosticDescriptor Rule => new DiagnosticDescriptor(DiagnosticDescriptorIdentifiers.IfAndElseMustHaveBracesAnalyzer,
             "IfAndElseMustHaveBracesAnalyzer",
             "{0}",
             "",

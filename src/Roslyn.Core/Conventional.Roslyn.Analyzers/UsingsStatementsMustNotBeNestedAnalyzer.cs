@@ -8,7 +8,7 @@ namespace Conventional.Roslyn.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class UsingsStatementsMustNotBeNestedAnalyzer : ConventionalSyntaxNodeAnalyzer
     {
-        protected override DiagnosticDescriptor Rule => new DiagnosticDescriptor("Conventional.UsingsStatementsMustNotBeNestedAnalyzer",
+        protected override DiagnosticDescriptor Rule => new DiagnosticDescriptor(DiagnosticDescriptorIdentifiers.UsingsStatementsMustNotBeNestedAnalyzer,
             "UsingsStatementsMustNotBeNestedAnalyzer",
             "{0}",
             "",

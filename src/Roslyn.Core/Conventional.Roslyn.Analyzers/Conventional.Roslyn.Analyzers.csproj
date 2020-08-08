@@ -1,12 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageId>Conventional.Roslyn.Analyzers</PackageId>
+        <Title>Conventional.Roslyn.Analyzers</Title>
+        <Authors>Andrew Best</Authors>
+        <Owners>Andrew Best</Owners>
+        <PackageProjectUrl>https://github.com/andrewabest/Conventional</PackageProjectUrl>
+        <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+        <Description>Rolsyn analysers that can be used both in your IDE and with Best.Conventional.Roslyn to create convention specifications for enforcing conventions in your codebase</Description>
+        <PackageIconUrl>https://raw.github.com/andrewabest/Conventional/master/duck.png</PackageIconUrl>
+        <Tags>Convention Testing, Roslyn, Analyzer</Tags>
+        <Copyright>Copyright © 2020, Andrew Best</Copyright>
+        <Version>1.2.0.0</Version>
+        <PackageVersion>1.2.0.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.7.0-2.final" />
-      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0-2.final" />
+      <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.6.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.6.0" />
     </ItemGroup>
 
 </Project>
