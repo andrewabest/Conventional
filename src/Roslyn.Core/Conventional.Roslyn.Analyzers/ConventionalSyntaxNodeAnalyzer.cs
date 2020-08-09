@@ -14,6 +14,8 @@ namespace Conventional.Roslyn.Analyzers
         {
             context.RegisterSyntaxNodeAction(Analyze, SyntaxKind.IfStatement, SyntaxKind.ElseClause);
             context.EnableConcurrentExecution();
+            // Generate diagnostic reports, but do not allow analyzer actions
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.ReportDiagnostics);
         }
 
         void Analyze(SyntaxNodeAnalysisContext context)
