@@ -11,7 +11,7 @@ namespace Conventional.Roslyn.Analyzers
         protected override DiagnosticDescriptor Rule => new DiagnosticDescriptor(DiagnosticDescriptorIdentifiers.IfAndElseMustHaveBracesAnalyzer,
             "IfAndElseMustHaveBracesAnalyzer",
             "{0}",
-            "",
+            "Conventional Analyzers",
             DiagnosticSeverity.Warning,
             true);
 
