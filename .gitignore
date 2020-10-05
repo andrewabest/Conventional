@@ -166,3 +166,4 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 /development.json
+**/.idea/*

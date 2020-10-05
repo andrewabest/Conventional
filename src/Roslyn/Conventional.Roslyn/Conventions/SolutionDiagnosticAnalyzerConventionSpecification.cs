@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Conventional.Roslyn.Analyzers;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Conventional.Roslyn.Conventions
 {
@@ -10,9 +10,10 @@ namespace Conventional.Roslyn.Conventions
         IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution);
     }
 
-    public abstract class SolutionDiagnosticAnalyzerConventionSpecification : DiagnosticAnalyzer,
+    public abstract class SolutionDiagnosticAnalyzerConventionSpecification:
         ISolutionDiagnosticAnalyzerConventionSpecification
     {
+        // ReSharper disable once UnusedMemberInSuper.Global
         protected abstract string FailureMessage { get; }
         private readonly string[] _fileExemptions;
 
@@ -52,8 +53,7 @@ namespace Conventional.Roslyn.Conventions
 
             return result.Success
                 ? ConventionResult.Satisfied(document.FilePath)
-                : ConventionResult.NotSatisfied(document.FilePath,
-                    FailureMessage.FormatWith(result.Message, result.LineNumber));
+                : ConventionResult.NotSatisfied(document.FilePath, result.Message);
         }
 
         protected abstract DiagnosticResult CheckNode(SyntaxNode node, Document document = null);

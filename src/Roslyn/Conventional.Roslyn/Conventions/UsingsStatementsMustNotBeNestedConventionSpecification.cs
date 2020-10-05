@@ -1,8 +1,6 @@
-﻿using System.Collections.Immutable;
-using System.Linq;
+﻿using System.Linq;
+using Conventional.Roslyn.Analyzers;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Conventional.Roslyn.Conventions
@@ -10,51 +8,28 @@ namespace Conventional.Roslyn.Conventions
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class UsingsStatementsMustNotBeNestedConventionSpecification : SolutionDiagnosticAnalyzerConventionSpecification
     {
-        public override void Initialize(AnalysisContext context)
-        {
-            context.RegisterSyntaxNodeAction(AnalyzeUsingsAndNamespace, SyntaxKind.NamespaceDeclaration);
-        }
-
-        private void AnalyzeUsingsAndNamespace(SyntaxNodeAnalysisContext context)
-        {
-            var result = CheckNode(context.Node);
-
-            if (result.Success == false)
-            {
-                Location loc = context.Node.GetLocation();
-                Diagnostic diagnostic = Diagnostic.Create(Rule, loc);
-                context.ReportDiagnostic(diagnostic);
-            }
-        }
-
-        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor("Conventional.UsingsStatementsMustNotBeNestedAnalyzer",
-             "UsingsStatementsMustNotBeNestedAnalyzer",
-             "{0}",
-             "",
-             DiagnosticSeverity.Warning,
-             true);
-
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
+        private readonly UsingsStatementsMustNotBeNestedAnalyzer _analyzer;
         protected override string FailureMessage => "{0} statements must not be nested within the namespace, using on line {1} does not conform";
 
         public UsingsStatementsMustNotBeNestedConventionSpecification(string[] fileExemptions) : base(fileExemptions)
         {
+            _analyzer = new UsingsStatementsMustNotBeNestedAnalyzer();
         }
 
         protected override DiagnosticResult CheckNode(SyntaxNode node, Document document = null)
         {
-            if (node is NamespaceDeclarationSyntax)
+            var result = _analyzer.CheckNode(node);
+
+            if (result.Success == false)
             {
-                var usings = node.DescendantNodes().OfType<UsingDirectiveSyntax>().ToArray();
-                if (usings.Any())
-                {
-                    return DiagnosticResult.Failed("Using", GetLineNumber(document, usings.First()));
-                }
+                var lineNumbers = result.FailedNodes.Any()
+                    ? string.Join(",", result.FailedNodes.Select(x => GetLineNumber(document, x)))
+                    : GetLineNumber(document, node).ToString();
+
+                result.UpdateFailureMessage(FailureMessage.FormatWith(result.Message, lineNumbers));
             }
 
-            return DiagnosticResult.Succeeded();
+            return result;
         }
     }
 }

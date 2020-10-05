@@ -1,0 +1,4 @@
+root = true
+
+[*.cs]
+dotnet_diagnostic.RS1027.severity = none
