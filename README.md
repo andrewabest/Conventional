@@ -1,4 +1,4 @@
-Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y026n60v9oe16?svg=true)](https://ci.appveyor.com/project/andrewabest/conventional) 
+Conventional [![Build status](https://ci.appveyor.com/api/projects/status/b34y026n60v9oe16?svg=true)](https://ci.appveyor.com/project/andrewabest/conventional)
 [![NuGet](https://img.shields.io/nuget/v/Best.Conventional.svg)](https://www.nuget.org/packages/Best.Conventional/)
 ============
 
@@ -12,10 +12,6 @@ Conventional targets .NET Standard 2.0, and as of Conventional 7.x, Conventional
 
     Install-Package Best.Conventional
 
-Looking for Roslyn-based conventions? Check out [the documentation](https://github.com/andrewabest/Conventional/wiki/Roslyn-Conventions) for more information.
-
-Conventional.Roslyn does not target .NET Standard 2.0 due to there being [no official .NET Core support](https://github.com/dotnet/roslyn/issues/17974) for `MSBuildWorkspace`, a core building block of Roslyn. 
-
 ## Documentation
 
 To get started with Conventional, please check out [the wiki](https://github.com/andrewabest/Conventional/wiki) for a comprehensive list of included conventions, sample usages, and configuration information.
@@ -23,6 +19,14 @@ To get started with Conventional, please check out [the wiki](https://github.com
 ## Examples
 
 Not sure how to get started with Conventional? Check out [the sample repository](https://github.com/andrewabest/Conventional.Samples) which contains a bunch of real-world usage examples
+
+## Roslyn-based conventions
+
+As of [This PR](https://github.com/andrewabest/Conventional/pull/73) Roslyn conventions are now supported on Dotnet Core.
+
+    Install-Package Best.Conventional.Roslyn
+
+Rolsyn-based conventions target `netcoreapp3.1`. Check out [the documentation](https://github.com/andrewabest/Conventional/wiki/Roslyn-Conventions) for more information.
 
 ## Contributing
 
