@@ -27,19 +27,21 @@ namespace Conventional.Conventions.Cecil
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
+            var typeDefinition = type.ToTypeDefinition();
+
             var typeInstructions =
-                type.ToTypeDefinition()
+                typeDefinition
                     .Methods
                     .Where(method => method.HasBody)
                     .SelectMany(method => method.Body.Instructions)
                     .Union(
-                        type.ToTypeDefinition()
+                        typeDefinition
                             .Methods
                             .Where(x => x.HasAttribute<AsyncStateMachineAttribute>())
                             .SelectMany(x => x.GetAsyncStateMachineType().Methods.Where(method => method.HasBody))
                             .SelectMany(method => method.Body.Instructions))
                     .Union(
-                        type.ToTypeDefinition()
+                        typeDefinition
                             .Methods
                             .Where(x => x.HasAttribute<IteratorStateMachineAttribute>())
                             .SelectMany(x => x.GetIteratorStateMachineType().Methods.Where(method => method.HasBody))
@@ -49,7 +51,7 @@ namespace Conventional.Conventions.Cecil
                 typeInstructions
                     .Where(x =>
                         x.OpCode == OpCodes.Call && x.Operand is MethodReference)
-                    .Join(_methodInfos, 
+                    .Join(_methodInfos,
                         x => (((MethodReference)x.Operand).DeclaringType.FullName, ((MethodReference)x.Operand).Name),
                         g => (g.DeclaringType?.FullName, g.Name),
                         (x,g) => x)
