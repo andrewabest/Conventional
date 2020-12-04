@@ -10,17 +10,20 @@ namespace Conventional.Conventions.Cecil
     public abstract class MustNotUseMethodSpecification : ConventionSpecification
     {
         private readonly MethodInfo[] _methodInfos;
+        private readonly bool _includeVirtualMethodCalls;
 
         protected MustNotUseMethodSpecification(MethodInfo methodInfo,
-            string failureMessage)
-            :this(new[] {methodInfo},failureMessage)
+            string failureMessage,
+            bool includeVirtualMethodCalls)
+            :this(new[] {methodInfo},failureMessage, includeVirtualMethodCalls)
         {
         }
 
-        protected MustNotUseMethodSpecification(MethodInfo[] methodInfos, string failureMessage)
+        protected MustNotUseMethodSpecification(MethodInfo[] methodInfos, string failureMessage, bool includeVirtualMethodCalls = false)
         {
             FailureMessage = failureMessage;
             _methodInfos = methodInfos;
+            _includeVirtualMethodCalls = includeVirtualMethodCalls;
         }
 
         protected override string FailureMessage { get; }
@@ -47,10 +50,13 @@ namespace Conventional.Conventions.Cecil
                             .SelectMany(x => x.GetIteratorStateMachineType().Methods.Where(method => method.HasBody))
                             .SelectMany(method => method.Body.Instructions));
 
-            var assignments =
+            var operandPredicate = _includeVirtualMethodCalls
+                ? (Func<Instruction, bool>)(x => (x.OpCode == OpCodes.Call || x.OpCode == OpCodes.Callvirt) && x.Operand is MethodReference)
+                : x => x.OpCode == OpCodes.Call && x.Operand is MethodReference;
+
+                    var assignments =
                 typeInstructions
-                    .Where(x =>
-                        x.OpCode == OpCodes.Call && x.Operand is MethodReference)
+                    .Where(operandPredicate)
                     .Join(_methodInfos,
                         x => (((MethodReference)x.Operand).DeclaringType.FullName, ((MethodReference)x.Operand).Name),
                         g => (g.DeclaringType?.FullName, g.Name),
