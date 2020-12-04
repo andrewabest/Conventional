@@ -14,7 +14,7 @@ namespace Conventional.Conventions.Cecil
 
         protected MustNotUseMethodSpecification(MethodInfo methodInfo,
             string failureMessage,
-            bool includeVirtualMethodCalls)
+            bool includeVirtualMethodCalls = false)
             :this(new[] {methodInfo},failureMessage, includeVirtualMethodCalls)
         {
         }
