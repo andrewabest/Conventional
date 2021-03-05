@@ -241,11 +241,14 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         {
             public InstantiatesPropertiesProperly()
             {
-                Names = new String[0];
+                Names = new string[0];
+                Addresses = new string[0];
                 Amount = new Money();
             }
 
-            public IEnumerable<string> Names { get; set; } 
+            public IEnumerable<string> Names { get; set; }
+
+            public IEnumerable<string> Addresses { get; set; }
 
             public Money Amount { get; set; }
         }
@@ -277,6 +280,8 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             }
 
             public IEnumerable<string> Names { get; set; }
+
+            public IEnumerable<string> Addresses { get; set; }
 
             public Money Amount { get; set; }
         }

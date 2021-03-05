@@ -27,9 +27,8 @@ namespace Conventional.Conventions.Cecil
 
             var subjects = _propertyTypes.SelectMany(x => typeDefinition.GetPropertiesOfType(x));
 
-            var subjectPropertySetters = subjects
+            var subjectProperties = subjects
                 .Where(p => p.SetMethod != null)
-                .Select(p => p.SetMethod.Name)
                 .ToArray();
 
             var defaultConstructor =
@@ -42,7 +41,7 @@ namespace Conventional.Conventions.Cecil
                 return ConventionResult.Satisfied(type.FullName);
             };
 
-            var setters =
+            var executedSetters =
                 defaultConstructor
                     .Body
                     .Instructions
@@ -50,14 +49,18 @@ namespace Conventional.Conventions.Cecil
                     .OfType<MethodDefinition>()
                     .Select(m => m.Name);
 
-            if (setters.Count(subjectPropertySetters.Contains) == subjectPropertySetters.Count())
+            var uninitialisedProperties = subjectProperties.Where(p => !executedSetters.Contains(p.SetMethod.Name));
+
+            if (!uninitialisedProperties.Any())
             {
                 return ConventionResult.Satisfied(type.FullName);
             }
 
-            var propertyTypeNames = _propertyTypes.Aggregate(string.Empty, (x, t) => t.Name + ", " + x).TrimEnd(' ', ',');
+            var failureDetails = string.Join(", ", uninitialisedProperties
+                .GroupBy(p => p.PropertyType.Name)
+                .Select(p => $"{p.Key} ({string.Join(", ", p.Select(x => x.Name))})"));
 
-            return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(propertyTypeNames));
+            return ConventionResult.NotSatisfied(type.FullName, FailureMessage.FormatWith(failureDetails));
         }
     }
 }
