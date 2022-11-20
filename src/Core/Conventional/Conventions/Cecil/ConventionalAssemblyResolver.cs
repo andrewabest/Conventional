@@ -42,9 +42,9 @@ namespace Conventional.Conventions.Cecil
         {
             var codebase = assembly.CodeBase.Replace(FileSchemePrefix, string.Empty);
 
-            return 
-                RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ?
-                $"/{codebase}" : codebase;
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
+                ? codebase 
+                : $"/{codebase}";
         }
 
         protected virtual void Dispose(bool disposing)
