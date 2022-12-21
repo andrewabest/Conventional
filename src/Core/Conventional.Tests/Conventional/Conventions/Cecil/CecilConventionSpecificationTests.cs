@@ -74,7 +74,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
-            result.Failures.First().Should().Contain(offendingType.FullName);
+            result.Failures.First().Should().Contain(nameof(DateTime));
         }
 
         private class OffendingDateTimeNowAsyncCitizen
@@ -97,7 +97,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
-            result.Failures.First().Should().Contain(offendingType.FullName);
+            result.Failures.First().Should().Contain(nameof(DateTime));
         }
 
         private class OffendingDateTimeNowIteratorCitizen
@@ -118,7 +118,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
-            result.Failures.First().Should().Contain(offendingType.FullName);
+            result.Failures.First().Should().Contain(nameof(DateTime));
         }
         
         private class GoodDateTimeOffsetCitizen

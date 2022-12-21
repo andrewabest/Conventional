@@ -18,8 +18,8 @@ namespace Conventional.Conventions.Cecil
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            var typeDefinition = type.ToTypeDefinition();
-
+            var typeDefinition = DecompilationCache.GetTypeDefinitionFor(type);
+            
             var subjects = typeDefinition.Properties;
 
             var subjectPropertySetters = subjects

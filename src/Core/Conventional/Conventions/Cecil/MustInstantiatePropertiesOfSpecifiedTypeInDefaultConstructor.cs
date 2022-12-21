@@ -23,7 +23,7 @@ namespace Conventional.Conventions.Cecil
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            var typeDefinition = type.ToTypeDefinition();
+            var typeDefinition = DecompilationCache.GetTypeDefinitionFor(type);
 
             var subjects = _propertyTypes.SelectMany(x => typeDefinition.GetPropertiesOfType(x));
 

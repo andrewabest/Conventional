@@ -18,7 +18,7 @@ namespace Conventional.Conventions.Cecil
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            var methodsWithBodies = type.ToTypeDefinition().Methods.Where(method => method.HasBody).ToList();
+            var methodsWithBodies = DecompilationCache.GetTypeDefinitionFor(type).Methods.Where(method => method.HasBody).ToList();
 
             var exceptions =
                 methodsWithBodies.SelectMany(method => method.Body.Instructions

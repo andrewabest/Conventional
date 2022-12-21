@@ -11,7 +11,7 @@ namespace Conventional.Conventions.Cecil
                 x=>DateTime.Now,
                 x=>DateTime.UtcNow,
                 x=>DateTime.Today
-            }, "Must not use DateTime directly. It is used {0} times in {1}. ")
+            })
         {
 
         }

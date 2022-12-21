@@ -5,16 +5,15 @@ using System.Reflection;
 
 namespace Conventional.Conventions.Cecil
 {
-    public abstract class MustNotUsePropertyGetterSpecification<TClass, TMember> : MustNotUseMethodSpecification
+    public abstract class MustNotUsePropertyGetterSpecification<TClass, TMember> : MustNotCallMethodConventionSpecification
     {
-        public MustNotUsePropertyGetterSpecification(Expression<Func<TClass, TMember>> expression,
-            string failureMessage)
-            :this(new[] {expression},failureMessage)
+        public MustNotUsePropertyGetterSpecification(Expression<Func<TClass, TMember>> expression)
+            : this(new[] {expression})
         {
         }
 
-        public MustNotUsePropertyGetterSpecification(Expression<Func<TClass, TMember>>[] expressions, string failureMessage):base(
-            expressions.Select(GetMethodInfoFromExpression).ToArray(), failureMessage)
+        public MustNotUsePropertyGetterSpecification(Expression<Func<TClass, TMember>>[] expressions):base(
+            expressions.Select(GetMethodInfoFromExpression).ToArray())
         {
         }
 
