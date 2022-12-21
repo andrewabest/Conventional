@@ -15,7 +15,7 @@ namespace Conventional.Conventions.Cecil
         static readonly ConcurrentDictionary<Type, TypeDefinition> TypeDefinitionsByType;
         static readonly ConcurrentDictionary<Type, IReadOnlyCollection<Instruction>> InstructionsByType;
         static readonly ConcurrentDictionary<Type, IReadOnlyCollection<Instruction>> StateMachineInstructionsByType;
-        static readonly object CecilMutex; // Cecil is not internally thread-safe in some places
+        static readonly object CecilMutex; // Note: Cecil is not internally thread-safe in some places
 
         static DecompilationCache()
         {
@@ -90,7 +90,7 @@ namespace Conventional.Conventions.Cecil
         {
             var typeDefinition = GetTypeDefinitionFor(method.DeclaringType!);
 
-            //TODO This isn't an exact match. Please feel free to tighten the criteria if you need to.  -andrewh 22/9/2021
+            // Note: This isn't an exact match. 
             var methodDefinition = typeDefinition.Methods
                 .Where(m => m.Name == method.Name)
                 .First(m => m.Parameters.Count == method.GetParameters().Length);
@@ -103,9 +103,8 @@ namespace Conventional.Conventions.Cecil
             {
                 var parentTypeDefinition = GetTypeDefinitionFor(type.DeclaringType);
 
-                // ReSharper disable once ReplaceWithSingleCallToSingleOrDefault
-                var typeDefinition = parentTypeDefinition.NestedTypes.Where(td => td.Name == type.Name).SingleOrDefault()
-                    ?? throw new Exception($"Could not find nested type {type.Name} in declaring type {parentTypeDefinition.FullName}");
+                var typeDefinition = parentTypeDefinition.NestedTypes.SingleOrDefault(td => td.Name == type.Name)
+                                     ?? throw new Exception($"Could not find nested type {type.Name} in declaring type {parentTypeDefinition.FullName}");
 
                 return typeDefinition;
             }

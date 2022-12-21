@@ -60,7 +60,7 @@ namespace Conventional.Conventions.Cecil
         static string ToFullyQualifiedName(MethodReference method)
         {
             var declaringType = method.DeclaringType;
-            var typeFullName = $"{declaringType.Namespace}.{declaringType.Name}"; // Flatten generic type names. This is a lossy operation.
+            var typeFullName = $"{declaringType.Namespace}.{declaringType.Name}"; // Note: Flatten generic type names. This is a lossy operation.
             return $"{typeFullName}.{method.Name}";
         }
     }
