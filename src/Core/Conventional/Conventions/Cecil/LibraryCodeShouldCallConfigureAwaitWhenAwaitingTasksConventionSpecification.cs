@@ -12,7 +12,7 @@ namespace Conventional.Conventions.Cecil
 
         public override ConventionResult IsSatisfiedBy(Type type)
         {
-            var failures = type.ToTypeDefinition()
+            var failures = DecompilationCache.GetTypeDefinitionFor(type)
                 .Methods
                 .Where(x => x.HasAttribute<AsyncStateMachineAttribute>())
                 .Where(AwaitingTasksWithoutConfigureAwait)
