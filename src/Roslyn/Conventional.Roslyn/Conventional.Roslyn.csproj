@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <PackageId>Best.Conventional.Roslyn</PackageId>
         <Title>Best.Conventional.Roslyn</Title>
         <Authors>Andrew Best</Authors>
@@ -17,10 +17,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Best.Conventional" Version="9.0.3" />
-      <PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
-      <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.6.0" />
-      <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.6.0" />
+      <PackageReference Include="Best.Conventional" Version="[9.0.3,)" />
+      <PackageReference Include="Microsoft.Build.Locator" Version="[1.2.2,)" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="[4.0.1,)" />
+      <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="[4.0.1,)" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,6 +30,21 @@
     <ItemGroup>
         <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools" />
         <None Include="$(OutputPath)\Conventional.Roslyn.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        
     </ItemGroup>
+
+    <PropertyGroup>
+        <TargetsForTfmSpecificBuildOutput> $(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+    </PropertyGroup>
+
+    <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+        <ItemGroup>
+            <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('PrivateAssets', 'All'))"/>
+        </ItemGroup>
+
+        <ItemGroup>
+            <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)"/>
+        </ItemGroup>
+    </Target>
 
 </Project>
