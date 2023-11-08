@@ -27,12 +27,6 @@
       <ProjectReference Include="..\Conventional.Roslyn.Analyzers\Conventional.Roslyn.Analyzers.csproj" PrivateAssets="All" />
     </ItemGroup>
 
-    <ItemGroup>
-        <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools" />
-        <None Include="$(OutputPath)\Conventional.Roslyn.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-        
-    </ItemGroup>
-
     <PropertyGroup>
         <TargetsForTfmSpecificBuildOutput> $(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
     </PropertyGroup>
