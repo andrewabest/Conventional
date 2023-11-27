@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <PackageId>Best.Conventional.Roslyn</PackageId>
         <Title>Best.Conventional.Roslyn</Title>
         <Authors>Andrew Best</Authors>
@@ -27,12 +28,6 @@
       <ProjectReference Include="..\Conventional.Roslyn.Analyzers\Conventional.Roslyn.Analyzers.csproj" PrivateAssets="All" />
     </ItemGroup>
 
-    <ItemGroup>
-        <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools" />
-        <None Include="$(OutputPath)\Conventional.Roslyn.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-        
-    </ItemGroup>
-
     <PropertyGroup>
         <TargetsForTfmSpecificBuildOutput> $(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
     </PropertyGroup>
@@ -43,7 +38,7 @@
         </ItemGroup>
 
         <ItemGroup>
-            <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)"/>
+            <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)"  TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)"/>
         </ItemGroup>
     </Target>
 
