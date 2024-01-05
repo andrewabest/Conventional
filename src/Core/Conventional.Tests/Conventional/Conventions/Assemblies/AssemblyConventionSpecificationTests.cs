@@ -219,5 +219,27 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
             // TODO: Use result.Should().AllSatisfy() once we've updated to fluentassertions 6.5.0+
             result.Select(x => x.IsSatisfied).Distinct().Single().Should().BeFalse();
         }
+
+        [Test]
+        public void MustNotIncludeProjectReferences_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("TestProjectTwo")
+                .MustConformTo(Convention.MustNotIncludeProjectReferences);
+
+            // Note: TestProjectTwo doesn't import any other projects (at time of writing)
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustNotIncludeProjectReferences_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("Conventional.Tests")
+                .MustConformTo(Convention.MustNotIncludeProjectReferences); // Note: Conventional.Tests of course includes a reference to Conventional
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().StartWith("Conventional.Tests includes reference to project");
+        }
     }
 }

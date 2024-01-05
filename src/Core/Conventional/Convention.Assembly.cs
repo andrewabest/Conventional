@@ -81,5 +81,12 @@ namespace Conventional
         {
             return new MustBeIncludedInSetOfAssembliesConventionSpecification(assemblies, setName);
         }
+
+        /// <summary>
+        /// Disallows this assembly (project) from referencing other projects
+        /// </summary>
+        /// <remarks>This convention is unaware of shared build prop files (Directory.Build.Props + Directory.Build.Targets) - see https://github.com/andrewabest/Conventional/issues/88</remarks>
+        public static MustNotIncludeProjectReferencesConventionSpecification MustNotIncludeProjectReferences =>
+            new MustNotIncludeProjectReferencesConventionSpecification();
     }
 }
