@@ -281,5 +281,60 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
 
             result.IsSatisfied.Should().BeFalse();
         }
+
+        [Test]
+        public void MustSetPropertyValue_SingleValue_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("TheUniversalAnswer", "42"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Theory]
+        [TestCase("Potato")]
+        [TestCase("Carrot")]
+        public void MustSetPropertyValue_MultipleValues_Success(string value)
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("Vegetable", value));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustSetPropertyValue_SingleValue_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("TheUniversalAnswer", "41.999"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("SdkClassLibrary1 should have property TheUniversalAnswer with value 41.999");
+        }
+
+        [Test]
+        public void MustSetPropertyValue_MultipleValues_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("Vegetable", "Turnip")); // Note: Assumes no <Vegetable>Turnip</Vegetable> in the csproj
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("SdkClassLibrary1 should have property Vegetable with value Turnip");
+        }
+
+        [Test]
+        public void MustSetPropertyValue_NoValues_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("ThisPropertyShouldNeverEverExist", "x")); // Note: Assumes no <ThisPropertyShouldNeverEverExist>x</ThisPropertyShouldNeverEverExist> in the csproj
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("SdkClassLibrary1 should have property ThisPropertyShouldNeverEverExist with value x");
+        }
     }
 }

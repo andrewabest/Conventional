@@ -108,5 +108,18 @@ namespace Conventional
         {
             return new MustNotReferencePackageAssemblyConventionSpecification(packageName);
         }
+
+        /// <summary>
+        /// Require this project to set a <see href="https://learn.microsoft.com/en-us/visualstudio/msbuild/property-element-msbuild?view=vs-2022#example">property value</see>
+        /// </summary>
+        /// <param name="propertyName">The name of the property</param>
+        /// <param name="value">The value the property should have</param>
+        /// <remarks>This convention is currently ignorant of <see href="https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-conditions">MSBuild conditions</see></remarks>
+        /// <remarks>This convention is unaware of shared build prop files (Directory.Build.Props + Directory.Build.Targets) - see https://github.com/andrewabest/Conventional/issues/88</remarks>
+        public static MustSetPropertyValueAssemblyConventionSpecification MustSetPropertyValue(
+            string propertyName, string value)
+        {
+            return new MustSetPropertyValueAssemblyConventionSpecification(propertyName, value);
+        }
     }
 }

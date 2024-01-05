@@ -1,6 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <TheUniversalAnswer>42</TheUniversalAnswer>
+        <Vegetable>Potato</Vegetable>
+        <Vegetable>Carrot</Vegetable>
+    </PropertyGroup>    
+    
+    <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
     </PropertyGroup>
 
