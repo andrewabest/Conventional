@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Conventional.Extensions;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -184,6 +184,40 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Single().Should().EndWith("copy-not.png");
+        }
+
+        private AssemblySpecimen[] TestProjects =>
+            AllAssemblies.WithNamesMatching("*")
+                .Where(specimen => specimen.ProjectFilePath.Contains("Tests"))
+                .ToArray();
+
+        // Note: In practice, this list of assemblies would be used to drive further convention tests (i.e. assembly.GetTypes())
+        private static readonly List<Assembly> TestAssemblies = new List<Assembly>
+        {
+            typeof(DogFoodConventions).Assembly
+        };
+
+        [Test]
+        public void MustBeIncludedInSetOfAssemblies_Success()
+        {
+            var result = TestProjects
+                .MustConformTo(Convention.MustBeIncludedInSetOfAssemblies(TestAssemblies, "TestAssemblies"));
+
+            // TODO: Use result.Should().AllSatisfy() once we've updated to fluentassertions 6.5.0+
+            result.Select(x => x.IsSatisfied).Distinct().Single().Should().BeTrue();
+        }
+
+        [Test]
+        public void MustBeIncludedInSetOfAssemblies_Failure()
+        {
+            // ReSharper disable once CollectionNeverUpdated.Local
+            var staleTestAssemblies = new List<Assembly>();
+
+            var result = TestProjects
+                .MustConformTo(Convention.MustBeIncludedInSetOfAssemblies(staleTestAssemblies, "TestAssemblies"));
+
+            // TODO: Use result.Should().AllSatisfy() once we've updated to fluentassertions 6.5.0+
+            result.Select(x => x.IsSatisfied).Distinct().Single().Should().BeFalse();
         }
     }
 }

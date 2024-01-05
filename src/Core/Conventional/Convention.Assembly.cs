@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Conventional.Conventions.Assemblies;
 
@@ -66,6 +68,18 @@ namespace Conventional
             string filePattern, string subfolder)
         {
             return new MustIncludeAllMatchingFilesInFolderConventionSpecification(filePattern, subfolder);
+        }
+
+        /// <summary>
+        /// Require this assembly to be included (by name) in a list of assemblies (e.g. "TestAssemblies")
+        /// </summary>
+        /// <param name="assemblies">The "haystack" set of assemblies that the "needle" assembly must appear in</param>
+        /// <param name="setName">A friendly name for the assembly set</param>
+        /// <remarks>Probably only useful when using <see cref="AssemblySpecimen"/> i.e. <see cref="TheAssembly"/> / <see cref="AllAssemblies"/></remarks>
+        public static MustBeIncludedInSetOfAssembliesConventionSpecification MustBeIncludedInSetOfAssemblies(
+            IEnumerable<Assembly> assemblies, string setName)
+        {
+            return new MustBeIncludedInSetOfAssembliesConventionSpecification(assemblies, setName);
         }
     }
 }
