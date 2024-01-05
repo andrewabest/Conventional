@@ -120,7 +120,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             result.Failures.Should().HaveCount(1);
             result.Failures.First().Should().Contain(nameof(DateTime));
         }
-        
+
         private class GoodDateTimeOffsetCitizen
         {
             private DateTimeOffset _current;
@@ -150,7 +150,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
                 _current = DateTimeOffset.Now;
             }
         }
-        
+
         private class AnotherOffendingDateTimeOffsetCitizen
         {
              private DateTimeOffset _current;
@@ -178,7 +178,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
         {
             var result = new []
                 {
-                    typeof (OffendingDateTimeOffsetCitizen), 
+                    typeof (OffendingDateTimeOffsetCitizen),
                     typeof(AnotherOffendingDateTimeOffsetCitizen),
                     typeof(AsyncOffendingDateTimeOffsetCitizen)
                 }
@@ -221,7 +221,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
                 throw new Exception();
             }
         }
-        
+
 
         [Test]
         public void ExceptionsThrownMustBeDerivedFromConventionSpecification_FailsIfExceptionDoesNotDeriveFromCorrectBase()
@@ -366,7 +366,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
-        
+
 
         private class HasMoreThanOneParameterizedConstructor
         {
@@ -384,7 +384,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             public int Id { get; set; }
             public string Name { get; set; }
         }
-        
+
         private class HasNoConstructors
         {
         }
@@ -485,7 +485,7 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             var expectedFailureMessage = "Libraries must call Task.ConfigureAwait(false) to prevent deadlocks"
                                          + Environment.NewLine
                                          + "- HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes.MethodThatAwaitsATaskAndDoesNotCallConfigureAwait";
-  
+
             var result = typeof(HasAnAsyncMethodThatAwaitsATaskAndDoesNotCallConfigureAwaitAndAnotherThatDoes)
                 .MustConformTo(Convention.LibraryCodeShouldCallConfigureAwaitWhenAwaitingTasks);
 
@@ -515,5 +515,63 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Single().Should().Be(expectedFailureMessage);
         }
+
+        # region MustNotUseGuidNewGuid
+
+        private interface IGuidProvider
+        {
+            Guid CreateIdentifier();
+        }
+
+        private class GoodGuidCreationCitizen
+        {
+            public GoodGuidCreationCitizen(IGuidProvider guidProvider)
+            {
+                guidProvider.CreateIdentifier();
+            }
+        }
+
+        [Test]
+        public void MustNotUseGuidNewGuid_Success()
+        {
+            typeof(GoodGuidCreationCitizen)
+                .MustConformTo(Convention.MustNotUseGuidNewGuid)
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        private class OffendingGuidCreationCitizen
+        {
+             public OffendingGuidCreationCitizen()
+             {
+                 Guid.NewGuid();
+             }
+        }
+
+        private class AsyncOffendingGuidCreationCitizen
+        {
+            public async Task<Guid> ResolveIdentifier()
+            {
+                await Task.Delay(1);
+                return Guid.NewGuid();
+            }
+        }
+
+        [Test]
+        public void MustNotUseGuidNewGuid_Failure()
+        {
+            var result = new []
+                {
+                    typeof(OffendingGuidCreationCitizen),
+                    typeof(AsyncOffendingGuidCreationCitizen)
+                }
+                .MustConformTo(Convention.MustNotUseGuidNewGuid);
+
+            result.Results.Should().OnlyContain(x => x.IsSatisfied == false);
+            result.Failures.Should().HaveCount(2);
+        }
+
+        # endregion
     }
 }
