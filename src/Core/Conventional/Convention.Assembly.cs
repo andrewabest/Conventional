@@ -88,5 +88,25 @@ namespace Conventional
         /// <remarks>This convention is unaware of shared build prop files (Directory.Build.Props + Directory.Build.Targets) - see https://github.com/andrewabest/Conventional/issues/88</remarks>
         public static MustNotIncludeProjectReferencesConventionSpecification MustNotIncludeProjectReferences =>
             new MustNotIncludeProjectReferencesConventionSpecification();
+
+        /// <summary>
+        /// Requires that this assembly (project) references the specified package
+        /// </summary>
+        /// <param name="packageName">The name of the package that must be referenced</param>
+        /// <remarks>This convention is unaware of shared build prop files (Directory.Build.Props + Directory.Build.Targets) - see https://github.com/andrewabest/Conventional/issues/88</remarks>
+        public static MustReferencePackageAssemblyConventionSpecification MustReferencePackage(string packageName)
+        {
+            return new MustReferencePackageAssemblyConventionSpecification(packageName);
+        }
+
+        /// <summary>
+        /// Requires that this assembly (project) does not reference the specified package
+        /// </summary>
+        /// <param name="packageName">The name of the package that must not be referenced</param>
+        /// <remarks>This convention is unaware of shared build prop files (Directory.Build.Props + Directory.Build.Targets) - see https://github.com/andrewabest/Conventional/issues/88</remarks>
+        public static MustNotReferencePackageAssemblyConventionSpecification MustNotReferencePackage(string packageName)
+        {
+            return new MustNotReferencePackageAssemblyConventionSpecification(packageName);
+        }
     }
 }

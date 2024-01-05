@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSolution.TestProject", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectTwo", "..\TestProjectTwo\TestProjectTwo.csproj", "{DA39482D-C4B4-41B8-9908-BF715AE9DD7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkClassLibrary1", "SdkClassLibrary1\SdkClassLibrary1.csproj", "{C0988207-0023-4364-BFE0-04F8954501C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DA39482D-C4B4-41B8-9908-BF715AE9DD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA39482D-C4B4-41B8-9908-BF715AE9DD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA39482D-C4B4-41B8-9908-BF715AE9DD7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0988207-0023-4364-BFE0-04F8954501C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0988207-0023-4364-BFE0-04F8954501C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0988207-0023-4364-BFE0-04F8954501C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0988207-0023-4364-BFE0-04F8954501C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

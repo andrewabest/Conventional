@@ -241,5 +241,45 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Single().Should().StartWith("Conventional.Tests includes reference to project");
         }
+
+        [Test]
+        public void MustReferencePackage_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustReferencePackage("coverlet.collector"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustReferencePackage_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustReferencePackage("koverlet.kollector"));
+
+            result.IsSatisfied.Should().BeFalse();
+        }
+
+        [Test]
+        public void MustNotReferencePackage_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustNotReferencePackage("foo.bar.baz"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustNotReferencePackage_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustNotReferencePackage("coverlet.collector"));
+
+            result.IsSatisfied.Should().BeFalse();
+        }
     }
 }
