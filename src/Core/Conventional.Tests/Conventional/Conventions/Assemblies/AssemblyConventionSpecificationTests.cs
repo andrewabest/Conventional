@@ -336,5 +336,61 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Single().Should().Be("SdkClassLibrary1 should have property ThisPropertyShouldNeverEverExist with value x");
         }
+
+        [Theory]
+        [TestCase("CS0162")]
+        [TestCase("CS4014")]
+        public void MustTreatWarningAsError_MultipleWarnings_Success(string warning)
+        {
+            var result = TheAssembly
+                .WithNameMatching("TestProjectTwo")
+                .MustConformTo(Convention.MustTreatWarningAsError(warning));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustTreatWarningAsError_SingleWarning_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustTreatWarningAsError("CS0162"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustTreatWarningAsError_MultipleWarnings_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("TestProjectTwo")
+                .MustConformTo(Convention.MustTreatWarningAsError("XX9999"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("Assembly TestProjectTwo should treat warning XX9999 as an error but does not");
+        }
+
+        [Test]
+        public void MustTreatWarningAsError_SingleWarnings_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustTreatWarningAsError("XX9999"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("Assembly SdkClassLibrary1 should treat warning XX9999 as an error but does not");
+        }
+
+        [Test]
+        public void MustTreatWarningAsError_NoWarnings_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("TestSolution.TestProject")
+                .MustConformTo(Convention.MustTreatWarningAsError("CS0162"));
+
+            // Note: TestSolution.TestProject does not set the WarningsAsErrors property, at time of writing
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("Assembly TestSolution.TestProject should treat warning CS0162 as an error but does not");
+        }
     }
 }

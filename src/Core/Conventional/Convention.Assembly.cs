@@ -121,5 +121,15 @@ namespace Conventional
         {
             return new MustSetPropertyValueAssemblyConventionSpecification(propertyName, value);
         }
+
+        /// <summary>
+        /// Require this project to treat the specified compiler warning as an error
+        /// </summary>
+        /// <param name="warning">The warning code to treat as fatal (e.g. CS0162)</param>
+        /// <remarks>This convention is unaware of shared build prop files (Directory.Build.Props + Directory.Build.Targets) - see https://github.com/andrewabest/Conventional/issues/88</remarks>
+        public static MustTreatWarningAsErrorAssemblyConventionSpecification MustTreatWarningAsError(string warning)
+        {
+            return new MustTreatWarningAsErrorAssemblyConventionSpecification(warning);
+        }
     }
 }

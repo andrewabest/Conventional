@@ -9,6 +9,10 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
     </PropertyGroup>
+    
+    <PropertyGroup>
+        <WarningsAsErrors>CS0162</WarningsAsErrors>
+    </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="coverlet.collector" Version="6.0.0">
