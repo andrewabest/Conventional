@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Conventional.Tests
 {
@@ -8,8 +9,9 @@ namespace Conventional.Tests
         public void Setup()
         {
             ConventionConfiguration.DefaultFailureAssertionCallback = Assert.Pass;
+            ConventionConfiguration.GlobalTypeFilter = type => type != typeof(YouCantSeeMe);
         }
-
+        
         private class AbjectConformanceFailure
         {
             public AbjectConformanceFailure(string name, string description)
@@ -39,11 +41,30 @@ namespace Conventional.Tests
                         Convention.PropertiesMustHavePublicSetters.And(
                             Convention.MustHaveADefaultConstructor)));
         }
+        
+        private class YouCantSeeMe
+        {
+            public string Name { get; set; }
+        }
+
+        private class YouCanSeeMe
+        {
+            public string Name { get; set; }
+        }
+        
+        [Test]
+        public void WhenDefaultTypeFilterIsSet_ItIsAppliedToAllConventions()
+        {
+            new[] { typeof(YouCantSeeMe), typeof(YouCanSeeMe) }
+                .MustConformTo(Convention.PropertiesMustHavePrivateSetters)
+                .Failures.Should().HaveCount(1);
+        }
 
         [TearDown]
         public void TearDown()
         {
             ConventionConfiguration.DefaultFailureAssertionCallback = null;
+            ConventionConfiguration.ResetGlobalTypeFilter();
         }
     }
 }
