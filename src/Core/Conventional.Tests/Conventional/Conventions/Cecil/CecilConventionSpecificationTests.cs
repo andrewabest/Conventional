@@ -516,8 +516,6 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             result.Failures.Single().Should().Be(expectedFailureMessage);
         }
 
-        # region MustNotUseGuidNewGuid
-
         private interface IGuidProvider
         {
             Guid CreateIdentifier();
@@ -571,7 +569,5 @@ namespace Conventional.Tests.Conventional.Conventions.Cecil
             result.Results.Should().OnlyContain(x => x.IsSatisfied == false);
             result.Failures.Should().HaveCount(2);
         }
-
-        # endregion
     }
 }
