@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Conventional.Extensions;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -184,6 +184,213 @@ namespace Conventional.Tests.Conventional.Conventions.Assemblies
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Single().Should().EndWith("copy-not.png");
+        }
+
+        private AssemblySpecimen[] TestProjects =>
+            AllAssemblies.WithNamesMatching("*")
+                .Where(specimen => specimen.ProjectFilePath.Contains("Tests"))
+                .ToArray();
+
+        // Note: In practice, this list of assemblies would be used to drive further convention tests (i.e. assembly.GetTypes())
+        private static readonly List<Assembly> TestAssemblies = new List<Assembly>
+        {
+            typeof(DogFoodConventions).Assembly
+        };
+
+        [Test]
+        public void MustBeIncludedInSetOfAssemblies_Success()
+        {
+            var result = TestProjects
+                .MustConformTo(Convention.MustBeIncludedInSetOfAssemblies(TestAssemblies, "TestAssemblies"));
+
+            // TODO: Use result.Should().AllSatisfy() once we've updated to fluentassertions 6.5.0+
+            result.Select(x => x.IsSatisfied).Distinct().Single().Should().BeTrue();
+        }
+
+        [Test]
+        public void MustBeIncludedInSetOfAssemblies_Failure()
+        {
+            // ReSharper disable once CollectionNeverUpdated.Local
+            var staleTestAssemblies = new List<Assembly>();
+
+            var result = TestProjects
+                .MustConformTo(Convention.MustBeIncludedInSetOfAssemblies(staleTestAssemblies, "TestAssemblies"));
+
+            // TODO: Use result.Should().AllSatisfy() once we've updated to fluentassertions 6.5.0+
+            result.Select(x => x.IsSatisfied).Distinct().Single().Should().BeFalse();
+        }
+
+        [Test]
+        public void MustNotIncludeProjectReferences_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("TestProjectTwo")
+                .MustConformTo(Convention.MustNotIncludeProjectReferences);
+
+            // Note: TestProjectTwo doesn't import any other projects (at time of writing)
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustNotIncludeProjectReferences_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("Conventional.Tests")
+                .MustConformTo(Convention.MustNotIncludeProjectReferences); // Note: Conventional.Tests of course includes a reference to Conventional
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().StartWith("Conventional.Tests includes reference to project");
+        }
+
+        [Test]
+        public void MustReferencePackage_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustReferencePackage("coverlet.collector"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustReferencePackage_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustReferencePackage("koverlet.kollector"));
+
+            result.IsSatisfied.Should().BeFalse();
+        }
+
+        [Test]
+        public void MustNotReferencePackage_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustNotReferencePackage("foo.bar.baz"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustNotReferencePackage_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustNotReferencePackage("coverlet.collector"));
+
+            result.IsSatisfied.Should().BeFalse();
+        }
+
+        [Test]
+        public void MustSetPropertyValue_SingleValue_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("TheUniversalAnswer", "42"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Theory]
+        [TestCase("Potato")]
+        [TestCase("Carrot")]
+        public void MustSetPropertyValue_MultipleValues_Success(string value)
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("Vegetable", value));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustSetPropertyValue_SingleValue_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("TheUniversalAnswer", "41.999"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("SdkClassLibrary1 should have property TheUniversalAnswer with value 41.999");
+        }
+
+        [Test]
+        public void MustSetPropertyValue_MultipleValues_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("Vegetable", "Turnip")); // Note: Assumes no <Vegetable>Turnip</Vegetable> in the csproj
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("SdkClassLibrary1 should have property Vegetable with value Turnip");
+        }
+
+        [Test]
+        public void MustSetPropertyValue_NoValues_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustSetPropertyValue("ThisPropertyShouldNeverEverExist", "x")); // Note: Assumes no <ThisPropertyShouldNeverEverExist>x</ThisPropertyShouldNeverEverExist> in the csproj
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("SdkClassLibrary1 should have property ThisPropertyShouldNeverEverExist with value x");
+        }
+
+        [Theory]
+        [TestCase("CS0162")]
+        [TestCase("CS4014")]
+        public void MustTreatWarningAsError_MultipleWarnings_Success(string warning)
+        {
+            var result = TheAssembly
+                .WithNameMatching("TestProjectTwo")
+                .MustConformTo(Convention.MustTreatWarningAsError(warning));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustTreatWarningAsError_SingleWarning_Success()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustTreatWarningAsError("CS0162"));
+
+            result.IsSatisfied.Should().BeTrue();
+        }
+
+        [Test]
+        public void MustTreatWarningAsError_MultipleWarnings_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("TestProjectTwo")
+                .MustConformTo(Convention.MustTreatWarningAsError("XX9999"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("Assembly TestProjectTwo should treat warning XX9999 as an error but does not");
+        }
+
+        [Test]
+        public void MustTreatWarningAsError_SingleWarnings_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("SdkClassLibrary1")
+                .MustConformTo(Convention.MustTreatWarningAsError("XX9999"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("Assembly SdkClassLibrary1 should treat warning XX9999 as an error but does not");
+        }
+
+        [Test]
+        public void MustTreatWarningAsError_NoWarnings_Failure()
+        {
+            var result = TheAssembly
+                .WithNameMatching("TestSolution.TestProject")
+                .MustConformTo(Convention.MustTreatWarningAsError("CS0162"));
+
+            // Note: TestSolution.TestProject does not set the WarningsAsErrors property, at time of writing
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Single().Should().Be("Assembly TestSolution.TestProject should treat warning CS0162 as an error but does not");
         }
     }
 }

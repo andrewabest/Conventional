@@ -9,6 +9,8 @@ namespace Conventional
 
         public static MustNotUseDateTimeOffsetNowConventionSpecification MustNotUseDateTimeOffsetNow => new MustNotUseDateTimeOffsetNowConventionSpecification();
 
+        public static MustNotUseGuidNewGuidConventionSpecification MustNotUseGuidNewGuid => new MustNotUseGuidNewGuidConventionSpecification();
+
         public static ExceptionsThrownMustBeDerivedFromConventionSpecification ExceptionsThrownMustBeDerivedFrom(Type baseType)
         {
             return new ExceptionsThrownMustBeDerivedFromConventionSpecification(baseType);
