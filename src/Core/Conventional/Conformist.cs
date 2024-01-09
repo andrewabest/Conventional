@@ -15,9 +15,11 @@ namespace Conventional
 
         public static WrappedConventionResult MustConformTo(this IEnumerable<Type> types, IConventionSpecification conventionSpecification)
         {
+            var filteredTypes = types.Where(ConventionConfiguration.GlobalTypeFilter).ToArray();
+            
             return EnforceConformance(new WrappedConventionResult(
-                types, 
-                types.Select(conventionSpecification.IsSatisfiedBy)));
+                filteredTypes, 
+                filteredTypes.Select(conventionSpecification.IsSatisfiedBy)));
         }
 
         public static ConventionResult MustConformTo(this Assembly assembly, IAssemblyConventionSpecification assemblyConventionSpecification)
