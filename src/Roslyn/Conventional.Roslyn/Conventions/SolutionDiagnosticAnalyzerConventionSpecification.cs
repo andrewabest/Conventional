@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Conventional.Roslyn.Analyzers;
 using Microsoft.CodeAnalysis;
@@ -10,7 +11,7 @@ namespace Conventional.Roslyn.Conventions
         IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution);
     }
 
-    public abstract class SolutionDiagnosticAnalyzerConventionSpecification:
+    public abstract class SolutionDiagnosticAnalyzerConventionSpecification :
         ISolutionDiagnosticAnalyzerConventionSpecification
     {
         // ReSharper disable once UnusedMemberInSuper.Global
@@ -33,13 +34,20 @@ namespace Conventional.Roslyn.Conventions
         private IEnumerable<ConventionResult> IsSatisfiedBy(Document document)
         {
             var node = document.GetSyntaxRootAsync().Result;
+            if (document.TryGetSemanticModel(out var semanticModel))
+            {
+                return IsSatisfiedBy(document, node, semanticModel);
+            }
 
             return IsSatisfiedBy(document, node);
         }
 
-        private IEnumerable<ConventionResult> IsSatisfiedBy(Document document, SyntaxNode node)
+        private IEnumerable<ConventionResult> IsSatisfiedBy(Document document, SyntaxNode syntaxNode) => IsSatisfiedBy(document, syntaxNode, null);
+
+
+        private IEnumerable<ConventionResult> IsSatisfiedBy(Document document, SyntaxNode node, SemanticModel semanticModel)
         {
-            yield return BuildResult(document, node);
+            yield return BuildResult(document, node, semanticModel);
 
             foreach (var childResult in node.ChildNodes().SelectMany(x => IsSatisfiedBy(document, x)))
             {
@@ -47,16 +55,16 @@ namespace Conventional.Roslyn.Conventions
             }
         }
 
-        private ConventionResult BuildResult(Document document, SyntaxNode node)
+        private ConventionResult BuildResult(Document document, SyntaxNode node, SemanticModel semanticModel)
         {
-            var result = CheckNode(node, document);
+            var result = CheckNode(node, document, semanticModel);
 
             return result.Success
                 ? ConventionResult.Satisfied(document.FilePath)
                 : ConventionResult.NotSatisfied(document.FilePath, result.Message);
         }
 
-        protected abstract DiagnosticResult CheckNode(SyntaxNode node, Document document = null);
+        protected abstract DiagnosticResult CheckNode(SyntaxNode node, Document document = null, SemanticModel semanticModel = null);
 
         protected static int GetLineNumber(Document document, SyntaxNode node)
         {

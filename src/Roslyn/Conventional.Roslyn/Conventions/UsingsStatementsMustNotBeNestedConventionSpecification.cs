@@ -16,9 +16,9 @@ namespace Conventional.Roslyn.Conventions
             _analyzer = new UsingsStatementsMustNotBeNestedAnalyzer();
         }
 
-        protected override DiagnosticResult CheckNode(SyntaxNode node, Document document = null)
+        protected override DiagnosticResult CheckNode(SyntaxNode node, Document document = null, SemanticModel semanticModel = null)
         {
-            var result = _analyzer.CheckNode(node);
+            var result = _analyzer.CheckNode(node, semanticModel);
 
             if (result.Success == false)
             {
