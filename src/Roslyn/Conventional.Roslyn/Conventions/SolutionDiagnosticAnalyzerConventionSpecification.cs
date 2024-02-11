@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Conventional.Roslyn.Analyzers;
@@ -8,7 +8,7 @@ namespace Conventional.Roslyn.Conventions
 {
     public interface ISolutionDiagnosticAnalyzerConventionSpecification
     {
-        IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution);
+        IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution, int knownOffenders);
     }
 
     public abstract class SolutionDiagnosticAnalyzerConventionSpecification :
@@ -23,12 +23,24 @@ namespace Conventional.Roslyn.Conventions
             _fileExemptions = fileExemptions;
         }
 
-        public IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution)
+        public IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution, int knownOffenders)
         {
-            return solution.Projects.SelectMany(x => x.Documents
+            var results = solution.Projects.SelectMany(x => x.Documents
                     .Where(d => d.SupportsSyntaxTree)
                     .Where(d => !_fileExemptions.Any(d.FilePath.EndsWith)))
-                .SelectMany(IsSatisfiedBy);
+                .SelectMany(IsSatisfiedBy)
+                .ToArray();
+            var filteredFailures = RemoveKnownOffenders(results, knownOffenders);
+            var final = results.Where(x => x.IsSatisfied).ToList();
+            final.AddRange(filteredFailures);
+
+            return final;
+        }
+
+        private static IEnumerable<ConventionResult> RemoveKnownOffenders(ConventionResult[] results, int knownOffenders)
+        {
+            var failures = results.Where(x => !x.IsSatisfied).ToArray();
+            return failures.Take(Math.Max(failures.Length - Math.Max(knownOffenders, 0), 0)).ToArray();
         }
 
         private IEnumerable<ConventionResult> IsSatisfiedBy(Document document)
@@ -43,7 +55,6 @@ namespace Conventional.Roslyn.Conventions
         }
 
         private IEnumerable<ConventionResult> IsSatisfiedBy(Document document, SyntaxNode syntaxNode) => IsSatisfiedBy(document, syntaxNode, null);
-
 
         private IEnumerable<ConventionResult> IsSatisfiedBy(Document document, SyntaxNode node, SemanticModel semanticModel)
         {

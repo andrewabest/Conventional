@@ -11,12 +11,13 @@ namespace Conventional.Roslyn.Tests
         [Test]
         public void ConventionSpecifications_MustHaveNameThatEndsWithConventionSpecification()
         {
+            ConventionConfiguration.DefaultFailureAssertionCallback = Assert.Fail;
+            ConventionConfiguration.DefaultWarningAssertionCallback =  Assert.Inconclusive;
             var baseAssembly = typeof(RoslynConvention).Assembly;
 
             new[] { baseAssembly }
                 .WhereTypes(x => ConventionTypes.Any(c => c.IsAssignableFrom(x)) && x.IsAbstract == false)
-                .MustConformTo(Convention.NameMustEndWith("ConventionSpecification"))
-                .WithFailureAssertion(Assert.Fail);
+                .MustConformTo(Convention.NameMustEndWith("ConventionSpecification"));
         }
 
         private Type[] ConventionTypes => new[]

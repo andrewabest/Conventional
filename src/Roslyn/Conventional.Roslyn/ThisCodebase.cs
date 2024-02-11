@@ -8,7 +8,7 @@ namespace Conventional.Roslyn
 {
     public static class ThisCodebase
     {
-        public static IEnumerable<ConventionResult> MustConformTo(ISolutionDiagnosticAnalyzerConventionSpecification convention)
+        public static IEnumerable<ConventionResult> MustConformTo(ISolutionDiagnosticAnalyzerConventionSpecification convention, int knownOffenders = 0)
         {
             // Locate and register the default instance of MSBuild installed on this machine.
             // https://github.com/dotnet/roslyn/issues/17974#issuecomment-624408861
@@ -21,13 +21,13 @@ namespace Conventional.Roslyn
 
             var solution = workspace.OpenSolutionAsync(KnownPaths.FullPathToSolution).Result;
 
-            foreach(var diagnostic in workspace.Diagnostics)
+            foreach (var diagnostic in workspace.Diagnostics)
             {
                 Trace.WriteLine(diagnostic.Message);
             }
 
             return Conformist.EnforceConformance(
-                convention.IsSatisfiedBy(solution));
+                convention.IsSatisfiedBy(solution, knownOffenders));
         }
     }
 }
