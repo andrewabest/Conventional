@@ -30,7 +30,7 @@ namespace Conventional
         {
             return new NameMustStartWithConventionSpecification(prefix);
         }
-        
+
         public static NameMustEndWithConventionSpecification NameMustEndWith(string suffix)
         {
             return new NameMustEndWithConventionSpecification(suffix);
@@ -39,6 +39,16 @@ namespace Conventional
         public static MustLiveInNamespaceConventionSpecification MustLiveInNamespace(string nameSpace)
         {
             return new MustLiveInNamespaceConventionSpecification(nameSpace);
+        }
+
+        public static NamespaceMustStartWithConventionSpecification NamespaceMustStartWith(string prefix)
+        {
+            return new NamespaceMustStartWithConventionSpecification(prefix);
+        }
+
+        public static NamespaceMustEndWithConventionSpecification NamespaceMustEndWith(string suffix)
+        {
+            return new NamespaceMustEndWithConventionSpecification(suffix);
         }
 
         public static MustHaveADefaultConstructorConventionSpecification MustHaveADefaultConstructor => new MustHaveADefaultConstructorConventionSpecification();

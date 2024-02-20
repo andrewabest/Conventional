@@ -310,7 +310,7 @@ namespace Conventional.Tests.Conventional.Conventions
                 .Should()
                 .BeTrue();
         }
-        
+
         [Test]
         public void NameMustStartWithConventionSpecification_FailsIfNameDoesNotStartWithSuppliedPrefix()
         {
@@ -320,7 +320,7 @@ namespace Conventional.Tests.Conventional.Conventions
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
         }
-        
+
         private class ClassSuffix
         {
         }
@@ -334,7 +334,7 @@ namespace Conventional.Tests.Conventional.Conventions
                 .Should()
                 .BeTrue();
         }
-        
+
         [Test]
         public void NameMustEndWithConventionSpecification_FailsIfNameDoesNotEndWithSuppliedPrefix()
         {
@@ -382,6 +382,46 @@ namespace Conventional.Tests.Conventional.Conventions
         {
             var result = typeof (ClassSuffix)
                 .MustConformTo(Convention.MustLiveInNamespace("Another.Namespace"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void NamespaceMustStartWithConventionSpecification_Success()
+        {
+            typeof(NamespaceMember)
+                .MustConformTo(Convention.NamespaceMustStartWith("Conventional.Tests.Conven"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void NamespaceMustStartWithConventionSpecification_FailsIfTypeDoesNotLiveInANamespaceStartingWithPrefix()
+        {
+            var result = typeof (NamespaceMember)
+                .MustConformTo(Convention.NamespaceMustStartWith("Conventional.Potato"));
+
+            result.IsSatisfied.Should().BeFalse();
+            result.Failures.Should().HaveCount(1);
+        }
+
+        [Test]
+        public void NamespaceMustEndWithConventionSpecification_Success()
+        {
+            typeof(NamespaceMember)
+                .MustConformTo(Convention.NamespaceMustEndWith(".Conventional.Conventions"))
+                .IsSatisfied
+                .Should()
+                .BeTrue();
+        }
+
+        [Test]
+        public void NamespaceMustEndWithConventionSpecification_FailsIfTypeDoesNotLiveInANamespaceEndingWithSuffix()
+        {
+            var result = typeof (NamespaceMember)
+                .MustConformTo(Convention.NamespaceMustEndWith(".Conventional.Potato"));
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
@@ -477,7 +517,7 @@ namespace Conventional.Tests.Conventional.Conventions
             {
             }
         }
-        
+
         [Test]
         public void MustNotTakeADependencyOnConventionSpecification_FailsIfTheIdentifiedConstructorParameterExists()
         {
@@ -506,7 +546,7 @@ namespace Conventional.Tests.Conventional.Conventions
                  .MustConformTo(Convention.MustHaveAppropriateConstructors)
                  .IsSatisfied
                  .Should()
-                 .BeTrue(); 
+                 .BeTrue();
         }
 
         private class DoesNotHaveAppropriateConstructors
@@ -549,7 +589,7 @@ namespace Conventional.Tests.Conventional.Conventions
                  .MustConformTo(Convention.RequiresACorrespondingImplementationOf(typeof(SomeGeneric<,>), new [] { typeof(SomeGenericImplementation) }))
                  .IsSatisfied
                  .Should()
-                 .BeTrue(); 
+                 .BeTrue();
         }
 
         private interface ISomeGeneric<T1, T2>
@@ -694,7 +734,7 @@ namespace Conventional.Tests.Conventional.Conventions
 
         private class HasLazilyLoadedEnumerables
         {
-            public IEnumerable<string> Names { get; set; } 
+            public IEnumerable<string> Names { get; set; }
         }
 
         [Test]
@@ -767,8 +807,8 @@ namespace Conventional.Tests.Conventional.Conventions
 
             result.IsSatisfied.Should().BeFalse();
             result.Failures.Should().HaveCount(1);
-        } 
-        
+        }
+
         private class HasImmutableProperties
         {
             public HasImmutableProperties(string[] names, int age)
