@@ -15,7 +15,7 @@ namespace Conventional.Roslyn.Analyzers
             DiagnosticSeverity.Warning,
             true);
 
-        public override DiagnosticResult CheckNode(SyntaxNode node)
+        public override DiagnosticResult CheckNode(SyntaxNode node, SemanticModel semanticModel)
         {
             switch (node)
             {

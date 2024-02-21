@@ -20,7 +20,7 @@ namespace Conventional.Roslyn.Analyzers
 
         void Analyze(SyntaxNodeAnalysisContext context)
         {
-            var result = CheckNode(context.Node);
+            var result = CheckNode(context.Node, context.SemanticModel);
 
             if (result.Success == false)
             {
@@ -34,6 +34,6 @@ namespace Conventional.Roslyn.Analyzers
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        public abstract DiagnosticResult CheckNode(SyntaxNode node);
+        public abstract DiagnosticResult CheckNode(SyntaxNode node, SemanticModel semanticModel);
     }
 }
