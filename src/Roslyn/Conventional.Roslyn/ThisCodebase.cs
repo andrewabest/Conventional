@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Conventional.Roslyn.Conventions;
 using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -26,8 +28,22 @@ namespace Conventional.Roslyn
                 Trace.WriteLine(diagnostic.Message);
             }
 
-            return Conformist.EnforceConformance(
-                convention.IsSatisfiedBy(solution, knownOffenders));
+            var conventionResults = Conformist.EnforceConformance(convention.IsSatisfiedBy(solution)).ToList();
+            var remainingOffenders = CalculateRemainingOffenders(conventionResults, knownOffenders);
+            return RecombineSatisfactoryResultsWithRemainingOffenders(conventionResults, remainingOffenders);
+        }
+
+        private static IEnumerable<ConventionResult> CalculateRemainingOffenders(IEnumerable<ConventionResult> results, int knownOffenders)
+        {
+            var failures = results.Where(x => !x.IsSatisfied).ToList();
+            return failures.Take(Math.Max(failures.Count - Math.Max(knownOffenders, 0), 0));
+        }
+
+        private static IEnumerable<ConventionResult> RecombineSatisfactoryResultsWithRemainingOffenders(IEnumerable<ConventionResult> conventionResults, IEnumerable<ConventionResult> remainingOffenders)
+        {
+            var results = conventionResults.Where(x => x.IsSatisfied).ToList();
+            results.AddRange(remainingOffenders);
+            return results;
         }
     }
 }

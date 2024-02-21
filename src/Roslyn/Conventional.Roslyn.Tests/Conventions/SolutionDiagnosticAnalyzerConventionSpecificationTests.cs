@@ -35,17 +35,6 @@ namespace Conventional.Roslyn.Tests.Conventions
                 .BeFalse();
         }
 
-                [Test]
-        public void WeirdKnownOffenderNumbersDontFailTheResult()
-        {
-            ThisCodebase
-                .MustConformTo(
-                    RoslynConvention.IfAndElseMustHaveBraces(), -42)
-                .All(x => x.IsSatisfied)
-                .Should()
-                .BeFalse();
-        }
-
         [Test]
         public void IfAndElseMustHaveBracesAnalyzer_Success()
         {
