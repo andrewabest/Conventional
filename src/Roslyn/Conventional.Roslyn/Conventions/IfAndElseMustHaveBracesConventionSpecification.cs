@@ -1,24 +1,20 @@
 using System.Linq;
 using Conventional.Roslyn.Analyzers;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Conventional.Roslyn.Conventions
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class IfAndElseMustHaveBracesConventionSpecification : SolutionDiagnosticAnalyzerConventionSpecification
     {
-        private readonly IfAndElseMustHaveBracesAnalyzer _analyzer;
         protected override string FailureMessage => "If and else must have braces, and {0} statement on line {1} does not";
 
-        public IfAndElseMustHaveBracesConventionSpecification(string[] fileExemptions) : base(fileExemptions)
+        public IfAndElseMustHaveBracesConventionSpecification(string[] fileExemptions) : base(new IfAndElseMustHaveBracesAnalyzer(), fileExemptions)
         {
-            _analyzer = new IfAndElseMustHaveBracesAnalyzer();
         }
 
         protected override DiagnosticResult CheckNode(SyntaxNode node, Document document = null, SemanticModel semanticModel = null)
         {
-            var result = _analyzer.CheckNode(node, semanticModel);
+            var result = Analyzer.CheckNode(node, semanticModel);
 
             if (result.Success == false)
             {

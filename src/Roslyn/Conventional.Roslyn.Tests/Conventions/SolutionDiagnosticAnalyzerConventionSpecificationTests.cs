@@ -48,7 +48,6 @@ namespace Conventional.Roslyn.Tests.Conventions
             }
         }
 
-
         [Test]
         public void IfAndElseMustHaveBracesAnalyzer_FailsWhenIfBlockDoesNotHaveBrace()
         {
@@ -88,7 +87,7 @@ namespace Conventional.Roslyn.Tests.Conventions
         }
 
         [Test]
-        public void UsingStatementsMustNotBeNestedAnalyzer_FailesWhenFileHasUsingsInsideNamespace()
+        public void UsingStatementsMustNotBeNestedAnalyzer_FailsWhenFileHasUsingsInsideNamespace()
         {
             using (new TestSolution("TestSolution"))
             {

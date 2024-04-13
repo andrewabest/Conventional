@@ -12,8 +12,13 @@ namespace Conventional.Roslyn.Analyzers
     {
         public override void Initialize(AnalysisContext context)
         {
-            context.RegisterSyntaxNodeAction(Analyze, SyntaxKind.IfStatement, SyntaxKind.ElseClause);
-            context.EnableConcurrentExecution();
+            context.RegisterSyntaxNodeAction(Analyze, SyntaxKinds());
+
+            if (EnableConcurrentExecution())
+            {
+                context.EnableConcurrentExecution();
+            }
+
             // Generate diagnostic reports, but do not allow analyzer actions
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.ReportDiagnostics);
         }
@@ -35,5 +40,7 @@ namespace Conventional.Roslyn.Analyzers
         protected abstract DiagnosticDescriptor Rule { get; }
 
         public abstract DiagnosticResult CheckNode(SyntaxNode node, SemanticModel semanticModel);
+        public abstract SyntaxKind[] SyntaxKinds();
+        public virtual bool EnableConcurrentExecution() => false;
     }
 }

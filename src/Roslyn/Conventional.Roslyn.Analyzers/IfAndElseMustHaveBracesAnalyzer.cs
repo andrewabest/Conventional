@@ -28,5 +28,8 @@ namespace Conventional.Roslyn.Analyzers
                     return DiagnosticResult.Succeeded();
             }
         }
+
+        public override SyntaxKind[] SyntaxKinds() => new[] { SyntaxKind.IfStatement, SyntaxKind.ElseClause };
+        public override bool EnableConcurrentExecution() => true;
     }
 }
