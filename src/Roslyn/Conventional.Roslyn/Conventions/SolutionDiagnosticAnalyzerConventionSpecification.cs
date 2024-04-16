@@ -33,7 +33,7 @@ namespace Conventional.Roslyn.Conventions
         private IEnumerable<ConventionResult> IsSatisfiedBy(Document document)
         {
             var node = document.GetSyntaxRootAsync().Result;
-            var semanticModel = document.GetSemanticModelAsync().Result;
+            var semanticModel = document.GetSemanticModelAsync().GetAwaiter().GetResult();
             if (semanticModel is not null)
             {
                 return IsSatisfiedBy(document, node, semanticModel);
