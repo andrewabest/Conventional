@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Conventional.Roslyn.Analyzers;
@@ -27,24 +29,22 @@ namespace Conventional.Roslyn.Conventions
 
         public IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution)
         {
-            if (Analyzer.EnableConcurrentExecution())
-            {
-                var tasks = solution
-                    .Projects.SelectMany(x =>
-                        x.Documents
-                            .Where(d => d.SupportsSyntaxTree)
-                            .Where(FilterFileExceptions)
-                            .Select(doc => Task.Run(() => IsSatisfiedBy(doc))));
-                var result = Task.WhenAll(tasks).GetAwaiter().GetResult();
-                return result.SelectMany(x => x);
-            }
+            var documents = solution
+                .Projects
+                .SelectMany(proj => proj.Documents
+                    .Where(doc => doc.SupportsSyntaxTree)
+                    .Where(FilterFileExceptions));
 
-            return solution
-                .Projects.SelectMany(x =>
-                    x.Documents
-                        .Where(d => d.SupportsSyntaxTree)
-                        .Where(FilterFileExceptions)
-                        .SelectMany(IsSatisfiedBy));
+            var concurrentBag = new ConcurrentBag<IEnumerable<ConventionResult>>();
+            Parallel.ForEach(
+                documents,
+// the compiler thinks this is an analyzer
+#pragma warning disable RS1035
+                new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
+#pragma warning restore RS1035
+                document => concurrentBag.Add(IsSatisfiedBy(document)));
+
+            return concurrentBag.SelectMany(x => x);
         }
 
         private bool FilterFileExceptions(Document document) => !_fileExemptions.Any(exemption => document.FilePath?.EndsWith(exemption) ?? true);
@@ -76,7 +76,10 @@ namespace Conventional.Roslyn.Conventions
         private ConventionResult BuildResult(Document document, SyntaxNode node, SemanticModel semanticModel)
         {
             var kinds = Analyzer.SyntaxKinds();
-            if (kinds.Length > 0 && !kinds.Contains(node!.Kind())) return ConventionResult.Satisfied(document.FilePath);
+            if (kinds.Length > 0 && !kinds.Contains(node!.Kind()))
+            {
+                return ConventionResult.Satisfied(document.FilePath);
+            }
 
             var result = CheckNode(node, document, semanticModel);
 

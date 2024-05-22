@@ -13,26 +13,23 @@ namespace Conventional.Roslyn.Analyzers
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(Analyze, SyntaxKinds());
-
-            if (EnableConcurrentExecution())
-            {
-                context.EnableConcurrentExecution();
-            }
+            context.EnableConcurrentExecution();
 
             // Generate diagnostic reports, but do not allow analyzer actions
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.ReportDiagnostics);
         }
 
-        void Analyze(SyntaxNodeAnalysisContext context)
+        private void Analyze(SyntaxNodeAnalysisContext context)
         {
             var result = CheckNode(context.Node, context.SemanticModel);
 
-            if (result.Success == false)
+            if (result.Success)
             {
-                var loc = context.Node.GetLocation();
-                var diagnostic = Diagnostic.Create(Rule, loc, $"{result.Message} must have braces");
-                context.ReportDiagnostic(diagnostic);
+                return;
             }
+            var loc = context.Node.GetLocation();
+            var diagnostic = Diagnostic.Create(Rule, loc, $"{result.Message} must have braces");
+            context.ReportDiagnostic(diagnostic);
         }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -41,6 +38,5 @@ namespace Conventional.Roslyn.Analyzers
 
         public abstract DiagnosticResult CheckNode(SyntaxNode node, SemanticModel semanticModel);
         public abstract SyntaxKind[] SyntaxKinds();
-        public virtual bool EnableConcurrentExecution() => false;
     }
 }

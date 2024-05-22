@@ -30,6 +30,5 @@ namespace Conventional.Roslyn.Analyzers
         }
 
         public override SyntaxKind[] SyntaxKinds() => new[] { SyntaxKind.IfStatement, SyntaxKind.ElseClause };
-        public override bool EnableConcurrentExecution() => true;
     }
 }

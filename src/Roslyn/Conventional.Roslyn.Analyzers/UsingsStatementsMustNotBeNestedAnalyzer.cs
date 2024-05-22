@@ -32,6 +32,5 @@ namespace Conventional.Roslyn.Analyzers
         }
 
         public override SyntaxKind[] SyntaxKinds() => Array.Empty<SyntaxKind>();
-        public override bool EnableConcurrentExecution() => true;
     }
 }
