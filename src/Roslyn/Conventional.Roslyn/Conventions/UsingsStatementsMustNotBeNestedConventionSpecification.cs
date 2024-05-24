@@ -1,24 +1,20 @@
 ﻿using System.Linq;
 using Conventional.Roslyn.Analyzers;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Conventional.Roslyn.Conventions
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class UsingsStatementsMustNotBeNestedConventionSpecification : SolutionDiagnosticAnalyzerConventionSpecification
     {
-        private readonly UsingsStatementsMustNotBeNestedAnalyzer _analyzer;
         protected override string FailureMessage => "{0} statements must not be nested within the namespace, using on line {1} does not conform";
 
-        public UsingsStatementsMustNotBeNestedConventionSpecification(string[] fileExemptions) : base(fileExemptions)
+        public UsingsStatementsMustNotBeNestedConventionSpecification(string[] fileExemptions) : base(new UsingsStatementsMustNotBeNestedAnalyzer(), fileExemptions)
         {
-            _analyzer = new UsingsStatementsMustNotBeNestedAnalyzer();
         }
 
         protected override DiagnosticResult CheckNode(SyntaxNode node, Document document = null, SemanticModel semanticModel = null)
         {
-            var result = _analyzer.CheckNode(node, semanticModel);
+            var result = Analyzer.CheckNode(node, semanticModel);
 
             if (result.Success == false)
             {

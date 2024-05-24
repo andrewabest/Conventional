@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -28,5 +30,7 @@ namespace Conventional.Roslyn.Analyzers
 
             return DiagnosticResult.Succeeded();
         }
+
+        public override SyntaxKind[] SyntaxKinds() => Array.Empty<SyntaxKind>();
     }
 }

@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Conventional.Roslyn.Analyzers;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Conventional.Roslyn.Conventions
 {
@@ -10,25 +14,40 @@ namespace Conventional.Roslyn.Conventions
         IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution);
     }
 
-    public abstract class SolutionDiagnosticAnalyzerConventionSpecification :
-        ISolutionDiagnosticAnalyzerConventionSpecification
+    public abstract class SolutionDiagnosticAnalyzerConventionSpecification : ISolutionDiagnosticAnalyzerConventionSpecification
     {
         // ReSharper disable once UnusedMemberInSuper.Global
         protected abstract string FailureMessage { get; }
+        protected readonly ConventionalSyntaxNodeAnalyzer Analyzer;
         private readonly string[] _fileExemptions;
 
-        protected SolutionDiagnosticAnalyzerConventionSpecification(string[] fileExemptions)
+        protected SolutionDiagnosticAnalyzerConventionSpecification(ConventionalSyntaxNodeAnalyzer diagnosticAnalyzer, string[] fileExemptions)
         {
+            Analyzer = diagnosticAnalyzer;
             _fileExemptions = fileExemptions;
         }
 
         public IEnumerable<ConventionResult> IsSatisfiedBy(Solution solution)
         {
-            return solution.Projects.SelectMany(x => x.Documents
-                    .Where(d => d.SupportsSyntaxTree)
-                    .Where(d => !_fileExemptions.Any(d.FilePath.EndsWith)))
-                .SelectMany(IsSatisfiedBy);
+            var documents = solution
+                .Projects
+                .SelectMany(proj => proj.Documents
+                    .Where(doc => doc.SupportsSyntaxTree)
+                    .Where(FilterFileExceptions));
+
+            var concurrentBag = new ConcurrentBag<IEnumerable<ConventionResult>>();
+            Parallel.ForEach(
+                documents,
+// the compiler thinks this is an analyzer
+#pragma warning disable RS1035
+                new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
+#pragma warning restore RS1035
+                document => concurrentBag.Add(IsSatisfiedBy(document)));
+
+            return concurrentBag.SelectMany(x => x);
         }
+
+        private bool FilterFileExceptions(Document document) => !_fileExemptions.Any(exemption => document.FilePath?.EndsWith(exemption) ?? true);
 
         private IEnumerable<ConventionResult> IsSatisfiedBy(Document document)
         {
@@ -56,6 +75,12 @@ namespace Conventional.Roslyn.Conventions
 
         private ConventionResult BuildResult(Document document, SyntaxNode node, SemanticModel semanticModel)
         {
+            var kinds = Analyzer.SyntaxKinds();
+            if (kinds.Length > 0 && !kinds.Contains(node!.Kind()))
+            {
+                return ConventionResult.Satisfied(document.FilePath);
+            }
+
             var result = CheckNode(node, document, semanticModel);
 
             return result.Success
