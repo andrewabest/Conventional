@@ -847,7 +847,7 @@ namespace Conventional.Tests.Conventional.Conventions
 
             public string[] Names { get; }
 
-            public int Age { get; }
+            public new int Age { get; }
         }
 
         [Test]
