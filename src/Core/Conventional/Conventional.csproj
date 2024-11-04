@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Best.Conventional</PackageId>
     <Title>Best.Conventional</Title>
     <Authors>Andrew Best</Authors>
@@ -13,6 +13,7 @@
     <Copyright>Copyright © 2017, Andrew Best</Copyright>
     <Version>0.0.0.0</Version>
     <PackageVersion>0.0.0.0</PackageVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Conventions\Database\AllCheckConstraintsMustBeNamedConventionSpecification.sql" />
@@ -41,7 +42,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
     <PackageReference Include="Mono.Cecil" Version="0.10.0" />
-    <PackageReference Include="System.Data.Common" Version="4.3.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 </Project>
