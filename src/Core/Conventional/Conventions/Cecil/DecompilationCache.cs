@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
@@ -28,11 +29,11 @@ namespace Conventional.Conventions.Cecil
 
         public static IReadOnlyCollection<Instruction> InstructionsFor(Type type, bool includeStateMachine = true)
         {
-            var typeInstructions = InstructionsByType.GetOrAdd(type, GetInstructionsFor(type));
+            var typeInstructions = GetOrAdd(InstructionsByType, type, GetInstructionsFor);
 
             if (includeStateMachine)
             {
-                var stateMachineTypeInstructions = StateMachineInstructionsByType.GetOrAdd(type, GetStateMachineInstructions(type));
+                var stateMachineTypeInstructions = GetOrAdd(StateMachineInstructionsByType, type, GetStateMachineInstructions);
 
                 return typeInstructions
                     .Union(stateMachineTypeInstructions)
@@ -45,7 +46,7 @@ namespace Conventional.Conventions.Cecil
 
         static IReadOnlyCollection<Instruction> GetInstructionsFor(Type type)
         {
-            var typeDefinition = TypeDefinitionsByType.GetOrAdd(type, GetTypeDefinitionFor);
+            var typeDefinition = GetOrAdd(TypeDefinitionsByType, type, GetTypeDefinitionFor);
 
             lock (CecilMutex)
             {
@@ -56,14 +57,14 @@ namespace Conventional.Conventions.Cecil
                         .SelectMany(method => method.Body.Instructions)
                         .Distinct()
                         .ToArray();
-
+                
                 return typeInstructions;
             }
         }
 
         static IReadOnlyCollection<Instruction> GetStateMachineInstructions(Type type)
         {
-            var typeDefinition = TypeDefinitionsByType.GetOrAdd(type, GetTypeDefinitionFor);
+            var typeDefinition = GetOrAdd(TypeDefinitionsByType, type, GetTypeDefinitionFor);
 
             lock (CecilMutex)
             {
@@ -108,20 +109,21 @@ namespace Conventional.Conventions.Cecil
 
                 return typeDefinition;
             }
-
-            var result = TypeDefinitionsByType.GetOrAdd(
+            
+            var result = GetOrAdd(
+                TypeDefinitionsByType,
                 type,
                 t =>
                 {
-                    var moduleDefinition = ModuleDefinitionsByAssemblyLocation.GetOrAdd(t.Assembly.Location, GetModuleDefinitionByLocation);
+                    var moduleDefinition = GetOrAdd(ModuleDefinitionsByAssemblyLocation, t.Assembly.Location, GetModuleDefinitionByLocation);
                     var typeDefinition = (TypeDefinition)moduleDefinition.GetType(type.FullName, true);
                     if (typeDefinition is null)
                     {
-                        var additionalMessage = 
+                        var additionalMessage =
                             string.Join(
-                                Environment.NewLine, 
+                                Environment.NewLine,
                                 moduleDefinition.Types.Select(td => $" - {td.FullName}"));
-                        
+
                         throw new InvalidOperationException($"Could not find type {t.FullName} in {t.Assembly.Location}.{Environment.NewLine}Types we can see: {additionalMessage}");
                     }
 
@@ -141,6 +143,15 @@ namespace Conventional.Conventions.Cecil
                 });
 
             return moduleDefinition;
+        }
+        
+        static TValue GetOrAdd<TKey, TValue>(ConcurrentDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> valueFactory)
+        {
+            if (dictionary.TryGetValue(key, out var value)) return value;
+
+            value = valueFactory(key);
+            // valueFactory can re-entrantly call other conventional methods, and it could have added `key`
+            return dictionary.GetOrAdd(key, value);
         }
     }
 }
