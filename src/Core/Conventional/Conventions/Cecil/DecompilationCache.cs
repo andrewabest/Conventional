@@ -150,7 +150,7 @@ namespace Conventional.Conventions.Cecil
             if (dictionary.TryGetValue(key, out var value)) return value;
 
             value = valueFactory(key);
-            // valueFactory can re-entrantly call other conventional methods, and it could have added `key`
+            // Note: valueFactory can re-entrantly call other conventional methods, and it could have added `key`
             return dictionary.GetOrAdd(key, value);
         }
     }
